@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chat</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    .wrap {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .frame {
+      flex: 1;
+      border: 0;
+      width: 100%;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">Assistente</div>
+    <iframe
+      class="frame"
+      src="https://longshore-gibson-unannoyed.ngrok-free.dev/webhook/a951144a-3246-44f6-8df8-254ccb86848d/chat"
+      allow="clipboard-write"
+    ></iframe>
+  </div>
+</body>
+</html>
