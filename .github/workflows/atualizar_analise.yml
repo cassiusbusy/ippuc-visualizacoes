@@ -1,1 +1,55 @@
 
+name: Atualizar Análise NLP
+
+on:
+  # Disparado pelo n8n via webhook
+  repository_dispatch:
+    types: [atualizar-analise]
+
+  # Disparo manual pelo GitHub
+  workflow_dispatch:
+
+  # Opcional: roda todo dia às 6h como fallback
+  schedule:
+    - cron: '0 9 * * *'  # 6h de Brasília = 9h UTC
+
+jobs:
+  gerar-analise:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: |
+          pip install pandas scikit-learn gspread google-auth
+
+      - name: Criar credentials.json da service account
+        run: |
+          echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
+
+      - name: Rodar análise NLP
+        run: |
+          python src/gerar_analise.py \
+            --fonte sheets \
+            --sheet-id ${{ secrets.SHEET_ID }} \
+            --aba Minuta \
+            --credentials credentials.json \
+            --output-dir docs/
+
+      - name: Remover credentials (segurança)
+        run: rm -f credentials.json
+
+      - name: Commitar HTMLs atualizados
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions"
+          git add docs/palavras_chave.html docs/lda_vis.html
+          git diff --staged --quiet || git commit -m "🤖 Análise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
+          git push
