@@ -39,7 +39,7 @@ jobs:
           python src/gerar_analise.py \
             --fonte sheets \
             --sheet-id ${{ secrets.SHEET_ID }} \
-            --aba Minuta \
+            --aba Contribuições \
             --credentials credentials.json \
             --output-dir docs/
 
