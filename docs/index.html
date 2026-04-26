@@ -1,1 +1,108 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise das Contribuições — Minuta Plano Diretor Curitiba</title>
+<style>
+  :root { --verde: #2a9d8f; --azul: #1f3a5c; --bg: #f8f7f4; --borda: #e0ddd8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #1a1a2e; }
+
+  header {
+    background: var(--azul); color: white;
+    padding: 28px 40px; text-align: center;
+  }
+  header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+  header p { font-size: 0.9rem; color: #a8c4e0; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+
+  .card {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 0.5px solid var(--borda); text-decoration: none; color: inherit;
+    transition: all 0.2s; display: flex; flex-direction: column; gap: 12px;
+  }
+  .card:hover {
+    border-color: var(--verde);
+    box-shadow: 0 4px 20px rgba(42,157,143,0.15);
+    transform: translateY(-2px);
+  }
+  .card-icon { font-size: 2.5rem; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--azul); }
+  .card-desc { font-size: 0.88rem; color: #666; line-height: 1.55; }
+  .card-tag {
+    display: inline-block; background: #eaf7f5; color: var(--verde);
+    border-radius: 12px; padding: 3px 12px; font-size: 0.75rem; font-weight: 600;
+    width: fit-content;
+  }
+
+  .info-box {
+    background: white; border-radius: 12px; padding: 20px 24px;
+    border: 0.5px solid var(--borda); margin-top: 24px;
+    font-size: 0.85rem; color: #555; line-height: 1.6;
+  }
+  .info-box strong { color: var(--azul); }
+
+  footer {
+    text-align: center; padding: 32px; font-size: 0.8rem; color: #999; margin-top: 20px;
+  }
+
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 Análise das Contribuições Cidadãs</h1>
+  <p>Minuta Interativa — Revisão Colaborativa do Plano Diretor de Curitiba 2025</p>
+</header>
+
+<div class="container">
+
+  <div class="cards">
+    <a class="card" href="palavras_chave.html">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">Palavras-Chave</div>
+      <div class="card-desc">
+        Nuvem interativa de termos mais relevantes calculados por TF-IDF.
+        Filtre contribuições por palavra-chave, título ou submission_id.
+      </div>
+      <span class="card-tag">TF-IDF</span>
+    </a>
+
+    <a class="card" href="lda_vis.html">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">Tópicos LDA</div>
+      <div class="card-desc">
+        Modelagem de tópicos latentes nas contribuições. Explore os clusters
+        temáticos com o slider λ e rastreie cada contribuição pelo submission_id.
+      </div>
+      <span class="card-tag">LDA · 5 tópicos</span>
+    </a>
+  </div>
+
+  <div class="info-box">
+    <strong>🤖 Atualização automática:</strong> esta análise é regenerada automaticamente
+    sempre que uma nova contribuição é enviada pela plataforma
+    <a href="https://minuta-planodiretor.vercel.app" target="_blank" style="color:var(--verde)">
+      minuta-planodiretor.vercel.app
+    </a>.
+    Os dados são processados em tempo real via pipeline n8n → GitHub Actions → GitHub Pages.
+    <br><br>
+    <strong>📎 Rastreabilidade:</strong> cada contribuição pode ser localizada pelo
+    <code>submission_id</code> único, permitindo ao IPPUC consultar o texto original
+    de qualquer proposta exibida nas visualizações.
+  </div>
+
+</div>
+
+<footer>
+  IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Dados atualizados automaticamente
+</footer>
+
+</body>
+</html>
