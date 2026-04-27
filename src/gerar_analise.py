@@ -16,7 +16,7 @@ Uso:
     # Google Sheets (producao)
     python gerar_analise.py --fonte sheets \
         --sheet-id SEU_SHEET_ID \
-        --aba-minuta Minuta \
+        --aba-minuta Contribuições \
         --aba-votos Votos \
         --credentials credentials.json \
         --output-dir docs/
