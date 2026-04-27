@@ -20,6 +20,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
+      - name: Configurar git
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Actions"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cassiusbusy/ippuc-visualizacoes.git
+
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
@@ -48,9 +54,7 @@ jobs:
 
       - name: Commitar HTMLs atualizados
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Actions"
           git add docs/
           git diff --staged --quiet && echo "Sem mudancas" && exit 0
           git commit -m "Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
-          git push --force-with-lease origin main
+          git push --force origin main
