@@ -20,24 +20,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Configurar git
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/cassiusbusy/ippuc-visualizacoes.git
-
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Instalar dependencias
-        run: |
-          pip install pandas scikit-learn gspread google-auth networkx
+        run: pip install pandas scikit-learn gspread google-auth networkx
 
       - name: Criar credentials.json
-        run: |
-          echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
 
       - name: Rodar analise NLP
         run: |
@@ -53,8 +45,7 @@ jobs:
         run: rm -f credentials.json
 
       - name: Commitar HTMLs atualizados
-        run: |
-          git add docs/
-          git diff --staged --quiet && echo "Sem mudancas" && exit 0
-          git commit -m "Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
-          git push --force origin main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Analise NLP atualizada
+          file_pattern: docs/
