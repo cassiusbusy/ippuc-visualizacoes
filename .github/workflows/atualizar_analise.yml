@@ -43,10 +43,10 @@ jobs:
           python src/gerar_analise.py \
             --fonte sheets \
             --sheet-id ${{ secrets.SHEET_ID }} \
-            --aba Contribuições \
+            --aba-minuta Minuta \
+            --aba-votos Votos \
             --credentials credentials.json \
             --output-dir docs/
-
       - name: Remover credentials (segurança)
         run: rm -f credentials.json
 
