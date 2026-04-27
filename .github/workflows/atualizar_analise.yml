@@ -1,17 +1,11 @@
-
-name: Atualizar Análise NLP
+name: Atualizar Analise NLP
 
 on:
-  # Disparado pelo n8n via webhook
   repository_dispatch:
     types: [atualizar-analise]
-
-  # Disparo manual pelo GitHub
   workflow_dispatch:
-
-  # Opcional: roda todo dia às 6h como fallback
   schedule:
-    - cron: '0 9 * * *'  # 6h de Brasília = 9h UTC
+    - cron: '0 9 * * *'
 
 jobs:
   gerar-analise:
@@ -20,26 +14,26 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout do repositório
+      - name: Checkout do repositorio
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: |
-          pip install pandas scikit-learn gspread google-auth
           pip install pandas scikit-learn gspread google-auth networkx
 
-      - name: Criar credentials.json da service account
+      - name: Criar credentials.json
         run: |
           echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
 
-      - name: Rodar análise NLP
+      - name: Rodar analise NLP
         run: |
           python src/gerar_analise.py \
             --fonte sheets \
@@ -48,15 +42,15 @@ jobs:
             --aba-votos Votos \
             --credentials credentials.json \
             --output-dir docs/
-      - name: Remover credentials (segurança)
+
+      - name: Remover credentials
         run: rm -f credentials.json
 
       - name: Commitar HTMLs atualizados
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
-          git pull --rebase origin main
-          git reset --soft origin/main
+          git pull origin main --rebase
           git add docs/
-          git diff --staged --quiet || git commit -m "🤖 Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
-          git push
+          git diff --staged --quiet || git commit -m "Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
+          git push origin main
