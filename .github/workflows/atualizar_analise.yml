@@ -55,6 +55,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
-          git add docs/palavras_chave.html docs/lda_vis.html
-          git diff --staged --quiet || git commit -m "🤖 Análise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
+          git pull --rebase origin main
+          git add docs/
+          git diff --staged --quiet || git commit -m "🤖 Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
           git push
