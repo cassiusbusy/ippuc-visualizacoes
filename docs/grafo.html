@@ -18,47 +18,42 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
          text-transform:uppercase;letter-spacing:.06em;}
 .back{display:inline-flex;align-items:center;gap:6px;color:var(--az);font-size:.78rem;
       font-weight:500;text-decoration:none;margin-bottom:14px;}
-
-/* KPI grid — 2 filas */
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
 .kpi{background:var(--cd);border-radius:10px;padding:12px 14px;border:.5px solid var(--bd);}
 .knum{font-size:1.6rem;font-weight:900;color:var(--v);}
 .klbl{font-size:.7rem;color:#888;margin-top:1px;line-height:1.3;}
 .ksub{font-size:.67rem;color:#bbb;margin-top:1px;}
-
-/* Sliders */
 .sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px;}
 .sl-g{display:flex;flex-direction:column;gap:4px;}
 .sl-top{display:flex;justify-content:space-between;font-size:.7rem;color:#666;}
 .sl-top b{color:var(--azd);}
 input[type=range]{width:100%;accent-color:var(--v);}
 
-/* Info box */
+/* Info box com botão fechar */
 .ibox{background:#fff;border-radius:9px;padding:14px;border:.5px solid var(--bd);
-      margin-bottom:12px;display:none;}
+      margin-bottom:12px;display:none;position:relative;}
 .ibox.vis{display:block;}
-.ibox-title{font-size:.88rem;font-weight:700;margin-bottom:8px;}
+.ibox-close{position:absolute;top:10px;right:10px;background:var(--cd);border:none;
+            border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.8rem;
+            color:#666;display:flex;align-items:center;justify-content:center;
+            transition:background .15s;}
+.ibox-close:hover{background:#e0e0e0;}
+.ibox-title{font-size:.88rem;font-weight:700;margin-bottom:8px;padding-right:32px;}
 .mpill{border-radius:7px;padding:2px 9px;font-size:.68rem;font-weight:600;
        display:inline-block;margin:2px 2px 2px 0;}
-.mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;}
 .mcard{background:var(--cd);border-radius:7px;padding:8px 10px;}
 .mcard-lbl{font-size:.67rem;color:#888;margin-bottom:3px;}
 .mcard-val{font-size:.9rem;font-weight:700;color:var(--azd);}
 .mbar-bg{background:#e0e0e0;border-radius:3px;height:5px;margin-top:4px;overflow:hidden;}
 .mbar-fill{height:100%;border-radius:3px;background:var(--v);}
-
-/* SVG */
 #gsvg{width:100%;border-radius:8px;background:#fafafa;border:.5px solid var(--bd);
       display:block;cursor:grab;user-select:none;}
 #gsvg:active{cursor:grabbing;}
-
-/* Legendas */
-.legrow{display:flex;flex-wrap:wrap;gap:10px;font-size:.72rem;margin-top:10px;}
+.legrow{display:flex;flex-wrap:wrap;gap:10px;font-size:.72rem;margin-top:8px;}
 .legi{display:flex;align-items:center;gap:4px;}
 .legdot{width:10px;height:10px;border-radius:50%;}
 .hint{font-size:.68rem;color:#aaa;margin-top:6px;line-height:1.5;}
-
-/* Modal */
 .mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;
      align-items:center;justify-content:center;padding:20px;}
 .mov.open{display:flex;}
@@ -74,22 +69,22 @@ input[type=range]{width:100%;accent-color:var(--v);}
 <div class="cnt">
   <a class="back" href="index.html">← Voltar</a>
   <div class="ptitle">Grafo de Rede — Similaridade entre Contribuicoes</div>
-  <div class="psub">Cor = topico LDA · Numero no no = comunidade Louvain · Tamanho = grau ponderado · Clique no no para ver metricas</div>
+  <div class="psub">Cor = topico LDA · Letra no no = comunidade Louvain · Tamanho = grau ponderado · Clique no no para ver metricas</div>
 
-  <!-- KPIs — 2 filas de 4 -->
   <div class="kgrid">
     <div class="kpi"><div class="knum" style="color:var(--azd);">25</div><div class="klbl">Nos</div></div>
     <div class="kpi"><div class="knum" style="color:var(--azd);">112</div><div class="klbl">Arestas</div></div>
     <div class="kpi"><div class="knum" style="color:var(--v);">4</div><div class="klbl">Comunidades Louvain</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--az);">0.3733</div><div class="klbl">Densidade</div><div class="ksub">0=esparso, 1=completo</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--az);">0.3733</div><div class="klbl">Densidade</div><div class="ksub">0=esparso · 1=completo</div></div>
     <div class="kpi"><div class="knum" style="color:var(--azd);">18</div><div class="klbl">Grau maximo</div></div>
     <div class="kpi"><div class="knum" style="color:var(--azd);">5.29</div><div class="klbl">Grau pond. maximo</div></div>
     <div class="kpi"><div class="knum" style="color:var(--la);">2–3</div><div class="klbl">Excentricidade</div><div class="ksub">min–max da rede</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--v);">37%</div><div class="klbl">Grafo conectado</div><div class="ksub">1 componente principal</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--v);">1</div><div class="klbl">Componente principal</div><div class="ksub">grafo totalmente conectado</div></div>
   </div>
 
-  <!-- Info nó selecionado -->
+  <!-- Info box com botão fechar (a) -->
   <div class="ibox" id="ibox">
+    <button class="ibox-close" onclick="document.getElementById('ibox').classList.remove('vis')" title="Fechar">✕</button>
     <div class="ibox-title" id="ibox-title"></div>
     <div id="ibox-pills"></div>
     <div class="mrow" id="ibox-metrics"></div>
@@ -104,18 +99,27 @@ input[type=range]{width:100%;accent-color:var(--v);}
   <div class="card">
     <h3>Rede Force-Directed</h3>
 
+    <!-- Sliders na ordem pedida (f) -->
     <div class="sliders">
-      <div class="sl-g">
-        <div class="sl-top"><span>Repulsao</span><b id="fval">100</b></div>
-        <input type="range" id="forca" min="20" max="400" value="100">
-      </div>
       <div class="sl-g">
         <div class="sl-top"><span>Distancia alvo</span><b id="dval">90</b></div>
         <input type="range" id="dist" min="20" max="250" value="90">
       </div>
       <div class="sl-g">
+        <div class="sl-top"><span>Repulsao</span><b id="fval">100</b></div>
+        <input type="range" id="forca" min="20" max="400" value="100">
+      </div>
+      <div class="sl-g">
         <div class="sl-top"><span>Similaridade minima</span><b id="tval">0.08</b></div>
         <input type="range" id="thr" min="1" max="50" value="8">
+      </div>
+      <div class="sl-g">
+        <div class="sl-top"><span>Bridging maximo</span><b id="bcval">3.20</b></div>
+        <input type="range" id="bcmax" min="0" max="319" value="319">
+      </div>
+      <div class="sl-g">
+        <div class="sl-top"><span>Peso minimo aresta</span><b id="wval">0.08</b></div>
+        <input type="range" id="wmin" min="8" max="100" value="8">
       </div>
       <div class="sl-g">
         <div class="sl-top"><span>Grau minimo</span><b id="gval">0</b></div>
@@ -126,12 +130,8 @@ input[type=range]{width:100%;accent-color:var(--v);}
         <input type="range" id="gpmin" min="0" max="52" value="0">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Bridging maximo</span><b id="bcval">3.20</b></div>
-        <input type="range" id="bcmax" min="0" max="319" value="319">
-      </div>
-      <div class="sl-g">
-        <div class="sl-top"><span>Peso minimo aresta</span><b id="wval">0.08</b></div>
-        <input type="range" id="wmin" min="8" max="100" value="8">
+        <div class="sl-top"><span>Excentricidade maxima</span><b id="exval">3</b></div>
+        <input type="range" id="exmax" min="2" max="3" value="3" step="1">
       </div>
       <div class="sl-g" style="justify-content:flex-end;padding-top:16px;">
         <button onclick="resetar()" style="padding:7px 14px;border-radius:7px;border:1px solid var(--bd);
@@ -145,19 +145,19 @@ input[type=range]{width:100%;accent-color:var(--v);}
     </svg>
 
     <div class="hint">
-      Cor do no = topico LDA &nbsp;·&nbsp;
-      Numero no no = comunidade Louvain &nbsp;·&nbsp;
+      Cor = topico LDA &nbsp;·&nbsp;
+      Letra = comunidade Louvain (A, B, C, D) &nbsp;·&nbsp;
       Tamanho = grau ponderado &nbsp;·&nbsp;
-      Cor da aresta = bridging (cinza=ponte, azul=nucleo) &nbsp;·&nbsp;
+      Cor aresta = bridging (cinza=ponte · azul=nucleo) &nbsp;·&nbsp;
       Espessura = peso
     </div>
 
-    <div style="margin-top:10px;">
-      <div style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Comunidades Louvain</div>
+    <div style="margin-top:12px;">
+      <div style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Comunidades Louvain</div>
       <div class="legrow" id="leg-com"></div>
     </div>
     <div style="margin-top:10px;">
-      <div style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Topicos LDA</div>
+      <div style="font-size:.7rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Topicos LDA</div>
       <div class="legrow" id="leg-top"></div>
     </div>
   </div>
@@ -165,7 +165,7 @@ input[type=range]{width:100%;accent-color:var(--v);}
 
 <div class="mov" id="modal">
   <div class="mo">
-    <button class="mc" onclick="fm()">x</button>
+    <button class="mc" onclick="fm()">✕</button>
     <div style="font-size:.93rem;font-weight:700;color:var(--azd);margin-bottom:9px" id="mt"></div>
     <div class="mid" id="mi"></div>
     <div class="mbody" id="mb"></div>
@@ -176,12 +176,13 @@ input[type=range]{width:100%;accent-color:var(--v);}
 const DALL={"nos": [{"id": 0, "submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos. Artigo: Fica assegurada a atuação autônoma dos Técnicos em Edificações, bem como dos demais profissionais legalmente habilitados, nos ...", "conteudo_completo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos. Artigo: Fica assegurada a atuação autônoma dos Técnicos em Edificações, bem como dos demais profissionais legalmente habilitados, nos processos de regularização edilícia, elaboração de projetos e acompanhamento de obras no município de Curitiba. O Município reconhecerá a competência técnica destes profissionais para assinatura de laudos e assunção de responsabilidade técnica (TRT ART RRT), respeitando estritamente os limites de área e especificações definidos por seus respectivos conselhos de classe federais. A inclusão desta diretriz no Plano Diretor visa alinhar a legislação municipal à legislação federal vigente, especificamente a Lei Federal nº 13.639 2018 (que instituiu o Conselho Federal dos Técnicos Industriais - CFT) e a Resolução CFT nº 58 2019, que define as prerrogativas e atribuições dos Técnicos em Edificações.", "grau": 12, "grau_pond": 5.0228, "bridging": 0.0578, "comunidade": 0, "excentricidade": 3, "pagerank": 0.06324, "eigenvector": 0.37905, "betweenness": 0.02536, "clustering": 0.26649, "pr_n": 0.8895, "ev_n": 1.0, "bt_n": 0.0414, "cl_n": 0.6142, "ex_n": 1.0}, {"id": 1, "submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "A inclusão desta diretriz no Plano Diretor visa alinhar a legislação municipal à legislação federal vigente, especificamente a Lei Federal nº 13.639 2018 (que instituiu o Conselho Federal dos Técnicos...", "conteudo_completo": "A inclusão desta diretriz no Plano Diretor visa alinhar a legislação municipal à legislação federal vigente, especificamente a Lei Federal nº 13.639 2018 (que instituiu o Conselho Federal dos Técnicos Industriais - CFT) e a Resolução CFT nº 58 2019, que define as prerrogativas e atribuições dos Técnicos em Edificações. O município não pode criar restrições administrativas que se sobreponham à lei federal de exercício profissional. Além do aspecto legal, o reconhecimento expresso destes profissionais no Plano Diretor atende ao princípio da eficiência e da desburocratização. A atuação plena dos Técnicos em Edificações amplia a oferta de serviços técnicos qualificados à população, facilitando a regularização de imóveis, especialmente para as famílias de baixa e média renda, contribuindo diretamente para a redução das irregularidades edilícias e para o desenvolvimento urbano ordenado de Curitiba.", "grau": 13, "grau_pond": 4.4742, "bridging": 0.0498, "comunidade": 0, "excentricidade": 2, "pagerank": 0.05592, "eigenvector": 0.34577, "betweenness": 0.0, "clustering": 0.20756, "pr_n": 0.7644, "ev_n": 0.9096, "bt_n": 0.0, "cl_n": 0.4469, "ex_n": 0.0}, {"id": 2, "submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Fica assegurada a atuação autônoma dos Técnicos em Edificações, bem como dos demais profissionais legalmente habilitados, nos processos de regularização edilícia, elaboração de projetos e acompanhamen...", "conteudo_completo": "Fica assegurada a atuação autônoma dos Técnicos em Edificações, bem como dos demais profissionais legalmente habilitados, nos processos de regularização edilícia, elaboração de projetos e acompanhamento de obras no município de Curitiba. O Município reconhecerá a competência técnica destes profissionais para assinatura de laudos e assunção de responsabilidade técnica (TRT ART RRT), respeitando estritamente os limites de área e especificações definidos por seus respectivos conselhos de classe federais.", "grau": 11, "grau_pond": 4.0269, "bridging": 0.0801, "comunidade": 0, "excentricidade": 3, "pagerank": 0.05193, "eigenvector": 0.31608, "betweenness": 0.00725, "clustering": 0.27241, "pr_n": 0.6964, "ev_n": 0.829, "bt_n": 0.0118, "cl_n": 0.6311, "ex_n": 1.0}, {"id": 3, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "O Poder Público Municipal garantirá a inclusão e a contratação de Técnicos em Edificações e demais profissionais técnicos industriais nas equipes multidisciplinares responsáveis pelos programas de Reg...", "conteudo_completo": "O Poder Público Municipal garantirá a inclusão e a contratação de Técnicos em Edificações e demais profissionais técnicos industriais nas equipes multidisciplinares responsáveis pelos programas de Regularização Fundiária Urbana de Interesse Social (REURB-S) e nas ações de Assistência Técnica para Habitação de Interesse Social (ATHIS). Fica reconhecida a capacidade destes profissionais para a elaboração de levantamentos planialtimétricos, projetos de regularização, laudos de vistoria e acompanhamento de obras, respeitadas as atribuições dos conselhos federais.", "grau": 15, "grau_pond": 5.2855, "bridging": 0.0143, "comunidade": 0, "excentricidade": 2, "pagerank": 0.06971, "eigenvector": 0.35491, "betweenness": 0.03986, "clustering": 0.17823, "pr_n": 1.0, "ev_n": 0.9344, "bt_n": 0.0651, "cl_n": 0.3636, "ex_n": 0.0}, {"id": 4, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "A proposta visa efetivar a Lei Federal nº 11.888 2008 (Lei da ATHIS) e a Lei Federal nº 13.465 2017 (REURB), integrando profissionais técnicos legalmente habilitados pelo CFT para baratear e acelerar ...", "conteudo_completo": "A proposta visa efetivar a Lei Federal nº 11.888 2008 (Lei da ATHIS) e a Lei Federal nº 13.465 2017 (REURB), integrando profissionais técnicos legalmente habilitados pelo CFT para baratear e acelerar a regularização de áreas de interesse social. A inserção dos Técnicos em Edificações nas equipes de REURB-S garante capilaridade no atendimento à população vulnerável, suprindo a alta demanda por responsáveis técnicos nas periferias de Curitiba e promovendo o direito constitucional à moradia digna e segura.", "grau": 12, "grau_pond": 4.4073, "bridging": 0.0397, "comunidade": 0, "excentricidade": 3, "pagerank": 0.05695, "eigenvector": 0.32901, "betweenness": 0.0471, "clustering": 0.22149, "pr_n": 0.7821, "ev_n": 0.8641, "bt_n": 0.0769, "cl_n": 0.4865, "ex_n": 1.0}, {"id": 5, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Fica assegurada a representação institucional do Conselho Regional dos Técnicos Industriais (CRT-PR), bem como de entidades sindicais e associativas representativas dos técnicos de nível médio, na com...", "conteudo_completo": "Fica assegurada a representação institucional do Conselho Regional dos Técnicos Industriais (CRT-PR), bem como de entidades sindicais e associativas representativas dos técnicos de nível médio, na composição do Conselho da Cidade de Curitiba (CONCITIBA) e nas demais comissões, câmaras técnicas e conselhos gestores voltados ao planejamento urbano, habitação, meio ambiente e regularização fundiária do município.", "grau": 10, "grau_pond": 3.6549, "bridging": 0.0529, "comunidade": 0, "excentricidade": 3, "pagerank": 0.04834, "eigenvector": 0.28411, "betweenness": 0.0, "clustering": 0.27745, "pr_n": 0.6351, "ev_n": 0.7421, "bt_n": 0.0, "cl_n": 0.6454, "ex_n": 1.0}, {"id": 6, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "A Lei Federal nº 13.639 2018 desmembrou os técnicos industriais do Sistema CONFEA CREA, criando um conselho próprio (CFT CRT). Para que a gestão democrática da cidade seja verdadeiramente representati...", "conteudo_completo": "A Lei Federal nº 13.639 2018 desmembrou os técnicos industriais do Sistema CONFEA CREA, criando um conselho próprio (CFT CRT). Para que a gestão democrática da cidade seja verdadeiramente representativa, é imperativa a atualização da composição dos conselhos municipais de urbanismo para incluir os representantes legais dos Técnicos Industriais. Isso garante pluralidade técnica nas decisões que afetam o desenvolvimento urbano e a fiscalização do exercício profissional em Curitiba.", "grau": 8, "grau_pond": 3.3261, "bridging": 0.2756, "comunidade": 0, "excentricidade": 3, "pagerank": 0.04256, "eigenvector": 0.27966, "betweenness": 0.0, "clustering": 0.40234, "pr_n": 0.5364, "ev_n": 0.73, "bt_n": 0.0, "cl_n": 1.0, "ex_n": 1.0}, {"id": 7, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Constitui diretriz da Política de Desenvolvimento Urbano a desburocratização e o fomento ao empreendedorismo na cadeia da construção civil, assegurando o livre exercício profissional de todos os técni...", "conteudo_completo": "Constitui diretriz da Política de Desenvolvimento Urbano a desburocratização e o fomento ao empreendedorismo na cadeia da construção civil, assegurando o livre exercício profissional de todos os técnicos e tecnólogos legalmente habilitados. É vedado ao município criar exigências administrativas, limitações de área ou restrições de aprovação de projetos que contrariem as resoluções vigentes do Conselho Federal dos Técnicos Industriais (CFT) e demais conselhos de classe.", "grau": 11, "grau_pond": 3.9513, "bridging": 0.0801, "comunidade": 0, "excentricidade": 3, "pagerank": 0.05138, "eigenvector": 0.29346, "betweenness": 0.0, "clustering": 0.26643, "pr_n": 0.6869, "ev_n": 0.7675, "bt_n": 0.0, "cl_n": 0.6141, "ex_n": 1.0}, {"id": 8, "submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Muitas vezes, decretos municipais ou normativas internas de secretarias criam barreiras ilegais que impedem o trabalho de profissionais técnicos, ferindo o princípio da legalidade. Esta diretriz no Tí...", "conteudo_completo": "Muitas vezes, decretos municipais ou normativas internas de secretarias criam barreiras ilegais que impedem o trabalho de profissionais técnicos, ferindo o princípio da legalidade. Esta diretriz no Título I consolida o respeito do município à legislação federal de regulamentação profissional, garantindo segurança jurídica aos Técnicos em Edificações para empreender, gerar renda e contribuir para o dinamismo econômico e a conformidade edilícia de Curitiba.", "grau": 13, "grau_pond": 3.3266, "bridging": 0.0498, "comunidade": 0, "excentricidade": 2, "pagerank": 0.04336, "eigenvector": 0.24746, "betweenness": 0.09783, "clustering": 0.17369, "pr_n": 0.55, "ev_n": 0.6426, "bt_n": 0.1598, "cl_n": 0.3508, "ex_n": 0.0}, {"id": 9, "submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 2, "topico_nome": "Mobilidade e Infraestrutura", "tipo": "ideia", "conteudo": "Criar contrapartida financeira na cessão de imóveis públicos para corporações, destinando tais recursos para a habitação popular .", "conteudo_completo": "Criar contrapartida financeira na cessão de imóveis públicos para corporações, destinando tais recursos para a habitação popular .", "grau": 3, "grau_pond": 0.3978, "bridging": 6.338, "comunidade": 1, "excentricidade": 3, "pagerank": 0.01115, "eigenvector": 0.02168, "betweenness": 0.01449, "clustering": 0.09872, "pr_n": 0.0, "ev_n": 0.0293, "bt_n": 0.0237, "cl_n": 0.1379, "ex_n": 1.0}, {"id": 10, "submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA ", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "Descentralizar a Secretaria da Mulher de Igualdade étnico-racial, contemplando as onze Regionais da cidade a exemplo das demais secretarias de relevancia na Gestão do Municipio - alcançando as demanda...", "conteudo_completo": "Descentralizar a Secretaria da Mulher de Igualdade étnico-racial, contemplando as onze Regionais da cidade a exemplo das demais secretarias de relevancia na Gestão do Municipio - alcançando as demandas de forma próxima e efetiva.", "grau": 8, "grau_pond": 1.4954, "bridging": 0.1541, "comunidade": 1, "excentricidade": 3, "pagerank": 0.02587, "eigenvector": 0.0846, "betweenness": 0.00362, "clustering": 0.14738, "pr_n": 0.2513, "ev_n": 0.2002, "bt_n": 0.0059, "cl_n": 0.276, "ex_n": 1.0}, {"id": 11, "submission_id": "6e128e03-de07-448f-8aac-134eee9be195", "email": "f****@gmail.com", "titulo": "DA ACESSIBILIDADE E DO DESENHO UNIVERSAL", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "CAPÍTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL Art. X. A Política Territorial Integrada do Município assegurará, de forma transversal, a promoção da acessibilidade e a adoção do desenho univer...", "conteudo_completo": "CAPÍTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL Art. X. A Política Territorial Integrada do Município assegurará, de forma transversal, a promoção da acessibilidade e a adoção do desenho universal como princípios estruturantes do planejamento, ordenamento e gestão do território, garantindo o uso seguro, autônomo e equitativo dos espaços urbanos por todas as pessoas, especialmente aquelas com deficiência ou mobilidade reduzida. Art. X 1. Para os fins deste Plano Diretor, considera-se: I acessibilidade: a condição para utilização, com segurança e autonomia, dos espaços, mobiliários, equipamentos urbanos, edificações, transportes, informação e comunicação por todas as pessoas; II desenho universal: a concepção de espaços, ambientes, produtos e serviços a serem utilizados por todas as pessoas, sem necessidade de adaptação ou de projeto específico. Art. X 2. Constituem diretrizes da política municipal de acessibilidade e desenho universal: I a eliminação progressiva de barreiras urbanísticas, arquitetônicas, nos transportes, na comunicação e na informação; II a promoção de rotas acessíveis contínuas, integradas e seguras em todo o território municipal; III a priorização do deslocamento a pé e por modos ativos, com atenção às pessoas com deficiência, idosos e demais grupos com mobilidade reduzida; IV a integração da acessibilidade às políticas de mobilidade urbana, habitação, saneamento ambiental, espaços públicos e equipamentos urbanos e comunitários; V a adoção de parâmetros técnicos de acessibilidade nas normas de uso e ocupação do solo, no código de obras e nas demais legislações urbanísticas; VI o estímulo à utilização de tecnologias assistivas e soluções inovadoras para promoção da inclusão urbana; VII a garantia de acesso à informação em formatos acessíveis. Art. X 3. O Município deverá assegurar a incorporação obrigatória dos princípios de acessibilidade e desenho universal: I na elaboração, aprovação e execução de projetos urbanísticos e arquitetônicos, públicos e privados; II nos processos de licenciamento urbanístico e edilício; III na implantação, ampliação e reforma de obras públicas e privadas; IV na requalificação de áreas urbanas consolidadas; V na implantação de mobiliário urbano, equipamentos públicos e espaços de uso coletivo. Art. X 4. Os empreendimentos e atividades classificados como de impacto urbanístico deverão apresentar, como condição para aprovação, soluções que assegurem acessibilidade plena e aplicação dos princípios do desenho universal, conforme regulamentação específica. Art. X 5. O Poder Público Municipal instituirá programas permanentes de adaptação e qualificação do espaço urbano, com metas progressivas de eliminação de barreiras, priorizando: I áreas com maior fluxo de pedestres; II entornos de equipamentos públicos, especialmente de saúde, educação e assistência social; III áreas com maior concentração de pessoas com deficiência, idosos ou população em situação de vulnerabilidade. Art. X 6. Será assegurada a participação da sociedade civil, especialmente de pessoas com deficiência e suas entidades representativas, na formulação, implementação, monitoramento e avaliação das políticas públicas de acessibilidade. Art. X 7. O descumprimento das normas de acessibilidade e desenho universal sujeitará os responsáveis às sanções previstas na legislação urbanística, edilícia e demais normas aplicáveis. Art. X 8. O Poder Executivo regulamentará este Capítulo, estabelecendo parâmetros técnicos, indicadores de monitoramento e instrumentos de fiscalização, observado o disposto na legislação federal pertinente.", "grau": 18, "grau_pond": 2.2066, "bridging": 0.0069, "comunidade": 1, "excentricidade": 2, "pagerank": 0.03913, "eigenvector": 0.07535, "betweenness": 0.61232, "clustering": 0.05017, "pr_n": 0.4778, "ev_n": 0.1751, "bt_n": 1.0, "cl_n": 0.0, "ex_n": 0.0}, {"id": 12, "submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticalização controlada e Desenvolvimento urbaníst", "topico": 1, "topico_nome": "Uso do Solo e Zoneamento", "tipo": "ideia", "conteudo": "- Substituicao das ruas paralelepípedos por asfalto em ruas não pertencente ao centro histórico, trazendo maior conforto mobilidade e segurança pra quem transita mora e trabalha e pra quem quer invest...", "conteudo_completo": "- Substituicao das ruas paralelepípedos por asfalto em ruas não pertencente ao centro histórico, trazendo maior conforto mobilidade e segurança pra quem transita mora e trabalha e pra quem quer investir na região -Aumento de verticalização de pavimentos no Zum-3 pertencente e adjacente eixo centro vivo e marechal floriano Peixoto de 4 pavimentos para 8 PAVIMENTOS, gerando maior valor ao Curitiba em 15 minutos e integração residencial comercial ao programa Curitiba volta ao centro, possibilitando novos moradores, novos comércios empresárial sem precisar comprar potencial construtivo abaixo de tro do parametro do cone que é de 900 metros.", "grau": 6, "grau_pond": 1.6002, "bridging": 0.1698, "comunidade": 3, "excentricidade": 3, "pagerank": 0.02848, "eigenvector": 0.03697, "betweenness": 0.0, "clustering": 0.21297, "pr_n": 0.2958, "ev_n": 0.0708, "bt_n": 0.0, "cl_n": 0.4623, "ex_n": 1.0}, {"id": 13, "submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticalização controlada e Desenvolvimento urbaníst", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "- Possibilidade maior para construção civil benefícios de substituição calçadas antigas por novas desde do recuo 6 metros pra dentros até o início da calçada, atendendo maior acessibilidade e mobilida...", "conteudo_completo": "- Possibilidade maior para construção civil benefícios de substituição calçadas antigas por novas desde do recuo 6 metros pra dentros até o início da calçada, atendendo maior acessibilidade e mobilidade urbana desde portadores baixa visão, recuo embarque e desembarque sem ponto cego, rampas de acesso cadeirantes e corrimões.", "grau": 3, "grau_pond": 0.8478, "bridging": 2.1671, "comunidade": 1, "excentricidade": 3, "pagerank": 0.01872, "eigenvector": 0.01268, "betweenness": 0.0, "clustering": 0.1373, "pr_n": 0.1292, "ev_n": 0.0048, "bt_n": 0.0, "cl_n": 0.2474, "ex_n": 1.0}, {"id": 14, "submission_id": "d8a2062e-d793-4652-aa83-1763b7c02f4f", "email": "g****@gmail.com", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA ", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "Todos os planos, projetos, regulamentações e demais desdobramentos do Plano Diretor deverão contar com processos participativos com dinâmicas que, em lugar da ratificação pública, propiciem a possibil...", "conteudo_completo": "Todos os planos, projetos, regulamentações e demais desdobramentos do Plano Diretor deverão contar com processos participativos com dinâmicas que, em lugar da ratificação pública, propiciem a possibilidade de segmentos interessados da sociedade civil incidirem sobre a política urbana, munidos das informações necessárias, por meio de espaços institucionais sucedidos de procedimentos transparentes de interpretação e análise das contribuições e de mecanismos de rastreabilidade.", "grau": 7, "grau_pond": 1.5885, "bridging": 0.1294, "comunidade": 1, "excentricidade": 3, "pagerank": 0.02628, "eigenvector": 0.09425, "betweenness": 0.03623, "clustering": 0.1829, "pr_n": 0.2583, "ev_n": 0.2264, "bt_n": 0.0592, "cl_n": 0.3769, "ex_n": 1.0}, {"id": 15, "submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "CAPÍTULO VIII - INSTRUMENTOS DE PROMOÇÃO DO ACESSO JUSTO E IGUALITÁRIO AO SOLO Capítulo orientado para a promoção da diversificação social no território, promovendo a inclusão de camadas sociais menos...", "conteudo_completo": "CAPÍTULO VIII - INSTRUMENTOS DE PROMOÇÃO DO ACESSO JUSTO E IGUALITÁRIO AO SOLO Capítulo orientado para a promoção da diversificação social no território, promovendo a inclusão de camadas sociais menos abastadas nas áreas centrais e abastecidas de infraestrutura.", "grau": 8, "grau_pond": 1.8842, "bridging": 0.1007, "comunidade": 2, "excentricidade": 2, "pagerank": 0.03397, "eigenvector": 0.05728, "betweenness": 0.05797, "clustering": 0.12603, "pr_n": 0.3897, "ev_n": 0.126, "bt_n": 0.0947, "cl_n": 0.2154, "ex_n": 0.0}, {"id": 16, "submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "Seção I - Da Função Social da Propriedade", "conteudo_completo": "Seção I - Da Função Social da Propriedade", "grau": 4, "grau_pond": 1.5775, "bridging": 1.4658, "comunidade": 2, "excentricidade": 3, "pagerank": 0.02723, "eigenvector": 0.07405, "betweenness": 0.0, "clustering": 0.33948, "pr_n": 0.2746, "ev_n": 0.1715, "bt_n": 0.0, "cl_n": 0.8215, "ex_n": 1.0}, {"id": 17, "submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "Retirar capítulo. A promoção da função social da propriedade deve ser a prioridade do município. Além disso, a otimização do uso do solo deve ser medida pela própria função social da propriedade e não...", "conteudo_completo": "Retirar capítulo. A promoção da função social da propriedade deve ser a prioridade do município. Além disso, a otimização do uso do solo deve ser medida pela própria função social da propriedade e não pela produção imobiliária.", "grau": 8, "grau_pond": 2.3581, "bridging": 0.083, "comunidade": 2, "excentricidade": 2, "pagerank": 0.0415, "eigenvector": 0.06808, "betweenness": 0.00362, "clustering": 0.11745, "pr_n": 0.5183, "ev_n": 0.1553, "bt_n": 0.0059, "cl_n": 0.1911, "ex_n": 0.0}, {"id": 18, "submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 4, "topico_nome": "Participacao e Gestao", "tipo": "ideia", "conteudo": "Definir bem o que são áreas estratégicas (para quem? por quem?). Parece um capítulo perigoso, que pode vir a promover a gentrificação e ou expulsão de populações vulneráveis.", "conteudo_completo": "Definir bem o que são áreas estratégicas (para quem? por quem?). Parece um capítulo perigoso, que pode vir a promover a gentrificação e ou expulsão de populações vulneráveis.", "grau": 8, "grau_pond": 1.0562, "bridging": 0.1225, "comunidade": 2, "excentricidade": 3, "pagerank": 0.02097, "eigenvector": 0.02832, "betweenness": 0.07609, "clustering": 0.07734, "pr_n": 0.1677, "ev_n": 0.0473, "bt_n": 0.1243, "cl_n": 0.0772, "ex_n": 1.0}, {"id": 19, "submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "topico": 1, "topico_nome": "Uso do Solo e Zoneamento", "tipo": "ideia", "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho en...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho entre a Via Veneto e a Rua Jacarezinho. 2.Rua Nicolau José Gravina: Bairro Cascatinha 1. Justificativa Técnica e Urbanística A presente proposta visa adequar o zoneamento de áreas estratégicas de Santa Felicidade e Cascatinha à realizada de infraestrutura e vocação comercial da região. Atualmente, a classificação como ZR1 e ZR2 (limita a 2 pavimentos e uso unifamiliar) nestes trechos subutiliza o solo urbano em áreas de grande dinamismo. A proposta busca conferir segurança jurídica através da regulamentação clara da VS2 (via setorial 2) e promover a vitalidade urbana através do uso misto, garantindo que o desenvolvimento econômico caminhe junto com a oferta habitacional qualificada. Ressalto que o uso misto no térreo atende diretamente às diretrizes globais de Cidades para Pessoas , reduzindo a necessidade de deslocamento e valorizando a identidade turística de Santa Felicidade. 2. PROPOSTA Solicita-se a revisão dos parâmetros normativos para os locais citados, conforme as seguintes diretrizes: Adensamento no Eixo Manoel Ribas: que a faixa de até 100 metros a partir do eixo da Avenida Manoel Ribas, no segmento compreendido entre a Via Veneto e a Rua Jacarezinho, passe a permitir oficialmente a construção de habitações coletivas de até 6 pavimentos. Integração e Regulamentação da VS2: Que este novo potencial construtivo seja formalmente agregado à regulamentação da Via Setorial (VS2), estabelecendo critérios claros que substituam as atuais omissões legislativas sobre o trecho. Ressalto que a mudança não é apenas um aumento de altura , mas uma estratégia de planejamento urbano para uma via que já possui natureza de eixo central. Fomento ao Uso Misto e Fachada Ativa: Com estratégia de diversificação local, a nova normativa deve viabilizar e incentivar ocupações habitacionais que contemplem o uso comercial no pavimento térreo. Esta configuração de uso misto visa aumentar a segurança, dinamismo econômico e a circulação de pedestres na região e atende diretamente às diretrizes globais de Cidades para Pessoas . Readequação no Bairro Cascatinha: para a Rua Nicolau José Gravina, propõe-se a elevação do zoneamento para permitir o uso multifamiliar e comercial de bairro com gabarito de até 4 pavimentos, servindo como zona de transição harmônica entre o eixo adensado e as áreas residenciais. 3. Objetivos Alcançados Diversificação Local: Estímulo à permanecia de moradores e fortalecimento do comercio de proximidade. Otimização da Infraestrutura: Aproveitamento do potencial de transporte e serviços da Av. Manoel Ribas para habitação coletiva. Segurança Jurídica: Definição de parâmetros objetivos para proprietários e investidores, eliminando a ambiguidade da legislação vigente. Sem mais, coloco-me a disposição para quaisquer esclarecimentos e encaminhamentos necessários. Maria de Lourdes Rocha de Souza OAB PR nº50.680", "grau": 9, "grau_pond": 3.8085, "bridging": 0.0912, "comunidade": 3, "excentricidade": 3, "pagerank": 0.05363, "eigenvector": 0.12053, "betweenness": 0.03261, "clustering": 0.22583, "pr_n": 0.7254, "ev_n": 0.2978, "bt_n": 0.0533, "cl_n": 0.4988, "ex_n": 1.0}, {"id": 20, "submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "topico": 1, "topico_nome": "Uso do Solo e Zoneamento", "tipo": "ideia", "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho en...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho entre a Via Veneto e a Rua Jacarezinho. 2.Rua Nicolau José Gravina: Bairro Cascatinha 1. Justificativa Técnica e Urbanística A presente proposta visa adequar o zoneamento de áreas estratégicas de Santa Felicidade e Cascatinha à realizada de infraestrutura e vocação comercial da região. Atualmente, a classificação como ZR1 e ZR2 (limita a 2 pavimentos e uso unifamiliar) nestes trechos subutiliza o solo urbano em áreas de grande dinamismo. A proposta busca conferir segurança jurídica através da regulamentação clara da VS2 (via setorial 2) e promover a vitalidade urbana através do uso misto, garantindo que o desenvolvimento econômico caminhe junto com a oferta habitacional qualificada. Ressalto que o uso misto no térreo atende diretamente às diretrizes globais de Cidades para Pessoas , reduzindo a necessidade de deslocamento e valorizando a identidade turística de Santa Felicidade. 2. PROPOSTA Solicita-se a revisão dos parâmetros normativos para os locais citados, conforme as seguintes diretrizes: Adensamento no Eixo Manoel Ribas: que a faixa de até 100 metros a partir do eixo da Avenida Manoel Ribas, no segmento compreendido entre a Via Veneto e a Rua Jacarezinho, passe a permitir oficialmente a construção de habitações coletivas de até 6 pavimentos. Integração e Regulamentação da VS2: Que este novo potencial construtivo seja formalmente agregado à regulamentação da Via Setorial (VS2), estabelecendo critérios claros que substituam as atuais omissões legislativas sobre o trecho. Ressalto que a mudança não é apenas um aumento de altura , mas uma estratégia de planejamento urbano para uma via que já possui natureza de eixo central. Fomento ao Uso Misto e Fachada Ativa: Com estratégia de diversificação local, a nova normativa deve viabilizar e incentivar ocupações habitacionais que contemplem o uso comercial no pavimento térreo. Esta configuração de uso misto visa aumentar a segurança, dinamismo econômico e a circulação de pedestres na região e atende diretamente às diretrizes globais de Cidades para Pessoas . Readequação no Bairro Cascatinha: para a Rua Nicolau José Gravina, propõe-se a elevação do zoneamento para permitir o uso multifamiliar e comercial de bairro com gabarito de até 4 pavimentos, servindo como zona de transição harmônica entre o eixo adensado e as áreas residenciais. 3. Objetivos Alcançados Diversificação Local: Estímulo à permanecia de moradores e fortalecimento do comercio de proximidade. Otimização da Infraestrutura: Aproveitamento do potencial de transporte e serviços da Av. Manoel Ribas para habitação coletiva. Segurança Jurídica: Definição de parâmetros objetivos para proprietários e investidores, eliminando a ambiguidade da legislação vigente. Sem mais, coloco-me a disposição para quaisquer esclarecimentos e encaminhamentos necessários. Maria de Lourdes Rocha de Souza OAB PR nº50.680", "grau": 9, "grau_pond": 3.8085, "bridging": 0.0912, "comunidade": 3, "excentricidade": 3, "pagerank": 0.05363, "eigenvector": 0.12053, "betweenness": 0.03261, "clustering": 0.22583, "pr_n": 0.7254, "ev_n": 0.2978, "bt_n": 0.0533, "cl_n": 0.4988, "ex_n": 1.0}, {"id": 21, "submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 1, "topico_nome": "Uso do Solo e Zoneamento", "tipo": "ideia", "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho en...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho entre a Via Veneto e a Rua Jacarezinho. 2.Rua Nicolau José Gravina: Bairro Cascatinha 1. Justificativa Técnica e Urbanística A presente proposta visa adequar o zoneamento de áreas estratégicas de Santa Felicidade e Cascatinha à realizada de infraestrutura e vocação comercial da região. Atualmente, a classificação como ZR1 e ZR2 (limita a 2 pavimentos e uso unifamiliar) nestes trechos subutiliza o solo urbano em áreas de grande dinamismo. A proposta busca conferir segurança jurídica através da regulamentação clara da VS2 (via setorial 2) e promover a vitalidade urbana através do uso misto, garantindo que o desenvolvimento econômico caminhe junto com a oferta habitacional qualificada. Ressalto que o uso misto no térreo atende diretamente às diretrizes globais de Cidades para Pessoas , reduzindo a necessidade de deslocamento e valorizando a identidade turística de Santa Felicidade. 2. PROPOSTA Solicita-se a revisão dos parâmetros normativos para os locais citados, conforme as seguintes diretrizes: Adensamento no Eixo Manoel Ribas: que a faixa de até 100 metros a partir do eixo da Avenida Manoel Ribas, no segmento compreendido entre a Via Veneto e a Rua Jacarezinho, passe a permitir oficialmente a construção de habitações coletivas de até 6 pavimentos. Integração e Regulamentação da VS2: Que este novo potencial construtivo seja formalmente agregado à regulamentação da Via Setorial (VS2), estabelecendo critérios claros que substituam as atuais omissões legislativas sobre o trecho. Ressalto que a mudança não é apenas um aumento de altura , mas uma estratégia de planejamento urbano para uma via que já possui natureza de eixo central. Fomento ao Uso Misto e Fachada Ativa: Com estratégia de diversificação local, a nova normativa deve viabilizar e incentivar ocupações habitacionais que contemplem o uso comercial no pavimento térreo. Esta configuração de uso misto visa aumentar a segurança, dinamismo econômico e a circulação de pedestres na região e atende diretamente às diretrizes globais de Cidades para Pessoas . Readequação no Bairro Cascatinha: para a Rua Nicolau José Gravina, propõe-se a elevação do zoneamento para permitir o uso multifamiliar e comercial de bairro com gabarito de até 4 pavimentos, servindo como zona de transição harmônica entre o eixo adensado e as áreas residenciais. 3. Objetivos Alcançados Diversificação Local: Estímulo à permanecia de moradores e fortalecimento do comercio de proximidade. Otimização da Infraestrutura: Aproveitamento do potencial de transporte e serviços da Av. Manoel Ribas para habitação coletiva. Segurança Jurídica: Definição de parâmetros objetivos para proprietários e investidores, eliminando a ambiguidade da legislação vigente. Sem mais, coloco-me a disposição para quaisquer esclarecimentos e encaminhamentos necessários. Maria de Lourdes Rocha de Souza OAB PR nº50.680", "grau": 9, "grau_pond": 3.8085, "bridging": 0.0912, "comunidade": 3, "excentricidade": 3, "pagerank": 0.05363, "eigenvector": 0.12053, "betweenness": 0.03261, "clustering": 0.22583, "pr_n": 0.7254, "ev_n": 0.2978, "bt_n": 0.0533, "cl_n": 0.4988, "ex_n": 1.0}, {"id": 22, "submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 1, "topico_nome": "Uso do Solo e Zoneamento", "tipo": "ideia", "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho en...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS Eixo Manoel Ribas e Entorno Objeto: Readequação de Zoneamento, Potencial Construtivo e Incentivo Misto. Localização: 1. Avenida Manoel Ribas: Trecho entre a Via Veneto e a Rua Jacarezinho. 2.Rua Nicolau José Gravina: Bairro Cascatinha 1. Justificativa Técnica e Urbanística A presente proposta visa adequar o zoneamento de áreas estratégicas de Santa Felicidade e Cascatinha à realizada de infraestrutura e vocação comercial da região. Atualmente, a classificação como ZR1 e ZR2 (limita a 2 pavimentos e uso unifamiliar) nestes trechos subutiliza o solo urbano em áreas de grande dinamismo. A proposta busca conferir segurança jurídica através da regulamentação clara da VS2 (via setorial 2) e promover a vitalidade urbana através do uso misto, garantindo que o desenvolvimento econômico caminhe junto com a oferta habitacional qualificada. Ressalto que o uso misto no térreo atende diretamente às diretrizes globais de Cidades para Pessoas , reduzindo a necessidade de deslocamento e valorizando a identidade turística de Santa Felicidade. 2. PROPOSTA Solicita-se a revisão dos parâmetros normativos para os locais citados, conforme as seguintes diretrizes: Adensamento no Eixo Manoel Ribas: que a faixa de até 100 metros a partir do eixo da Avenida Manoel Ribas, no segmento compreendido entre a Via Veneto e a Rua Jacarezinho, passe a permitir oficialmente a construção de habitações coletivas de até 6 pavimentos. Integração e Regulamentação da VS2: Que este novo potencial construtivo seja formalmente agregado à regulamentação da Via Setorial (VS2), estabelecendo critérios claros que substituam as atuais omissões legislativas sobre o trecho. Ressalto que a mudança não é apenas um aumento de altura , mas uma estratégia de planejamento urbano para uma via que já possui natureza de eixo central. Fomento ao Uso Misto e Fachada Ativa: Com estratégia de diversificação local, a nova normativa deve viabilizar e incentivar ocupações habitacionais que contemplem o uso comercial no pavimento térreo. Esta configuração de uso misto visa aumentar a segurança, dinamismo econômico e a circulação de pedestres na região e atende diretamente às diretrizes globais de Cidades para Pessoas . Readequação no Bairro Cascatinha: para a Rua Nicolau José Gravina, propõe-se a elevação do zoneamento para permitir o uso multifamiliar e comercial de bairro com gabarito de até 4 pavimentos, servindo como zona de transição harmônica entre o eixo adensado e as áreas residenciais. 3. Objetivos Alcançados Diversificação Local: Estímulo à permanecia de moradores e fortalecimento do comercio de proximidade. Otimização da Infraestrutura: Aproveitamento do potencial de transporte e serviços da Av. Manoel Ribas para habitação coletiva. Segurança Jurídica: Definição de parâmetros objetivos para proprietários e investidores, eliminando a ambiguidade da legislação vigente. Sem mais, coloco-me a disposição para quaisquer esclarecimentos e encaminhamentos necessários. Maria de Lourdes Rocha de Souza OAB PR nº50.680", "grau": 9, "grau_pond": 3.8085, "bridging": 0.0912, "comunidade": 3, "excentricidade": 3, "pagerank": 0.05363, "eigenvector": 0.12053, "betweenness": 0.03261, "clustering": 0.22583, "pr_n": 0.7254, "ev_n": 0.2978, "bt_n": 0.0533, "cl_n": 0.4988, "ex_n": 1.0}, {"id": 23, "submission_id": "dcb1615c-dccc-4c93-9dcd-0946e35d7263", "email": "m****@hotmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRAD", "topico": 3, "topico_nome": "Habitacao e Inclusao Social", "tipo": "ideia", "conteudo": "xx. Visando a minimização da poluição gerada por veículos em geral ao arrancarem ( pára-anda ), inclusive os de transporte público e pesado, a autoridade do sistema de controle semafórico de trânsito ...", "conteudo_completo": "xx. Visando a minimização da poluição gerada por veículos em geral ao arrancarem ( pára-anda ), inclusive os de transporte público e pesado, a autoridade do sistema de controle semafórico de trânsito deverá otimizá-lo para fluxo ininterrupto nas vias do anel central, estruturais e vias de ligação e principais, considerando: I. média de 85 das velocidades máximas dos trechos dessas vias; II. priorização dessa otimização para as vias utilizadas por veículos articulados para o transporte público; III. revisão anual da otimização, com disponibilização do respectivo relatório e sua evolução no sítio da autoridade.", "grau": 5, "grau_pond": 0.5545, "bridging": 0.6153, "comunidade": 3, "excentricidade": 3, "pagerank": 0.01323, "eigenvector": 0.01483, "betweenness": 0.0, "clustering": 0.11933, "pr_n": 0.0355, "ev_n": 0.0107, "bt_n": 0.0, "cl_n": 0.1964, "ex_n": 1.0}, {"id": 24, "submission_id": "75f9f486-5d77-44a7-ab02-658771380aa1", "email": "r****@hotmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓR", "topico": 0, "topico_nome": "Regulamentacao Profissional", "tipo": "ideia", "conteudo": "As mulheres são extremamente afetadas por questões sociais. Há a Secretaria da Mulher e Igualdade Étnico-racial, que tem como atribuição articular com as demais políticas públicas para a efetivação da...", "conteudo_completo": "As mulheres são extremamente afetadas por questões sociais. Há a Secretaria da Mulher e Igualdade Étnico-racial, que tem como atribuição articular com as demais políticas públicas para a efetivação da transversalização de gênero em todas as políticas públicas. Incluir um capítulo para a políticas pública para mulheres, reforça a premissa do programa Curitiba mais mulheres e reforça o olhar sensível ao gênero, no munícipio", "grau": 5, "grau_pond": 0.6253, "bridging": 0.6099, "comunidade": 2, "excentricidade": 3, "pagerank": 0.01556, "eigenvector": 0.0109, "betweenness": 0.00362, "clustering": 0.0819, "pr_n": 0.0752, "ev_n": 0.0, "bt_n": 0.0059, "cl_n": 0.0901, "ex_n": 1.0}], "arestas": [{"source": 0, "target": 1, "weight": 0.6695, "bridging": 0.0538}, {"source": 0, "target": 2, "weight": 0.8257, "bridging": 0.0689}, {"source": 0, "target": 3, "weight": 0.6682, "bridging": 0.036}, {"source": 0, "target": 4, "weight": 0.5999, "bridging": 0.0488}, {"source": 0, "target": 5, "weight": 0.4104, "bridging": 0.0553}, {"source": 0, "target": 6, "weight": 0.4064, "bridging": 0.1667}, {"source": 0, "target": 7, "weight": 0.4158, "bridging": 0.0689}, {"source": 0, "target": 8, "weight": 0.4696, "bridging": 0.0538}, {"source": 0, "target": 10, "weight": 0.1153, "bridging": 0.1059}, {"source": 0, "target": 11, "weight": 0.1175, "bridging": 0.0323}, {"source": 0, "target": 14, "weight": 0.2189, "bridging": 0.0936}, {"source": 0, "target": 15, "weight": 0.1056, "bridging": 0.0793}, {"source": 1, "target": 2, "weight": 0.3378, "bridging": 0.065}, {"source": 1, "target": 3, "weight": 0.5119, "bridging": 0.032}, {"source": 1, "target": 4, "weight": 0.6205, "bridging": 0.0447}, {"source": 1, "target": 5, "weight": 0.4725, "bridging": 0.0513}, {"source": 1, "target": 6, "weight": 0.5104, "bridging": 0.1627}, {"source": 1, "target": 7, "weight": 0.4097, "bridging": 0.065}, {"source": 1, "target": 8, "weight": 0.4793, "bridging": 0.0498}, {"source": 1, "target": 11, "weight": 0.0815, "bridging": 0.0284}, {"source": 1, "target": 19, "weight": 0.0953, "bridging": 0.0705}, {"source": 1, "target": 20, "weight": 0.0953, "bridging": 0.0705}, {"source": 1, "target": 21, "weight": 0.0953, "bridging": 0.0705}, {"source": 1, "target": 22, "weight": 0.0953, "bridging": 0.0705}, {"source": 2, "target": 3, "weight": 0.6683, "bridging": 0.0472}, {"source": 2, "target": 4, "weight": 0.528, "bridging": 0.0599}, {"source": 2, "target": 5, "weight": 0.222, "bridging": 0.0665}, {"source": 2, "target": 6, "weight": 0.2178, "bridging": 0.1779}, {"source": 2, "target": 7, "weight": 0.3559, "bridging": 0.0801}, {"source": 2, "target": 8, "weight": 0.3506, "bridging": 0.065}, {"source": 2, "target": 10, "weight": 0.1844, "bridging": 0.1171}, {"source": 2, "target": 11, "weight": 0.0917, "bridging": 0.0435}, {"source": 2, "target": 14, "weight": 0.2446, "bridging": 0.1047}, {"source": 3, "target": 4, "weight": 0.582, "bridging": 0.027}, {"source": 3, "target": 5, "weight": 0.4436, "bridging": 0.0336}, {"source": 3, "target": 6, "weight": 0.4135, "bridging": 0.1449}, {"source": 3, "target": 7, "weight": 0.3473, "bridging": 0.0472}, {"source": 3, "target": 8, "weight": 0.3097, "bridging": 0.032}, {"source": 3, "target": 9, "weight": 0.0942, "bridging": 3.1762}, {"source": 3, "target": 10, "weight": 0.1625, "bridging": 0.0842}, {"source": 3, "target": 11, "weight": 0.1097, "bridging": 0.0106}, {"source": 3, "target": 14, "weight": 0.1799, "bridging": 0.0718}, {"source": 3, "target": 15, "weight": 0.1488, "bridging": 0.0575}, {"source": 3, "target": 16, "weight": 0.3822, "bridging": 0.74}, {"source": 3, "target": 17, "weight": 0.2635, "bridging": 0.0486}, {"source": 4, "target": 5, "weight": 0.3226, "bridging": 0.0463}, {"source": 4, "target": 6, "weight": 0.2604, "bridging": 0.1577}, {"source": 4, "target": 7, "weight": 0.4165, "bridging": 0.0599}, {"source": 4, "target": 8, "weight": 0.4372, "bridging": 0.0447}, {"source": 4, "target": 15, "weight": 0.1152, "bridging": 0.0702}, {"source": 4, "target": 16, "weight": 0.2573, "bridging": 0.7528}, {"source": 4, "target": 17, "weight": 0.1774, "bridging": 0.0614}, {"source": 4, "target": 18, "weight": 0.0903, "bridging": 0.0811}, {"source": 5, "target": 6, "weight": 0.6914, "bridging": 0.1643}, {"source": 5, "target": 7, "weight": 0.5858, "bridging": 0.0665}, {"source": 5, "target": 8, "weight": 0.1657, "bridging": 0.0513}, {"source": 5, "target": 9, "weight": 0.125, "bridging": 3.1955}, {"source": 5, "target": 10, "weight": 0.2157, "bridging": 0.1035}, {"source": 6, "target": 7, "weight": 0.6585, "bridging": 0.1779}, {"source": 6, "target": 8, "weight": 0.1677, "bridging": 0.1627}, {"source": 7, "target": 8, "weight": 0.1615, "bridging": 0.065}, {"source": 7, "target": 10, "weight": 0.2103, "bridging": 0.1171}, {"source": 7, "target": 11, "weight": 0.0906, "bridging": 0.0435}, {"source": 7, "target": 14, "weight": 0.2995, "bridging": 0.1047}, {"source": 8, "target": 11, "weight": 0.0824, "bridging": 0.0284}, {"source": 8, "target": 19, "weight": 0.1757, "bridging": 0.0705}, {"source": 8, "target": 20, "weight": 0.1757, "bridging": 0.0705}, {"source": 8, "target": 21, "weight": 0.1757, "bridging": 0.0705}, {"source": 8, "target": 22, "weight": 0.1757, "bridging": 0.0705}, {"source": 9, "target": 11, "weight": 0.1785, "bridging": 3.1724}, {"source": 10, "target": 11, "weight": 0.0908, "bridging": 0.0805}, {"source": 10, "target": 14, "weight": 0.3173, "bridging": 0.1417}, {"source": 10, "target": 24, "weight": 0.1991, "bridging": 0.382}, {"source": 11, "target": 12, "weight": 0.0819, "bridging": 0.0883}, {"source": 11, "target": 13, "weight": 0.3113, "bridging": 1.087}, {"source": 11, "target": 14, "weight": 0.243, "bridging": 0.0681}, {"source": 11, "target": 15, "weight": 0.1642, "bridging": 0.0538}, {"source": 11, "target": 17, "weight": 0.1161, "bridging": 0.045}, {"source": 11, "target": 19, "weight": 0.0802, "bridging": 0.0491}, {"source": 11, "target": 20, "weight": 0.0802, "bridging": 0.0491}, {"source": 11, "target": 21, "weight": 0.0802, "bridging": 0.0491}, {"source": 11, "target": 22, "weight": 0.0802, "bridging": 0.0491}, {"source": 11, "target": 24, "weight": 0.1265, "bridging": 0.3084}, {"source": 12, "target": 13, "weight": 0.4512, "bridging": 1.1684}, {"source": 12, "target": 19, "weight": 0.2668, "bridging": 0.1305}, {"source": 12, "target": 20, "weight": 0.2668, "bridging": 0.1305}, {"source": 12, "target": 21, "weight": 0.2668, "bridging": 0.1305}, {"source": 12, "target": 22, "weight": 0.2668, "bridging": 0.1305}, {"source": 13, "target": 14, "weight": 0.0853, "bridging": 1.1482}, {"source": 15, "target": 16, "weight": 0.2485, "bridging": 0.7833}, {"source": 15, "target": 17, "weight": 0.6802, "bridging": 0.0919}, {"source": 15, "target": 18, "weight": 0.3052, "bridging": 0.1116}, {"source": 15, "target": 24, "weight": 0.1164, "bridging": 0.3553}, {"source": 16, "target": 17, "weight": 0.6894, "bridging": 0.7744}, {"source": 17, "target": 18, "weight": 0.1512, "bridging": 0.1028}, {"source": 17, "target": 23, "weight": 0.1996, "bridging": 0.3491}, {"source": 17, "target": 24, "weight": 0.0807, "bridging": 0.3464}, {"source": 18, "target": 19, "weight": 0.1017, "bridging": 0.1069}, {"source": 18, "target": 20, "weight": 0.1017, "bridging": 0.1069}, {"source": 18, "target": 21, "weight": 0.1017, "bridging": 0.1069}, {"source": 18, "target": 22, "weight": 0.1017, "bridging": 0.1069}, {"source": 18, "target": 24, "weight": 0.1026, "bridging": 0.3662}, {"source": 19, "target": 20, "weight": 1.0, "bridging": 0.0912}, {"source": 19, "target": 21, "weight": 1.0, "bridging": 0.0912}, {"source": 19, "target": 22, "weight": 1.0, "bridging": 0.0912}, {"source": 19, "target": 23, "weight": 0.0887, "bridging": 0.3532}, {"source": 20, "target": 21, "weight": 1.0, "bridging": 0.0912}, {"source": 20, "target": 22, "weight": 1.0, "bridging": 0.0912}, {"source": 20, "target": 23, "weight": 0.0887, "bridging": 0.3532}, {"source": 21, "target": 22, "weight": 1.0, "bridging": 0.0912}, {"source": 21, "target": 23, "weight": 0.0887, "bridging": 0.3532}, {"source": 22, "target": 23, "weight": 0.0887, "bridging": 0.3532}], "nomes_topicos": ["Regulamentacao Profissional", "Uso do Solo e Zoneamento", "Mobilidade e Infraestrutura", "Habitacao e Inclusao Social", "Participacao e Gestao"], "grau_max": 18, "grau_pond_max": 5.2855, "metricas_globais": {"densidade": 0.3733, "n_comunidades": 4, "n_nos": 25, "n_arestas": 112}};
 const CORES_TOP=["#00a859", "#F07E31", "#447EC0", "#EA535E", "#8E6CAD"];
 const CORES_COM=["#1a3a5c", "#8E6CAD", "#F07E31", "#EA535E"];
+const LETRAS=["A", "B", "C", "D", "E", "F", "G", "H"];
 const W=920,H=540;
 const GPMAX=5.2855;
 const DRAG_THRESHOLD=4;
 
 let thr=0.08,forca=100,dist=90,gmin=0,gpmin=0;
-let bcmax=3.1955,wmin=0.0802;
+let bcmax=3.1955,wmin=0.0802,exmax=3;
 let tr={k:1,tx:0,ty:0};
 let dragState=null;
 let nos;
@@ -202,11 +203,15 @@ function bridgingColor(b){
   return `rgb(${Math.round(220+(26-220)*t)},${Math.round(220+(58-220)*t)},${Math.round(220+(92-220)*t)})`;
 }
 
-function nosVisiveis(){return nos.filter(n=>n.grau>=gmin&&n.grau_pond>=gpmin);}
+// (e) filtro por excentricidade
+function nosVisiveis(){
+  return nos.filter(n=>n.grau>=gmin&&n.grau_pond>=gpmin&&n.excentricidade<=exmax);
+}
 function aresVisiveis(){
   const ids=new Set(nosVisiveis().map(n=>n.id));
   return DALL.arestas.filter(a=>
-    a.weight>=thr&&a.bridging<=bcmax&&a.weight>=wmin&&ids.has(a.source)&&ids.has(a.target));
+    a.weight>=thr&&a.bridging<=bcmax&&a.weight>=wmin&&
+    ids.has(a.source)&&ids.has(a.target));
 }
 
 function tick(){
@@ -242,8 +247,10 @@ function render(){
 
   document.getElementById('links').innerHTML=av.map(a=>{
     const s=nos[a.source],t=nos[a.target];if(!s||!t)return'';
-    return `<line x1="${s.x.toFixed(1)}" y1="${s.y.toFixed(1)}" x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}"
-      stroke="${bridgingColor(a.bridging)}" stroke-width="${(0.5+a.weight/maxW*3.5).toFixed(2)}"
+    return `<line x1="${s.x.toFixed(1)}" y1="${s.y.toFixed(1)}"
+                  x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}"
+      stroke="${bridgingColor(a.bridging)}"
+      stroke-width="${(0.5+a.weight/maxW*3.5).toFixed(2)}"
       stroke-opacity="0.72" pointer-events="none"/>`;
   }).join('');
 
@@ -251,14 +258,15 @@ function render(){
     if(!nv.has(n.id))return'';
     const cor=CORES_TOP[n.topico]||'#ccc';
     const r=noRadius(n);
-    const fs=Math.max(6,r*.6).toFixed(1);
+    const letra=LETRAS[n.comunidade]||String(n.comunidade);  // (d) letra
     return `<g data-i="${i}" class="no-g" style="cursor:pointer">
       <circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${r}"
         fill="${cor}" fill-opacity=".85" stroke="#fff" stroke-width="2"/>
       <text x="${n.x.toFixed(1)}" y="${n.y.toFixed(1)}"
         text-anchor="middle" dominant-baseline="middle"
-        font-size="${fs}" fill="white" font-family="Roboto,sans-serif"
-        font-weight="900" pointer-events="none">${n.comunidade}</text>
+        font-size="${Math.max(7,r*.65).toFixed(1)}" fill="white"
+        font-family="Roboto,sans-serif" font-weight="900"
+        pointer-events="none">${letra}</text>
     </g>`;
   }).join('');
 
@@ -273,12 +281,10 @@ function render(){
 
 // ── SVG eventos ───────────────────────────────────────────────────────────────
 const svg=document.getElementById('gsvg');
-
 svg.addEventListener('mousedown',e=>{
   if(dragState&&dragState.type==='node')return;
   dragState={type:'canvas',startX:e.clientX,startY:e.clientY,ox:tr.tx,oy:tr.ty,moved:false};
 });
-
 svg.addEventListener('mousemove',e=>{
   if(!dragState)return;
   const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;
@@ -295,13 +301,11 @@ svg.addEventListener('mousemove',e=>{
     }
   }
 });
-
 svg.addEventListener('mouseup',e=>{
   if(!dragState)return;
   if(!dragState.moved&&dragState.type==='node')mostrarInfo(dragState.i);
   dragState=null;
 });
-
 svg.addEventListener('mouseleave',()=>{dragState=null;});
 svg.addEventListener('wheel',e=>{
   e.preventDefault();
@@ -315,30 +319,30 @@ function mostrarInfo(i){
   window._noSel=i;
   const cor=CORES_TOP[n.topico];
   const corCom=CORES_COM[n.comunidade]||'#555';
+  const letra=LETRAS[n.comunidade]||String(n.comunidade);
 
   document.getElementById('ibox-title').innerHTML=
     `<span style="color:${cor};font-weight:700">${n.topico_nome}</span>
-     <span style="color:#aaa;font-size:.8rem;font-weight:400;margin-left:8px;">${n.submission_id.slice(0,18)}...</span>`;
+     <span style="color:#aaa;font-size:.78rem;font-weight:400;margin-left:8px;">
+       ${n.submission_id.slice(0,20)}...</span>`;
 
+  // (b) sem "tipo: ideia" · (c) nome completo do tópico
   document.getElementById('ibox-pills').innerHTML=
-    `<span class="mpill" style="background:${cor}22;color:${cor}">Topico LDA ${n.topico}</span>
-     <span class="mpill" style="background:${corCom}22;color:${corCom}">Comunidade ${n.comunidade}</span>
-     <span class="mpill" style="background:#f3f3f3;color:#555">Autor: ${n.email}</span>
-     <span class="mpill" style="background:#f3f3f3;color:#555">Tipo: ${n.tipo}</span>`;
+    `<span class="mpill" style="background:${cor}22;color:${cor}">Topico: ${n.topico_nome}</span>
+     <span class="mpill" style="background:${corCom}22;color:${corCom}">Comunidade ${letra}</span>
+     <span class="mpill" style="background:#f3f3f3;color:#555">Autor: ${n.email}</span>`;
 
-  // 6 métricas em 2 filas de 3
   const metricas=[
-    {lbl:'Grau',         val:n.grau,              pct:n.grau/DALL.grau_max,            fmt:v=>v},
-    {lbl:'Grau Pond.',   val:n.grau_pond.toFixed(3),pct:n.grau_pond/DALL.grau_pond_max,fmt:v=>v},
-    {lbl:'Excentricidade',val:n.excentricidade,    pct:n.ex_n,                          fmt:v=>v},
-    {lbl:'PageRank',     val:n.pagerank.toFixed(5), pct:n.pr_n,                          fmt:v=>v},
-    {lbl:'Eigenvector',  val:n.eigenvector.toFixed(5),pct:n.ev_n,                       fmt:v=>v},
-    {lbl:'Betweenness',  val:n.betweenness.toFixed(5),pct:n.bt_n,                       fmt:v=>v},
-    {lbl:'Clustering',   val:n.clustering.toFixed(5), pct:n.cl_n,                       fmt:v=>v},
-    {lbl:'Bridging',     val:n.bridging.toFixed(4),   pct:n.bridging,                   fmt:v=>v},
+    {lbl:'Grau',          val:n.grau,                   pct:n.grau/DALL.grau_max},
+    {lbl:'Grau Pond.',     val:n.grau_pond.toFixed(3),   pct:n.grau_pond/DALL.grau_pond_max},
+    {lbl:'Excentricidade', val:n.excentricidade,         pct:n.ex_n},
+    {lbl:'PageRank',       val:n.pagerank.toFixed(5),    pct:n.pr_n},
+    {lbl:'Eigenvector',    val:n.eigenvector.toFixed(5), pct:n.ev_n},
+    {lbl:'Betweenness',    val:n.betweenness.toFixed(5), pct:n.bt_n},
+    {lbl:'Clustering',     val:n.clustering.toFixed(5),  pct:n.cl_n},
+    {lbl:'Bridging',       val:n.bridging.toFixed(4),    pct:n.bridging},
   ];
 
-  document.getElementById('ibox-metrics').style.gridTemplateColumns='repeat(4,1fr)';
   document.getElementById('ibox-metrics').innerHTML=metricas.map(m=>`
     <div class="mcard">
       <div class="mcard-lbl">${m.lbl}</div>
@@ -353,10 +357,11 @@ function mostrarInfo(i){
 function abrirCompleto(i){
   if(i===null||i===undefined)return;
   const n=nos[i];
+  const letra=LETRAS[n.comunidade]||String(n.comunidade);
   document.getElementById('mt').textContent=n.topico_nome;
   document.getElementById('mi').innerHTML=
     `<b>ID:</b> ${n.submission_id}<br><b>Autor:</b> ${n.email}<br>
-     <b>Topico:</b> ${n.topico_nome} | <b>Comunidade:</b> ${n.comunidade}<br>
+     <b>Topico:</b> ${n.topico_nome} | <b>Comunidade:</b> ${letra}<br>
      <b>PageRank:</b> ${n.pagerank} | <b>Eigenvector:</b> ${n.eigenvector}<br>
      <b>Betweenness:</b> ${n.betweenness} | <b>Clustering:</b> ${n.clustering}`;
   document.getElementById('mb').textContent=n.conteudo_completo||n.conteudo;
@@ -372,10 +377,12 @@ document.getElementById('modal').addEventListener('click',e=>{
 function renderLegs(){
   const lc=document.getElementById('leg-com');
   CORES_COM.forEach((c,i)=>lc.innerHTML+=
-    `<div class="legi"><div class="legdot" style="background:${c}"></div><span>Comunidade ${i}</span></div>`);
+    `<div class="legi"><div class="legdot" style="background:${c}"></div>
+     <span>Comunidade ${LETRAS[i]}</span></div>`);
   const lt=document.getElementById('leg-top');
   DALL.nomes_topicos.forEach((n,i)=>lt.innerHTML+=
-    `<div class="legi"><div class="legdot" style="background:${CORES_TOP[i]}"></div><span>${n}</span></div>`);
+    `<div class="legi"><div class="legdot" style="background:${CORES_TOP[i]}"></div>
+     <span>${n}</span></div>`);
 }
 
 // ── Sliders ───────────────────────────────────────────────────────────────────
@@ -386,13 +393,14 @@ function bindSl(id,valId,factor,cb){
     cb(v);
   });
 }
-bindSl('forca','fval',1,v=>forca=v);
-bindSl('dist','dval',1,v=>dist=v);
-bindSl('thr','tval',100,v=>thr=v);
-bindSl('gmin','gval',1,v=>gmin=v);
-bindSl('gpmin','gpval',10,v=>gpmin=v);
-bindSl('bcmax','bcval',100,v=>bcmax=v);
-bindSl('wmin','wval',100,v=>wmin=v);
+bindSl('dist',  'dval',  1,   v=>dist=v);
+bindSl('forca', 'fval',  1,   v=>forca=v);
+bindSl('thr',   'tval',  100, v=>thr=v);
+bindSl('bcmax', 'bcval', 100, v=>bcmax=v);
+bindSl('wmin',  'wval',  100, v=>wmin=v);
+bindSl('gmin',  'gval',  1,   v=>gmin=v);
+bindSl('gpmin', 'gpval', 10,  v=>gpmin=v);
+bindSl('exmax', 'exval', 1,   v=>exmax=v);  // (e)
 
 function resetar(){
   nos.forEach(n=>{
