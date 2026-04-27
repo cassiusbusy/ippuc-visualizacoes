@@ -50,7 +50,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
-          git pull origin main --rebase
           git add docs/
-          git diff --staged --quiet || git commit -m "Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
-          git push origin main
+          git diff --staged --quiet && echo "Sem mudancas" && exit 0
+          git commit -m "Analise NLP atualizada [$(date '+%Y-%m-%d %H:%M')]"
+          git push --force-with-lease origin main
