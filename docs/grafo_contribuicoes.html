@@ -27,83 +27,79 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .filtro-g{display:flex;flex-direction:column;gap:4px;}
 .filtro-g label{font-size:.68rem;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
 select{border:1.5px solid var(--bd);border-radius:8px;padding:7px 12px;font-size:.8rem;
-        font-family:Roboto,sans-serif;background:#fff;color:var(--tx);outline:none;cursor:pointer;min-width:180px;}
+       font-family:Roboto,sans-serif;background:#fff;color:var(--tx);outline:none;cursor:pointer;min-width:180px;}
 select:focus{border-color:var(--v);}
 .fontes{display:flex;gap:6px;flex-wrap:wrap;}
 .fbtn{padding:4px 10px;border-radius:14px;border:1.5px solid var(--bd);background:#fff;
-       cursor:pointer;font-family:Roboto,sans-serif;font-size:.71rem;font-weight:500;
-       color:#666;transition:all .15s;display:flex;align-items:center;gap:5px;}
+      cursor:pointer;font-family:Roboto,sans-serif;font-size:.71rem;font-weight:500;
+      color:#666;transition:all .15s;display:flex;align-items:center;gap:5px;}
 .fbtn.ativo{font-weight:700;color:#fff;border-color:transparent;}
 .fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-bottom:10px;}
-.sl-g{display:flex;flex-direction:column;gap:3px;}
+.ctrl-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:10px;}
+.sl-g{display:flex;flex-direction:column;gap:4px;min-width:160px;}
 .sl-top{display:flex;justify-content:space-between;font-size:.69rem;color:#666;}
 .sl-top b{color:var(--azd);}
 input[type=range]{width:100%;accent-color:var(--v);}
 #gsvg{width:100%;border-radius:8px;background:#f8f8f8;border:.5px solid var(--bd);
-       display:block;cursor:grab;user-select:none;}
+      display:block;cursor:grab;user-select:none;}
 #gsvg:active{cursor:grabbing;}
 .ibox{background:#fff;border-radius:9px;padding:12px;border:.5px solid var(--bd);
-       margin-bottom:10px;display:none;position:relative;}
+      margin-bottom:10px;display:none;position:relative;}
 .ibox.vis{display:block;}
 .ibox-close{position:absolute;top:8px;right:8px;background:var(--cd);border:none;
-             border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:.8rem;color:#555;}
+            border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:.8rem;color:#555;}
 .mpill{border-radius:7px;padding:2px 8px;font-size:.67rem;font-weight:600;display:inline-block;margin:2px;}
 .legrow{display:flex;flex-wrap:wrap;gap:10px;font-size:.71rem;margin-top:8px;}
 .legi{display:flex;align-items:center;gap:4px;}
 .legdot{width:10px;height:10px;border-radius:50%;}
 .hint{font-size:.67rem;color:#aaa;margin-top:6px;line-height:1.5;}
 .info-bar{font-size:.72rem;color:var(--az);font-weight:500;padding:6px 10px;
-           background:var(--vl);border-radius:6px;margin-bottom:8px;display:none;}
+          background:var(--vl);border-radius:6px;margin-bottom:8px;display:none;}
 .loading{display:flex;align-items:center;justify-content:center;gap:10px;
-          padding:40px;color:#888;font-size:.85rem;}
+         padding:40px;color:#888;font-size:.85rem;}
 .spinner{width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--bordo);
-          border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
+         border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .tooltip{position:fixed;background:rgba(26,26,46,.92);color:#fff;border-radius:8px;
-          padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:280px;
-          pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
+         padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:280px;
+         pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
 .tooltip.vis{display:block;}
 .mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;
-      align-items:center;justify-content:center;padding:20px;}
+     align-items:center;justify-content:center;padding:20px;}
 .mov.open{display:flex;}
 .mo{background:#fff;border-radius:12px;max-width:660px;width:100%;max-height:80vh;
-     overflow-y:auto;padding:24px;position:relative;border-top:4px solid var(--bordo);}
+    overflow-y:auto;padding:24px;position:relative;border-top:4px solid var(--bordo);}
 .mc{position:absolute;top:10px;right:10px;background:var(--cd);border:none;
-     border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.8rem;}
+    border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.8rem;}
 .mid{font-family:monospace;font-size:.7rem;color:#777;background:var(--cd);
-      padding:7px 10px;border-radius:6px;margin-bottom:10px;line-height:1.6;word-break:break-all;}
+     padding:7px 10px;border-radius:6px;margin-bottom:10px;line-height:1.6;word-break:break-all;}
 .mbody{font-size:.85rem;line-height:1.75;color:#222;white-space:pre-wrap;}
 </style></head><body>
-
 <div class="stripe">
   <div style="background:#00a859"></div><div style="background:#447EC0"></div>
   <div style="background:#8E6CAD"></div><div style="background:#8EC899"></div>
   <div style="background:#FDC533"></div><div style="background:#F07E31"></div>
   <div style="background:#EA535E"></div><div style="background:#CA6673"></div>
 </div>
-
 <div class="cnt">
   <a class="back" href="index.html">← Voltar</a>
   <div class="ptitle">Grafo de Contribuições — Plano Diretor Curitiba</div>
-  <div class="psub">Estrutura da minuta em cinza · contribuições em bordo · tamanho do nó = contribuições recebidas</div>
-
+  <div class="psub">Estrutura da minuta em cinza · contribuições em bordo · tamanho = contribuições recebidas</div>
   <div class="krow">
     <div class="kpi"><div class="knum" style="color:#666;">123</div><div class="klbl">Itens da Minuta</div></div>
     <div class="kpi"><div class="knum" style="color:var(--bordo);" id="k-contrib">—</div><div class="klbl">Contribuições</div></div>
     <div class="kpi"><div class="knum" style="color:var(--az);" id="k-arestas">—</div><div class="klbl">Conexões</div></div>
     <div class="kpi"><div class="knum" style="color:#888;" id="k-vis">—</div><div class="klbl">Visíveis</div></div>
   </div>
-
   <div class="card" id="card-filtros" style="display:none;">
     <h3>Filtros</h3>
     <div class="filtros-row">
       <div class="filtro-g">
-        <label>Título do Plano Diretor</label>
+        <label>Título</label>
         <select id="sel-titulo"><option value="todos">Todos os títulos</option></select>
       </div>
       <div class="filtro-g">
-        <label>Nome da Oficina</label>
+        <label>Oficina</label>
         <select id="sel-oficina"><option value="todas">Todas as oficinas</option></select>
       </div>
       <div class="filtro-g">
@@ -113,7 +109,6 @@ input[type=range]{width:100%;accent-color:var(--v);}
     </div>
     <div class="info-bar" id="info-bar"></div>
   </div>
-
   <div class="ibox" id="ibox">
     <button class="ibox-close" onclick="document.getElementById('ibox').classList.remove('vis')">✕</button>
     <div style="font-size:.88rem;font-weight:700;margin-bottom:7px;" id="ibox-titulo"></div>
@@ -124,14 +119,12 @@ input[type=range]{width:100%;accent-color:var(--v);}
              background:var(--bordol);color:var(--bordo);cursor:pointer;font-size:.71rem;
              font-family:Roboto,sans-serif;display:none;">Ver completo</button>
   </div>
-
   <div class="card">
     <h3>Rede Circular</h3>
     <div id="loading-msg" class="loading">
-      <div class="spinner"></div>
-      <span>Carregando contribuições...</span>
+      <div class="spinner"></div><span>Carregando contribuições...</span>
     </div>
-    <div class="sliders" id="sliders-panel" style="display:none;">
+    <div class="ctrl-row" id="ctrl-panel" style="display:none;">
       <div class="sl-g">
         <div class="sl-top"><span>Grau mín. minuta</span><b id="gval">0</b></div>
         <input type="range" id="gmin" min="0" max="300" value="0">
@@ -140,11 +133,9 @@ input[type=range]{width:100%;accent-color:var(--v);}
         <div class="sl-top"><span>Contribuições</span><b id="cval">Sim</b></div>
         <input type="range" id="cshow" min="0" max="1" step="1" value="1">
       </div>
-      <div class="sl-g" style="justify-content:flex-end;padding-top:14px;">
-        <button onclick="resetar()" style="padding:6px 12px;border-radius:7px;border:1px solid var(--bd);
-                background:#fff;cursor:pointer;font-family:Roboto,sans-serif;font-size:.72rem;color:var(--azd);">
-          Resetar</button>
-      </div>
+      <button onclick="resetar()" style="padding:6px 12px;border-radius:7px;border:1px solid var(--bd);
+              background:#fff;cursor:pointer;font-family:Roboto,sans-serif;font-size:.72rem;color:var(--azd);">
+        Resetar</button>
     </div>
     <svg id="gsvg" viewBox="0 0 960 600" style="display:none;">
       <g id="zg">
@@ -169,331 +160,218 @@ input[type=range]{width:100%;accent-color:var(--v);}
     </div>
   </div>
 </div>
-
 <div class="tooltip" id="tooltip"></div>
 <div class="mov" id="modal">
   <div class="mo">
-    <button class="mc" onclick="fm()">✕</button>
+    <button class="mc" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
     <div style="font-size:.92rem;font-weight:700;color:var(--azd);margin-bottom:8px;" id="mt"></div>
     <div class="mid" id="mi"></div>
     <div class="mbody" id="mb"></div>
   </div>
 </div>
-
 <script>
 const MINUTA={"minuta": [{"id": "T1", "nivel": 1, "tipo": "TÍTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 200.0, "ang": -1.5707963267948966, "grau": 0, "pagerank": 0}, {"id": "T1-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS DISPOSIÇÕES PRELIMINARES", "titulo_pai": "T1", "px": 416.34, "py": 141.29, "ang": -1.9523, "grau": 0, "pagerank": 0}, {"id": "T1-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA VISÃO DE FUTURO DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 115.0, "ang": -1.5708, "grau": 0, "pagerank": 0}, {"id": "T1-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Princípios e da Visão 2050 de Desenvolvimento Urbano Sustentável", "titulo_pai": "T1", "px": 386.55, "py": 67.04, "ang": -1.9523, "grau": 0, "pagerank": 0}, {"id": "T1-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Objetivos e Diretrizes de Desenvolvimento Urbano Sustentável", "titulo_pai": "T1", "px": 578.66, "py": 54.05, "ang": -1.1893, "grau": 0, "pagerank": 0}, {"id": "T1-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS ESTRATÉGIAS DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 554.09, "py": 115.31, "ang": -1.1893, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Desenvolvimento orientado pela Sustentabilidade Urbana", "titulo_pai": "T1", "px": 480.0, "py": 49.0, "ang": -1.5708, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cidade Inteligente, Inovadora e Educadora", "titulo_pai": "T1", "px": 530.24, "py": 39.81, "ang": -1.38, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mitigação, Adaptação e Resiliência às Mudanças Climáticas", "titulo_pai": "T1", "px": 583.87, "py": 41.06, "ang": -1.1893, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Liberdade Econômica e Prosperidade Compartilhada", "titulo_pai": "T1", "px": 615.92, "py": 88.99, "ang": -0.9986, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Inclusão, Identidade e Diversidade Sociocultural e Intergeracional", "titulo_pai": "T1", "px": 663.13, "py": 108.46, "ang": -0.8078, "grau": 0, "pagerank": 0}, {"id": "T2", "nivel": 1, "tipo": "TÍTULO", "nome": "DA INTEGRAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 558.183148246803, "py": 237.65101981412664, "ang": -0.6731984257692414, "grau": 0, "pagerank": 0}, {"id": "T2-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ALINHAMENTO MUNICIPAL COM A MACROESTRUTURAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 564.39, "py": 151.27, "ang": -1.0547, "grau": 0, "pagerank": 0}, {"id": "T2-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Dimensão Metropolitana no Ordenamento Territorial do município-polo da RMC", "titulo_pai": "T2", "px": 513.69, "py": 51.27, "ang": -1.4362, "grau": 0, "pagerank": 0}, {"id": "T2-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das estratégias e dos Instrumentos de Integração Metropolitana", "titulo_pai": "T2", "px": 687.18, "py": 134.77, "ang": -0.6732, "grau": 0, "pagerank": 0}, {"id": "T2-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA ARTICULAÇÃO DAS POLÍTICAS PÚBLICAS MUNICIPAIS COM AS FUNÇÕES PÚBLICAS DE INTERESSE COMUM (FPICS)", "titulo_pai": "T2", "px": 657.18, "py": 246.79, "ang": -0.2917, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Planejamento Territorial e Uso do Solo", "titulo_pai": "T2", "px": 676.24, "py": 143.51, "ang": -0.6732, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Metropolitana", "titulo_pai": "T2", "px": 714.75, "py": 177.06, "ang": -0.4824, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Meio Ambiente e Recursos Hídricos", "titulo_pai": "T2", "px": 747.21, "py": 219.76, "ang": -0.2917, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Habitação de Interesse Social", "titulo_pai": "T2", "px": 729.72, "py": 274.7, "ang": -0.101, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Desenvolvimento Social e Econômico", "titulo_pai": "T2", "px": 743.93, "py": 323.76, "ang": 0.0898, "grau": 0, "pagerank": 0}, {"id": "T3", "nivel": 1, "tipo": "TÍTULO", "nome": "DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3", "px": 577.4927912181823, "py": 322.25209339563145, "ang": 0.2243994752564138, "grau": 0, "pagerank": 0}, {"id": "T3-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE ESTRUTURAÇÃO URBANO-AMBIENTAL", "titulo_pai": "T3", "px": 648.89, "py": 273.25, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estruturação Urbana", "titulo_pai": "T3", "px": 695.47, "py": 171.26, "ang": -0.5386, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação do Uso do Solo", "titulo_pai": "T3", "px": 671.42, "py": 48.57, "ang": -0.9201, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação Viária", "titulo_pai": "T3", "px": 763.28, "py": 130.73, "ang": -0.5386, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação do Transporte Coletivo", "titulo_pai": "T3", "px": 819.76, "py": 246.17, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estruturação Ambiental", "titulo_pai": "T3", "px": 741.74, "py": 258.54, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Rede Hídrica", "titulo_pai": "T3", "px": 751.27, "py": 137.92, "ang": -0.5386, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Do Sistema Municipal de Unidades de Conservação", "titulo_pai": "T3", "px": 801.73, "py": 373.43, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Integração Urbano-Ambiental", "titulo_pai": "T3", "px": 752.01, "py": 362.08, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Rede de Espaços e Equipamentos Públicos", "titulo_pai": "T3", "px": 792.11, "py": 250.57, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Paisagem Ambiental-Cultural Urbana", "titulo_pai": "T3", "px": 751.26, "py": 487.93, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ORDENAMENTO TERRITORIAL", "titulo_pai": "T3", "px": 664.92, "py": 294.47, "ang": -0.0299, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Macrozoneamento Urbano-Ambiental", "titulo_pai": "T3", "px": 710.06, "py": 199.63, "ang": -0.4114, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Urbana Metropolitana (MM)", "titulo_pai": "T3", "px": 701.77, "py": 74.89, "ang": -0.7929, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Urbana Local (MU)", "titulo_pai": "T3", "px": 770.71, "py": 153.57, "ang": -0.5386, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona de Transição Urbano-Ambiental (MT)", "titulo_pai": "T3", "px": 810.2, "py": 203.53, "ang": -0.2842, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB4", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Ambiental (MA)", "titulo_pai": "T3", "px": 795.86, "py": 290.55, "ang": -0.0299, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Macroestratégias da Política Territorial Integrada", "titulo_pai": "T3", "px": 736.18, "py": 232.18, "ang": -0.2588, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macroestratégias Urbanas", "titulo_pai": "T3", "px": 733.41, "py": 111.22, "ang": -0.6403, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macroestratégias Ambientais", "titulo_pai": "T3", "px": 807.52, "py": 340.38, "ang": 0.1227, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Zoneamento Misto e Inteligente", "titulo_pai": "T3", "px": 757.43, "py": 270.43, "ang": -0.1062, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Setorização Especial para Sustentabilidade Urbana", "titulo_pai": "T3", "px": 730.73, "py": 311.64, "ang": 0.0464, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Parcelamento, Uso e Ocupação do Solo", "titulo_pai": "T3", "px": 739.77, "py": 352.38, "ang": 0.199, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Posturas, Obras e Edificações Sustentáveis", "titulo_pai": "T3", "px": 741.93, "py": 396.08, "ang": 0.3516, "grau": 0, "pagerank": 0}, {"id": "T3-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA MUNICIPAL DE HABITAÇÃO", "titulo_pai": "T3", "px": 678.06, "py": 319.32, "ang": 0.0972, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Habitacional", "titulo_pai": "T3", "px": 720.93, "py": 229.6, "ang": -0.2843, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Produção Habitacional Diversificada", "titulo_pai": "T3", "px": 744.88, "py": 292.06, "ang": -0.03, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Habitação de Interesse Social", "titulo_pai": "T3", "px": 759.43, "py": 384.9, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Regularização Fundiária Urbana", "titulo_pai": "T3", "px": 702.79, "py": 415.61, "ang": 0.4787, "grau": 0, "pagerank": 0}, {"id": "T3-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE SANEAMENTO AMBIENTAL", "titulo_pai": "T3", "px": 646.71, "py": 338.05, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Saneamento Ambiental", "titulo_pai": "T3", "px": 727.91, "py": 260.74, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Sustentável das Bacias Hidrográficas", "titulo_pai": "T3", "px": 752.3, "py": 314.9, "ang": -0.0299, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Abastecimento e Uso Sustentável da Água", "titulo_pai": "T3", "px": 757.68, "py": 327.09, "ang": 0.0972, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Esgotamento Sanitário", "titulo_pai": "T3", "px": 724.71, "py": 355.85, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Drenagem Pluvial Urbana", "titulo_pai": "T3", "px": 728.79, "py": 391.26, "ang": 0.3516, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Sustentável dos Resíduos Sólidos", "titulo_pai": "T3", "px": 727.64, "py": 428.52, "ang": 0.4787, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Zeladoria e Limpeza Urbana", "titulo_pai": "T3", "px": 686.32, "py": 442.94, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA INTEGRADO DE MOBILIDADE", "titulo_pai": "T3", "px": 653.68, "py": 363.71, "ang": 0.3516, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Mobilidade Urbana Sustentável", "titulo_pai": "T3", "px": 730.89, "py": 292.5, "ang": -0.0299, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Ativa", "titulo_pai": "T3", "px": 743.75, "py": 325.74, "ang": 0.0973, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Mobilidade Pedonal", "titulo_pai": "T3", "px": 783.33, "py": 211.4, "ang": -0.2842, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Ciclomobilidade", "titulo_pai": "T3", "px": 772.89, "py": 452.03, "ang": 0.4788, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Rede Integrada de Transporte", "titulo_pai": "T3", "px": 724.49, "py": 382.07, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Sistemas Viário, de Circulação e Estacionamentos", "titulo_pai": "T3", "px": 715.64, "py": 386.44, "ang": 0.3516, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Comercial", "titulo_pai": "T3", "px": 715.21, "py": 422.08, "ang": 0.4788, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S5-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Do Transporte Urbano de Cargas", "titulo_pai": "T3", "px": 780.31, "py": 474.87, "ang": 0.4788, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Viária", "titulo_pai": "T3", "px": 709.33, "py": 458.9, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Educação para o Trânsito", "titulo_pai": "T3", "px": 788.08, "py": 370.32, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Diretrizes de Engenharia", "titulo_pai": "T3", "px": 758.68, "py": 510.77, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Diretrizes Legais", "titulo_pai": "T3", "px": 669.5, "py": 587.1, "ang": 0.9874, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estratégia de Descarbonização", "titulo_pai": "T3", "px": 666.52, "py": 467.96, "ang": 0.7331, "grau": 0, "pagerank": 0}, {"id": "T3-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO E REDUÇÃO DE RISCO DE DESASTRES", "titulo_pai": "T3", "px": 656.63, "py": 391.67, "ang": 0.4787, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Resiliência Urbana", "titulo_pai": "T3", "px": 729.81, "py": 324.36, "ang": 0.0972, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Integrada de Riscos", "titulo_pai": "T3", "px": 736.21, "py": 414.08, "ang": 0.3515, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Adaptação Climática Estruturante", "titulo_pai": "T3", "px": 716.76, "py": 481.71, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Resiliência Comunitária aos Desastres", "titulo_pai": "T3", "px": 643.73, "py": 490.25, "ang": 0.8602, "grau": 0, "pagerank": 0}, {"id": "T3-C7", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO PATRIMÔNIO AMBIENTAL NATURAL E CULTURAL", "titulo_pai": "T3", "px": 620.56, "py": 397.38, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política do Patrimônio Natural e Biodiversidade Urbana", "titulo_pai": "T3", "px": 732.13, "py": 378.69, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Arborização Urbana", "titulo_pai": "T3", "px": 799.53, "py": 273.4, "ang": -0.1571, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Soluções Baseadas na Natureza", "titulo_pai": "T3", "px": 809.15, "py": 396.26, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Biodiversidade Urbana", "titulo_pai": "T3", "px": 762.77, "py": 495.9, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política do Patrimônio Cultural Material e Imaterial", "titulo_pai": "T3", "px": 625.98, "py": 521.17, "ang": 0.9874, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Proteção e Recuperação de Bens Culturais Materiais", "titulo_pai": "T3", "px": 739.75, "py": 479.97, "ang": 0.6059, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Proteção e Fomento aos Bens Culturais Imateriais", "titulo_pai": "T3", "px": 546.18, "py": 623.3, "ang": 1.3689, "grau": 0, "pagerank": 0}, {"id": "T4", "nivel": 1, "tipo": "TÍTULO", "nome": "DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "titulo_pai": "T4", "px": 523.3883739117558, "py": 390.0968867902419, "ang": 1.121997376282069, "grau": 0, "pagerank": 0}, {"id": "T4-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO SOCIAL", "titulo_pai": "T4", "px": 606.22, "py": 415.37, "ang": 0.7405, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Desenvolvimento Social", "titulo_pai": "T4", "px": 722.42, "py": 411.02, "ang": 0.359, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Alimentar e Nutricional", "titulo_pai": "T4", "px": 714.29, "py": 423.82, "ang": 0.4862, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Educação", "titulo_pai": "T4", "px": 680.64, "py": 480.57, "ang": 0.6133, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cultura", "titulo_pai": "T4", "px": 672.69, "py": 492.17, "ang": 0.7405, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Esporte, Lazer e Juventude", "titulo_pai": "T4", "px": 651.35, "py": 502.15, "ang": 0.8677, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Saúde", "titulo_pai": "T4", "px": 631.96, "py": 533.99, "ang": 0.9948, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Assistência Social", "titulo_pai": "T4", "px": 588.91, "py": 526.14, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO ECONÔMICO", "titulo_pai": "T4", "px": 560.27, "py": 466.68, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Desenvolvimento Econômico Sustentável", "titulo_pai": "T4", "px": 637.76, "py": 489.32, "ang": 0.7405, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Inovação", "titulo_pai": "T4", "px": 658.77, "py": 524.98, "ang": 0.8677, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Economia de Baixo Carbono e Circular", "titulo_pai": "T4", "px": 639.37, "py": 556.82, "ang": 0.9948, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Indústria e Logística", "titulo_pai": "T4", "px": 596.32, "py": 548.97, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Economia Criativa", "titulo_pai": "T4", "px": 563.77, "py": 551.41, "ang": 1.2492, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Turismo", "titulo_pai": "T4", "px": 533.92, "py": 573.74, "ang": 1.3763, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Empreendedorismo", "titulo_pai": "T4", "px": 496.88, "py": 550.43, "ang": 1.5035, "grau": 0, "pagerank": 0}, {"id": "T4-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA DEFESA SOCIAL", "titulo_pai": "T4", "px": 493.39, "py": 498.55, "ang": 1.5035, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Defesa Social", "titulo_pai": "T4", "px": 561.39, "py": 546.13, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Garantias e Direitos Humanos e Sociais", "titulo_pai": "T4", "px": 531.21, "py": 560.01, "ang": 1.3763, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Cidadã", "titulo_pai": "T4", "px": 463.31, "py": 578.5, "ang": 1.6307, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Resposta às Calamidades", "titulo_pai": "T4", "px": 402.43, "py": 538.71, "ang": 1.885, "grau": 0, "pagerank": 0}, {"id": "T5", "nivel": 1, "tipo": "TÍTULO", "nome": "DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T5", "px": 436.6116260882442, "py": 390.0968867902419, "ang": 2.019595277307724, "grau": 0, "pagerank": 0}, {"id": "T5-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DISPOSIÇÕES GERAIS E CLASSIFICAÇÃO DOS INSTRUMENTOS", "titulo_pai": "T5", "px": 468.5, "py": 470.61, "ang": 1.6381, "grau": 0, "pagerank": 0}, {"id": "T5-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE INDUÇÃO AO CUMPRIMENTO DA FUNÇÃO SOCIAL DA PROPRIEDADE", "titulo_pai": "T5", "px": 444.25, "py": 481.51, "ang": 1.7653, "grau": 0, "pagerank": 0}, {"id": "T5-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE OTIMIZAÇÃO DO USO DO SOLO E DA PRODUÇÃO IMOBILIÁRIA", "titulo_pai": "T5", "px": 417.09, "py": 488.79, "ang": 1.8924, "grau": 0, "pagerank": 0}, {"id": "T5-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE PLANEJAMENTO E INTERVENÇÃO EM ÁREAS ESTRATÉGICAS", "titulo_pai": "T5", "px": 405.81, "py": 454.07, "ang": 2.0196, "grau": 0, "pagerank": 0}, {"id": "T5-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE GESTÃO URBANA E AMBIENTAL", "titulo_pai": "T5", "px": 379.24, "py": 455.15, "ang": 2.1468, "grau": 0, "pagerank": 0}, {"id": "T5-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE REGULARIZAÇÃO FUNDIÁRIA E PROVISÃO DE HABITAÇÃO", "titulo_pai": "T5", "px": 351.33, "py": 451.8, "ang": 2.2739, "grau": 0, "pagerank": 0}, {"id": "T5-C7", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS FISCAIS E ECONÔMICOS", "titulo_pai": "T5", "px": 353.78, "py": 415.37, "ang": 2.4011, "grau": 0, "pagerank": 0}, {"id": "T6", "nivel": 1, "tipo": "TÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 382.50720878181767, "py": 322.25209339563145, "ang": 2.9171931783333793, "grau": 0, "pagerank": 0}, {"id": "T6-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO MUNICIPAL", "titulo_pai": "T6", "px": 339.44, "py": 397.38, "ang": 2.5357, "grau": 0, "pagerank": 0}, {"id": "T6-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO DO PLANEJAMENTO INTEGRADO", "titulo_pai": "T6", "px": 310.71, "py": 374.61, "ang": 2.7265, "grau": 0, "pagerank": 0}, {"id": "T6-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 285.99, "py": 344.28, "ang": 2.9172, "grau": 0, "pagerank": 0}, {"id": "T6-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE GEOINFORMAÇÃO E MONITORAMENTO", "titulo_pai": "T6", "px": 309.1, "py": 305.75, "ang": 3.1079, "grau": 0, "pagerank": 0}, {"id": "T6-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA ESTRUTURAÇÃO E FINANCIAMENTO DE PLANOS, PROGRAMAS E PROJETOS ESTRATÉGICOS", "titulo_pai": "T6", "px": 297.28, "py": 271.06, "ang": 3.2987, "grau": 0, "pagerank": 0}, {"id": "T7", "nivel": 1, "tipo": "TÍTULO", "nome": "DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "titulo_pai": "T7", "px": 401.816851753197, "py": 237.65101981412667, "ang": 3.8147910793590345, "grau": 0, "pagerank": 0}], "arestas_hierarquicas": [{"source": "T1-C1", "target": "T1"}, {"source": "T1-C2", "target": "T1"}, {"source": "T1-C2-S1", "target": "T1-C2"}, {"source": "T1-C2-S2", "target": "T1-C2"}, {"source": "T1-C3", "target": "T1"}, {"source": "T1-C3-S1", "target": "T1-C3"}, {"source": "T1-C3-S2", "target": "T1-C3"}, {"source": "T1-C3-S3", "target": "T1-C3"}, {"source": "T1-C3-S4", "target": "T1-C3"}, {"source": "T1-C3-S5", "target": "T1-C3"}, {"source": "T2-C1", "target": "T2"}, {"source": "T2-C1-S1", "target": "T2-C1"}, {"source": "T2-C1-S2", "target": "T2-C1"}, {"source": "T2-C2", "target": "T2"}, {"source": "T2-C2-S1", "target": "T2-C2"}, {"source": "T2-C2-S2", "target": "T2-C2"}, {"source": "T2-C2-S3", "target": "T2-C2"}, {"source": "T2-C2-S4", "target": "T2-C2"}, {"source": "T2-C2-S5", "target": "T2-C2"}, {"source": "T3-C1", "target": "T3"}, {"source": "T3-C1-S1", "target": "T3-C1"}, {"source": "T3-C1-S1-SUB1", "target": "T3-C1-S1"}, {"source": "T3-C1-S1-SUB2", "target": "T3-C1-S1"}, {"source": "T3-C1-S1-SUB3", "target": "T3-C1-S1"}, {"source": "T3-C1-S2", "target": "T3-C1"}, {"source": "T3-C1-S2-SUB1", "target": "T3-C1-S2"}, {"source": "T3-C1-S2-SUB2", "target": "T3-C1-S2"}, {"source": "T3-C1-S3", "target": "T3-C1"}, {"source": "T3-C1-S3-SUB1", "target": "T3-C1-S3"}, {"source": "T3-C1-S3-SUB2", "target": "T3-C1-S3"}, {"source": "T3-C2", "target": "T3"}, {"source": "T3-C2-S1", "target": "T3-C2"}, {"source": "T3-C2-S1-SUB1", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB2", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB3", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB4", "target": "T3-C2-S1"}, {"source": "T3-C2-S2", "target": "T3-C2"}, {"source": "T3-C2-S2-SUB1", "target": "T3-C2-S2"}, {"source": "T3-C2-S2-SUB2", "target": "T3-C2-S2"}, {"source": "T3-C2-S3", "target": "T3-C2"}, {"source": "T3-C2-S4", "target": "T3-C2"}, {"source": "T3-C2-S5", "target": "T3-C2"}, {"source": "T3-C2-S6", "target": "T3-C2"}, {"source": "T3-C3", "target": "T3"}, {"source": "T3-C3-S1", "target": "T3-C3"}, {"source": "T3-C3-S2", "target": "T3-C3"}, {"source": "T3-C3-S3", "target": "T3-C3"}, {"source": "T3-C3-S4", "target": "T3-C3"}, {"source": "T3-C4", "target": "T3"}, {"source": "T3-C4-S1", "target": "T3-C4"}, {"source": "T3-C4-S2", "target": "T3-C4"}, {"source": "T3-C4-S3", "target": "T3-C4"}, {"source": "T3-C4-S4", "target": "T3-C4"}, {"source": "T3-C4-S5", "target": "T3-C4"}, {"source": "T3-C4-S6", "target": "T3-C4"}, {"source": "T3-C4-S7", "target": "T3-C4"}, {"source": "T3-C5", "target": "T3"}, {"source": "T3-C5-S1", "target": "T3-C5"}, {"source": "T3-C5-S2", "target": "T3-C5"}, {"source": "T3-C5-S2-SUB1", "target": "T3-C5-S2"}, {"source": "T3-C5-S2-SUB2", "target": "T3-C5-S2"}, {"source": "T3-C5-S3", "target": "T3-C5"}, {"source": "T3-C5-S4", "target": "T3-C5"}, {"source": "T3-C5-S5", "target": "T3-C5"}, {"source": "T3-C5-S5-SUB1", "target": "T3-C5-S5"}, {"source": "T3-C5-S6", "target": "T3-C5"}, {"source": "T3-C5-S6-SUB1", "target": "T3-C5-S6"}, {"source": "T3-C5-S6-SUB2", "target": "T3-C5-S6"}, {"source": "T3-C5-S6-SUB3", "target": "T3-C5-S6"}, {"source": "T3-C5-S7", "target": "T3-C5"}, {"source": "T3-C6", "target": "T3"}, {"source": "T3-C6-S1", "target": "T3-C6"}, {"source": "T3-C6-S2", "target": "T3-C6"}, {"source": "T3-C6-S3", "target": "T3-C6"}, {"source": "T3-C6-S4", "target": "T3-C6"}, {"source": "T3-C7", "target": "T3"}, {"source": "T3-C7-S1", "target": "T3-C7"}, {"source": "T3-C7-S1-SUB1", "target": "T3-C7-S1"}, {"source": "T3-C7-S1-SUB2", "target": "T3-C7-S1"}, {"source": "T3-C7-S1-SUB3", "target": "T3-C7-S1"}, {"source": "T3-C7-S2", "target": "T3-C7"}, {"source": "T3-C7-S2-SUB1", "target": "T3-C7-S2"}, {"source": "T3-C7-S2-SUB2", "target": "T3-C7-S2"}, {"source": "T4-C1", "target": "T4"}, {"source": "T4-C1-S1", "target": "T4-C1"}, {"source": "T4-C1-S2", "target": "T4-C1"}, {"source": "T4-C1-S3", "target": "T4-C1"}, {"source": "T4-C1-S4", "target": "T4-C1"}, {"source": "T4-C1-S5", "target": "T4-C1"}, {"source": "T4-C1-S6", "target": "T4-C1"}, {"source": "T4-C1-S7", "target": "T4-C1"}, {"source": "T4-C2", "target": "T4"}, {"source": "T4-C2-S1", "target": "T4-C2"}, {"source": "T4-C2-S2", "target": "T4-C2"}, {"source": "T4-C2-S3", "target": "T4-C2"}, {"source": "T4-C2-S4", "target": "T4-C2"}, {"source": "T4-C2-S5", "target": "T4-C2"}, {"source": "T4-C2-S6", "target": "T4-C2"}, {"source": "T4-C2-S7", "target": "T4-C2"}, {"source": "T4-C3", "target": "T4"}, {"source": "T4-C3-S1", "target": "T4-C3"}, {"source": "T4-C3-S2", "target": "T4-C3"}, {"source": "T4-C3-S3", "target": "T4-C3"}, {"source": "T4-C3-S4", "target": "T4-C3"}, {"source": "T5-C1", "target": "T5"}, {"source": "T5-C2", "target": "T5"}, {"source": "T5-C3", "target": "T5"}, {"source": "T5-C4", "target": "T5"}, {"source": "T5-C5", "target": "T5"}, {"source": "T5-C6", "target": "T5"}, {"source": "T5-C7", "target": "T5"}, {"source": "T6-C1", "target": "T6"}, {"source": "T6-C2", "target": "T6"}, {"source": "T6-C3", "target": "T6"}, {"source": "T6-C4", "target": "T6"}, {"source": "T6-C5", "target": "T6"}], "titulos": [{"id": "T1", "nivel": 1, "tipo": "TÍTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 210.0, "ang": -1.5707963267948966, "grau": 0, "pagerank": 0}, {"id": "T2", "nivel": 1, "tipo": "TÍTULO", "nome": "DA INTEGRAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 550.3648334221227, "py": 243.88591783271397, "ang": -0.6731984257692414, "grau": 0, "pagerank": 0}, {"id": "T3", "nivel": 1, "tipo": "TÍTULO", "nome": "DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3", "px": 567.7435120963642, "py": 320.0268840560683, "ang": 0.2243994752564138, "grau": 0, "pagerank": 0}, {"id": "T4", "nivel": 1, "tipo": "TÍTULO", "nome": "DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "titulo_pai": "T4", "px": 519.0495365205802, "py": 381.08719811121773, "ang": 1.121997376282069, "grau": 0, "pagerank": 0}, {"id": "T5", "nivel": 1, "tipo": "TÍTULO", "nome": "DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T5", "px": 440.9504634794198, "py": 381.08719811121773, "ang": 2.019595277307724, "grau": 0, "pagerank": 0}, {"id": "T6", "nivel": 1, "tipo": "TÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 392.25648790363584, "py": 320.0268840560683, "ang": 2.9171931783333793, "grau": 0, "pagerank": 0}, {"id": "T7", "nivel": 1, "tipo": "TÍTULO", "nome": "DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "titulo_pai": "T7", "px": 409.6351665778773, "py": 243.885917832714, "ang": 3.8147910793590345, "grau": 0, "pagerank": 0}], "grau_max": 251};
 const SHEET_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vSQDMje4w1kwNnGKcE4FyQgs8cVKa9CjpwOGa6QZ1FDxo3QITxIeJxFcgR5DPzI3Sgq_bosiHMI9qFZ/pub?output=csv';
-const CORES_NIVEL={0:'#444',1:'#666',2:'#888',3:'#aaa',4:'#ccc'};
-const W=960,H=600,CX=480,CY=300;
-const RAIOS={0:0,1:100,2:185,3:265,4:330};
-const RAIO_CONTRIB=400;
-const DRAG_THR=4;
-
-let rigidez=0.03,atrContrib=0.04,gmin=0,showContrib=true;
-let tituloFiltro='todos',fontesFiltro=new Set(),oficinaFiltro='todas';
-let tr={k:1,tx:0,ty:0},drag=null;
+const CORES={0:'#444',1:'#666',2:'#888',3:'#aaa',4:'#ccc'};
+const W=960,H=600,CX=480,CY=300,RAIOS={0:0,1:100,2:185,3:265,4:330},RC=400,DRAG=4;
+let gmin=0,showContrib=true,tituloFiltro='todos',fontesFiltro=new Set(),oficFiltro='todas';
+let tr={k:1,tx:0,ty:0},drag=null,grau_max=1;
+let nosContrib=[],mapContrib={},ARESTAS=[],fontes=[],oficinas=[];
 window._sel=null;
 
-const noRaiz={id:'ROOT',nivel:0,nome:'Plano Diretor',x:CX,y:CY,vx:0,vy:0,fixed:false};
-let nosMinuta=MINUTA.minuta.map(n=>({...n,x:n.px,y:n.py,vx:0,vy:0,fixed:false}));
-const mapMinuta={};
-nosMinuta.forEach(n=>mapMinuta[n.id]=n);
-const idsTitulo=nosMinuta.filter(n=>n.nivel===1).map(n=>n.id);
+const noRaiz={id:'ROOT',x:CX,y:CY,vx:0,vy:0};
+let nosM=MINUTA.minuta.map(n=>({...n,x:n.px,y:n.py,vx:0,vy:0,fixed:false}));
+const mapM={};nosM.forEach(n=>mapM[n.id]=n);
+const titIds=nosM.filter(n=>n.nivel===1).map(n=>n.id);
 
-let nosContrib=[],mapContrib={},ARESTAS=[],fontes_unicas=[],oficinas_unicas=[],grau_max=1;
+function normCol(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');}
 
-
-function normCol(s) {
-  return s.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^a-z0-9]/g,'');
-}
-
-function parseCSV(txt) {
-  const linhas = txt.split('\n');
-  const rawHeaders = linhas[0].split(',').map(h => h.trim().replace(/^"|"$/g,''));
-  const normHeaders = rawHeaders.map(normCol);
-
-  // Mapa: nome normalizado → índice
-  const idx = {};
-  normHeaders.forEach((h,i) => idx[h] = i);
-
-  // Detectar coluna de código (aceita: código, codigo, Código, cod)
-  const colCodigo = normHeaders.find(h => h.includes('cdigo') || h === 'codigo' || h === 'cod');
-  const colProposta = normHeaders.find(h => h.includes('proposta'));
-  const colFonte = normHeaders.find(h => h === 'fonte');
-  const colOficina = normHeaders.find(h => h.includes('oficina') || h.includes('nome'));
-  const colExpl = normHeaders.find(h => h.includes('explic'));
-  const colSim = normHeaders.find(h => h.includes('similar'));
-
-  console.log('Colunas detectadas:', {colCodigo, colProposta, colFonte, colOficina});
-
-  return linhas.slice(1).filter(l => l.trim()).map(l => {
-    const vals = []; let cur = '', inQ = false;
-    for (const c of l) {
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
-      else cur += c;
-    }
-    vals.push(cur.trim());
-    return {
-      codigo:    (vals[idx[colCodigo]]  || '').replace(/^"|"$/g,'').trim(),
-      proposta:  (vals[idx[colProposta]]|| '').replace(/^"|"$/g,'').trim(),
-      fonte:     (vals[idx[colFonte]]   || 'outros').replace(/^"|"$/g,'').trim(),
-      oficina:   (vals[idx[colOficina]] || '').replace(/^"|"$/g,'').trim(),
-      explicacao:(vals[idx[colExpl]]    || '').replace(/^"|"$/g,'').trim(),
-      similaridade:(vals[idx[colSim]]  || '').replace(/^"|"$/g,'').trim(),
-    };
+function parseCSV(txt){
+  const lin=txt.split('
+');
+  const raw=lin[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
+  const norm=raw.map(normCol);
+  const idx={};norm.forEach((h,i)=>idx[h]=i);
+  const iCod=norm.findIndex(h=>h.includes('cdigo')||h==='codigo'||h==='cod'||h==='codigo');
+  const iProp=norm.findIndex(h=>h.includes('proposta'));
+  const iFonte=norm.findIndex(h=>h==='fonte');
+  const iOfic=norm.findIndex(h=>h.includes('oficina'));
+  const iExpl=norm.findIndex(h=>h.includes('explic'));
+  const iSim=norm.findIndex(h=>h.includes('similar'));
+  console.log('Headers raw:', raw);
+  console.log('iCod:',iCod,'iProp:',iProp,'iFonte:',iFonte,'iOfic:',iOfic);
+  return lin.slice(1).filter(l=>l.trim()).map(l=>{
+    const v=[];let c='',q=false;
+    for(const ch of l){if(ch==='"'){q=!q;}else if(ch===','&&!q){v.push(c.trim());c='';}else c+=ch;}
+    v.push(c.trim());
+    const g=i=>i>=0?(v[i]||'').replace(/^"|"$/g,'').trim():'';
+    return {codigo:g(iCod),proposta:g(iProp),fonte:g(iFonte)||'outros',oficina:g(iOfic),explicacao:g(iExpl),similaridade:g(iSim)};
   });
 }
 
-
-async function carregarContribuicoes(){
+async function carregar(){
   try{
-    const resp=await fetch(SHEET_URL);
-    if(!resp.ok)throw new Error('HTTP '+resp.status);
-    const txt=await resp.text();
-    const rows=parseCSV(txt);
-    console.log('Rows carregados:', rows.length, 'Exemplo:', rows[0]);
-
-    const ids_minuta=new Set(Object.keys(mapMinuta));
-    const arestas=[],contribs=[];
-    const grauCount={};
-
-    rows.forEach((r,idx)=>{
+    const r=await fetch(SHEET_URL);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const rows=parseCSV(await r.text());
+    console.log('Rows:',rows.length,'ex:',rows[0]);
+    const ids=new Set(Object.keys(mapM));
+    const gc={};
+    rows.forEach((r,i)=>{
       let cod=r.codigo;
-      if(!cod||cod==='nan'||cod==='undefined')return;
-      if(!ids_minuta.has(cod)){
-        const partes=cod.split('-');
-        const pai=partes.slice(0,-1).join('-');
-        if(ids_minuta.has(pai))cod=pai; else return;
-      }
-      const fonte=r.fonte||'outros';
-      const oficina=r.oficina||'';
-      const titulo_pai=cod.split('-')[0];
-      const node_id='c_'+idx;
-      const m=mapMinuta[cod];
-      const ang=m?m.ang:Math.random()*Math.PI*2;
-      const jitter=(Math.random()-.5)*.5;
-      const rv=RAIO_CONTRIB+(Math.random()-.5)*35;
-      contribs.push({
-        id:node_id,fonte,nome_oficina:oficina,
-        texto:(r.proposta||'').slice(0,150),
-        texto_completo:r.proposta||'',
-        id_estrutura:cod,titulo_pai,
-        explicacao:r.explicacao||'',
-        similaridade:r.similaridade||'',
-        x:CX+Math.cos(ang+jitter)*rv,
-        y:CY+Math.sin(ang+jitter)*rv,
-        vx:0,vy:0,fixed:false
-      });
-      arestas.push({source:node_id,target:cod});
-      grauCount[cod]=(grauCount[cod]||0)+1;
+      if(!cod||cod==='nan')return;
+      if(!ids.has(cod)){const p=cod.split('-').slice(0,-1).join('-');if(ids.has(p))cod=p;else return;}
+      const id='c'+i,m=mapM[cod],ang=m?m.ang:Math.random()*Math.PI*2;
+      const rv=RC+(Math.random()-.5)*35,jit=(Math.random()-.5)*.5;
+      nosContrib.push({id,fonte:r.fonte,nome_oficina:r.oficina,texto:r.proposta.slice(0,150),
+        texto_completo:r.proposta,id_estrutura:cod,titulo_pai:cod.split('-')[0],
+        explicacao:r.explicacao,similaridade:r.similaridade,
+        x:CX+Math.cos(ang+jit)*rv,y:CY+Math.sin(ang+jit)*rv,vx:0,vy:0,fixed:false});
+      ARESTAS.push({source:id,target:cod});
+      gc[cod]=(gc[cod]||0)+1;
     });
-
-    // Atualizar grau nos nós da minuta
-    nosMinuta.forEach(n=>{n.grau=grauCount[n.id]||0;});
-    grau_max=Math.max(...nosMinuta.map(n=>n.grau),1);
-    nosContrib=contribs; ARESTAS=arestas;
+    nosM.forEach(n=>n.grau=gc[n.id]||0);
+    grau_max=Math.max(...nosM.map(n=>n.grau),1);
     nosContrib.forEach(c=>mapContrib[c.id]=c);
-    fontes_unicas=[...new Set(nosContrib.map(c=>c.fonte))].sort();
-    oficinas_unicas=[...new Set(nosContrib.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'&&o!==''))].sort();
-    fontesFiltro=new Set(fontes_unicas);
-
-    console.log('Contrib carregadas:', nosContrib.length, 'Fontes:', fontes_unicas, 'Oficinas:', oficinas_unicas);
-
-    // KPIs
+    fontes=[...new Set(nosContrib.map(c=>c.fonte))].sort();
+    oficinas=[...new Set(nosContrib.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'&&o!==''))].sort();
+    fontesFiltro=new Set(fontes);
+    console.log('Carregado:',nosContrib.length,'contrib,',fontes,'fontes');
     document.getElementById('k-contrib').textContent=nosContrib.length;
-    document.getElementById('k-arestas').textContent=arestas.length;
+    document.getElementById('k-arestas').textContent=ARESTAS.length;
     document.getElementById('gmin').max=grau_max;
-
-    // Popular selects
-    const selT=document.getElementById('sel-titulo');
-    MINUTA.titulos.forEach(t=>{
-      const o=document.createElement('option');
-      o.value=t.id;o.textContent=t.id+' — '+t.nome.slice(0,50);
-      selT.appendChild(o);
-    });
-    const selO=document.getElementById('sel-oficina');
-    oficinas_unicas.forEach(o=>{
-      const opt=document.createElement('option');
-      opt.value=o;opt.textContent=o;selO.appendChild(opt);
-    });
-
+    // Populate selects
+    MINUTA.titulos.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.id+' — '+t.nome.slice(0,50);document.getElementById('sel-titulo').appendChild(o);});
+    oficinas.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;document.getElementById('sel-oficina').appendChild(op);});
     initFontes();
-
-    document.getElementById('loading-msg').style.display='none';
-    document.getElementById('gsvg').style.display='block';
-    document.getElementById('sliders-panel').style.display='grid';
-    document.getElementById('hint').style.display='block';
-    document.getElementById('legenda').style.display='block';
-    document.getElementById('card-filtros').style.display='block';
-
+    ['loading-msg'].forEach(id=>document.getElementById(id).style.display='none');
+    ['gsvg','ctrl-panel','hint','legenda','card-filtros'].forEach(id=>document.getElementById(id).style.display='block');
+    document.getElementById('ctrl-panel').style.display='flex';
     setInterval(tick,30);
-
   }catch(e){
     console.error(e);
-    document.getElementById('loading-msg').innerHTML=
-      `<span style="color:var(--bordo)">Erro: ${e.message}</span>`;
+    document.getElementById('loading-msg').innerHTML='<span style="color:#CA6673">Erro: '+e.message+'</span>';
   }
 }
 
-function rMinuta(n){
-  if(n.nivel===0)return 20;
-  const base=n.nivel===1?15:n.nivel===2?11:n.nivel===3?8:6;
-  return base+Math.min((n.grau||0)/grau_max*14,14);
-}
-
-function minutaVisiveis(){
-  return nosMinuta.filter(n=>{
-    if((n.grau||0)<gmin)return false;
-    if(tituloFiltro==='todos')return true;
-    return n.titulo_pai===tituloFiltro;
-  });
-}
-function contribVisiveis(){
+function rM(n){if(n.nivel===0)return 20;const b=n.nivel===1?15:n.nivel===2?11:n.nivel===3?8:6;return b+Math.min((n.grau||0)/grau_max*14,14);}
+function mv(){return nosM.filter(n=>(n.grau||0)>=gmin&&(tituloFiltro==='todos'||n.titulo_pai===tituloFiltro));}
+function cv(){
   if(!showContrib)return[];
-  return nosContrib.filter(c=>{
-    if(!fontesFiltro.has(c.fonte))return false;
-    if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return false;
-    if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return false;
-    return true;
-  });
+  return nosContrib.filter(c=>fontesFiltro.has(c.fonte)&&(tituloFiltro==='todos'||c.titulo_pai===tituloFiltro)&&(oficFiltro==='todas'||c.nome_oficina===oficFiltro));
 }
 
 function tick(){
-  const mv=minutaVisiveis(),cv=contribVisiveis(),mvSet=new Set(mv.map(n=>n.id));
-  mv.forEach(n=>{
+  const mvs=mv(),cvs=cv(),mvSet=new Set(mvs.map(n=>n.id));
+  mvs.forEach(n=>{
     if(n.fixed)return;
     let tx=n.px,ty=n.py;
-    if(tituloFiltro!=='todos'){
-      const r={1:70,2:140,3:200,4:250}[n.nivel]||70;
-      tx=CX+Math.cos(n.ang)*r;ty=CY+Math.sin(n.ang)*r;
-    }
-    n.vx+=(tx-n.x)*rigidez;n.vy+=(ty-n.y)*rigidez;
-    n.vx*=0.6;n.vy*=0.6;
-    n.x=Math.max(15,Math.min(W-15,n.x+n.vx));
-    n.y=Math.max(15,Math.min(H-15,n.y+n.vy));
+    if(tituloFiltro!=='todos'){const r={1:70,2:140,3:200,4:250}[n.nivel]||70;tx=CX+Math.cos(n.ang)*r;ty=CY+Math.sin(n.ang)*r;}
+    n.vx+=(tx-n.x)*0.03;n.vy+=(ty-n.y)*0.03;n.vx*=0.6;n.vy*=0.6;
+    n.x=Math.max(15,Math.min(W-15,n.x+n.vx));n.y=Math.max(15,Math.min(H-15,n.y+n.vy));
   });
   ARESTAS.forEach(a=>{
-    const c=mapContrib[a.source],m=mapMinuta[a.target];
+    const c=mapContrib[a.source],m=mapM[a.target];
     if(!c||!m||!fontesFiltro.has(c.fonte)||!showContrib||!mvSet.has(m.id))return;
     if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return;
-    if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return;
+    if(oficFiltro!=='todas'&&c.nome_oficina!==oficFiltro)return;
     const dx=m.x-c.x,dy=m.y-c.y,d=Math.sqrt(dx*dx+dy*dy)||1;
-    const f=(d-Math.max(20,RAIO_CONTRIB-RAIOS[m.nivel]-20))*atrContrib;
+    const f=(d-Math.max(20,RC-RAIOS[m.nivel]-20))*0.04;
     c.vx+=dx/d*f;c.vy+=dy/d*f;
   });
-  cv.forEach(c=>{if(c.fixed)return;c.vx*=0.55;c.vy*=0.55;c.x=Math.max(5,Math.min(W-5,c.x+c.vx));c.y=Math.max(5,Math.min(H-5,c.y+c.vy));});
-  render(mv,cv,mvSet);
+  cvs.forEach(c=>{if(c.fixed)return;c.vx*=0.55;c.vy*=0.55;c.x=Math.max(5,Math.min(W-5,c.x+c.vx));c.y=Math.max(5,Math.min(H-5,c.y+c.vy));});
+  render(mvs,cvs,mvSet);
 }
 
-function render(mv,cv,mvSet){
+function render(mvs,cvs,mvSet){
   let rL='';
-  idsTitulo.forEach(tid=>{
+  titIds.forEach(tid=>{
     if(tituloFiltro!=='todos'&&tid!==tituloFiltro)return;
-    const t=mapMinuta[tid];if(!t||!mvSet.has(tid))return;
-    rL+=`<line x1="${noRaiz.x.toFixed(1)}" y1="${noRaiz.y.toFixed(1)}" x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}" stroke="#bbb" stroke-width="1" stroke-opacity=".5" pointer-events="none"/>`;
+    const t=mapM[tid];if(!t||!mvSet.has(tid))return;
+    rL+=`<line x1="${noRaiz.x}" y1="${noRaiz.y}" x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}" stroke="#bbb" stroke-width="1" stroke-opacity=".5" pointer-events="none"/>`;
   });
   document.getElementById('links-raiz').innerHTML=rL;
-
   let hL='';
   MINUTA.arestas_hierarquicas.forEach(a=>{
-    const f=mapMinuta[a.source],p=mapMinuta[a.target];
+    const f=mapM[a.source],p=mapM[a.target];
     if(!f||!p||!mvSet.has(f.id)||!mvSet.has(p.id))return;
     hL+=`<line x1="${f.x.toFixed(1)}" y1="${f.y.toFixed(1)}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="#ddd" stroke-width=".8" stroke-opacity=".6" pointer-events="none"/>`;
   });
   document.getElementById('links-hier').innerHTML=hL;
-
   let cL='';
-  if(showContrib){
-    ARESTAS.forEach(a=>{
-      const c=mapContrib[a.source],m=mapMinuta[a.target];
-      if(!c||!m||!fontesFiltro.has(c.fonte)||!mvSet.has(m.id))return;
-      if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return;
-      if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return;
-      cL+=`<line x1="${c.x.toFixed(1)}" y1="${c.y.toFixed(1)}" x2="${m.x.toFixed(1)}" y2="${m.y.toFixed(1)}" stroke="#CA6673" stroke-width=".3" stroke-opacity=".12" pointer-events="none"/>`;
-    });
-  }
-  document.getElementById('links-contrib').innerHTML=cL;
-
-  let cHTML='';
-  if(showContrib)cv.forEach(c=>{
-    cHTML+=`<circle data-type="contrib" data-id="${c.id}" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3" fill="#CA6673" fill-opacity=".65" style="cursor:pointer"/>`;
+  if(showContrib)ARESTAS.forEach(a=>{
+    const c=mapContrib[a.source],m=mapM[a.target];
+    if(!c||!m||!fontesFiltro.has(c.fonte)||!mvSet.has(m.id))return;
+    if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return;
+    if(oficFiltro!=='todas'&&c.nome_oficina!==oficFiltro)return;
+    cL+=`<line x1="${c.x.toFixed(1)}" y1="${c.y.toFixed(1)}" x2="${m.x.toFixed(1)}" y2="${m.y.toFixed(1)}" stroke="#CA6673" stroke-width=".3" stroke-opacity=".12" pointer-events="none"/>`;
   });
-  document.getElementById('nodes-contrib').innerHTML=cHTML;
-
-  let mHTML='';
-  mv.forEach(n=>{
-    const cor=CORES_NIVEL[n.nivel],r=rMinuta(n);
-    mHTML+=`<g data-type="minuta" data-id="${n.id}" style="cursor:pointer">
+  document.getElementById('links-contrib').innerHTML=cL;
+  let cH='';
+  if(showContrib)cvs.forEach(c=>{cH+=`<circle data-type="contrib" data-id="${c.id}" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3" fill="#CA6673" fill-opacity=".65" style="cursor:pointer"/>`;});
+  document.getElementById('nodes-contrib').innerHTML=cH;
+  let mH='';
+  mvs.forEach(n=>{
+    const cor=CORES[n.nivel],r=rM(n);
+    mH+=`<g data-type="minuta" data-id="${n.id}" style="cursor:pointer">
       <circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${r}" fill="${cor}" stroke="#fff" stroke-width="${n.nivel<=1?2:1}"/>
       <text x="${n.x.toFixed(1)}" y="${n.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle"
         font-size="${Math.max(6,Math.min(r*.6,11)).toFixed(1)}" fill="white" font-family="Roboto,sans-serif"
-        font-weight="700" pointer-events="none">${n.grau||0}</text>
-    </g>`;
+        font-weight="700" pointer-events="none">${n.grau||0}</text></g>`;
   });
-  document.getElementById('nodes-minuta').innerHTML=mHTML;
-
-  document.getElementById('node-raiz').innerHTML=`
-    <g style="cursor:pointer" onclick="mostrarRaiz()">
-      <circle cx="${noRaiz.x.toFixed(1)}" cy="${noRaiz.y.toFixed(1)}" r="20" fill="#444" stroke="#fff" stroke-width="2"/>
-      <text x="${noRaiz.x.toFixed(1)}" y="${noRaiz.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle"
-        font-size="7" fill="white" font-family="Roboto,sans-serif" font-weight="700" pointer-events="none">PD</text>
-    </g>`;
-
+  document.getElementById('nodes-minuta').innerHTML=mH;
+  document.getElementById('node-raiz').innerHTML=`<g style="cursor:pointer" onclick="mostrarRaiz()">
+    <circle cx="${noRaiz.x}" cy="${noRaiz.y}" r="20" fill="#444" stroke="#fff" stroke-width="2"/>
+    <text x="${noRaiz.x}" y="${noRaiz.y}" text-anchor="middle" dominant-baseline="middle"
+      font-size="7" fill="white" font-family="Roboto,sans-serif" font-weight="700" pointer-events="none">PD</text></g>`;
   document.querySelectorAll('[data-type="minuta"]').forEach(el=>{
-    const id=el.dataset.id;
-    el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'minuta',id,startX:e.clientX,startY:e.clientY,moved:false};});
+    const id=el.dataset.id;el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'minuta',id,sx:e.clientX,sy:e.clientY,moved:false};});
   });
   document.querySelectorAll('[data-type="contrib"]').forEach(el=>{
-    const id=el.dataset.id;
-    el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'contrib',id,startX:e.clientX,startY:e.clientY,moved:false};});
+    const id=el.dataset.id;el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'contrib',id,sx:e.clientX,sy:e.clientY,moved:false};});
   });
-
-  const tot=mv.length+1+(showContrib?cv.length:0);
+  const tot=mvs.length+1+(showContrib?cvs.length:0);
   document.getElementById('k-vis').textContent=tot;
   const bar=document.getElementById('info-bar');
-  const filtroAtivo=tituloFiltro!=='todos'||oficinaFiltro!=='todas'||fontesFiltro.size<fontes_unicas.length;
-  if(filtroAtivo){
+  const fa=tituloFiltro!=='todos'||oficFiltro!=='todas'||fontesFiltro.size<fontes.length;
+  if(fa){
     const t=MINUTA.titulos.find(x=>x.id===tituloFiltro);
-    const partes=[];
-    if(tituloFiltro!=='todos')partes.push(t?t.id+' — '+t.nome.slice(0,40):tituloFiltro);
-    if(oficinaFiltro!=='todas')partes.push('Oficina: '+oficinaFiltro);
-    if(fontesFiltro.size<fontes_unicas.length)partes.push('Fontes: '+[...fontesFiltro].join(', '));
-    partes.push(mv.length+' itens · '+(showContrib?cv.length:0)+' contribuições');
-    bar.style.display='block';bar.textContent=partes.join(' · ');
+    const p=[];
+    if(tituloFiltro!=='todos')p.push(t?t.id+' — '+t.nome.slice(0,40):tituloFiltro);
+    if(oficFiltro!=='todas')p.push('Oficina: '+oficFiltro);
+    if(fontesFiltro.size<fontes.length)p.push('Fontes: '+[...fontesFiltro].join(', '));
+    p.push(mvs.length+' itens · '+(showContrib?cvs.length:0)+' contribuições');
+    bar.style.display='block';bar.textContent=p.join(' · ');
   }else bar.style.display='none';
 }
 
-const svg=document.getElementById('gsvg');
-const tooltip=document.getElementById('tooltip');
+const svg=document.getElementById('gsvg'),ttp=document.getElementById('tooltip');
 svg.addEventListener('mousemove',e=>{
   if(!drag){
-    const el=document.elementFromPoint(e.clientX,e.clientY);
-    const g=el?.closest('[data-type]');
-    if(g){
-      const tipo=g.dataset.type,id=g.dataset.id;let txt='';
-      if(tipo==='minuta'){const n=mapMinuta[id];if(n)txt=`<strong style="color:#ddd">${n.tipo}</strong><br>${n.nome}<br><span style="color:#aaa;font-size:.67rem">${n.grau||0} contribuições · ${n.id}</span>`;}
-      else if(tipo==='contrib'){const c=mapContrib[id];if(c){const of=c.nome_oficina?`<br><span style="color:#f0b8c0">${c.nome_oficina}</span>`:'';txt=`<span style="color:#e8a0a8;font-weight:600">${c.fonte}</span>${of}<br>${c.texto.slice(0,120)}${c.texto.length>120?'...':''}`;}}
-      if(txt){tooltip.innerHTML=txt;tooltip.style.left=(e.clientX+14)+'px';tooltip.style.top=(e.clientY-10)+'px';tooltip.classList.add('vis');}
-    }else tooltip.classList.remove('vis');
-  }else tooltip.classList.remove('vis');
+    const el=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-type]');
+    if(el){
+      const tipo=el.dataset.type,id=el.dataset.id;let txt='';
+      if(tipo==='minuta'){const n=mapM[id];if(n)txt=`<strong style="color:#ddd">${n.tipo}</strong><br>${n.nome}<br><span style="color:#aaa;font-size:.67rem">${n.grau||0} contribuições · ${n.id}</span>`;}
+      else{const c=mapContrib[id];if(c){const of=c.nome_oficina?`<br><span style="color:#f0b8c0">${c.nome_oficina}</span>`:'';txt=`<span style="color:#e8a0a8;font-weight:600">${c.fonte}</span>${of}<br>${c.texto.slice(0,120)}${c.texto.length>120?'...':''}`;}}
+      if(txt){ttp.innerHTML=txt;ttp.style.left=(e.clientX+14)+'px';ttp.style.top=(e.clientY-10)+'px';ttp.classList.add('vis');}
+    }else ttp.classList.remove('vis');
+  }else ttp.classList.remove('vis');
   if(!drag)return;
-  const dx=e.clientX-drag.startX,dy=e.clientY-drag.startY;
-  if(Math.sqrt(dx*dx+dy*dy)>DRAG_THR)drag.moved=true;
+  const dx=e.clientX-drag.sx,dy=e.clientY-drag.sy;
+  if(Math.sqrt(dx*dx+dy*dy)>DRAG)drag.moved=true;
   if(!drag.moved)return;
-  if(drag.type==='canvas'){tr.tx=drag.ox+dx;tr.ty=drag.oy+dy;document.getElementById('zg').setAttribute('transform',`translate(${tr.tx.toFixed(1)},${tr.ty.toFixed(1)}) scale(${tr.k})`);}
-  else if(drag.type==='minuta'){const n=mapMinuta[drag.id];if(!n)return;const r=svg.getBoundingClientRect();n.x=(e.clientX-r.left)/tr.k-tr.tx/tr.k;n.y=(e.clientY-r.top)/tr.k-tr.ty/tr.k;n.fixed=true;}
-  else if(drag.type==='contrib'){const c=mapContrib[drag.id];if(!c)return;const r=svg.getBoundingClientRect();c.x=(e.clientX-r.left)/tr.k-tr.tx/tr.k;c.y=(e.clientY-r.top)/tr.k-tr.ty/tr.k;c.fixed=true;}
+  const rect=svg.getBoundingClientRect();
+  if(drag.type==='canvas'){tr.tx=drag.ox+dx;tr.ty=drag.oy+dy;document.getElementById('zg').setAttribute('transform',`translate(${tr.tx},${tr.ty}) scale(${tr.k})`);}
+  else if(drag.type==='minuta'){const n=mapM[drag.id];if(n){n.x=(e.clientX-rect.left)/tr.k-tr.tx/tr.k;n.y=(e.clientY-rect.top)/tr.k-tr.ty/tr.k;n.fixed=true;}}
+  else if(drag.type==='contrib'){const c=mapContrib[drag.id];if(c){c.x=(e.clientX-rect.left)/tr.k-tr.tx/tr.k;c.y=(e.clientY-rect.top)/tr.k-tr.ty/tr.k;c.fixed=true;}}
 });
-svg.addEventListener('mousedown',e=>{if(drag)return;drag={type:'canvas',startX:e.clientX,startY:e.clientY,ox:tr.tx,oy:tr.ty,moved:false};});
+svg.addEventListener('mousedown',e=>{if(!drag)drag={type:'canvas',sx:e.clientX,sy:e.clientY,ox:tr.tx,oy:tr.ty,moved:false};});
 svg.addEventListener('mouseup',e=>{
   if(drag&&!drag.moved){if(drag.type==='minuta')mostrarMinuta(drag.id);else if(drag.type==='contrib')mostrarContrib(drag.id);}
   drag=null;
 });
-svg.addEventListener('mouseleave',()=>{drag=null;tooltip.classList.remove('vis');});
-svg.addEventListener('wheel',e=>{e.preventDefault();tr.k=Math.max(.1,Math.min(8,tr.k*(e.deltaY<0?1.12:.9)));document.getElementById('zg').setAttribute('transform',`translate(${tr.tx.toFixed(1)},${tr.ty.toFixed(1)}) scale(${tr.k})`);},{passive:false});
+svg.addEventListener('mouseleave',()=>{drag=null;ttp.classList.remove('vis');});
+svg.addEventListener('wheel',e=>{e.preventDefault();tr.k=Math.max(.1,Math.min(8,tr.k*(e.deltaY<0?1.12:.9)));document.getElementById('zg').setAttribute('transform',`translate(${tr.tx},${tr.ty}) scale(${tr.k})`);},{passive:false});
 
 function mostrarRaiz(){
   document.getElementById('ibox-titulo').innerHTML='<span style="color:#444;font-weight:700">Plano Diretor de Curitiba</span>';
@@ -503,15 +381,12 @@ function mostrarRaiz(){
   document.getElementById('ibox').classList.add('vis');
 }
 function mostrarMinuta(id){
-  const n=mapMinuta[id];if(!n)return;window._sel={type:'minuta',id};
-  const cor=CORES_NIVEL[n.nivel];
-  const cv=nosContrib.filter(c=>c.id_estrutura===id&&fontesFiltro.has(c.fonte));
+  const n=mapM[id];if(!n)return;window._sel={type:'minuta',id};
+  const cor=CORES[n.nivel],cvs=nosContrib.filter(c=>c.id_estrutura===id&&fontesFiltro.has(c.fonte));
   document.getElementById('ibox-titulo').innerHTML=`<span style="color:${cor}">${n.tipo}</span> · ${n.nome}`;
   document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:#f3f3f3;color:#444">ID: ${n.id}</span><span class="mpill" style="background:var(--bordol);color:var(--bordo)">${n.grau||0} contribuições</span>`;
-  const oficinas=[...new Set(cv.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'))];
-  document.getElementById('ibox-txt').textContent=cv.length>0
-    ?`Visíveis: ${cv.length} · Fontes: ${[...new Set(cv.map(c=>c.fonte))].join(', ')}${oficinas.length?' · Oficinas: '+oficinas.join(', '):''}`
-    :'Nenhuma contribuição com os filtros atuais.';
+  const ofs=[...new Set(cvs.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'))];
+  document.getElementById('ibox-txt').textContent=cvs.length>0?`Visíveis: ${cvs.length} · Fontes: ${[...new Set(cvs.map(c=>c.fonte))].join(', ')}${ofs.length?' · Oficinas: '+ofs.join(', '):''}` :'Nenhuma contribuição com os filtros atuais.';
   document.getElementById('ibox-ver').style.display='none';
   document.getElementById('ibox').classList.add('vis');
 }
@@ -519,24 +394,23 @@ function mostrarContrib(id){
   const c=mapContrib[id];if(!c)return;window._sel={type:'contrib',id};
   const of=c.nome_oficina&&c.nome_oficina!=='nan'?c.nome_oficina:'';
   document.getElementById('ibox-titulo').innerHTML=`<span style="color:var(--bordo)">${c.fonte}</span>${of?' · '+of:''}`;
-  document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:var(--bordol);color:var(--bordo)">${c.fonte}</span>${of?`<span class="mpill" style="background:#fff8e1;color:#e65100">${of}</span>`:''}<span class="mpill" style="background:#eef2ff;color:var(--az)">Classificada em: ${c.id_estrutura}</span>`;
+  document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:var(--bordol);color:var(--bordo)">${c.fonte}</span>${of?`<span class="mpill" style="background:#fff8e1;color:#e65100">${of}</span>`:''}<span class="mpill" style="background:#eef2ff;color:var(--az)">Em: ${c.id_estrutura}</span>`;
   document.getElementById('ibox-txt').textContent=c.texto;
   document.getElementById('ibox-ver').style.display=c.texto_completo?'inline-block':'none';
   document.getElementById('ibox').classList.add('vis');
 }
 function abrirModal(sel){
-  if(!sel)return;let titulo,meta,corpo;
-  if(sel.type==='minuta'){const n=mapMinuta[sel.id];titulo=n.tipo+': '+n.nome;meta=`ID: ${n.id} | Grau: ${n.grau||0}`;corpo='Contribuições: '+(n.grau||0);}
-  else{const c=mapContrib[sel.id];titulo='Contribuição — '+c.fonte+(c.nome_oficina?' / '+c.nome_oficina:'');meta=`Fonte: ${c.fonte}${c.nome_oficina?' | Oficina: '+c.nome_oficina:''} | Em: ${c.id_estrutura}`;corpo=c.texto_completo||c.texto;}
-  document.getElementById('mt').textContent=titulo;document.getElementById('mi').textContent=meta;document.getElementById('mb').textContent=corpo;
+  if(!sel)return;let t,m,b;
+  if(sel.type==='minuta'){const n=mapM[sel.id];t=n.tipo+': '+n.nome;m='ID: '+n.id+' | Grau: '+(n.grau||0);b='Contribuições: '+(n.grau||0);}
+  else{const c=mapContrib[sel.id];t='Contribuição — '+c.fonte+(c.nome_oficina?' / '+c.nome_oficina:'');m='Fonte: '+c.fonte+(c.nome_oficina?' | Oficina: '+c.nome_oficina:'')+' | Em: '+c.id_estrutura;b=c.texto_completo||c.texto;}
+  document.getElementById('mt').textContent=t;document.getElementById('mi').textContent=m;document.getElementById('mb').textContent=b;
   document.getElementById('modal').classList.add('open');
 }
-function fm(){document.getElementById('modal').classList.remove('open');}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))fm();});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('open');});
 
 function initFontes(){
   const el=document.getElementById('fontes-btns');el.innerHTML='';
-  fontes_unicas.forEach(f=>{
+  fontes.forEach(f=>{
     const btn=document.createElement('button');btn.className='fbtn ativo';
     btn.style.background='#CA6673';btn.style.color='#fff';
     btn.innerHTML=`<div class="fdot" style="background:#fff"></div>${f}`;
@@ -548,16 +422,16 @@ function initFontes(){
   });
 }
 
-
 document.getElementById('gmin').addEventListener('input',e=>{gmin=parseInt(e.target.value);document.getElementById('gval').textContent=e.target.value;});
 document.getElementById('cshow').addEventListener('input',e=>{showContrib=parseInt(e.target.value)===1;document.getElementById('cval').textContent=showContrib?'Sim':'Não';});
-document.getElementById('sel-titulo').addEventListener('change',e=>{tituloFiltro=e.target.value;nosMinuta.forEach(n=>{n.vx=0;n.vy=0;n.fixed=false;});});
-document.getElementById('sel-oficina').addEventListener('change',e=>{oficinaFiltro=e.target.value;});
+document.getElementById('sel-titulo').addEventListener('change',e=>{tituloFiltro=e.target.value;nosM.forEach(n=>{n.vx=0;n.vy=0;n.fixed=false;});});
+document.getElementById('sel-oficina').addEventListener('change',e=>{oficFiltro=e.target.value;});
+
 function resetar(){
-  nosMinuta.forEach(n=>{n.x=n.px;n.y=n.py;n.vx=0;n.vy=0;n.fixed=false;});
-  nosContrib.forEach(c=>{const m=mapMinuta[c.id_estrutura];const ang=m?m.ang:Math.random()*Math.PI*2;c.x=CX+Math.cos(ang+((Math.random()-.5)*.5))*RAIO_CONTRIB;c.y=CY+Math.sin(ang+((Math.random()-.5)*.5))*RAIO_CONTRIB;c.vx=0;c.vy=0;c.fixed=false;});
+  nosM.forEach(n=>{n.x=n.px;n.y=n.py;n.vx=0;n.vy=0;n.fixed=false;});
+  nosContrib.forEach(c=>{const m=mapM[c.id_estrutura];const a=m?m.ang:Math.random()*Math.PI*2;c.x=CX+Math.cos(a+((Math.random()-.5)*.5))*RC;c.y=CY+Math.sin(a+((Math.random()-.5)*.5))*RC;c.vx=0;c.vy=0;c.fixed=false;});
 }
 
-carregarContribuicoes();
+carregar();
 </script>
 </body></html>
