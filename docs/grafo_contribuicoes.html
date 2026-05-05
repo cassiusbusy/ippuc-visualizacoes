@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grafo Contribuições — Plano Diretor Curitiba</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+:root{
+  --v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;
+  --bordo:#CA6673;--bordol:#fdeef0;
+  --bg:#fff;--cd:#f3f3f3;--bd:#e2e4e8;--tx:#1a1a2e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;}
+.stripe{height:5px;display:flex;}.stripe div{flex:1;}
+.cnt{max-width:1280px;margin:0 auto;padding:20px;}
+.ptitle{font-size:1.1rem;font-weight:700;color:var(--azd);margin-bottom:4px;}
+.psub{font-size:.8rem;color:#888;margin-bottom:14px;}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--az);font-size:.78rem;font-weight:500;text-decoration:none;margin-bottom:12px;}
+.card{background:var(--cd);border-radius:10px;padding:16px;border:.5px solid var(--bd);margin-bottom:10px;}
+.card h3{font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;}
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:10px;}
+.kpi{background:var(--cd);border-radius:10px;padding:10px 12px;border:.5px solid var(--bd);}
+.knum{font-size:1.5rem;font-weight:900;}
+.klbl{font-size:.68rem;color:#888;margin-top:1px;}
+.filtros-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px;}
+.filtro-g{display:flex;flex-direction:column;gap:4px;}
+.filtro-g label{font-size:.68rem;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+select{border:1.5px solid var(--bd);border-radius:8px;padding:7px 12px;font-size:.8rem;
+        font-family:Roboto,sans-serif;background:#fff;color:var(--tx);outline:none;cursor:pointer;min-width:180px;}
+select:focus{border-color:var(--v);}
+.fontes{display:flex;gap:6px;flex-wrap:wrap;}
+.fbtn{padding:4px 10px;border-radius:14px;border:1.5px solid var(--bd);background:#fff;
+       cursor:pointer;font-family:Roboto,sans-serif;font-size:.71rem;font-weight:500;
+       color:#666;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.fbtn.ativo{font-weight:700;color:#fff;border-color:transparent;}
+.fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-bottom:10px;}
+.sl-g{display:flex;flex-direction:column;gap:3px;}
+.sl-top{display:flex;justify-content:space-between;font-size:.69rem;color:#666;}
+.sl-top b{color:var(--azd);}
+input[type=range]{width:100%;accent-color:var(--v);}
+#gsvg{width:100%;border-radius:8px;background:#f8f8f8;border:.5px solid var(--bd);
+       display:block;cursor:grab;user-select:none;}
+#gsvg:active{cursor:grabbing;}
+.ibox{background:#fff;border-radius:9px;padding:12px;border:.5px solid var(--bd);
+       margin-bottom:10px;display:none;position:relative;}
+.ibox.vis{display:block;}
+.ibox-close{position:absolute;top:8px;right:8px;background:var(--cd);border:none;
+             border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:.8rem;color:#555;}
+.mpill{border-radius:7px;padding:2px 8px;font-size:.67rem;font-weight:600;display:inline-block;margin:2px;}
+.legrow{display:flex;flex-wrap:wrap;gap:10px;font-size:.71rem;margin-top:8px;}
+.legi{display:flex;align-items:center;gap:4px;}
+.legdot{width:10px;height:10px;border-radius:50%;}
+.hint{font-size:.67rem;color:#aaa;margin-top:6px;line-height:1.5;}
+.info-bar{font-size:.72rem;color:var(--az);font-weight:500;padding:6px 10px;
+           background:var(--vl);border-radius:6px;margin-bottom:8px;display:none;}
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;
+          padding:30px;color:#888;font-size:.85rem;}
+.spinner{width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--bordo);
+          border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tooltip{position:fixed;background:rgba(26,26,46,.92);color:#fff;border-radius:8px;
+          padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:280px;
+          pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
+.tooltip.vis{display:block;}
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;
+      align-items:center;justify-content:center;padding:20px;}
+.mov.open{display:flex;}
+.mo{background:#fff;border-radius:12px;max-width:660px;width:100%;max-height:80vh;
+     overflow-y:auto;padding:24px;position:relative;border-top:4px solid var(--bordo);}
+.mc{position:absolute;top:10px;right:10px;background:var(--cd);border:none;
+     border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.8rem;}
+.mid{font-family:monospace;font-size:.7rem;color:#777;background:var(--cd);
+      padding:7px 10px;border-radius:6px;margin-bottom:10px;line-height:1.6;word-break:break-all;}
+.mbody{font-size:.85rem;line-height:1.75;color:#222;white-space:pre-wrap;}
+</style></head><body>
+
+<div class="stripe">
+  <div style="background:#00a859"></div><div style="background:#447EC0"></div>
+  <div style="background:#8E6CAD"></div><div style="background:#8EC899"></div>
+  <div style="background:#FDC533"></div><div style="background:#F07E31"></div>
+  <div style="background:#EA535E"></div><div style="background:#CA6673"></div>
+</div>
+
+<div class="cnt">
+  <a class="back" href="index.html">← Voltar</a>
+  <div class="ptitle">Grafo de Contribuições — Plano Diretor Curitiba</div>
+  <div class="psub">Estrutura da minuta em cinza · contribuições em bordo · tamanho do nó = contribuições recebidas</div>
+
+  <div class="krow">
+    <div class="kpi"><div class="knum" style="color:#666;" id="k-minuta">123</div><div class="klbl">Itens da Minuta</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--bordo);" id="k-contrib">—</div><div class="klbl">Contribuições</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--az);" id="k-arestas">—</div><div class="klbl">Conexões</div></div>
+    <div class="kpi"><div class="knum" style="color:#888;" id="k-vis">—</div><div class="klbl">Visíveis</div></div>
+  </div>
+
+  <div class="card" id="card-filtros" style="display:none;">
+    <h3>Filtros</h3>
+    <div class="filtros-row">
+      <div class="filtro-g">
+        <label>Título do Plano Diretor</label>
+        <select id="sel-titulo">
+          <option value="todos">Todos os títulos</option>
+        </select>
+      </div>
+      <div class="filtro-g">
+        <label>Nome da Oficina</label>
+        <select id="sel-oficina">
+          <option value="todas">Todas as oficinas</option>
+        </select>
+      </div>
+      <div class="filtro-g">
+        <label>Fonte</label>
+        <div class="fontes" id="fontes-btns"></div>
+      </div>
+    </div>
+    <div class="info-bar" id="info-bar"></div>
+  </div>
+
+  <div class="ibox" id="ibox">
+    <button class="ibox-close" onclick="document.getElementById('ibox').classList.remove('vis')">✕</button>
+    <div style="font-size:.88rem;font-weight:700;margin-bottom:7px;" id="ibox-titulo"></div>
+    <div id="ibox-pills" style="margin-bottom:7px;"></div>
+    <div style="font-size:.78rem;color:#333;line-height:1.5;" id="ibox-txt"></div>
+    <button id="ibox-ver" onclick="abrirModal(window._sel)"
+      style="margin-top:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--bordo);
+             background:var(--bordol);color:var(--bordo);cursor:pointer;font-size:.71rem;
+             font-family:Roboto,sans-serif;display:none;">Ver completo</button>
+  </div>
+
+  <div class="card">
+    <h3>Rede Circular</h3>
+    <div id="loading-msg" class="loading">
+      <div class="spinner"></div>
+      <span>Carregando contribuições do Sheets...</span>
+    </div>
+    <div class="sliders" id="sliders-panel" style="display:none;">
+      <div class="sl-g">
+        <div class="sl-top"><span>Rigidez hierárquica</span><b id="fval">0.03</b></div>
+        <input type="range" id="forca" min="1" max="10" value="3">
+      </div>
+      <div class="sl-g">
+        <div class="sl-top"><span>Atração contrib.</span><b id="dval">0.04</b></div>
+        <input type="range" id="dist" min="1" max="10" value="4">
+      </div>
+      <div class="sl-g">
+        <div class="sl-top"><span>Grau mín. minuta</span><b id="gval">0</b></div>
+        <input type="range" id="gmin" min="0" max="300" value="0">
+      </div>
+      <div class="sl-g">
+        <div class="sl-top"><span>Contribuições</span><b id="cval">Sim</b></div>
+        <input type="range" id="cshow" min="0" max="1" step="1" value="1">
+      </div>
+      <div class="sl-g" style="justify-content:flex-end;padding-top:14px;">
+        <button onclick="resetar()" style="padding:6px 12px;border-radius:7px;border:1px solid var(--bd);
+                background:#fff;cursor:pointer;font-family:Roboto,sans-serif;font-size:.72rem;color:var(--azd);">
+          Resetar</button>
+      </div>
+    </div>
+
+    <svg id="gsvg" viewBox="0 0 960 600" style="display:none;">
+      <g id="zg">
+        <g id="links-raiz"></g>
+        <g id="links-hier"></g>
+        <g id="links-contrib"></g>
+        <g id="nodes-contrib"></g>
+        <g id="nodes-minuta"></g>
+        <g id="node-raiz"></g>
+      </g>
+    </svg>
+
+    <div class="hint" id="hint" style="display:none;">
+      Raiz ao centro · Títulos → Capítulos → Seções → Subseções em anéis concêntricos · Contribuições na periferia
+    </div>
+    <div style="margin-top:10px;display:none;" id="legenda">
+      <div style="font-size:.69rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Legenda</div>
+      <div class="legrow">
+        <div class="legi"><div class="legdot" style="background:#444"></div><span>Raiz (PD)</span></div>
+        <div class="legi"><div class="legdot" style="background:#666"></div><span>Título</span></div>
+        <div class="legi"><div class="legdot" style="background:#888"></div><span>Capítulo</span></div>
+        <div class="legi"><div class="legdot" style="background:#aaa"></div><span>Seção</span></div>
+        <div class="legi"><div class="legdot" style="background:#ccc"></div><span>Subseção</span></div>
+        <div class="legi"><div class="legdot" style="background:#CA6673"></div><span>Contribuições</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+<div class="mov" id="modal">
+  <div class="mo">
+    <button class="mc" onclick="fm()">✕</button>
+    <div style="font-size:.92rem;font-weight:700;color:var(--azd);margin-bottom:8px;" id="mt"></div>
+    <div class="mid" id="mi"></div>
+    <div class="mbody" id="mb"></div>
+  </div>
+</div>
+
+<script>
+const MINUTA={"minuta": [{"id": "T1", "nivel": 1, "tipo": "TÍTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 210.0, "ang": -1.5707963267948966, "grau": 0, "pagerank": 0}, {"id": "T1-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS DISPOSIÇÕES PRELIMINARES", "titulo_pai": "T1", "px": 415.54, "py": 149.2, "ang": -1.9747, "grau": 0, "pagerank": 0}, {"id": "T1-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA VISÃO DE FUTURO DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 124.0, "ang": -1.5708, "grau": 0, "pagerank": 0}, {"id": "T1-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Princípios e da Visão 2050 de Desenvolvimento Urbano Sustentável", "titulo_pai": "T1", "px": 388.03, "py": 84.83, "ang": -1.9747, "grau": 0, "pagerank": 0}, {"id": "T1-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Objetivos e Diretrizes de Desenvolvimento Urbano Sustentável", "titulo_pai": "T1", "px": 576.68, "py": 73.8, "ang": -1.1669, "grau": 0, "pagerank": 0}, {"id": "T1-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS ESTRATÉGIAS DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 544.46, "py": 149.2, "ang": -1.1669, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Desenvolvimento orientado pela Sustentabilidade Urbana", "titulo_pai": "T1", "px": 479.99, "py": 66.0, "ang": -1.5708, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cidade Inteligente, Inovadora e Educadora", "titulo_pai": "T1", "px": 529.34, "py": 59.0, "ang": -1.3689, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mitigação, Adaptação e Resiliência às Mudanças Climáticas", "titulo_pai": "T1", "px": 571.96, "py": 84.83, "ang": -1.1669, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Liberdade Econômica e Prosperidade Compartilhada", "titulo_pai": "T1", "px": 620.09, "py": 97.78, "ang": -0.9649, "grau": 0, "pagerank": 0}, {"id": "T1-C3-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Inclusão, Identidade e Diversidade Sociocultural e Intergeracional", "titulo_pai": "T1", "px": 649.13, "py": 138.29, "ang": -0.763, "grau": 0, "pagerank": 0}, {"id": "T2", "nivel": 1, "tipo": "TÍTULO", "nome": "DA INTEGRAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 550.3648334221227, "py": 243.88591783271397, "ang": -0.6731984257692414, "grau": 0, "pagerank": 0}, {"id": "T2-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ALINHAMENTO MUNICIPAL COM A MACROESTRUTURAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 557.71, "py": 155.58, "ang": -1.0771, "grau": 0, "pagerank": 0}, {"id": "T2-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Dimensão Metropolitana no Ordenamento Territorial do município-polo da RMC", "titulo_pai": "T2", "px": 500.98, "py": 66.94, "ang": -1.481, "grau": 0, "pagerank": 0}, {"id": "T2-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das estratégias e dos Instrumentos de Integração Metropolitana", "titulo_pai": "T2", "px": 672.33, "py": 146.62, "ang": -0.6732, "grau": 0, "pagerank": 0}, {"id": "T2-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA ARTICULAÇÃO DAS POLÍTICAS PÚBLICAS MUNICIPAIS COM AS FUNÇÕES PÚBLICAS DE INTERESSE COMUM (FPICS)", "titulo_pai": "T2", "px": 649.66, "py": 253.18, "ang": -0.2693, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Planejamento Territorial e Uso do Solo", "titulo_pai": "T2", "px": 662.95, "py": 154.1, "ang": -0.6732, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Metropolitana", "titulo_pai": "T2", "px": 699.19, "py": 188.31, "ang": -0.4713, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Meio Ambiente e Recursos Hídricos", "titulo_pai": "T2", "px": 705.57, "py": 237.74, "ang": -0.2693, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Habitação de Interesse Social", "titulo_pai": "T2", "px": 725.44, "py": 283.45, "ang": -0.0673, "grau": 0, "pagerank": 0}, {"id": "T2-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Desenvolvimento Social e Econômico", "titulo_pai": "T2", "px": 711.88, "py": 331.41, "ang": 0.1346, "grau": 0, "pagerank": 0}, {"id": "T3", "nivel": 1, "tipo": "TÍTULO", "nome": "DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3", "px": 567.7435120963642, "py": 320.0268840560683, "ang": 0.2243994752564138, "grau": 0, "pagerank": 0}, {"id": "T3-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE ESTRUTURAÇÃO URBANO-AMBIENTAL", "titulo_pai": "T3", "px": 641.36, "py": 270.72, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estruturação Urbana", "titulo_pai": "T3", "px": 675.29, "py": 171.09, "ang": -0.5834, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação do Uso do Solo", "titulo_pai": "T3", "px": 641.97, "py": 54.64, "ang": -0.9873, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação Viária", "titulo_pai": "T3", "px": 735.39, "py": 131.44, "ang": -0.5834, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Estruturação do Transporte Coletivo", "titulo_pai": "T3", "px": 769.28, "py": 247.52, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estruturação Ambiental", "titulo_pai": "T3", "px": 722.05, "py": 256.08, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Rede Hídrica", "titulo_pai": "T3", "px": 725.37, "py": 138.04, "ang": -0.5834, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Do Sistema Municipal de Unidades de Conservação", "titulo_pai": "T3", "px": 778.33, "py": 368.1, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Integração Urbano-Ambiental", "titulo_pai": "T3", "px": 708.13, "py": 352.07, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Rede de Espaços e Equipamentos Públicos", "titulo_pai": "T3", "px": 778.28, "py": 263.09, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C1-S3-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Paisagem Ambiental-Cultural Urbana", "titulo_pai": "T3", "px": 727.56, "py": 479.86, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ORDENAMENTO TERRITORIAL", "titulo_pai": "T3", "px": 655.82, "py": 292.1, "ang": -0.0449, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Macrozoneamento Urbano-Ambiental", "titulo_pai": "T3", "px": 690.82, "py": 198.47, "ang": -0.4488, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Urbana Metropolitana (MM)", "titulo_pai": "T3", "px": 673.43, "py": 78.6, "ang": -0.8527, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Urbana Local (MU)", "titulo_pai": "T3", "px": 744.38, "py": 147.02, "ang": -0.5834, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona de Transição Urbano-Ambiental (MT)", "titulo_pai": "T3", "px": 759.61, "py": 209.15, "ang": -0.3142, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S1-SUB4", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macrozona Ambiental (MA)", "titulo_pai": "T3", "px": 785.69, "py": 286.27, "ang": -0.0449, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Macroestratégias da Política Territorial Integrada", "titulo_pai": "T3", "px": 715.92, "py": 230.3, "ang": -0.2873, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macroestratégias Urbanas", "titulo_pai": "T3", "px": 706.52, "py": 112.58, "ang": -0.6912, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Macroestratégias Ambientais", "titulo_pai": "T3", "px": 783.92, "py": 335.6, "ang": 0.1166, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Zoneamento Misto e Inteligente", "titulo_pai": "T3", "px": 712.15, "py": 270.67, "ang": -0.1257, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Setorização Especial para Sustentabilidade Urbana", "titulo_pai": "T3", "px": 725.84, "py": 308.83, "ang": 0.0359, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Parcelamento, Uso e Ocupação do Solo", "titulo_pai": "T3", "px": 709.45, "py": 345.9, "ang": 0.1975, "grau": 0, "pagerank": 0}, {"id": "T3-C2-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Posturas, Obras e Edificações Sustentáveis", "titulo_pai": "T3", "px": 710.32, "py": 386.43, "ang": 0.359, "grau": 0, "pagerank": 0}, {"id": "T3-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA MUNICIPAL DE HABITAÇÃO", "titulo_pai": "T3", "px": 643.34, "py": 314.7, "ang": 0.0898, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Habitacional", "titulo_pai": "T3", "px": 702.55, "py": 227.7, "ang": -0.3141, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Produção Habitacional Diversificada", "titulo_pai": "T3", "px": 725.75, "py": 288.97, "ang": -0.0448, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Habitação de Interesse Social", "titulo_pai": "T3", "px": 717.13, "py": 367.67, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Regularização Fundiária Urbana", "titulo_pai": "T3", "px": 696.62, "py": 416.58, "ang": 0.4937, "grau": 0, "pagerank": 0}, {"id": "T3-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE SANEAMENTO AMBIENTAL", "titulo_pai": "T3", "px": 651.59, "py": 339.16, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Saneamento Ambiental", "titulo_pai": "T3", "px": 710.24, "py": 258.22, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Sustentável das Bacias Hidrográficas", "titulo_pai": "T3", "px": 734.75, "py": 304.55, "ang": -0.0449, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Abastecimento e Uso Sustentável da Água", "titulo_pai": "T3", "px": 713.06, "py": 320.98, "ang": 0.0898, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Esgotamento Sanitário", "titulo_pai": "T3", "px": 719.83, "py": 354.74, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Drenagem Pluvial Urbana", "titulo_pai": "T3", "px": 699.08, "py": 382.22, "ang": 0.359, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Sustentável dos Resíduos Sólidos", "titulo_pai": "T3", "px": 705.63, "py": 432.16, "ang": 0.4937, "grau": 0, "pagerank": 0}, {"id": "T3-C4-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Zeladoria e Limpeza Urbana", "titulo_pai": "T3", "px": 669.31, "py": 437.54, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA INTEGRADO DE MOBILIDADE", "titulo_pai": "T3", "px": 633.54, "py": 357.63, "ang": 0.359, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Mobilidade Urbana Sustentável", "titulo_pai": "T3", "px": 713.76, "py": 289.49, "ang": -0.0449, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Ativa", "titulo_pai": "T3", "px": 725.01, "py": 322.04, "ang": 0.0897, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Mobilidade Pedonal", "titulo_pai": "T3", "px": 768.61, "py": 224.72, "ang": -0.3142, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Ciclomobilidade", "titulo_pai": "T3", "px": 749.47, "py": 444.99, "ang": 0.4936, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Rede Integrada de Transporte", "titulo_pai": "T3", "px": 695.14, "py": 374.58, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Sistemas Viário, de Circulação e Estacionamentos", "titulo_pai": "T3", "px": 719.32, "py": 402.02, "ang": 0.359, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Comercial", "titulo_pai": "T3", "px": 686.06, "py": 410.88, "ang": 0.4936, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S5-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Do Transporte Urbano de Cargas", "titulo_pai": "T3", "px": 738.91, "py": 439.3, "ang": 0.4936, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Viária", "titulo_pai": "T3", "px": 679.02, "py": 444.59, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Educação para o Trânsito", "titulo_pai": "T3", "px": 766.63, "py": 365.42, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Diretrizes de Engenharia", "titulo_pai": "T3", "px": 736.56, "py": 495.45, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S6-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Diretrizes Legais", "titulo_pai": "T3", "px": 630.8, "py": 552.38, "ang": 1.0322, "grau": 0, "pagerank": 0}, {"id": "T3-C5-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Estratégia de Descarbonização", "titulo_pai": "T3", "px": 649.14, "py": 461.7, "ang": 0.7629, "grau": 0, "pagerank": 0}, {"id": "T3-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO E REDUÇÃO DE RISCO DE DESASTRES", "titulo_pai": "T3", "px": 634.98, "py": 383.4, "ang": 0.4937, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política de Resiliência Urbana", "titulo_pai": "T3", "px": 722.06, "py": 336.57, "ang": 0.0898, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Gestão Integrada de Riscos", "titulo_pai": "T3", "px": 697.31, "py": 408.96, "ang": 0.3591, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Adaptação Climática Estruturante", "titulo_pai": "T3", "px": 678.31, "py": 453.14, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C6-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Resiliência Comunitária aos Desastres", "titulo_pai": "T3", "px": 633.37, "py": 492.33, "ang": 0.8976, "grau": 0, "pagerank": 0}, {"id": "T3-C7", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO PATRIMÔNIO AMBIENTAL NATURAL E CULTURAL", "titulo_pai": "T3", "px": 612.68, "py": 396.4, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política do Patrimônio Natural e Biodiversidade Urbana", "titulo_pai": "T3", "px": 674.13, "py": 352.07, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Arborização Urbana", "titulo_pai": "T3", "px": 756.28, "py": 270.02, "ang": -0.1795, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Das Soluções Baseadas na Natureza", "titulo_pai": "T3", "px": 787.33, "py": 383.68, "ang": 0.2244, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S1-SUB3", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Biodiversidade Urbana", "titulo_pai": "T3", "px": 717.85, "py": 472.81, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política do Patrimônio Cultural Material e Imaterial", "titulo_pai": "T3", "px": 606.18, "py": 511.18, "ang": 1.0322, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2-SUB1", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Proteção e Recuperação de Bens Culturais Materiais", "titulo_pai": "T3", "px": 726.86, "py": 488.39, "ang": 0.6283, "grau": 0, "pagerank": 0}, {"id": "T3-C7-S2-SUB2", "nivel": 4, "tipo": "SUBSEÇÃO", "nome": "Da Proteção e Fomento aos Bens Culturais Imateriais", "titulo_pai": "T3", "px": 521.09, "py": 603.23, "ang": 1.4361, "grau": 0, "pagerank": 0}, {"id": "T4", "nivel": 1, "tipo": "TÍTULO", "nome": "DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "titulo_pai": "T4", "px": 519.0495365205802, "py": 381.08719811121773, "ang": 1.121997376282069, "grau": 0, "pagerank": 0}, {"id": "T4-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO SOCIAL", "titulo_pai": "T4", "px": 603.5, "py": 407.9, "ang": 0.7181, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Desenvolvimento Social", "titulo_pai": "T4", "px": 702.55, "py": 372.31, "ang": 0.3142, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Alimentar e Nutricional", "titulo_pai": "T4", "px": 701.64, "py": 406.74, "ang": 0.4488, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Educação", "titulo_pai": "T4", "px": 675.29, "py": 428.91, "ang": 0.5835, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cultura", "titulo_pai": "T4", "px": 665.25, "py": 461.86, "ang": 0.7181, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Esporte, Lazer e Juventude", "titulo_pai": "T4", "px": 633.95, "py": 476.22, "ang": 0.8527, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Saúde", "titulo_pai": "T4", "px": 615.52, "py": 505.31, "ang": 0.9874, "grau": 0, "pagerank": 0}, {"id": "T4-C1-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Assistência Social", "titulo_pai": "T4", "px": 581.52, "py": 510.83, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO ECONÔMICO", "titulo_pai": "T4", "px": 556.36, "py": 458.57, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Desenvolvimento Econômico Sustentável", "titulo_pai": "T4", "px": 656.22, "py": 453.96, "ang": 0.7181, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Inovação", "titulo_pai": "T4", "px": 641.85, "py": 485.26, "ang": 0.8527, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Economia de Baixo Carbono e Circular", "titulo_pai": "T4", "px": 608.91, "py": 495.29, "ang": 0.9874, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Indústria e Logística", "titulo_pai": "T4", "px": 586.73, "py": 521.64, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Economia Criativa", "titulo_pai": "T4", "px": 552.31, "py": 522.55, "ang": 1.2566, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S6", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Turismo", "titulo_pai": "T4", "px": 523.92, "py": 542.05, "ang": 1.3913, "grau": 0, "pagerank": 0}, {"id": "T4-C2-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Empreendedorismo", "titulo_pai": "T4", "px": 490.5, "py": 533.76, "ang": 1.5259, "grau": 0, "pagerank": 0}, {"id": "T4-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA DEFESA SOCIAL", "titulo_pai": "T4", "px": 487.36, "py": 463.83, "ang": 1.5259, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Política Integrada de Defesa Social", "titulo_pai": "T4", "px": 590.53, "py": 526.42, "ang": 1.122, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Das Garantias e Direitos Humanos e Sociais", "titulo_pai": "T4", "px": 532.93, "py": 557.64, "ang": 1.3913, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Segurança Cidadã", "titulo_pai": "T4", "px": 459.03, "py": 533.06, "ang": 1.6605, "grau": 0, "pagerank": 0}, {"id": "T4-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Resposta às Calamidades", "titulo_pai": "T4", "px": 393.57, "py": 530.32, "ang": 1.9298, "grau": 0, "pagerank": 0}, {"id": "T5", "nivel": 1, "tipo": "TÍTULO", "nome": "DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T5", "px": 440.9504634794198, "py": 381.08719811121773, "ang": 2.019595277307724, "grau": 0, "pagerank": 0}, {"id": "T5-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DISPOSIÇÕES GERAIS E CLASSIFICAÇÃO DOS INSTRUMENTOS", "titulo_pai": "T5", "px": 472.64, "py": 463.83, "ang": 1.6157, "grau": 0, "pagerank": 0}, {"id": "T5-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE INDUÇÃO AO CUMPRIMENTO DA FUNÇÃO SOCIAL DA PROPRIEDADE", "titulo_pai": "T5", "px": 448.57, "py": 473.17, "ang": 1.7503, "grau": 0, "pagerank": 0}, {"id": "T5-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE OTIMIZAÇÃO DO USO DO SOLO E DA PRODUÇÃO IMOBILIÁRIA", "titulo_pai": "T5", "px": 429.32, "py": 455.97, "ang": 1.885, "grau": 0, "pagerank": 0}, {"id": "T5-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE PLANEJAMENTO E INTERVENÇÃO EM ÁREAS ESTRATÉGICAS", "titulo_pai": "T5", "px": 403.64, "py": 458.57, "ang": 2.0196, "grau": 0, "pagerank": 0}, {"id": "T5-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE GESTÃO URBANA E AMBIENTAL", "titulo_pai": "T5", "px": 389.65, "py": 436.87, "ang": 2.1542, "grau": 0, "pagerank": 0}, {"id": "T5-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE REGULARIZAÇÃO FUNDIÁRIA E PROVISÃO DE HABITAÇÃO", "titulo_pai": "T5", "px": 364.2, "py": 432.54, "ang": 2.2889, "grau": 0, "pagerank": 0}, {"id": "T5-C7", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS FISCAIS E ECONÔMICOS", "titulo_pai": "T5", "px": 356.5, "py": 407.9, "ang": 2.4235, "grau": 0, "pagerank": 0}, {"id": "T6", "nivel": 1, "tipo": "TÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 392.25648790363584, "py": 320.0268840560683, "ang": 2.9171931783333793, "grau": 0, "pagerank": 0}, {"id": "T6-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO MUNICIPAL", "titulo_pai": "T6", "px": 347.32, "py": 396.4, "ang": 2.5133, "grau": 0, "pagerank": 0}, {"id": "T6-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO DO PLANEJAMENTO INTEGRADO", "titulo_pai": "T6", "px": 319.76, "py": 372.79, "ang": 2.7152, "grau": 0, "pagerank": 0}, {"id": "T6-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 320.11, "py": 336.49, "ang": 2.9172, "grau": 0, "pagerank": 0}, {"id": "T6-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE GEOINFORMAÇÃO E MONITORAMENTO", "titulo_pai": "T6", "px": 304.04, "py": 303.95, "ang": 3.1192, "grau": 0, "pagerank": 0}, {"id": "T6-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA ESTRUTURAÇÃO E FINANCIAMENTO DE PLANOS, PROGRAMAS E PROJETOS ESTRATÉGICOS", "titulo_pai": "T6", "px": 318.64, "py": 270.72, "ang": 3.3211, "grau": 0, "pagerank": 0}, {"id": "T7", "nivel": 1, "tipo": "TÍTULO", "nome": "DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "titulo_pai": "T7", "px": 409.6351665778773, "py": 243.885917832714, "ang": 3.8147910793590345, "grau": 0, "pagerank": 0}], "arestas_hierarquicas": [{"source": "T1-C1", "target": "T1"}, {"source": "T1-C2", "target": "T1"}, {"source": "T1-C2-S1", "target": "T1-C2"}, {"source": "T1-C2-S2", "target": "T1-C2"}, {"source": "T1-C3", "target": "T1"}, {"source": "T1-C3-S1", "target": "T1-C3"}, {"source": "T1-C3-S2", "target": "T1-C3"}, {"source": "T1-C3-S3", "target": "T1-C3"}, {"source": "T1-C3-S4", "target": "T1-C3"}, {"source": "T1-C3-S5", "target": "T1-C3"}, {"source": "T2-C1", "target": "T2"}, {"source": "T2-C1-S1", "target": "T2-C1"}, {"source": "T2-C1-S2", "target": "T2-C1"}, {"source": "T2-C2", "target": "T2"}, {"source": "T2-C2-S1", "target": "T2-C2"}, {"source": "T2-C2-S2", "target": "T2-C2"}, {"source": "T2-C2-S3", "target": "T2-C2"}, {"source": "T2-C2-S4", "target": "T2-C2"}, {"source": "T2-C2-S5", "target": "T2-C2"}, {"source": "T3-C1", "target": "T3"}, {"source": "T3-C1-S1", "target": "T3-C1"}, {"source": "T3-C1-S1-SUB1", "target": "T3-C1-S1"}, {"source": "T3-C1-S1-SUB2", "target": "T3-C1-S1"}, {"source": "T3-C1-S1-SUB3", "target": "T3-C1-S1"}, {"source": "T3-C1-S2", "target": "T3-C1"}, {"source": "T3-C1-S2-SUB1", "target": "T3-C1-S2"}, {"source": "T3-C1-S2-SUB2", "target": "T3-C1-S2"}, {"source": "T3-C1-S3", "target": "T3-C1"}, {"source": "T3-C1-S3-SUB1", "target": "T3-C1-S3"}, {"source": "T3-C1-S3-SUB2", "target": "T3-C1-S3"}, {"source": "T3-C2", "target": "T3"}, {"source": "T3-C2-S1", "target": "T3-C2"}, {"source": "T3-C2-S1-SUB1", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB2", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB3", "target": "T3-C2-S1"}, {"source": "T3-C2-S1-SUB4", "target": "T3-C2-S1"}, {"source": "T3-C2-S2", "target": "T3-C2"}, {"source": "T3-C2-S2-SUB1", "target": "T3-C2-S2"}, {"source": "T3-C2-S2-SUB2", "target": "T3-C2-S2"}, {"source": "T3-C2-S3", "target": "T3-C2"}, {"source": "T3-C2-S4", "target": "T3-C2"}, {"source": "T3-C2-S5", "target": "T3-C2"}, {"source": "T3-C2-S6", "target": "T3-C2"}, {"source": "T3-C3", "target": "T3"}, {"source": "T3-C3-S1", "target": "T3-C3"}, {"source": "T3-C3-S2", "target": "T3-C3"}, {"source": "T3-C3-S3", "target": "T3-C3"}, {"source": "T3-C3-S4", "target": "T3-C3"}, {"source": "T3-C4", "target": "T3"}, {"source": "T3-C4-S1", "target": "T3-C4"}, {"source": "T3-C4-S2", "target": "T3-C4"}, {"source": "T3-C4-S3", "target": "T3-C4"}, {"source": "T3-C4-S4", "target": "T3-C4"}, {"source": "T3-C4-S5", "target": "T3-C4"}, {"source": "T3-C4-S6", "target": "T3-C4"}, {"source": "T3-C4-S7", "target": "T3-C4"}, {"source": "T3-C5", "target": "T3"}, {"source": "T3-C5-S1", "target": "T3-C5"}, {"source": "T3-C5-S2", "target": "T3-C5"}, {"source": "T3-C5-S2-SUB1", "target": "T3-C5-S2"}, {"source": "T3-C5-S2-SUB2", "target": "T3-C5-S2"}, {"source": "T3-C5-S3", "target": "T3-C5"}, {"source": "T3-C5-S4", "target": "T3-C5"}, {"source": "T3-C5-S5", "target": "T3-C5"}, {"source": "T3-C5-S5-SUB1", "target": "T3-C5-S5"}, {"source": "T3-C5-S6", "target": "T3-C5"}, {"source": "T3-C5-S6-SUB1", "target": "T3-C5-S6"}, {"source": "T3-C5-S6-SUB2", "target": "T3-C5-S6"}, {"source": "T3-C5-S6-SUB3", "target": "T3-C5-S6"}, {"source": "T3-C5-S7", "target": "T3-C5"}, {"source": "T3-C6", "target": "T3"}, {"source": "T3-C6-S1", "target": "T3-C6"}, {"source": "T3-C6-S2", "target": "T3-C6"}, {"source": "T3-C6-S3", "target": "T3-C6"}, {"source": "T3-C6-S4", "target": "T3-C6"}, {"source": "T3-C7", "target": "T3"}, {"source": "T3-C7-S1", "target": "T3-C7"}, {"source": "T3-C7-S1-SUB1", "target": "T3-C7-S1"}, {"source": "T3-C7-S1-SUB2", "target": "T3-C7-S1"}, {"source": "T3-C7-S1-SUB3", "target": "T3-C7-S1"}, {"source": "T3-C7-S2", "target": "T3-C7"}, {"source": "T3-C7-S2-SUB1", "target": "T3-C7-S2"}, {"source": "T3-C7-S2-SUB2", "target": "T3-C7-S2"}, {"source": "T4-C1", "target": "T4"}, {"source": "T4-C1-S1", "target": "T4-C1"}, {"source": "T4-C1-S2", "target": "T4-C1"}, {"source": "T4-C1-S3", "target": "T4-C1"}, {"source": "T4-C1-S4", "target": "T4-C1"}, {"source": "T4-C1-S5", "target": "T4-C1"}, {"source": "T4-C1-S6", "target": "T4-C1"}, {"source": "T4-C1-S7", "target": "T4-C1"}, {"source": "T4-C2", "target": "T4"}, {"source": "T4-C2-S1", "target": "T4-C2"}, {"source": "T4-C2-S2", "target": "T4-C2"}, {"source": "T4-C2-S3", "target": "T4-C2"}, {"source": "T4-C2-S4", "target": "T4-C2"}, {"source": "T4-C2-S5", "target": "T4-C2"}, {"source": "T4-C2-S6", "target": "T4-C2"}, {"source": "T4-C2-S7", "target": "T4-C2"}, {"source": "T4-C3", "target": "T4"}, {"source": "T4-C3-S1", "target": "T4-C3"}, {"source": "T4-C3-S2", "target": "T4-C3"}, {"source": "T4-C3-S3", "target": "T4-C3"}, {"source": "T4-C3-S4", "target": "T4-C3"}, {"source": "T5-C1", "target": "T5"}, {"source": "T5-C2", "target": "T5"}, {"source": "T5-C3", "target": "T5"}, {"source": "T5-C4", "target": "T5"}, {"source": "T5-C5", "target": "T5"}, {"source": "T5-C6", "target": "T5"}, {"source": "T5-C7", "target": "T5"}, {"source": "T6-C1", "target": "T6"}, {"source": "T6-C2", "target": "T6"}, {"source": "T6-C3", "target": "T6"}, {"source": "T6-C4", "target": "T6"}, {"source": "T6-C5", "target": "T6"}], "titulos": [{"id": "T1", "nivel": 1, "tipo": "TÍTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1", "px": 480.0, "py": 210.0, "ang": -1.5707963267948966, "grau": 0, "pagerank": 0}, {"id": "T2", "nivel": 1, "tipo": "TÍTULO", "nome": "DA INTEGRAÇÃO METROPOLITANA", "titulo_pai": "T2", "px": 550.3648334221227, "py": 243.88591783271397, "ang": -0.6731984257692414, "grau": 0, "pagerank": 0}, {"id": "T3", "nivel": 1, "tipo": "TÍTULO", "nome": "DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3", "px": 567.7435120963642, "py": 320.0268840560683, "ang": 0.2243994752564138, "grau": 0, "pagerank": 0}, {"id": "T4", "nivel": 1, "tipo": "TÍTULO", "nome": "DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "titulo_pai": "T4", "px": 519.0495365205802, "py": 381.08719811121773, "ang": 1.121997376282069, "grau": 0, "pagerank": 0}, {"id": "T5", "nivel": 1, "tipo": "TÍTULO", "nome": "DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T5", "px": 440.9504634794198, "py": 381.08719811121773, "ang": 2.019595277307724, "grau": 0, "pagerank": 0}, {"id": "T6", "nivel": 1, "tipo": "TÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6", "px": 392.25648790363584, "py": 320.0268840560683, "ang": 2.9171931783333793, "grau": 0, "pagerank": 0}, {"id": "T7", "nivel": 1, "tipo": "TÍTULO", "nome": "DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "titulo_pai": "T7", "px": 409.6351665778773, "py": 243.885917832714, "ang": 3.8147910793590345, "grau": 0, "pagerank": 0}], "grau_max": 251};
+const SHEET_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vSQDMje4w1kwNnGKcE4FyQgs8cVKa9CjpwOGa6QZ1FDxo3QITxIeJxFcgR5DPzI3Sgq_bosiHMI9qFZ/pub?output=csv';
+const CORES_NIVEL={0:'#444',1:'#666',2:'#888',3:'#aaa',4:'#ccc'};
+const COR_CONTRIB='#CA6673';
+const W=960,H=600,CX=480,CY=300;
+const RAIOS={0:0,1:90,2:170,3:240,4:300};
+const RAIO_CONTRIB=370;
+const DRAG_THR=4;
+
+let rigidez=0.03,atrContrib=0.04,gmin=0,showContrib=true;
+let tituloFiltro='todos',fontesFiltro=new Set(),oficinaFiltro='todas';
+let tr={k:1,tx:0,ty:0},drag=null,simInterval=null;
+window._sel=null;
+
+// Nó raiz
+const noRaiz={id:'ROOT',nivel:0,nome:'Plano Diretor',x:CX,y:CY,vx:0,vy:0,fixed:false};
+
+// Nós da minuta com posições pré-calculadas
+let nosMinuta=MINUTA.minuta.map(n=>({...n,x:n.px,y:n.py,vx:0,vy:0,fixed:false}));
+const mapMinuta={};
+nosMinuta.forEach(n=>mapMinuta[n.id]=n);
+const idsTitulo=nosMinuta.filter(n=>n.nivel===1).map(n=>n.id);
+
+let nosContrib=[], mapContrib={}, ARESTAS=[];
+let fontes_unicas=[], oficinas_unicas=[], grau_max=1;
+
+// ── Carregar CSV do Sheets ────────────────────────────────────────────────
+function parseCSV(txt){
+  const linhas=txt.split('\n');
+  const headers=linhas[0].split(',').map(h=>h.trim().replace(/"/g,''));
+  return linhas.slice(1).filter(l=>l.trim()).map(l=>{
+    // Parse respeitando campos com vírgula entre aspas
+    const vals=[]; let cur='', inQ=false;
+    for(const c of l){
+      if(c==='"'){inQ=!inQ;}
+      else if(c===','&&!inQ){vals.push(cur.trim());cur='';}
+      else cur+=c;
+    }
+    vals.push(cur.trim());
+    const obj={};
+    headers.forEach((h,i)=>obj[h]=vals[i]||'');
+    return obj;
+  });
+}
+
+async function carregarContribuicoes(){
+  try{
+    const resp=await fetch(SHEET_URL);
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const txt=await resp.text();
+    const rows=parseCSV(txt);
+
+    const ids_minuta=new Set(Object.keys(mapMinuta));
+    const arestas=[];
+    const contribs=[];
+
+    rows.forEach((r,idx)=>{
+      let cod=(r['código']||r['codigo']||'').trim();
+      if(!cod||cod==='nan')return;
+      if(!ids_minuta.has(cod)){
+        const partes=cod.split('-');
+        const pai=partes.slice(0,-1).join('-');
+        if(ids_minuta.has(pai))cod=pai; else return;
+      }
+      const fonte=(r['fonte']||'outros').trim();
+      const oficina=(r['nome Oficina']||r['nome_oficina']||'').trim();
+      const titulo_pai=cod.split('-')[0];
+      const node_id='c_'+idx;
+      const ang=mapMinuta[cod]?mapMinuta[cod].ang:Math.random()*Math.PI*2;
+      const jitter=(Math.random()-.5)*.4;
+      const rv=RAIO_CONTRIB+(Math.random()-.5)*30;
+      contribs.push({
+        id:node_id, fonte, nome_oficina:oficina,
+        texto:(r['Propostas']||'').slice(0,150),
+        texto_completo:r['Propostas']||'',
+        id_estrutura:cod, titulo_pai,
+        explicacao:r['explicação']||'',
+        similaridade:r['similaridade']||'',
+        x:CX+Math.cos(ang+jitter)*rv, y:CY+Math.sin(ang+jitter)*rv,
+        vx:0,vy:0,fixed:false
+      });
+      arestas.push({source:node_id,target:cod});
+    });
+
+    // Calcular grau
+    const grauCount={};
+    arestas.forEach(a=>grauCount[a.target]=(grauCount[a.target]||0)+1);
+    nosMinuta.forEach(n=>{n.grau=grauCount[n.id]||0;});
+    grau_max=Math.max(...nosMinuta.map(n=>n.grau),1);
+
+    nosContrib=contribs;
+    ARESTAS=arestas;
+    nosContrib.forEach(c=>mapContrib[c.id]=c);
+
+    fontes_unicas=[...new Set(nosContrib.map(c=>c.fonte))].sort();
+    oficinas_unicas=[...new Set(nosContrib.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'))].sort();
+    fontesFiltro=new Set(fontes_unicas);
+
+    // Atualizar KPIs
+    document.getElementById('k-contrib').textContent=nosContrib.length;
+    document.getElementById('k-arestas').textContent=arestas.length;
+    document.getElementById('gmin').max=grau_max;
+
+    // Popular selects
+    const selTitulo=document.getElementById('sel-titulo');
+    MINUTA.titulos.forEach(t=>{
+      const o=document.createElement('option');
+      o.value=t.id;o.textContent=t.id+' — '+t.nome.slice(0,50);
+      selTitulo.appendChild(o);
+    });
+
+    const selOficina=document.getElementById('sel-oficina');
+    oficinas_unicas.forEach(o=>{
+      const opt=document.createElement('option');
+      opt.value=o;opt.textContent=o;selOficina.appendChild(opt);
+    });
+
+    initFontes();
+
+    // Mostrar UI
+    document.getElementById('loading-msg').style.display='none';
+    document.getElementById('gsvg').style.display='block';
+    document.getElementById('sliders-panel').style.display='grid';
+    document.getElementById('hint').style.display='block';
+    document.getElementById('legenda').style.display='block';
+    document.getElementById('card-filtros').style.display='block';
+
+    simInterval=setInterval(tick,30);
+
+  }catch(e){
+    document.getElementById('loading-msg').innerHTML=
+      `<span style="color:var(--bordo)">Erro ao carregar: ${e.message}. Verifique se a planilha está publicada na web.</span>`;
+  }
+}
+
+function rMinuta(n){
+  if(n.nivel===0)return 20;
+  const base=n.nivel===1?15:n.nivel===2?11:n.nivel===3?8:6;
+  return base+Math.min((n.grau||0)/grau_max*14,14);
+}
+
+function minutaVisiveis(){
+  return nosMinuta.filter(n=>{
+    if((n.grau||0)<gmin)return false;
+    if(tituloFiltro==='todos')return true;
+    return n.titulo_pai===tituloFiltro;
+  });
+}
+function contribVisiveis(){
+  if(!showContrib)return[];
+  return nosContrib.filter(c=>{
+    if(!fontesFiltro.has(c.fonte))return false;
+    if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return false;
+    if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return false;
+    return true;
+  });
+}
+
+function tick(){
+  const mv=minutaVisiveis(),cv=contribVisiveis(),mvSet=new Set(mv.map(n=>n.id));
+  mv.forEach(n=>{
+    if(n.fixed)return;
+    let tx=n.px,ty=n.py;
+    if(tituloFiltro!=='todos'){
+      const r={1:60,2:120,3:180,4:230}[n.nivel]||60;
+      tx=CX+Math.cos(n.ang)*r;ty=CY+Math.sin(n.ang)*r;
+    }
+    n.vx+=(tx-n.x)*rigidez;n.vy+=(ty-n.y)*rigidez;
+    n.vx*=0.6;n.vy*=0.6;
+    n.x=Math.max(15,Math.min(W-15,n.x+n.vx));
+    n.y=Math.max(15,Math.min(H-15,n.y+n.vy));
+  });
+  ARESTAS.forEach(a=>{
+    const c=mapContrib[a.source],m=mapMinuta[a.target];
+    if(!c||!m||!fontesFiltro.has(c.fonte)||!showContrib||!mvSet.has(m.id))return;
+    if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return;
+    if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return;
+    const dx=m.x-c.x,dy=m.y-c.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+    const f=(d-Math.max(20,RAIO_CONTRIB-RAIOS[m.nivel]-20))*atrContrib;
+    c.vx+=dx/d*f;c.vy+=dy/d*f;
+  });
+  cv.forEach(c=>{if(c.fixed)return;c.vx*=0.55;c.vy*=0.55;c.x=Math.max(5,Math.min(W-5,c.x+c.vx));c.y=Math.max(5,Math.min(H-5,c.y+c.vy));});
+  render(mv,cv,mvSet);
+}
+
+function render(mv,cv,mvSet){
+  let rL='';
+  idsTitulo.forEach(tid=>{
+    if(tituloFiltro!=='todos'&&tid!==tituloFiltro)return;
+    const t=mapMinuta[tid];if(!t||!mvSet.has(tid))return;
+    rL+=`<line x1="${noRaiz.x.toFixed(1)}" y1="${noRaiz.y.toFixed(1)}" x2="${t.x.toFixed(1)}" y2="${t.y.toFixed(1)}" stroke="#bbb" stroke-width="1" stroke-opacity=".5" pointer-events="none"/>`;
+  });
+  document.getElementById('links-raiz').innerHTML=rL;
+
+  let hL='';
+  MINUTA.arestas_hierarquicas.forEach(a=>{
+    const filho=mapMinuta[a.source],pai=mapMinuta[a.target];
+    if(!filho||!pai||!mvSet.has(filho.id)||!mvSet.has(pai.id))return;
+    hL+=`<line x1="${filho.x.toFixed(1)}" y1="${filho.y.toFixed(1)}" x2="${pai.x.toFixed(1)}" y2="${pai.y.toFixed(1)}" stroke="#ddd" stroke-width=".8" stroke-opacity=".6" pointer-events="none"/>`;
+  });
+  document.getElementById('links-hier').innerHTML=hL;
+
+  let cL='';
+  if(showContrib){
+    ARESTAS.forEach(a=>{
+      const c=mapContrib[a.source],m=mapMinuta[a.target];
+      if(!c||!m||!fontesFiltro.has(c.fonte)||!mvSet.has(m.id))return;
+      if(tituloFiltro!=='todos'&&c.titulo_pai!==tituloFiltro)return;
+      if(oficinaFiltro!=='todas'&&c.nome_oficina!==oficinaFiltro)return;
+      cL+=`<line x1="${c.x.toFixed(1)}" y1="${c.y.toFixed(1)}" x2="${m.x.toFixed(1)}" y2="${m.y.toFixed(1)}" stroke="#CA6673" stroke-width=".3" stroke-opacity=".12" pointer-events="none"/>`;
+    });
+  }
+  document.getElementById('links-contrib').innerHTML=cL;
+
+  let cHTML='';
+  if(showContrib)cv.forEach(c=>{
+    cHTML+=`<circle data-type="contrib" data-id="${c.id}" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3" fill="#CA6673" fill-opacity=".6" style="cursor:pointer"/>`;
+  });
+  document.getElementById('nodes-contrib').innerHTML=cHTML;
+
+  let mHTML='';
+  mv.forEach(n=>{
+    const cor=CORES_NIVEL[n.nivel],r=rMinuta(n);
+    mHTML+=`<g data-type="minuta" data-id="${n.id}" style="cursor:pointer">
+      <circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${r}" fill="${cor}" stroke="#fff" stroke-width="${n.nivel<=1?2:1}"/>
+      <text x="${n.x.toFixed(1)}" y="${n.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle"
+        font-size="${Math.max(6,Math.min(r*.6,11)).toFixed(1)}" fill="white" font-family="Roboto,sans-serif"
+        font-weight="700" pointer-events="none">${n.grau||0}</text>
+    </g>`;
+  });
+  document.getElementById('nodes-minuta').innerHTML=mHTML;
+
+  document.getElementById('node-raiz').innerHTML=`
+    <g style="cursor:pointer" onclick="mostrarRaiz()">
+      <circle cx="${noRaiz.x.toFixed(1)}" cy="${noRaiz.y.toFixed(1)}" r="20" fill="#444" stroke="#fff" stroke-width="2"/>
+      <text x="${noRaiz.x.toFixed(1)}" y="${noRaiz.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle"
+        font-size="7" fill="white" font-family="Roboto,sans-serif" font-weight="700" pointer-events="none">PD</text>
+    </g>`;
+
+  document.querySelectorAll('[data-type="minuta"]').forEach(el=>{
+    const id=el.dataset.id;
+    el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'minuta',id,startX:e.clientX,startY:e.clientY,moved:false};});
+  });
+  document.querySelectorAll('[data-type="contrib"]').forEach(el=>{
+    const id=el.dataset.id;
+    el.addEventListener('mousedown',e=>{e.stopPropagation();drag={type:'contrib',id,startX:e.clientX,startY:e.clientY,moved:false};});
+  });
+
+  const tot=mv.length+1+(showContrib?cv.length:0);
+  document.getElementById('k-vis').textContent=tot;
+  const bar=document.getElementById('info-bar');
+  const filtroAtivo=tituloFiltro!=='todos'||oficinaFiltro!=='todas'||fontesFiltro.size<fontes_unicas.length;
+  if(filtroAtivo){
+    const t=MINUTA.titulos.find(x=>x.id===tituloFiltro);
+    const partes=[];
+    if(tituloFiltro!=='todos')partes.push(t?t.id+' — '+t.nome.slice(0,40):tituloFiltro);
+    if(oficinaFiltro!=='todas')partes.push('Oficina: '+oficinaFiltro);
+    if(fontesFiltro.size<fontes_unicas.length)partes.push('Fontes: '+[...fontesFiltro].join(', '));
+    partes.push(mv.length+' itens · '+(showContrib?cv.length:0)+' contribuições');
+    bar.style.display='block';bar.textContent=partes.join(' · ');
+  }else{bar.style.display='none';}
+}
+
+// ── SVG eventos ────────────────────────────────────────────────────────────
+const svg=document.getElementById('gsvg');
+const tooltip=document.getElementById('tooltip');
+
+svg.addEventListener('mousemove',e=>{
+  if(!drag){
+    const el=document.elementFromPoint(e.clientX,e.clientY);
+    const g=el?.closest('[data-type]');
+    if(g){
+      const tipo=g.dataset.type,id=g.dataset.id;let txt='';
+      if(tipo==='minuta'){const n=mapMinuta[id];if(n)txt=`<strong style="color:#ddd">${n.tipo}</strong><br>${n.nome}<br><span style="color:#aaa;font-size:.67rem">${n.grau||0} contribuições · ${n.id}</span>`;}
+      else if(tipo==='contrib'){const c=mapContrib[id];if(c){const of=c.nome_oficina&&c.nome_oficina!=='nan'?`<br><span style="color:#f0b8c0">${c.nome_oficina}</span>`:'';txt=`<span style="color:#e8a0a8;font-weight:600">${c.fonte}</span>${of}<br>${c.texto.slice(0,120)}${c.texto.length>120?'...':''}`;}}
+      if(txt){tooltip.innerHTML=txt;tooltip.style.left=(e.clientX+14)+'px';tooltip.style.top=(e.clientY-10)+'px';tooltip.classList.add('vis');}
+    }else tooltip.classList.remove('vis');
+  }else tooltip.classList.remove('vis');
+  if(!drag)return;
+  const dx=e.clientX-drag.startX,dy=e.clientY-drag.startY;
+  if(Math.sqrt(dx*dx+dy*dy)>DRAG_THR)drag.moved=true;
+  if(!drag.moved)return;
+  if(drag.type==='canvas'){tr.tx=drag.ox+dx;tr.ty=drag.oy+dy;document.getElementById('zg').setAttribute('transform',`translate(${tr.tx.toFixed(1)},${tr.ty.toFixed(1)}) scale(${tr.k})`);}
+  else if(drag.type==='minuta'){const n=mapMinuta[drag.id];if(!n)return;const r=svg.getBoundingClientRect();n.x=(e.clientX-r.left)/tr.k-tr.tx/tr.k;n.y=(e.clientY-r.top)/tr.k-tr.ty/tr.k;n.fixed=true;}
+  else if(drag.type==='contrib'){const c=mapContrib[drag.id];if(!c)return;const r=svg.getBoundingClientRect();c.x=(e.clientX-r.left)/tr.k-tr.tx/tr.k;c.y=(e.clientY-r.top)/tr.k-tr.ty/tr.k;c.fixed=true;}
+});
+svg.addEventListener('mousedown',e=>{if(drag)return;drag={type:'canvas',startX:e.clientX,startY:e.clientY,ox:tr.tx,oy:tr.ty,moved:false};});
+svg.addEventListener('mouseup',e=>{
+  if(drag&&!drag.moved){if(drag.type==='minuta')mostrarMinuta(drag.id);else if(drag.type==='contrib')mostrarContrib(drag.id);}
+  drag=null;
+});
+svg.addEventListener('mouseleave',()=>{drag=null;tooltip.classList.remove('vis');});
+svg.addEventListener('wheel',e=>{e.preventDefault();tr.k=Math.max(.1,Math.min(8,tr.k*(e.deltaY<0?1.12:.9)));document.getElementById('zg').setAttribute('transform',`translate(${tr.tx.toFixed(1)},${tr.ty.toFixed(1)}) scale(${tr.k})`);},{passive:false});
+
+function mostrarRaiz(){
+  document.getElementById('ibox-titulo').innerHTML='<span style="color:#444;font-weight:700">Plano Diretor de Curitiba</span>';
+  document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:#f3f3f3;color:#444">123 itens</span><span class="mpill" style="background:var(--bordol);color:var(--bordo)">${nosContrib.length} contribuições</span>`;
+  document.getElementById('ibox-txt').textContent='Nó central. Todos os títulos estão conectados a este ponto.';
+  document.getElementById('ibox-ver').style.display='none';
+  document.getElementById('ibox').classList.add('vis');
+}
+function mostrarMinuta(id){
+  const n=mapMinuta[id];if(!n)return;window._sel={type:'minuta',id};
+  const cor=CORES_NIVEL[n.nivel];
+  const cv=nosContrib.filter(c=>c.id_estrutura===id&&fontesFiltro.has(c.fonte));
+  document.getElementById('ibox-titulo').innerHTML=`<span style="color:${cor}">${n.tipo}</span> · ${n.nome}`;
+  document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:#f3f3f3;color:#444">ID: ${n.id}</span><span class="mpill" style="background:var(--bordol);color:var(--bordo)">${n.grau||0} contribuições</span>`;
+  const oficinas=[...new Set(cv.map(c=>c.nome_oficina).filter(o=>o&&o!=='nan'))];
+  document.getElementById('ibox-txt').textContent=cv.length>0?`Visíveis: ${cv.length} · Fontes: ${[...new Set(cv.map(c=>c.fonte))].join(', ')}${oficinas.length?' · Oficinas: '+oficinas.join(', '):''}` :'Nenhuma contribuição com os filtros atuais.';
+  document.getElementById('ibox-ver').style.display='none';
+  document.getElementById('ibox').classList.add('vis');
+}
+function mostrarContrib(id){
+  const c=mapContrib[id];if(!c)return;window._sel={type:'contrib',id};
+  const oficina=c.nome_oficina&&c.nome_oficina!=='nan'?c.nome_oficina:'';
+  document.getElementById('ibox-titulo').innerHTML=`<span style="color:var(--bordo)">${c.fonte}</span>${oficina?' · '+oficina:''}`;
+  document.getElementById('ibox-pills').innerHTML=`<span class="mpill" style="background:var(--bordol);color:var(--bordo)">${c.fonte}</span>${oficina?`<span class="mpill" style="background:#fff8e1;color:#e65100">${oficina}</span>`:''}<span class="mpill" style="background:#eef2ff;color:var(--az)">Classificada em: ${c.id_estrutura}</span>`;
+  document.getElementById('ibox-txt').textContent=c.texto;
+  document.getElementById('ibox-ver').style.display=c.texto_completo?'inline-block':'none';
+  document.getElementById('ibox').classList.add('vis');
+}
+function abrirModal(sel){
+  if(!sel)return;
+  let titulo,meta,corpo;
+  if(sel.type==='minuta'){const n=mapMinuta[sel.id];titulo=n.tipo+': '+n.nome;meta=`ID: ${n.id} | Nível: ${n.nivel} | Grau: ${n.grau||0}`;corpo='Contribuições classificadas: '+(n.grau||0);}
+  else{const c=mapContrib[sel.id];titulo='Contribuição — '+c.fonte+(c.nome_oficina?' / '+c.nome_oficina:'');meta=`Fonte: ${c.fonte}${c.nome_oficina?' | Oficina: '+c.nome_oficina:''} | Classificada em: ${c.id_estrutura}`;corpo=c.texto_completo||c.texto;}
+  document.getElementById('mt').textContent=titulo;document.getElementById('mi').textContent=meta;document.getElementById('mb').textContent=corpo;
+  document.getElementById('modal').classList.add('open');
+}
+function fm(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))fm();});
+
+function initFontes(){
+  const el=document.getElementById('fontes-btns');el.innerHTML='';
+  fontes_unicas.forEach(f=>{
+    const btn=document.createElement('button');btn.className='fbtn ativo';
+    btn.style.background='#CA6673';btn.style.color='#fff';
+    btn.innerHTML=`<div class="fdot" style="background:#fff"></div>${f}`;
+    btn.onclick=()=>{
+      if(fontesFiltro.has(f)){fontesFiltro.delete(f);btn.classList.remove('ativo');btn.style.background='#fff';btn.style.color='#666';btn.style.borderColor='#CA6673';}
+      else{fontesFiltro.add(f);btn.classList.add('ativo');btn.style.background='#CA6673';btn.style.color='#fff';btn.style.borderColor='transparent';}
+    };
+    el.appendChild(btn);
+  });
+}
+
+document.getElementById('forca').addEventListener('input',e=>{rigidez=parseInt(e.target.value)/100;document.getElementById('fval').textContent=rigidez.toFixed(2);});
+document.getElementById('dist').addEventListener('input',e=>{atrContrib=parseInt(e.target.value)/100;document.getElementById('dval').textContent=atrContrib.toFixed(2);});
+document.getElementById('gmin').addEventListener('input',e=>{gmin=parseInt(e.target.value);document.getElementById('gval').textContent=e.target.value;});
+document.getElementById('cshow').addEventListener('input',e=>{showContrib=parseInt(e.target.value)===1;document.getElementById('cval').textContent=showContrib?'Sim':'Não';});
+document.getElementById('sel-titulo').addEventListener('change',e=>{tituloFiltro=e.target.value;nosMinuta.forEach(n=>{n.vx=0;n.vy=0;n.fixed=false;});});
+document.getElementById('sel-oficina').addEventListener('change',e=>{oficinaFiltro=e.target.value;});
+
+function resetar(){
+  nosMinuta.forEach(n=>{n.x=n.px;n.y=n.py;n.vx=0;n.vy=0;n.fixed=false;});
+  nosContrib.forEach(c=>{const m=mapMinuta[c.id_estrutura];const ang=m?m.ang:Math.random()*Math.PI*2;c.x=CX+Math.cos(ang+((Math.random()-.5)*.4))*RAIO_CONTRIB;c.y=CY+Math.sin(ang+((Math.random()-.5)*.4))*RAIO_CONTRIB;c.vx=0;c.vy=0;c.fixed=false;});
+}
+
+// Iniciar
+carregarContribuicoes();
+</script>
+</body></html>
