@@ -548,8 +548,7 @@ function initFontes(){
   });
 }
 
-document.getElementById('forca').addEventListener('input',e=>{rigidez=parseInt(e.target.value)/100;document.getElementById('fval').textContent=rigidez.toFixed(2);});
-document.getElementById('dist').addEventListener('input',e=>{atrContrib=parseInt(e.target.value)/100;document.getElementById('dval').textContent=atrContrib.toFixed(2);});
+
 document.getElementById('gmin').addEventListener('input',e=>{gmin=parseInt(e.target.value);document.getElementById('gval').textContent=e.target.value;});
 document.getElementById('cshow').addEventListener('input',e=>{showContrib=parseInt(e.target.value)===1;document.getElementById('cval').textContent=showContrib?'Sim':'Não';});
 document.getElementById('sel-titulo').addEventListener('change',e=>{tituloFiltro=e.target.value;nosMinuta.forEach(n=>{n.vx=0;n.vy=0;n.fixed=false;});});
