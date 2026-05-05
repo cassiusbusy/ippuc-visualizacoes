@@ -79,27 +79,27 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
   <!-- 1. KPIs gerais -->
   <div class="krow">
     <div class="kpi">
-      <div class="knum" style="color:var(--az);">47</div>
+      <div class="knum" style="color:var(--az);">36</div>
       <div class="klbl">Votantes</div>
     </div>
     <div class="kpi">
-      <div class="knum" style="color:var(--azd);">311</div>
+      <div class="knum" style="color:var(--azd);">155</div>
       <div class="klbl">Votos</div>
     </div>
     <div class="kpi">
-      <div class="knum" style="color:var(--la);">61</div>
+      <div class="knum" style="color:var(--la);">50</div>
       <div class="klbl">Precisa de Ajuste</div>
     </div>
     <div class="kpi">
-      <div class="knum" style="color:var(--v);">250</div>
+      <div class="knum" style="color:var(--v);">105</div>
       <div class="klbl">Adequado</div>
     </div>
     <div class="kpi">
-      <div class="knum" style="color:var(--azd);">42</div>
+      <div class="knum" style="color:var(--azd);">37</div>
       <div class="klbl">Contribuicoes recebidas</div>
     </div>
     <div class="kpi">
-      <div class="knum" style="color:var(--v);">34</div>
+      <div class="knum" style="color:var(--v);">27</div>
       <div class="klbl">Contribuicoes analisadas</div>
     </div>
   </div>
@@ -112,12 +112,12 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
         <span style="font-size:.7rem;color:var(--az);font-weight:500;">Ver detalhe →</span>
       </div>
       <div class="vbar">
-        <div class="vbar-ad" style="width:80.4%"></div>
-        <div class="vbar-pr" style="width:19.6%"></div>
+        <div class="vbar-ad" style="width:67.7%"></div>
+        <div class="vbar-pr" style="width:32.3%"></div>
       </div>
       <div class="vbar-leg">
-        <span style="color:var(--v);font-weight:600;">Adequado 80.4%</span>
-        <span style="color:var(--la);font-weight:600;">Precisa de Ajuste 19.6%</span>
+        <span style="color:var(--v);font-weight:600;">Adequado 67.7%</span>
+        <span style="color:var(--la);font-weight:600;">Precisa de Ajuste 32.3%</span>
       </div>
     </div>
   </a>
@@ -152,6 +152,30 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
       <div class="ncb">Cosine Similarity</div>
     </a>
   </div>
+
+  
+  <!-- Box contribuições -->
+  <a href="grafo_contribuicoes.html" style="text-decoration:none;display:block;margin-top:14px;">
+    <div style="background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
+                padding:18px 24px;transition:border-color .15s;display:flex;
+                align-items:center;justify-content:space-between;gap:16px;"
+         onmouseover="this.style.borderColor='var(--v)'"
+         onmouseout="this.style.borderColor='var(--bd)'">
+      <div>
+        <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;
+                    letter-spacing:.08em;margin-bottom:5px;">Visualização Interativa</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">
+          Confira todas as contribuições
+        </div>
+        <div style="font-size:.78rem;color:#666;">
+          Grafo de rede conectando todas as contribuições à estrutura do Plano Diretor — por fonte, nível hierárquico e similaridade.
+        </div>
+      </div>
+      <div style="flex-shrink:0;font-size:.78rem;color:var(--az);font-weight:500;white-space:nowrap;">
+        Ver grafo →
+      </div>
+    </div>
+  </a>
 
   <footer>
     IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Analise gerada automaticamente
