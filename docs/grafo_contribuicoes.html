@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -148,33 +149,47 @@ let nM=MINUTA.minuta.map(n=>({...n,x:n.px,y:n.py,vx:0,vy:0,fixed:false}));
 const mM={};nM.forEach(n=>mM[n.id]=n);
 const tIds=nM.filter(n=>n.nivel===1).map(n=>n.id);
 
-function nc(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');}
+function nc(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
 
 function parseCSV(txt){
-  var rows=[],cur='',inQ=false,fields=[],i=0;
-  while(i<txt.length){
-    var ch=txt[i];
-    if(ch==='"'){if(inQ&&txt[i+1]==='"'){cur+='"';i+=2;continue;}inQ=!inQ;i++;continue;}
-    if(ch===','&&!inQ){fields.push(cur);cur='';i++;continue;}
-    if(ch==='
-'&&!inQ){fields.push(cur);cur='';rows.push(fields);fields=[];i++;continue;}
-    if(ch==='
-'){i++;continue;}
-    cur+=ch;i++;
+  // Parser robusto: suporta campos com \n e vírgulas dentro de aspas
+  const campos = [];
+  let cur = '', inQ = false, i = 0;
+  while(i < txt.length){
+    const ch = txt[i];
+    if(ch === '"'){
+      if(inQ && txt[i+1] === '"'){cur += '"'; i+=2; continue;} // "" escapa aspas
+      inQ = !inQ; i++; continue;
+    }
+    if(ch === ',' && !inQ){campos.push(cur); cur=''; i++; continue;}
+    if(ch === '\n' && !inQ){campos.push(cur); cur=''; campos.push('\x00ROW\x00'); i++; continue;}
+    if(ch === '\r'){i++; continue;}
+    cur += ch; i++;
   }
-  if(cur||fields.length){fields.push(cur);rows.push(fields);}
-  if(rows.length<2)return[];
-  var raw=rows[0].map(function(h){return h.trim().replace(/^"|"$/g,'');});
-  var norm=raw.map(nc);
-  var iC=norm.findIndex(function(h){return h.includes('cdigo')||h==='codigo';});
-  var iP=norm.findIndex(function(h){return h.includes('proposta');});
-  var iF=norm.findIndex(function(h){return h==='fonte';});
-  var iO=norm.findIndex(function(h){return h.includes('oficina');});
-  var iE=norm.findIndex(function(h){return h.includes('explic');});
-  var iS=norm.findIndex(function(h){return h.includes('similar');});
+  campos.push(cur);
+
+  // Separar em linhas usando marcador
+  const linhas = [];
+  let row = [];
+  for(const f of campos){
+    if(f === '\x00ROW\x00'){linhas.push(row); row=[];}
+    else row.push(f.trim());
+  }
+  if(row.length>0)linhas.push(row);
+
+  if(linhas.length < 2) return [];
+  const raw = linhas[0];
+  const norm = raw.map(nc);
+  const iC = norm.findIndex(h=>h.includes('cdigo')||h==='codigo');
+  const iP = norm.findIndex(h=>h.includes('proposta'));
+  const iF = norm.findIndex(h=>h==='fonte');
+  const iO = norm.findIndex(h=>h.includes('oficina'));
+  const iE = norm.findIndex(h=>h.includes('explic'));
+  const iS = norm.findIndex(h=>h.includes('similar'));
   console.log('Headers:',raw,'iC:',iC,'iP:',iP,'iF:',iF,'iO:',iO);
-  return rows.slice(1).filter(function(r){return r.length>1;}).map(function(v){
-    function g(idx){return idx>=0?(v[idx]||'').trim().replace(/^"|"$/g,''):'';};
+
+  return linhas.slice(1).filter(r=>r.length>1).map(v=>{
+    const g=i=>i>=0?(v[i]||'').trim():'';
     return{codigo:g(iC),proposta:g(iP),fonte:g(iF)||'outros',oficina:g(iO),explicacao:g(iE),similaridade:g(iS)};
   });
 }
