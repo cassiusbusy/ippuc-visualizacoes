@@ -20,7 +20,7 @@ select:focus{border-color:var(--v);}
 .spinner{width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--bordo);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{text-align:center;padding:60px;color:#aaa;font-size:.85rem;display:none;}
-#sankey-wrap{overflow-x:auto;margin-top:4px;}
+#sankey-wrap{overflow-x:auto;margin-top:4px;display:flex;justify-content:center;}
 svg text{font-family:'Roboto',sans-serif;}
 .tooltip{position:fixed;background:rgba(26,26,46,.92);color:#fff;border-radius:8px;padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:320px;pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
 .tooltip.vis{display:block;}
@@ -227,7 +227,8 @@ function desenhar(){
     var w=NODE_W_M-ind;
     var fs=n.nivel===1?11:n.nivel===2?10:9;
     var fw=n.nivel<=2?'700':'500';
-    var short=esc(n.nome.slice(0,36)+(n.nome.length>36?'...':''));
+    var label=n.tipo+' — '+n.nome;
+    var short=esc(label.slice(0,38)+(label.length>38?'...':''));
     var full=esc(n.nome);
     out.push('<g class="nm" data-id="'+n.id+'" data-full="'+full+'">');
     out.push('<rect x="'+(xM+ind)+'" y="'+n.py+'" width="'+w+'" height="'+n.h+'" rx="4" fill="'+cor+'" fill-opacity=".85"/>');
