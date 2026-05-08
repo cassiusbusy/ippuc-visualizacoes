@@ -335,7 +335,7 @@ function desenhar(){
     out.push('<g class="nm" data-id="'+n.id+'" data-full="'+full+'" data-vtot="'+vtot+'" data-adq="'+vadq+'" data-prec="'+vprec+'">');
     out.push('<rect x="'+(xM+ind)+'" y="'+n.py+'" width="'+w+'" height="'+n.h+'" rx="4" fill="'+cor+'" fill-opacity=".85"/>');
     out.push('<text x="'+(xM+ind+8)+'" y="'+(n.py+n.h/2)+'" dominant-baseline="middle" font-size="'+fs+'" font-weight="'+fw+'" fill="white">'+short+'</text>');
-    if(n.nivel===1&&votos&&votos.total>0){
+    if(votos&&votos.total>0){
       var barX=xM+ind+4, barY=n.py+n.h-7, barW=w-8, barH=4;
       var pAdq=votos.adequado/votos.total;
       var wAdq=Math.round(barW*pAdq);
