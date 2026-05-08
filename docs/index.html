@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,8 +13,6 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .cnt{max-width:1100px;margin:0 auto;padding:28px 24px;}
 .ptitle{font-size:1.15rem;font-weight:700;color:var(--azd);margin-bottom:4px;}
 .psub{font-size:.8rem;color:#888;margin-bottom:20px;}
-
-/* KPIs */
 .krow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px;}
 .kpi{background:var(--cd);border-radius:10px;padding:14px 10px;border:.5px solid var(--bd);text-align:center;}
 .knum{font-size:1.7rem;font-weight:900;}
@@ -24,8 +23,6 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .kpi.loading .knum{display:none;}
 .kpi.loading .spin-wrap{display:flex;justify-content:center;align-items:center;height:2rem;}
 .spin-wrap{display:none;}
-
-/* Barra votação */
 .vbloco{background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
   margin-bottom:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .15s;}
 .vbloco:hover{border-color:var(--v);}
@@ -34,13 +31,9 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .vbar-ad{background:var(--v);transition:width .6s ease;}
 .vbar-pr{background:var(--la);transition:width .6s ease;}
 .vbar-leg{display:flex;justify-content:space-between;margin-top:5px;font-size:.68rem;}
-
-/* Corte */
 .cut{display:flex;align-items:center;gap:12px;margin:22px 0 16px;}
 .cut-line{flex:1;height:.5px;background:var(--bd);}
 .cut-lbl{font-size:.7rem;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
-
-/* Cards — 3 colunas */
 .ncards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .nc{background:var(--cd);border-radius:10px;padding:18px;border:.5px solid var(--bd);
      text-decoration:none;color:inherit;transition:all .2s;display:block;}
@@ -49,40 +42,25 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .ncd{font-size:.74rem;color:#666;line-height:1.5;}
 .ncb{display:inline-block;margin-top:10px;background:var(--vl);color:var(--v);
       border-radius:10px;padding:2px 10px;font-size:.68rem;font-weight:600;}
-
-/* Box contribuições — sem link */
 .contrib-box{background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
   padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;}
-
 .updated{font-size:.65rem;color:#bbb;text-align:right;margin-bottom:6px;min-height:14px;}
-
 footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px;border-top:.5px solid var(--bd);}
-
-@media(max-width:800px){
-  .krow{grid-template-columns:repeat(3,1fr);}
-  .ncards{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:500px){
-  .krow{grid-template-columns:1fr 1fr;}
-  .ncards{grid-template-columns:1fr;}
-}
+@media(max-width:800px){.krow{grid-template-columns:repeat(3,1fr);}.ncards{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.krow{grid-template-columns:1fr 1fr;}.ncards{grid-template-columns:1fr;}}
 </style></head><body>
-
 <div class="stripe">
   <div style="background:#00a859"></div><div style="background:#447EC0"></div>
   <div style="background:#8E6CAD"></div><div style="background:#8EC899"></div>
   <div style="background:#FDC533"></div><div style="background:#F07E31"></div>
   <div style="background:#EA535E"></div><div style="background:#CA6673"></div>
 </div>
-
 <div class="cnt">
   <div style="margin-bottom:18px;padding-top:4px;">
     <div class="ptitle">Análise das Contribuições enviadas pelo site</div>
     <div class="psub">Minuta Interativa — Revisão Colaborativa do Plano Diretor de Curitiba 2025</div>
   </div>
-
   <div class="updated" id="updated-lbl">Carregando dados…</div>
-
   <div class="krow">
     <div class="kpi loading" id="kpi-votantes">
       <div class="spin-wrap"><div class="spinner"></div></div>
@@ -113,7 +91,6 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
       <div class="klbl">Contribuições analisadas</div>
     </div>
   </div>
-
   <a class="vbloco" href="votos.html">
     <div class="vbar-wrap">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
@@ -130,13 +107,11 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
       </div>
     </div>
   </a>
-
   <div class="cut">
     <div class="cut-line"></div>
     <div class="cut-lbl">Análise Semântica</div>
     <div class="cut-line"></div>
   </div>
-
   <div class="ncards">
     <a class="nc" href="palavras_chave.html">
       <div class="nct">Nuvem de Palavras</div>
@@ -149,114 +124,60 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
       <div class="ncb">Mapa de Temas Próximos</div>
     </a>
     <a class="nc" href="grafo.html">
-      <div class="nct">Grafo de Rede</div>
+      <div class="nct">Gráfico de Rede</div>
       <div class="ncd">Explore como uma sugestão se conecta a outras e quais são os tópicos centrais que "amarram" as diferentes visões sobre a cidade.</div>
       <div class="ncb">Conexão entre Ideias</div>
     </a>
   </div>
 
-  <div class="contrib-box">
-    <div>
-      <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Visualização Interativa</div>
-      <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">Confira todas as contribuições</div>
-      <div style="font-size:.78rem;color:#666;">Veja como cada sugestão enviada se encaixa dentro dos capítulos e temas oficiais da revisão do Plano Diretor.</div>
+  <a href="grafo_contribuicoes.html" style="text-decoration:none;display:block;margin-top:14px;">
+    <div class="contrib-box" onmouseover="this.style.borderColor='var(--v)'" onmouseout="this.style.borderColor='var(--bd)'" style="transition:border-color .15s;cursor:pointer;">
+      <div>
+        <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Visualização Interativa</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">Confira todas as contribuições</div>
+        <div style="font-size:.78rem;color:#666;">Veja como cada sugestão enviada se encaixa dentro dos capítulos e temas oficiais da revisão do Plano Diretor.</div>
+      </div>
+      <div style="flex-shrink:0;font-size:.78rem;color:var(--az);font-weight:500;white-space:nowrap;">Ver gráfico</div>
     </div>
-    <div style="flex-shrink:0;font-size:.78rem;color:#ccc;font-weight:500;white-space:nowrap;">Em breve</div>
-  </div>
+  </a>
 
   <footer>IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Análise gerada automaticamente</footer>
 </div>
-
 <script>
 const SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv';
-
-function splitCSVLine(line) {
-  const result = []; let cur = '', inQ = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (c === '"') { inQ = !inQ; continue; }
-    if (c === ',' && !inQ) { result.push(cur); cur = ''; continue; }
-    cur += c;
-  }
-  result.push(cur);
-  return result;
-}
-
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase().trim().replace(/\r/g,''));
-  console.log('Colunas detectadas:', headers); 
-  return lines.slice(1).filter(l => l.trim()).map(line => {
-    const vals = splitCSVLine(line);
-    const obj = {};
-    headers.forEach((h, i) => obj[h] = (vals[i] || '').trim().replace(/^"|"$/g, '').replace(/\r/g,''));
-    return obj;
-  });
-}
-
-function setKpi(id, kpiId, value) {
-  const el = document.getElementById(id);
-  const kpi = document.getElementById(kpiId);
-  if (el) el.textContent = value;
-  if (kpi) kpi.classList.remove('loading');
-}
-
-function updateBar(adequado, ajuste) {
-  const total = adequado + ajuste;
-  if (total === 0) return;
-  const pAd = (adequado / total * 100).toFixed(1);
-  const pPr = (ajuste   / total * 100).toFixed(1);
-  document.getElementById('bar-ad').style.width = pAd + '%';
-  document.getElementById('bar-pr').style.width = pPr + '%';
-  document.getElementById('leg-ad').textContent = 'Adequado ' + pAd + '%';
-  document.getElementById('leg-pr').textContent = 'Precisa de Ajuste ' + pPr + '%';
-}
-
-async function loadData() {
-  try {
-    const res = await fetch(SHEETS_CSV + '&t=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    const rows = parseCSV(text);
-
-    console.log('Primeira linha de dados:', rows[0]);
-
-    const emails  = new Set();
-    let votos = 0, ajuste = 0, adequado = 0;
-
-    rows.forEach(row => {
-      const email = row['email'] || row['e-mail'] || row['mail'] || '';
-      if (email) emails.add(email.toLowerCase());
-
-      const voto = (row['voto'] || row['vote'] || row['resposta'] || '').toLowerCase().trim();
-      if (voto === 'adequado') { adequado++; votos++; }
-      else if (voto === 'precisa_ajuste' || voto === 'precisa de ajuste' || voto === 'precisa') { ajuste++; votos++; }
+function splitCSVLine(line){const result=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){inQ=!inQ;continue;}if(c===','&&!inQ){result.push(cur);cur='';continue;}cur+=c;}result.push(cur);return result;}
+function parseCSV(text){const lines=text.trim().split('
+');const headers=splitCSVLine(lines[0]).map(h=>h.toLowerCase().trim().replace(/
+/g,''));return lines.slice(1).filter(l=>l.trim()).map(line=>{const vals=splitCSVLine(line);const obj={};headers.forEach((h,i)=>obj[h]=(vals[i]||'').trim().replace(/^"|"$/g,'').replace(/
+/g,''));return obj;});}
+function setKpi(id,kpiId,value){const el=document.getElementById(id);const kpi=document.getElementById(kpiId);if(el)el.textContent=value;if(kpi)kpi.classList.remove('loading');}
+function updateBar(adequado,ajuste){const total=adequado+ajuste;if(total===0)return;const pAd=(adequado/total*100).toFixed(1),pPr=(ajuste/total*100).toFixed(1);document.getElementById('bar-ad').style.width=pAd+'%';document.getElementById('bar-pr').style.width=pPr+'%';document.getElementById('leg-ad').textContent='Adequado '+pAd+'%';document.getElementById('leg-pr').textContent='Precisa de Ajuste '+pPr+'%';}
+async function loadData(){
+  try{
+    const res=await fetch(SHEETS_CSV+'&t='+Date.now());
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const rows=parseCSV(await res.text());
+    const emails=new Set();let votos=0,ajuste=0,adequado=0;
+    rows.forEach(row=>{
+      const email=row['email']||row['e-mail']||row['mail']||'';
+      if(email)emails.add(email.toLowerCase());
+      const voto=(row['voto']||row['vote']||row['resposta']||'').toLowerCase().trim();
+      if(voto==='adequado'){adequado++;votos++;}
+      else if(voto==='precisa_ajuste'||voto==='precisa de ajuste'||voto==='precisa'){ajuste++;votos++;}
     });
-
-    const votantes = emails.size || rows.length;
-
-    setKpi('n-votantes', 'kpi-votantes', votantes);
-    setKpi('n-votos',    'kpi-votos',    votos);
-    setKpi('n-ajuste',   'kpi-ajuste',   ajuste);
-    setKpi('n-adequado', 'kpi-adequado', adequado);
-    if (votos > 0) updateBar(adequado, ajuste);
-
-    const now = new Date();
-    document.getElementById('updated-lbl').textContent =
-      'Atualizado em ' + now.toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-
-  } catch(e) {
-    console.error('Erro ao carregar Sheets:', e);
-    setKpi('n-votantes', 'kpi-votantes', 45);
-    setKpi('n-votos',    'kpi-votos',    291);
-    setKpi('n-ajuste',   'kpi-ajuste',   65);
-    setKpi('n-adequado', 'kpi-adequado', 226);
-    updateBar(226, 65);
-    document.getElementById('updated-lbl').textContent = 'Dados estáticos (falha ao carregar Sheets)';
+    const votantes=emails.size||rows.length;
+    setKpi('n-votantes','kpi-votantes',votantes);setKpi('n-votos','kpi-votos',votos);setKpi('n-ajuste','kpi-ajuste',ajuste);setKpi('n-adequado','kpi-adequado',adequado);
+    if(votos>0)updateBar(adequado,ajuste);
+    const now=new Date();
+    document.getElementById('updated-lbl').textContent='Atualizado em '+now.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }catch(e){
+    console.error('Erro:',e);
+    setKpi('n-votantes','kpi-votantes',45);setKpi('n-votos','kpi-votos',291);setKpi('n-ajuste','kpi-ajuste',65);setKpi('n-adequado','kpi-adequado',226);
+    updateBar(226,65);
+    document.getElementById('updated-lbl').textContent='Dados estáticos (falha ao carregar Sheets)';
   }
 }
-
 loadData();
-setInterval(loadData, 5 * 60 * 1000);
+setInterval(loadData,5*60*1000);
 </script>
 </body></html>
