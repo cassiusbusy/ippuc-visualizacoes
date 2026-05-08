@@ -139,7 +139,7 @@ async function carregar(){
       var viId=vh.findIndex(function(h){return h.includes('estrutura')||h.includes('codigo')||h==='id';});
       var viA=vh.findIndex(function(h){return h.includes('adequado');});
       var viP=vh.findIndex(function(h){return h.includes('precisa')||h.includes('ajuste');});
-      console.log('Votos headers:',vrows[0],'viId:',viId,'viA:',viA,'viP:',viP);
+      console.log('Votos headers:',vrows[0],'viId:',viId,'viV:',viV);
       vrows.slice(1).forEach(function(v){
         function g(i){return i>=0?(v[i]||'').trim().replace(/^"|"$/g,''):'';}
         var id=g(viId); if(!id)return;
@@ -147,6 +147,10 @@ async function carregar(){
         mapVotos[id]={adequado:a,precisa:p,total:a+p};
       });
       console.log('Votos carregados:',Object.keys(mapVotos).length);
+      // Redesenhar se já houver seleção ativa
+      var etapa=document.getElementById('sel-etapa').value;
+      var oficina=document.getElementById('sel-oficina').value;
+      if(etapa&&oficina) desenhar();
     }).catch(function(e){console.warn('Votos nao carregados:',e.message);});
 
     document.getElementById('loading-msg').style.display='none';
