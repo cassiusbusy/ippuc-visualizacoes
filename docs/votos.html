@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,17 +14,21 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .psub{font-size:.8rem;color:#888;margin-bottom:20px;}
 .back{display:inline-flex;align-items:center;gap:6px;color:var(--az);font-size:.78rem;font-weight:500;text-decoration:none;margin-bottom:14px;}
 
-/* KPIs */
 .krow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
 .kpi{background:var(--cd);border-radius:10px;padding:16px;border:.5px solid var(--bd);text-align:center;}
 .knum{font-size:2.2rem;font-weight:900;}
 .klbl{font-size:.75rem;color:#888;margin-top:3px;font-weight:500;}
-.knum.tot{color:var(--azd);}
-.knum.ad{color:var(--v);}
-.knum.pr{color:var(--la);}
-.knum.vt{color:var(--az);}
+.knum.tot{color:var(--azd);} .knum.ad{color:var(--v);} .knum.pr{color:var(--la);} .knum.vt{color:var(--az);}
 
-/* Filtro */
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--bd);
+  border-top-color:var(--az);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kpi.loading .knum{display:none;}
+.kpi.loading .spin-wrap{display:flex;justify-content:center;align-items:center;height:2.6rem;}
+.spin-wrap{display:none;}
+
+.updated{font-size:.65rem;color:#bbb;text-align:right;margin-bottom:8px;min-height:14px;}
+
 .filtro-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
 .fbtn{padding:7px 18px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;
        cursor:pointer;font-family:Roboto,sans-serif;font-size:.78rem;font-weight:500;
@@ -34,30 +37,28 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .fbtn.ativo{background:var(--v);border-color:var(--v);color:#fff;font-weight:700;}
 .fbtn:disabled{opacity:.35;cursor:not-allowed;}
 
-/* Legenda */
 .leg{display:flex;gap:18px;margin-bottom:16px;font-size:.78rem;}
 .leg-item{display:flex;align-items:center;gap:6px;font-weight:500;}
 .leg-dot{width:14px;height:14px;border-radius:3px;}
 
-/* Grafico */
 .chart-wrap{background:var(--cd);border-radius:12px;padding:20px;border:.5px solid var(--bd);}
 .chart-title{font-size:.8rem;font-weight:700;color:var(--azd);text-transform:uppercase;
               letter-spacing:.06em;margin-bottom:16px;}
 .bar-row{display:flex;align-items:center;margin-bottom:10px;gap:8px;}
 .bar-label{width:240px;font-size:.74rem;color:#444;text-align:right;flex-shrink:0;
             line-height:1.3;padding-right:6px;}
-.bar-center{flex:1;display:flex;align-items:center;gap:0;}
+.bar-center{flex:1;display:flex;align-items:center;}
 .bar-precisa{height:26px;background:var(--la);border-radius:4px 0 0 4px;
-              display:flex;align-items:center;justify-content:flex-start;
-              padding-left:5px;transition:width .5s ease;min-width:0;}
+              display:flex;align-items:center;padding-left:5px;transition:width .5s ease;min-width:0;}
 .bar-adequado{height:26px;background:var(--v);border-radius:0 4px 4px 0;
                display:flex;align-items:center;justify-content:flex-end;
                padding-right:5px;transition:width .5s ease;min-width:0;}
 .bar-val{font-size:.72rem;font-weight:700;color:#fff;white-space:nowrap;}
 .bar-zero{width:2px;background:#ccc;height:26px;flex-shrink:0;}
-.axis-line{border-top:1.5px solid #d0d0d0;margin:4px 0 12px;position:relative;}
+.axis-line{border-top:1.5px solid #d0d0d0;margin:4px 0 12px;}
 .sem-dados{text-align:center;padding:40px;color:#bbb;font-size:.9rem;}
 .nota{font-size:.7rem;color:#aaa;margin-top:12px;text-align:center;}
+.chart-loading{display:flex;justify-content:center;align-items:center;padding:60px;gap:10px;color:#aaa;font-size:.85rem;}
 
 @media(max-width:700px){
   .krow{grid-template-columns:1fr 1fr;}
@@ -77,11 +78,25 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
   <div class="ptitle">Resultado da Votacao</div>
   <div class="psub">Avaliacao da minuta pelos participantes da consulta publica — Plano Diretor de Curitiba 2025</div>
 
+  <div class="updated" id="updated-lbl">Carregando dados…</div>
+
   <div class="krow">
-    <div class="kpi"><div class="knum vt">36</div><div class="klbl">Votantes</div></div>
-    <div class="kpi"><div class="knum tot">155</div><div class="klbl">Votos</div></div>
-    <div class="kpi"><div class="knum pr">50</div><div class="klbl">Precisa de Ajuste</div></div>
-    <div class="kpi"><div class="knum ad">105</div><div class="klbl">Adequado</div></div>
+    <div class="kpi loading" id="kpi-vt">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum vt" id="n-vt">—</div><div class="klbl">Votantes</div>
+    </div>
+    <div class="kpi loading" id="kpi-tot">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum tot" id="n-tot">—</div><div class="klbl">Votos</div>
+    </div>
+    <div class="kpi loading" id="kpi-pr">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum pr" id="n-pr">—</div><div class="klbl">Precisa de Ajuste</div>
+    </div>
+    <div class="kpi loading" id="kpi-ad">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum ad" id="n-ad">—</div><div class="klbl">Adequado</div>
+    </div>
   </div>
 
   <div class="filtro-row" id="filtros"></div>
@@ -93,86 +108,206 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 
   <div class="chart-wrap">
     <div class="chart-title" id="chart-title">Por Titulo</div>
-    <div id="chart"></div>
+    <div id="chart"><div class="chart-loading"><div class="spinner"></div>&nbsp;Carregando votos…</div></div>
     <div class="nota" id="nota"></div>
   </div>
-
 </div>
 
 <script>
-const D={"kpis": {"votantes": 45, "total": 291, "adequado": 226, "precisa": 65}, "niveis": {"titulo": [{"nome": "TÍTULO I – DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "adequado": 24, "precisa": 14}, {"nome": "TÍTULO II – DA INTEGRAÇÃO METROPOLITANA", "adequado": 19, "precisa": 7}, {"nome": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "adequado": 19, "precisa": 7}, {"nome": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "adequado": 18, "precisa": 6}, {"nome": "TÍTULO VII – DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "adequado": 12, "precisa": 8}, {"nome": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "adequado": 12, "precisa": 4}, {"nome": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "adequado": 10, "precisa": 5}], "capitulo": [{"nome": "CAPÍTULO I – DAS DISPOSIÇÕES PRELIMINARES", "adequado": 3, "precisa": 0}, {"nome": "CAPÍTULO II – DA VISÃO DE FUTURO DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "adequado": 3, "precisa": 0}, {"nome": "CAPÍTULO III – DAS ESTRATÉGIAS DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "adequado": 3, "precisa": 0}, {"nome": "CAPÍTULO III – DO SISTEMA MUNICIPAL DE HABITAÇÃO", "adequado": 1, "precisa": 2}, {"nome": "CAPÍTULO II – DA ARTICULAÇÃO DAS POLÍTICAS PÚBLICAS MUNICIPAIS COM AS FUNÇÕES PÚBLICAS DE INTERESSE COMUM (FPICS)", "adequado": 2, "precisa": 0}, {"nome": "CAPÍTULO II – DO DESENVOLVIMENTO ECONÔMICO", "adequado": 1, "precisa": 1}, {"nome": "CAPÍTULO I – DO ALINHAMENTO MUNICIPAL COM A MACROESTRUTURAÇÃO METROPOLITANA", "adequado": 2, "precisa": 0}, {"nome": "CAPÍTULO I – DO DESENVOLVIMENTO SOCIAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO II – DA GESTÃO DO PLANEJAMENTO INTEGRADO", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO I – DO SISTEMA DE ESTRUTURAÇÃO URBANO-AMBIENTAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO I – DISPOSIÇÕES GERAIS E CLASSIFICAÇÃO DOS INSTRUMENTOS", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO II – DO ORDENAMENTO TERRITORIAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO III – DA DEFESA SOCIAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO II – INSTRUMENTOS DE INDUÇÃO AO CUMPRIMENTO DA FUNÇÃO SOCIAL DA PROPRIEDADE", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO III – INSTRUMENTOS DE OTIMIZAÇÃO DO USO DO SOLO E DA PRODUÇÃO IMOBILIÁRIA", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO IV – DO SISTEMA DE SANEAMENTO AMBIENTAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO IV – INSTRUMENTOS DE PLANEJAMENTO E INTERVENÇÃO EM ÁREAS ESTRATÉGICAS", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO V – DA ESTRUTURAÇÃO E FINANCIAMENTO DE PLANOS, PROGRAMAS E PROJETOS ESTRATÉGICOS", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO V – DO SISTEMA INTEGRADO DE MOBILIDADE", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO V – INSTRUMENTOS DE GESTÃO URBANA E AMBIENTAL", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO VI – DA GESTÃO E REDUÇÃO DE RISCO DE DESASTRES", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO VI – INSTRUMENTOS DE REGULARIZAÇÃO FUNDIÁRIA E PROVISÃO DE HABITAÇÃO", "adequado": 1, "precisa": 0}, {"nome": "CAPÍTULO VII – DO PATRIMÔNIO AMBIENTAL NATURAL E CULTURAL", "adequado": 0, "precisa": 1}, {"nome": "CAPÍTULO VII – INSTRUMENTOS FISCAIS E ECONÔMICOS", "adequado": 1, "precisa": 0}], "secao": [{"nome": "SEÇÃO I – Da Dimensão Metropolitana no Ordenamento Territorial do município-polo da RMC", "adequado": 2, "precisa": 0}, {"nome": "SEÇÃO I – Do Planejamento Territorial e Uso do Solo", "adequado": 2, "precisa": 0}, {"nome": "SEÇÃO II – Das estratégias e dos Instrumentos de Integração Metropolitana", "adequado": 2, "precisa": 0}, {"nome": "SEÇÃO II – Da Mobilidade Metropolitana", "adequado": 2, "precisa": 0}, {"nome": "SEÇÃO III – Da Habitação de Interesse Social", "adequado": 1, "precisa": 1}, {"nome": "SEÇÃO IV – Da Regularização Fundiária Urbana", "adequado": 1, "precisa": 1}, {"nome": "SEÇÃO III – Do Meio Ambiente e Recursos Hídricos", "adequado": 1, "precisa": 1}, {"nome": "SEÇÃO V – Do Desenvolvimento Social e Econômico", "adequado": 1, "precisa": 1}, {"nome": "SEÇÃO IV – Da Habitação de Interesse Social", "adequado": 2, "precisa": 0}, {"nome": "SEÇÃO III – Do Zoneamento Misto e Inteligente", "adequado": 1, "precisa": 1}, {"nome": "SEÇÃO I – Da Política de Mobilidade Urbana Sustentável", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política Integrada de Defesa Social", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Do Macrozoneamento Urbano-Ambiental", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Do Desenvolvimento orientado pela Sustentabilidade Urbana", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política do Patrimônio Natural e Biodiversidade Urbana", "adequado": 0, "precisa": 1}, {"nome": "SEÇÃO I – Dos Princípios e da Visão 2050 de Desenvolvimento Urbano Sustentável", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Gestão Sustentável das Bacias Hidrográficas", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Inovação", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Estruturação Ambiental", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Cidade Inteligente, Inovadora e Educadora", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Produção Habitacional Diversificada", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Mobilidade Ativa", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Das Garantias e Direitos Humanos e Sociais", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política Integrada de Desenvolvimento Social", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política de Saneamento Ambiental", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política Integrada de Desenvolvimento Econômico Sustentável", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Política Habitacional", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO I – Da Estruturação Urbana", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Da Educação", "adequado": 0, "precisa": 1}, {"nome": "SEÇÃO III – Da Economia de Baixo Carbono e Circular", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Dos Objetivos e Diretrizes de Desenvolvimento Urbano Sustentável", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Das Macroestratégias da Política Territorial Integrada", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO II – Da Segurança Alimentar e Nutricional", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Da Segurança Cidadã", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Da Integração Urbano-Ambiental", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Da Rede Integrada de Transporte", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Da Cultura", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Do Abastecimento e Uso Sustentável da Água", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Da Indústria e Logística", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Da Liberdade Econômica e Prosperidade Compartilhada", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Da Resposta às Calamidades", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Da Setorização Especial para Sustentabilidade Urbana", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Do Esgotamento Sanitário", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO III – Da Mitigação, Adaptação e Resiliência às Mudanças Climáticas", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO IV – Dos Sistemas Viário, de Circulação e Estacionamentos", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Da Drenagem Pluvial Urbana", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Da Inclusão, Identidade e Diversidade Sociocultural e Intergeracional", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Da Economia Criativa", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Da Mobilidade Comercial", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Do Esporte, Lazer e Juventude", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO V – Do Parcelamento, Uso e Ocupação do Solo", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VI – Da Gestão Sustentável dos Resíduos Sólidos", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VI – Da Saúde", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VI – Da Segurança Viária", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VI – Das Posturas, Obras e Edificações Sustentáveis", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VI – Do Turismo", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VII – Da Assistência Social", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VII – Da Estratégia de Descarbonização", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VII – Da Zeladoria e Limpeza Urbana", "adequado": 1, "precisa": 0}, {"nome": "SEÇÃO VII – Do Empreendedorismo", "adequado": 0, "precisa": 1}], "subsecao": [{"nome": "SUBSEÇÃO I – Da Educação para o Trânsito", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Da Estruturação do Uso do Solo", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Da Mobilidade Pedonal", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Da Rede Hídrica", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Da Rede de Espaços e Equipamentos Públicos", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Do Transporte Urbano de Cargas", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Macroestratégias Urbanas", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO I – Macrozona Urbana Metropolitana (MM)", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Da Ciclomobilidade", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Da Estruturação Viária", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Da Paisagem Ambiental-Cultural Urbana", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Das Diretrizes de Engenharia", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Das Soluções Baseadas na Natureza", "adequado": 0, "precisa": 1}, {"nome": "SUBSEÇÃO II – Do Sistema Municipal de Unidades de Conservação", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Macroestratégias Ambientais", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO II – Macrozona Urbana Local (MU)", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO III – Da Biodiversidade Urbana", "adequado": 0, "precisa": 1}, {"nome": "SUBSEÇÃO III – Da Estruturação do Transporte Coletivo", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO III – Das Diretrizes Legais", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO III – Macrozona de Transição Urbano-Ambiental (MT)", "adequado": 1, "precisa": 0}, {"nome": "SUBSEÇÃO IV – Macrozona Ambiental (MA)", "adequado": 1, "precisa": 0}]}};
-const NIVEIS=[
+const SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv';
+
+const NIVEIS = [
   {id:'titulo',   label:'Titulo'},
   {id:'capitulo', label:'Capitulo'},
   {id:'secao',    label:'Secao'},
   {id:'subsecao', label:'Subsecao'},
 ];
-let nivelAtivo='titulo';
 
-function init(){
-  // Botoes de filtro
-  const fr=document.getElementById('filtros');
-  NIVEIS.forEach(n=>{
-    const btn=document.createElement('button');
-    btn.className='fbtn'+(n.id==='titulo'?' ativo':'');
-    btn.textContent=n.label;
-    const temDados=D.niveis[n.id]&&D.niveis[n.id].length>0;
-    if(!temDados)btn.disabled=true;
-    btn.onclick=()=>{if(!temDados)return;nivelAtivo=n.id;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('ativo'));btn.classList.add('ativo');renderChart();};
-    fr.appendChild(btn);
-  });
-  renderChart();
+let nivelAtivo = 'titulo';
+let dadosGlobais = null;
+
+function splitCSVLine(line) {
+  const result = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; continue; }
+    if (c === ',' && !inQ) { result.push(cur); cur = ''; continue; }
+    cur += c;
+  }
+  result.push(cur);
+  return result;
 }
 
-function renderChart(){
-  const el=document.getElementById('chart');
-  const nota=document.getElementById('nota');
-  const dados=D.niveis[nivelAtivo]||[];
-  const lbl=NIVEIS.find(n=>n.id===nivelAtivo)?.label||'';
-  document.getElementById('chart-title').textContent='Por '+lbl;
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase().trim());
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = splitCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] || '').trim().replace(/^"|"$/g, ''));
+    return obj;
+  });
+}
 
-  if(!dados.length){
-    el.innerHTML='<div class="sem-dados">Nenhum voto registrado neste nivel ainda.<br>Os votos de capitulos, secoes e subsecoes serao exibidos conforme chegarem novas submissoes.</div>';
-    nota.textContent='';return;
+function normalizeNivel(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove acentos
+    .trim();
+}
+
+function agregaDados(rows) {
+  const emails = new Set();
+  const niveis = { titulo: {}, capitulo: {}, secao: {}, subsecao: {} };
+  let totalVotos = 0, totalAd = 0, totalPr = 0;
+
+  rows.forEach(row => {
+    const email = row['email'] || '';
+    const nivel = normalizeNivel(row['nivel'] || '');
+    const nome  = (row['nome'] || '').trim();
+    const voto  = (row['voto'] || '').toLowerCase().trim();
+
+    if (email) emails.add(email);
+
+    const nivelKey = nivel.startsWith('tit') ? 'titulo'
+                   : nivel.startsWith('cap') ? 'capitulo'
+                   : nivel.startsWith('sec') ? 'secao'
+                   : nivel.startsWith('sub') ? 'subsecao'
+                   : null;
+
+    if (!nivelKey || !nome) return;
+    if (!niveis[nivelKey][nome]) niveis[nivelKey][nome] = { nome, adequado: 0, precisa: 0 };
+
+    if (voto === 'adequado') {
+      niveis[nivelKey][nome].adequado++; totalAd++; totalVotos++;
+    } else if (voto === 'precisa_ajuste' || voto === 'precisa de ajuste' || voto === 'precisa') {
+      niveis[nivelKey][nome].precisa++; totalPr++; totalVotos++;
+    }
+  });
+
+  const niveisArr = {};
+  Object.keys(niveis).forEach(k => {
+    niveisArr[k] = Object.values(niveis[k])
+      .sort((a, b) => (b.adequado + b.precisa) - (a.adequado + a.precisa));
+  });
+
+  return {
+    kpis: { votantes: emails.size, total: totalVotos, adequado: totalAd, precisa: totalPr },
+    niveis: niveisArr
+  };
+}
+
+function setKpi(elId, kpiId, value) {
+  const el = document.getElementById(elId);
+  const kpi = document.getElementById(kpiId);
+  if (el) el.textContent = value;
+  if (kpi) kpi.classList.remove('loading');
+}
+
+function renderChart() {
+  if (!dadosGlobais) return;
+  const el    = document.getElementById('chart');
+  const nota  = document.getElementById('nota');
+  const dados = dadosGlobais.niveis[nivelAtivo] || [];
+  const lbl   = NIVEIS.find(n => n.id === nivelAtivo)?.label || '';
+  document.getElementById('chart-title').textContent = 'Por ' + lbl;
+
+  // Atualiza quais botões estão habilitados
+  document.querySelectorAll('.fbtn').forEach(btn => {
+    const nid = btn.dataset.nivel;
+    btn.disabled = !(dadosGlobais.niveis[nid]?.length > 0);
+  });
+
+  if (!dados.length) {
+    el.innerHTML = '<div class="sem-dados">Nenhum voto registrado neste nivel ainda.<br>Os dados aparecerao conforme chegarem novas submissoes.</div>';
+    nota.textContent = ''; return;
   }
 
-  // Calcular escala: max valor absoluto de adequado ou precisa
-  const maxVal=Math.max(...dados.map(d=>Math.max(d.adequado,d.precisa)),1);
-  const BAR_MAX=220; // px max para cada lado
+  const maxVal = Math.max(...dados.map(d => Math.max(d.adequado, d.precisa)), 1);
+  const BAR_MAX = 220;
 
-  // Linha zero central
-  let html='<div class="axis-line"></div>';
-
-  dados.forEach(d=>{
-    const wA=Math.round(d.adequado/maxVal*BAR_MAX);
-    const wP=Math.round(d.precisa/maxVal*BAR_MAX);
-    const nome=d.nome.replace(/TÍTULO\s+/i,'TÍTULO ');
-
-    html+=`<div class="bar-row">
-      <div class="bar-label" title="${d.nome}">${nome.length>55?nome.slice(0,55)+'...':nome}</div>
+  let html = '<div class="axis-line"></div>';
+  dados.forEach(d => {
+    const wA  = Math.round(d.adequado / maxVal * BAR_MAX);
+    const wP  = Math.round(d.precisa  / maxVal * BAR_MAX);
+    const nom = d.nome.length > 60 ? d.nome.slice(0, 58) + '…' : d.nome;
+    html += `<div class="bar-row">
+      <div class="bar-label" title="${d.nome}">${nom}</div>
       <div class="bar-center">
         <div style="flex:1;display:flex;justify-content:flex-end;">
           <div class="bar-precisa" style="width:${wP}px;">
-            ${d.precisa>0?`<span class="bar-val">-${d.precisa}</span>`:''}
+            ${d.precisa > 0 ? `<span class="bar-val">-${d.precisa}</span>` : ''}
           </div>
         </div>
         <div class="bar-zero"></div>
         <div style="flex:1;display:flex;justify-content:flex-start;">
           <div class="bar-adequado" style="width:${wA}px;">
-            ${d.adequado>0?`<span class="bar-val">${d.adequado}</span>`:''}
+            ${d.adequado > 0 ? `<span class="bar-val">${d.adequado}</span>` : ''}
           </div>
         </div>
       </div>
     </div>`;
   });
 
-  el.innerHTML=html;
+  el.innerHTML = html;
 
-  // Nota de disponibilidade
-  const disponiveis=NIVEIS.filter(n=>D.niveis[n.id]&&D.niveis[n.id].length>0).map(n=>n.label);
-  nota.textContent=disponiveis.length<4?'Niveis com dados: '+disponiveis.join(', ')+'. Demais niveis serao preenchidos com novas submissoes.':'';
+  const disponiveis = NIVEIS.filter(n => dadosGlobais.niveis[n.id]?.length > 0).map(n => n.label);
+  nota.textContent = disponiveis.length < 4
+    ? 'Niveis com dados: ' + disponiveis.join(', ') + '. Demais niveis aparecirao com novas submissoes.'
+    : '';
 }
 
-init();
+function initFiltros() {
+  const fr = document.getElementById('filtros');
+  NIVEIS.forEach(n => {
+    const btn = document.createElement('button');
+    btn.className = 'fbtn' + (n.id === 'titulo' ? ' ativo' : '');
+    btn.textContent = n.label;
+    btn.dataset.nivel = n.id;
+    btn.disabled = true;
+    btn.onclick = () => {
+      nivelAtivo = n.id;
+      document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('ativo'));
+      btn.classList.add('ativo');
+      renderChart();
+    };
+    fr.appendChild(btn);
+  });
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(SHEETS_CSV + '&t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    dadosGlobais = agregaDados(rows);
+
+    const k = dadosGlobais.kpis;
+    setKpi('n-vt',  'kpi-vt',  k.votantes);
+    setKpi('n-tot', 'kpi-tot', k.total);
+    setKpi('n-pr',  'kpi-pr',  k.precisa);
+    setKpi('n-ad',  'kpi-ad',  k.adequado);
+    renderChart();
+
+    const now = new Date();
+    document.getElementById('updated-lbl').textContent =
+      'Atualizado em ' + now.toLocaleString('pt-BR', {
+        day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+      });
+
+  } catch(e) {
+    console.error('Erro ao carregar Sheets:', e);
+    document.getElementById('chart').innerHTML =
+      '<div class="sem-dados">Erro ao carregar os dados. Verifique a conexão e recarregue a página.</div>';
+    document.getElementById('updated-lbl').textContent = 'Falha ao carregar dados do Sheets.';
+    ['kpi-vt','kpi-tot','kpi-pr','kpi-ad'].forEach(id =>
+      document.getElementById(id)?.classList.remove('loading')
+    );
+  }
+}
+
+initFiltros();
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
 </script>
 </body></html>
