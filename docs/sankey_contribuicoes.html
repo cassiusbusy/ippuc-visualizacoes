@@ -328,9 +328,22 @@ function desenhar(){
     var label=n.tipo+' — '+n.nome;
     var short=esc(label.slice(0,38)+(label.length>38?'...':''));
     var full=esc(n.nome);
-    out.push('<g class="nm" data-id="'+n.id+'" data-full="'+full+'">');
+    var votos=mapVotos[n.id]||null;
+    var vtot=votos?votos.total:0;
+    var vadq=votos?votos.adequado:0;
+    var vprec=votos?votos.precisa:0;
+    out.push('<g class="nm" data-id="'+n.id+'" data-full="'+full+'" data-vtot="'+vtot+'" data-adq="'+vadq+'" data-prec="'+vprec+'">');
     out.push('<rect x="'+(xM+ind)+'" y="'+n.py+'" width="'+w+'" height="'+n.h+'" rx="4" fill="'+cor+'" fill-opacity=".85"/>');
     out.push('<text x="'+(xM+ind+8)+'" y="'+(n.py+n.h/2)+'" dominant-baseline="middle" font-size="'+fs+'" font-weight="'+fw+'" fill="white">'+short+'</text>');
+    if(n.nivel===1&&votos&&votos.total>0){
+      var barX=xM+ind+4, barY=n.py+n.h-7, barW=w-8, barH=4;
+      var pAdq=votos.adequado/votos.total;
+      var wAdq=Math.round(barW*pAdq);
+      var wPrec=barW-wAdq;
+      out.push('<rect x="'+barX+'" y="'+barY+'" width="'+barW+'" height="'+barH+'" rx="2" fill="rgba(0,0,0,0.2)"/>');
+      if(wAdq>0)out.push('<rect x="'+barX+'" y="'+barY+'" width="'+wAdq+'" height="'+barH+'" rx="2" fill="#00a859" fill-opacity=".9"/>');
+      if(wPrec>0)out.push('<rect x="'+(barX+wAdq)+'" y="'+barY+'" width="'+wPrec+'" height="'+barH+'" fill="#F07E31" fill-opacity=".9"/>');
+    }
     out.push('</g>');
   });
 
