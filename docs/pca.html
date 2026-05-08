@@ -94,8 +94,8 @@ function draw(){
     <line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#ddd" stroke-width="1"/>
     <line x1="${PAD}" y1="${H/2}" x2="${W-PAD}" y2="${H/2}" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
     <line x1="${W/2}" y1="${PAD}" x2="${W/2}" y2="${H-PAD}" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
-    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif">PC1 (19.0%)</text>
-    <text x="11" y="${H/2}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 11 ${H/2})">PC2 (13.1%)</text>`;
+    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif">Dimensão 1</text>
+    <text x="11" y="${H/2}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 11 ${H/2})">Dimensão 2</text>`;
   D.docs.forEach(d=>{
     const cx=sc.x(d.x),cy=sc.y(d.y),cor=CORES[d.topico]||'#ccc';
     g.innerHTML+=`<circle cx="${cx}" cy="${cy}" r="8" fill="${cor}" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="abrir('${d.submission_id}')"><title>${d.topico_nome}</title></circle>`;
@@ -186,13 +186,13 @@ function renderLtable(){
   const m1=Math.max(...pc1.map(a=>Math.abs(a.x)),0.01);
   const m2=Math.max(...pc2.map(a=>Math.abs(a.y)),0.01);
   el.innerHTML=`
-    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">PC1</div>
+    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 1</div>
     ${pc1.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
       <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
       <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.x)/m1*100}%;height:100%;border-radius:3px;background:${a.x>0?'var(--v)':'var(--vm)'}"></div></div>
       <span style="width:38px;font-size:.68rem;color:#aaa">${a.x.toFixed(3)}</span>
     </div>`).join('')}</div>
-    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">PC2</div>
+    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 2</div>
     ${pc2.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
       <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
       <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.y)/m2*100}%;height:100%;border-radius:3px;background:${a.y>0?'var(--az)':'var(--la)'}"></div></div>
@@ -202,7 +202,7 @@ function renderLtable(){
 
 function abrir(sid){
   const d=D.docs.find(x=>x.submission_id===sid);if(!d)return;
-  am(d.topico_nome,`<b>ID:</b> ${d.submission_id}<br><b>Autor:</b> ${d.email}<br><b>Topico:</b> ${d.topico_nome}<br><b>PC1:</b> ${d.x.toFixed(4)} | <b>PC2:</b> ${d.y.toFixed(4)}`,d.conteudo_completo||d.conteudo);
+  am(d.topico_nome,`<b>ID:</b> ${d.submission_id}<br><b>Autor:</b> ${d.email}<br><b>Topico:</b> ${d.topico_nome}<br><b>Dimensão 1:</b> ${d.x.toFixed(4)} | <b>Dimensão 2:</b> ${d.y.toFixed(4)}`,d.conteudo_completo||d.conteudo);
 }
 
 document.getElementById('asc').addEventListener('input',e=>{asc=parseFloat(e.target.value);draw();});
