@@ -68,17 +68,17 @@ input[type=range]{width:100%;accent-color:var(--v);}
 <div class="stripe"><div style="background:#00a859"></div><div style="background:#447EC0"></div><div style="background:#8E6CAD"></div><div style="background:#8EC899"></div><div style="background:#FDC533"></div><div style="background:#F07E31"></div><div style="background:#EA535E"></div><div style="background:#CA6673"></div></div>
 <div class="cnt">
   <a class="back" href="index.html">← Voltar</a>
-  <div class="ptitle">Grafo de Rede — Análise PARCIAL da Similaridade entre Contribuições</div>
-  <div class="psub">Cor = topico LDA · Letra no no = comunidade Louvain · Tamanho = grau ponderado · Clique no no para ver metricas</div>
+  <div class="ptitle">Panorama de Afinidade entre Contribuições</div>
+  <div class="psub">Este mapa mostra como as sugestões da população se conectam. Círculos próximos e ligados indicam ideias que tratam de temas semelhantes.</div>
 
   <div class="kgrid">
-    <div class="kpi"><div class="knum" style="color:var(--azd);">25</div><div class="klbl">Nos</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--azd);">112</div><div class="klbl">Arestas</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--v);">4</div><div class="klbl">Comunidades Louvain</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--az);">0.3733</div><div class="klbl">Densidade</div><div class="ksub">0=esparso · 1=completo</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--azd);">18</div><div class="klbl">Grau maximo</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--azd);">5.29</div><div class="klbl">Grau pond. maximo</div></div>
-    <div class="kpi"><div class="knum" style="color:var(--la);">2–3</div><div class="klbl">Excentricidade</div><div class="ksub">min–max da rede</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--azd);">25</div><div class="klbl">Total de Contribuições</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--azd);">112</div><div class="klbl">Conexões Identificadas</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--v);">4</div><div class="klbl">Grupos Temáticos</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--az);">0.3733</div><div class="klbl">Nível de Coesão</div><div class="ksub">0=esparso · 1=completo</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--azd);">18</div><div class="klbl">Sugestão Mais Conectada</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--azd);">5.29</div><div class="klbl">Sugestão Conectada com maior relevância</div></div>
+    <div class="kpi"><div class="knum" style="color:var(--la);">2–3</div><div class="klbl">Diversidade da Rede</div><div class="ksub">min–max da rede</div></div>
     <div class="kpi"><div class="knum" style="color:var(--v);">1</div><div class="klbl">Componente principal</div><div class="ksub">grafo totalmente conectado</div></div>
   </div>
 
@@ -102,35 +102,35 @@ input[type=range]{width:100%;accent-color:var(--v);}
     <!-- Sliders na ordem pedida (f) -->
     <div class="sliders">
       <div class="sl-g">
-        <div class="sl-top"><span>Distancia alvo</span><b id="dval">90</b></div>
+        <div class="sl-top"><span>Espaçamento entre círculos</span><b id="dval">90</b></div>
         <input type="range" id="dist" min="20" max="250" value="90">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Repulsao</span><b id="fval">100</b></div>
+        <div class="sl-top"><span>Repulsão</span><b id="fval">100</b></div>
         <input type="range" id="forca" min="20" max="400" value="100">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Similaridade minima</span><b id="tval">0.08</b></div>
+        <div class="sl-top"><span>Rigor da conexão</span><b id="tval">0.08</b></div>
         <input type="range" id="thr" min="1" max="50" value="8">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Bridging maximo</span><b id="bcval">3.20</b></div>
+        <div class="sl-top"><span>Força da conexão</span><b id="bcval">3.20</b></div>
         <input type="range" id="bcmax" min="0" max="319" value="319">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Peso minimo aresta</span><b id="wval">0.08</b></div>
+        <div class="sl-top"><span>Força do vínculo</span><b id="wval">0.08</b></div>
         <input type="range" id="wmin" min="8" max="100" value="8">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Grau minimo</span><b id="gval">0</b></div>
+        <div class="sl-top"><span>Quantidade de conexões</span><b id="gval">0</b></div>
         <input type="range" id="gmin" min="0" max="18" value="0">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Grau pond. minimo</span><b id="gpval">0.0</b></div>
+        <div class="sl-top"><span>Qualidade da Conexões</span><b id="gpval">0.0</b></div>
         <input type="range" id="gpmin" min="0" max="52" value="0">
       </div>
       <div class="sl-g">
-        <div class="sl-top"><span>Excentricidade maxima</span><b id="exval">3</b></div>
+        <div class="sl-top"><span>Conexões mais distantes</span><b id="exval">3</b></div>
         <input type="range" id="exmax" min="2" max="3" value="3" step="1">
       </div>
       <div class="sl-g" style="justify-content:flex-end;padding-top:16px;">
@@ -145,11 +145,11 @@ input[type=range]{width:100%;accent-color:var(--v);}
     </svg>
 
     <div class="hint">
-      Cor = topico LDA &nbsp;·&nbsp;
-      Letra = comunidade Louvain (A, B, C, D) &nbsp;·&nbsp;
-      Tamanho = grau ponderado &nbsp;·&nbsp;
-      Cor aresta = bridging (cinza=ponte · azul=nucleo) &nbsp;·&nbsp;
-      Espessura = peso
+      Cor = temas vinculados &nbsp;·&nbsp;
+      Letra = grupos mais próximos&nbsp;·&nbsp;
+      Tamanho = quantidade ligações &nbsp;·&nbsp;
+      Cor aresta = conexões (cinza=ponte · azul=nucleo) &nbsp;·&nbsp;
+      Espessura = força da conexão
     </div>
 
     <div style="margin-top:12px;">
