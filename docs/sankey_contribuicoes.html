@@ -137,14 +137,28 @@ async function carregar(){
       if(vrows.length<2)return;
       var vh=vrows[0].map(function(h){return h.trim().replace(/^"|"$/g,'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9_]/g,'');});
       var viId=vh.findIndex(function(h){return h.includes('estrutura')||h.includes('codigo')||h==='id';});
-      var viA=vh.findIndex(function(h){return h.includes('adequado');});
-      var viP=vh.findIndex(function(h){return h.includes('precisa')||h.includes('ajuste');});
+      var viV=vh.findIndex(function(h){return h==='voto'||h.includes('voto');});
       console.log('Votos headers:',vrows[0],'viId:',viId,'viV:',viV);
+      var tmpVotos={};
       vrows.slice(1).forEach(function(v){
         function g(i){return i>=0?(v[i]||'').trim().replace(/^"|"$/g,''):'';}
         var id=g(viId); if(!id)return;
-        var a=parseInt(g(viA))||0, p=parseInt(g(viP))||0;
-        mapVotos[id]={adequado:a,precisa:p,total:a+p};
+        var voto=g(viV).toLowerCase();
+        if(!tmpVotos[id])tmpVotos[id]={adequado:0,precisa:0};
+        if(voto.includes('adequado'))tmpVotos[id].adequado++;
+        else if(voto.includes('precisa')||voto.includes('ajuste'))tmpVotos[id].precisa++;
+      });
+      Object.keys(tmpVotos).forEach(function(id){
+        var v=tmpVotos[id];
+        mapVotos[id]={adequado:v.adequado,precisa:v.precisa,total:v.adequado+v.precisa};
+        var partes=id.split('-');
+        for(var pi=1;pi<partes.length;pi++){
+          var pai=partes.slice(0,pi).join('-');
+          if(!mapVotos[pai])mapVotos[pai]={adequado:0,precisa:0,total:0};
+          mapVotos[pai].adequado+=v.adequado;
+          mapVotos[pai].precisa+=v.precisa;
+          mapVotos[pai].total+=v.adequado+v.precisa;
+        }
       });
       console.log('Votos carregados:',Object.keys(mapVotos).length);
       // Redesenhar se já houver seleção ativa
