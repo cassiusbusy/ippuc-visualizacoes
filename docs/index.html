@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Analise NLP — Plano Diretor Curitiba</title>
+<title>Análise NLP — Plano Diretor Curitiba</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 :root{--v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;--la:#F07E31;
@@ -25,7 +25,7 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .kpi.loading .spin-wrap{display:flex;justify-content:center;align-items:center;height:2rem;}
 .spin-wrap{display:none;}
 
-/* Barra votacao */
+/* Barra votação */
 .vbloco{background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
   margin-bottom:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .15s;}
 .vbloco:hover{border-color:var(--v);}
@@ -40,7 +40,7 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .cut-line{flex:1;height:.5px;background:var(--bd);}
 .cut-lbl{font-size:.7rem;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
 
-/* Cards — 3 colunas agora */
+/* Cards — 3 colunas */
 .ncards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .nc{background:var(--cd);border-radius:10px;padding:18px;border:.5px solid var(--bd);
      text-decoration:none;color:inherit;transition:all .2s;display:block;}
@@ -50,7 +50,7 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .ncb{display:inline-block;margin-top:10px;background:var(--vl);color:var(--v);
       border-radius:10px;padding:2px 10px;font-size:.68rem;font-weight:600;}
 
-/* Box contribuicoes — sem link */
+/* Box contribuições — sem link */
 .contrib-box{background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
   padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px;}
 
@@ -77,8 +77,8 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
 
 <div class="cnt">
   <div style="margin-bottom:18px;padding-top:4px;">
-    <div class="ptitle">Analise das Contribuicoes Cidadas</div>
-    <div class="psub">Minuta Interativa — Revisao Colaborativa do Plano Diretor de Curitiba 2025</div>
+    <div class="ptitle">Análise das Contribuições Cidadãs</div>
+    <div class="psub">Minuta Interativa — Revisão Colaborativa do Plano Diretor de Curitiba 2025</div>
   </div>
 
   <div class="updated" id="updated-lbl">Carregando dados…</div>
@@ -106,19 +106,19 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
     </div>
     <div class="kpi">
       <div class="knum" style="color:var(--azd);">45</div>
-      <div class="klbl">Contribuicoes recebidas</div>
+      <div class="klbl">Contribuições recebidas</div>
     </div>
     <div class="kpi">
       <div class="knum" style="color:var(--v);">37</div>
-      <div class="klbl">Contribuicoes analisadas</div>
+      <div class="klbl">Contribuições analisadas</div>
     </div>
   </div>
 
   <a class="vbloco" href="votos.html">
     <div class="vbar-wrap">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;">Resultado da Votacao por Titulo</span>
-        <span style="font-size:.7rem;color:var(--az);font-weight:500;">Ver detalhe →</span>
+        <span style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;">Resultado da Votação por Título</span>
+        <span style="font-size:.7rem;color:var(--az);font-weight:500;">Ver detalhes →</span>
       </div>
       <div class="vbar">
         <div class="vbar-ad" id="bar-ad" style="width:0%"></div>
@@ -133,20 +133,19 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
 
   <div class="cut">
     <div class="cut-line"></div>
-    <div class="cut-lbl">Analise Semantica</div>
+    <div class="cut-lbl">Análise Semântica</div>
     <div class="cut-line"></div>
   </div>
 
-  <!-- 3 cards (LDA removido) -->
   <div class="ncards">
     <a class="nc" href="palavras_chave.html">
       <div class="nct">Palavras-Chave</div>
-      <div class="ncd">Nuvem TF-IDF com NER por categoria: localizacao, organizacoes, verbos e adjetivos.</div>
+      <div class="ncd">Nuvem TF-IDF com NER por categoria: localização, organizações, verbos e adjetivos.</div>
       <div class="ncb">TF-IDF + NER</div>
     </a>
     <a class="nc" href="pca.html">
-      <div class="nct">PCA — Espaco Semantico</div>
-      <div class="ncd">Biplot com loadings e scree plot. 5 PCs para 50%, 11 PCs para 80% da variancia.</div>
+      <div class="nct">PCA — Espaço Semântico</div>
+      <div class="ncd">Biplot com loadings e scree plot. 5 PCs para 50%, 11 PCs para 80% da variância.</div>
       <div class="ncb">PCA · 32.1% (2 PCs)</div>
     </a>
     <a class="nc" href="grafo.html">
@@ -156,17 +155,16 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px
     </a>
   </div>
 
-  <!-- Box contribuicoes sem link/clique -->
   <div class="contrib-box">
     <div>
-      <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Visualizacao Interativa</div>
-      <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">Confira todas as contribuicoes</div>
-      <div style="font-size:.78rem;color:#666;">Grafo de rede conectando todas as contribuicoes a estrutura do Plano Diretor — por fonte, nivel hierarquico e similaridade.</div>
+      <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Visualização Interativa</div>
+      <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">Confira todas as contribuições</div>
+      <div style="font-size:.78rem;color:#666;">Grafo de rede conectando todas as contribuições à estrutura do Plano Diretor — por fonte, nível hierárquico e similaridade.</div>
     </div>
     <div style="flex-shrink:0;font-size:.78rem;color:#ccc;font-weight:500;white-space:nowrap;">Em breve</div>
   </div>
 
-  <footer>IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Analise gerada automaticamente</footer>
+  <footer>IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Análise gerada automaticamente</footer>
 </div>
 
 <script>
@@ -187,7 +185,7 @@ function splitCSVLine(line) {
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase().trim().replace(/\r/g,''));
-  console.log('Colunas detectadas:', headers); // debug
+  console.log('Colunas detectadas:', headers); 
   return lines.slice(1).filter(l => l.trim()).map(line => {
     const vals = splitCSVLine(line);
     const obj = {};
@@ -221,23 +219,21 @@ async function loadData() {
     const text = await res.text();
     const rows = parseCSV(text);
 
-    console.log('Primeira linha de dados:', rows[0]); // debug
+    console.log('Primeira linha de dados:', rows[0]);
 
     const emails  = new Set();
     let votos = 0, ajuste = 0, adequado = 0;
 
     rows.forEach(row => {
-      // email único → votantes
       const email = row['email'] || row['e-mail'] || row['mail'] || '';
       if (email) emails.add(email.toLowerCase());
 
-      // voto
       const voto = (row['voto'] || row['vote'] || row['resposta'] || '').toLowerCase().trim();
       if (voto === 'adequado') { adequado++; votos++; }
       else if (voto === 'precisa_ajuste' || voto === 'precisa de ajuste' || voto === 'precisa') { ajuste++; votos++; }
     });
 
-    const votantes = emails.size || rows.length; // fallback: total de linhas
+    const votantes = emails.size || rows.length;
 
     setKpi('n-votantes', 'kpi-votantes', votantes);
     setKpi('n-votos',    'kpi-votos',    votos);
@@ -251,13 +247,12 @@ async function loadData() {
 
   } catch(e) {
     console.error('Erro ao carregar Sheets:', e);
-    // Fallback estático
     setKpi('n-votantes', 'kpi-votantes', 45);
     setKpi('n-votos',    'kpi-votos',    291);
     setKpi('n-ajuste',   'kpi-ajuste',   65);
     setKpi('n-adequado', 'kpi-adequado', 226);
     updateBar(226, 65);
-    document.getElementById('updated-lbl').textContent = 'Dados estaticos (falha ao carregar Sheets)';
+    document.getElementById('updated-lbl').textContent = 'Dados estáticos (falha ao carregar Sheets)';
   }
 }
 
