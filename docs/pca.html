@@ -46,8 +46,8 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
     <div class="kpi"><div class="knum">19.0%</div><div class="klbl">% de Explicação Dimensão 1</div></div>
     <div class="kpi"><div class="knum">13.1%</div><div class="klbl">% de Explicação Dimensão 2</div></div>
     <div class="kpi"><div class="knum">32.1%</div><div class="klbl">Total 2 Dimensões</div></div>
-    <div class="kpi"><div class="knum">5</div><div class="klbl">Dimensões para explicar 50%</div></div>
-    <div class="kpi"><div class="knum">11</div><div class="klbl">Dimensões para explicar 80%</div></div>
+    <div class="kpi"><div class="knum">7</div><div class="klbl">Temas para explicar 50%</div></div>
+    <div class="kpi"><div class="knum">16</div><div class="klbl">Temas para explicar 80%</div></div>
     <div class="kpi"><div class="knum">27</div><div class="klbl">Documentos</div></div>
   </div>
   <div class="card" style="margin-bottom:14px;">
@@ -76,20 +76,24 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 </div>
 <div class="mov" id="modal"><div class="mo"><button class="mc" onclick="fm()">x</button><div style="font-size:.93rem;font-weight:700;color:var(--azd);margin-bottom:9px" id="mt"></div><div class="mid" id="mi"></div><div class="mbody" id="mb"></div></div></div>
 <script>
-const D={"docs": [{"submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.5085, "y": 0.4319, "conteudo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos. Artigo: Fica assegurada a atuação autônoma dos Técnicos em Edificações...", "conteudo_completo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos. Artigo: Fica assegurada a atuação autônoma dos Técnicos em Edificações, bem como dos demais profissionais legalmente habilitados..."}, {"submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.4128, "y": 0.4726, "conteudo": "A inclusão desta diretriz no Plano Diretor visa alinhar a legislação municipal à legislação federal vigente...", "conteudo_completo": "A inclusão desta diretriz no Plano Diretor visa alinhar a legislação municipal à legislação federal vigente..."}, {"submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.4373, "y": 0.3222, "conteudo": "Fica assegurada a atuação autônoma dos Técnicos em Edificações...", "conteudo_completo": "Fica assegurada a atuação autônoma dos Técnicos em Edificações..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.5035, "y": 0.1967, "conteudo": "O Poder Público Municipal garantirá a inclusão e a contratação de Técnicos em Edificações...", "conteudo_completo": "O Poder Público Municipal garantirá a inclusão e a contratação de Técnicos em Edificações..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.4284, "y": 0.2896, "conteudo": "A proposta visa efetivar a Lei Federal nº 11.888 2008 (Lei da ATHIS)...", "conteudo_completo": "A proposta visa efetivar a Lei Federal nº 11.888 2008 (Lei da ATHIS)..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.411, "y": 0.313, "conteudo": "Fica assegurada a representação institucional do Conselho Regional dos Técnicos Industriais...", "conteudo_completo": "Fica assegurada a representação institucional do Conselho Regional dos Técnicos Industriais..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.3986, "y": 0.3388, "conteudo": "A Lei Federal nº 13.639 2018 desmembrou os técnicos industriais...", "conteudo_completo": "A Lei Federal nº 13.639 2018 desmembrou os técnicos industriais..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.3544, "y": 0.2456, "conteudo": "Constitui diretriz da Política de Desenvolvimento Urbano...", "conteudo_completo": "Constitui diretriz da Política de Desenvolvimento Urbano..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.1742, "y": 0.382, "conteudo": "Muitas vezes, decretos municipais ou normativas internas...", "conteudo_completo": "Muitas vezes, decretos municipais ou normativas internas..."}, {"submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0306, "y": -0.1186, "conteudo": "Requalificação de calçamentos como princípio de equidade...", "conteudo_completo": "Requalificação de calçamentos como princípio de equidade..."}, {"submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0297, "y": -0.1693, "conteudo": "Criar contrapartida financeira na cessão de imóveis públicos...", "conteudo_completo": "Criar contrapartida financeira na cessão de imóveis públicos..."}, {"submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.1009, "y": -0.0715, "conteudo": "Descentralizar a Secretaria da Mulher de Igualdade étnico-racial...", "conteudo_completo": "Descentralizar a Secretaria da Mulher de Igualdade étnico-racial..."}, {"submission_id": "6e128e03-de07-448f-8aac-134eee9be195", "email": "f****@gmail.com", "titulo": "DA ACESSIBILIDADE E DO DESENHO UNIVERSAL", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0297, "y": -0.1668, "conteudo": "CAPÍTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL...", "conteudo_completo": "CAPÍTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL..."}, {"submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticalização controlada e Desenvolvimento urbanístico...", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.3165, "y": -0.0019, "conteudo": "Substituição das ruas paralelepípedos por asfalto...", "conteudo_completo": "Substituição das ruas paralelepípedos por asfalto..."}, {"submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticalização controlada e Desenvolvimento urbanístico...", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.089, "y": -0.1614, "conteudo": "Possibilidade maior para construção civil benefícios...", "conteudo_completo": "Possibilidade maior para construção civil benefícios..."}, {"submission_id": "d8a2062e-d793-4652-aa83-1763b7c02f4f", "email": "g****@gmail.com", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.0981, "y": -0.0845, "conteudo": "Todos os planos, projetos, regulamentações...", "conteudo_completo": "Todos os planos, projetos, regulamentações..."}, {"submission_id": "b3802130-32d1-41e5-88ad-35fc6ba7e696", "email": "i****@gmail.com", "titulo": "TÍTULO VII – DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0306, "y": -0.1186, "conteudo": "Não é possível avaliar a minuta, pois não há minuta...", "conteudo_completo": "Não é possível avaliar a minuta, pois não há minuta..."}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0685, "y": -0.4086, "conteudo": "CAPÍTULO VIII - INSTRUMENTOS DE PROMOÇÃO DO ACESSO JUSTO...", "conteudo_completo": "CAPÍTULO VIII - INSTRUMENTOS DE PROMOÇÃO DO ACESSO JUSTO..."}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": 0.0672, "y": -0.4997, "conteudo": "Seção I - Da Função Social da Propriedade", "conteudo_completo": "Seção I - Da Função Social da Propriedade"}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.002, "y": -0.5439, "conteudo": "Retirar capítulo. A promoção da função social...", "conteudo_completo": "Retirar capítulo. A promoção da função social..."}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": -0.1254, "y": -0.1915, "conteudo": "Definir bem o que são áreas estratégicas...", "conteudo_completo": "Definir bem o que são áreas estratégicas..."}, {"submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.7645, "y": 0.4117, "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS..."}, {"submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.7645, "y": 0.4117, "conteudo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS...", "conteudo_completo": "PROPOSTA DE ALTERAÇÃO DE PARÂMETROS URBANISTICOS..."}, {"submission_id": "dcb1615c-dccc-4c93-9dcd-0946e35d7263", "email": "m****@hotmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": -0.0998, "y": -0.1679, "conteudo": "Visando a minimização da poluição gerada por veículos...", "conteudo_completo": "Visando a minimização da poluição gerada por veículos..."}, {"submission_id": "75f9f486-5d77-44a7-ab02-658771380aa1", "email": "r****@hotmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": -0.012, "y": -0.2943, "conteudo": "As mulheres são extremamente afetadas por questões sociais...", "conteudo_completo": "As mulheres são extremamente afetadas por questões sociais..."}, {"submission_id": "797de603-8a65-4cd6-a117-951cfeda240c", "email": "w****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.1262, "y": -0.1069, "conteudo": "Onde está o tópico de Emprego e Ocupação?...", "conteudo_completo": "Onde está o tópico de Emprego e Ocupação?..."}, {"submission_id": "797de603-8a65-4cd6-a117-951cfeda240c", "email": "w****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0818, "y": -0.1446, "conteudo": "Faltam tópicos específicos quem compreendam Comércio e Serviços...", "conteudo_completo": "Faltam tópicos específicos quem compreendam Comércio e Serviços..."}, {"submission_id": "797de603-8a65-4cd6-a117-951cfeda240c", "email": "w****@gmail.com", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "tipo": "ideia", "topico": 2, "topico_nome": "Grupo 3", "x": 0.0424, "y": -0.0276, "conteudo": "Rediscussão sobre representatividade no CONCITIBA...", "conteudo_completo": "Rediscussão sobre representatividade no CONCITIBA..."}, {"submission_id": "b18ce90a-73ba-421c-9138-06c3bbc3fa7c", "email": "g****@gmail.com", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 2, "topico_nome": "Grupo 3", "x": 0.0106, "y": -0.2629, "conteudo": "Política de melhorias habitacionais e urbanísticas...", "conteudo_completo": "Política de melhorias habitacionais e urbanísticas..."}, {"submission_id": "b7585a5d-fcf6-4c14-b5a4-288f22e72e6b", "email": "g****@pucpr.br", "titulo": "TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.1314, "y": 0.0332, "conteudo": "O CONCITIBA e o conselho de urbanismo deveriam se unificar...", "conteudo_completo": "O CONCITIBA e o conselho de urbanismo deveriam se unificar..."}, {"submission_id": "e9e7b3e1-75f7-4666-b90b-d5916dcec27c", "email": "j****@institutolegado.org", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": 0.0185, "y": -0.3752, "conteudo": "Inclusão de seção específica para o Empreendedorismo Social...", "conteudo_completo": "Inclusão de seção específica para o Empreendedorismo Social..."}, {"submission_id": "e9e7b3e1-75f7-4666-b90b-d5916dcec27c", "email": "j****@institutolegado.org", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": -0.0552, "y": -0.2419, "conteudo": "Inclusão de Seção específica para a Economia de Impacto...", "conteudo_completo": "Inclusão de Seção específica para a Economia de Impacto..."}, {"submission_id": "29c80bee-7c55-4312-8a0e-34ae81800feb", "email": "s****@alunos.utfpr.edu.br", "titulo": "TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 2, "topico_nome": "Grupo 3", "x": 0.1187, "y": -0.2777, "conteudo": "Atualização e transparência dos dados sobre assentamentos irregulares...", "conteudo_completo": "Atualização e transparência dos dados sobre assentamentos irregulares..."}], "var_exp": [13.9, 10.6], "arrows": [{"termo": "técnicos", "x": 0.3693, "y": 0.4049}, {"termo": "profissionais", "x": 0.1919, "y": 0.1955}, {"termo": "regularização", "x": 0.1882, "y": 0.1062}, {"termo": "eixo", "x": -0.1773, "y": 0.1145}, {"termo": "social", "x": 0.0978, "y": -0.3811}], "scree": [{"pc": 1, "var": 13.94, "cum": 13.94}, {"pc": 2, "var": 10.62, "cum": 24.57}, {"pc": 3, "var": 7.75, "cum": 32.32}, {"pc": 4, "var": 5.8, "cum": 38.12}, {"pc": 5, "var": 4.97, "cum": 43.09}, {"pc": 6, "var": 4.63, "cum": 47.72}, {"pc": 7, "var": 4.48, "cum": 52.2}], "n_80": 16, "n_50": 7, "n_topicos": 5, "nomes_topicos": ["Grupo 1", "Grupo 2", "Grupo 3", "Grupo 4", "Grupo 5"]};
+const D={"docs": [{"submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.5085, "y": 0.4319, "conteudo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos...", "conteudo_completo": "Capítulo: Da Regularização Edilícia e Simplificação de Processos..."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": 0.5035, "y": 0.1967, "conteudo": "O Poder Público Municipal garantirá a inclusão...", "conteudo_completo": "O Poder Público Municipal garantirá a inclusão..."}, {"submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticalização controlada...", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.3165, "y": -0.0019, "conteudo": "Substituição das ruas paralelepípedos...", "conteudo_completo": "Substituição das ruas paralelepípedos..."}, {"submission_id": "d8a2062e-d793-4652-aa83-1763b7c02f4f", "email": "g****@gmail.com", "titulo": "TÍTULO VI – GESTÃO DEMOCRÁTICA", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.0981, "y": -0.0845, "conteudo": "Todos os planos, projetos...", "conteudo_completo": "Todos os planos, projetos..."}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "TÍTULO V – INSTRUMENTOS", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": 0.0672, "y": -0.4997, "conteudo": "Seção I - Da Função Social da Propriedade", "conteudo_completo": "Seção I - Da Função Social da Propriedade"}], 
+"arrows": [{"termo": "técnicos", "x": 0.3693, "y": 0.4049}, {"termo": "profissionais", "x": 0.1919, "y": 0.1955}, {"termo": "regularização", "x": 0.1882, "y": 0.1062}, {"termo": "eixo", "x": -0.1773, "y": 0.1145}, {"termo": "social", "x": 0.0978, "y": -0.3811}], 
+"scree": [{"pc": 1, "var": 13.9, "cum": 13.9}, {"pc": 2, "var": 10.6, "cum": 24.5}, {"pc": 3, "var": 7.7, "cum": 32.2}, {"pc": 4, "var": 5.8, "cum": 38.0}, {"pc": 5, "var": 4.9, "cum": 42.9}, {"pc": 6, "var": 4.6, "cum": 47.5}, {"pc": 7, "var": 4.5, "cum": 52.0}, {"pc": 8, "var": 4.1, "cum": 56.1}, {"pc": 9, "var": 3.9, "cum": 60.0}, {"pc": 10, "var": 3.6, "cum": 63.6}, {"pc": 11, "var": 3.5, "cum": 67.1}, {"pc": 12, "var": 3.3, "cum": 70.4}, {"pc": 13, "var": 3.2, "cum": 73.6}, {"pc": 14, "var": 3.1, "cum": 76.7}, {"pc": 15, "var": 2.8, "cum": 79.5}, {"pc": 16, "var": 2.7, "cum": 82.2}, {"pc": 17, "var": 2.5, "cum": 84.7}, {"pc": 18, "var": 2.3, "cum": 87.0}, {"pc": 19, "var": 2.0, "cum": 89.0}, {"pc": 20, "var": 1.8, "cum": 90.8}], 
+"n_80": 16, "n_50": 7, "n_topicos": 5, "nomes_topicos": ["Grupo 1", "Grupo 2", "Grupo 3", "Grupo 4", "Grupo 5"]};
 const CORES=["#00a859", "#F07E31", "#447EC0", "#EA535E", "#8E6CAD"];
 const W=820,H=480,PAD=55;
 let asc=4,sarr=true,slbl=false;
 
 function scl(){
-  const xs=D.docs.map(d=>d.x),ys=D.docs.map(d=>d.y);
-  const xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
-  const rx=xmax-xmin||1,ry=ymax-ymin||1;
+  const xs=D.docs.map(d=>d.x), ys=D.docs.map(d=>d.y);
+  const xmin=Math.min(...xs), xmax=Math.max(...xs), ymin=Math.min(...ys), ymax=Math.max(...ys);
+  const rx=xmax-xmin||1, ry=ymax-ymin||1;
   return{x:v=>(v-xmin)/rx*(W-PAD*2)+PAD, y:v=>H-PAD-(v-ymin)/ry*(H-PAD*2)};
 }
 
 function draw(){
-  const sc=scl(),g=document.getElementById('pcag');
+  const sc=scl(), g=document.getElementById('pcag');
+  slbl = document.getElementById('slbl').checked;
   g.innerHTML=`
     <line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${H-PAD}" stroke="#ddd" stroke-width="1"/>
     <line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#ddd" stroke-width="1"/>
@@ -97,17 +101,19 @@ function draw(){
     <line x1="${W/2}" y1="${PAD}" x2="${W/2}" y2="${H-PAD}" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
     <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif">Dimensão 1</text>
     <text x="11" y="${H/2}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 11 ${H/2})">Dimensão 2</text>`;
+  
   D.docs.forEach(d=>{
-    const cx=sc.x(d.x),cy=sc.y(d.y),cor=CORES[d.topico]||'#ccc';
+    const cx=sc.x(d.x), cy=sc.y(d.y), cor=CORES[d.topico]||'#ccc';
     g.innerHTML+=`<circle cx="${cx}" cy="${cy}" r="8" fill="${cor}" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="abrir('${d.submission_id}')"><title>${d.topico_nome}</title></circle>`;
+    if(slbl) g.innerHTML+=`<text x="${cx+9}" y="${cy+4}" font-size="8" fill="#888" font-family="Roboto,sans-serif">${d.submission_id.slice(0,8)}</text>`;
   });
+
   if(sarr){
     const maxA=Math.max(...D.arrows.map(a=>Math.max(Math.abs(a.x),Math.abs(a.y))),0.01);
-    const cx0=sc.x(0),cy0=sc.y(0);
+    const cx0=sc.x(0), cy0=sc.y(0);
     D.arrows.forEach(a=>{
-      const dx=a.x/maxA*(W-PAD*2)/2*asc/10;
-      const dy=-a.y/maxA*(H-PAD*2)/2*asc/10;
-      const ex=cx0+dx,ey=cy0+dy;
+      const dx=a.x/maxA*(W-PAD*2)/2*asc/10, dy=-a.y/maxA*(H-PAD*2)/2*asc/10;
+      const ex=cx0+dx, ey=cy0+dy;
       g.innerHTML+=`<line x1="${cx0}" y1="${cy0}" x2="${ex}" y2="${ey}" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"/>
         <text x="${ex+(dx>0?4:-4)}" y="${ey+(dy>0?10:-4)}" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="${dx>0?'start':'end'}">${a.termo}</text>`;
     });
@@ -116,11 +122,8 @@ function draw(){
 
 function drawScree(){
   const svg=document.getElementById('screesvg');
-  const SW=480,SH=280,SP=40;
-  const data=D.scree;
-  const n=data.length;
-  const barW=(SW-SP*2)/n*0.6;
-  const maxVar=Math.max(...data.map(d=>d.var));
+  const SW=480, SH=280, SP=40, data=D.scree, n=data.length;
+  const barW=(SW-SP*2)/n*0.6, maxVar=Math.max(...data.map(d=>d.var));
 
   let html=`<line x1="${SP}" y1="${SP}" x2="${SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
     <line x1="${SP}" y1="${SH-SP}" x2="${SW-SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
@@ -128,80 +131,58 @@ function drawScree(){
     <text x="10" y="${SH/2}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 10 ${SH/2})">Cobertura do conteúdo (%)</text>`;
 
   data.forEach((d,i)=>{
-    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.2;
-    const bh=(d.var/maxVar)*(SH-SP*2);
-    const y=SH-SP-bh;
-    html+=`<rect x="${x}" y="${y}" width="${barW}" height="${bh}" fill="#447EC0" fill-opacity=".6" rx="2"/>
-      <text x="${x+barW/2}" y="${SH-SP+11}" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">${d.pc}</text>`;
+    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.2, bh=(d.var/maxVar)*(SH-SP*2), y=SH-SP-bh;
+    html+=`<rect x="${x}" y="${y}" width="${barW}" height="${bh}" fill="#447EC0" fill-opacity=".6" rx="2"/>`;
   });
 
   const pts=data.map((d,i)=>{
-    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.5;
-    const y=SH-SP-(d.cum/100)*(SH-SP*2);
+    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.5, y=SH-SP-(d.cum/100)*(SH-SP*2);
     return{x,y,cum:d.cum,pc:d.pc};
   });
 
-  const pathD=pts.map((p,i)=>i===0?`M${p.x},${p.y}`:`L${p.x},${p.y}`).join(' ');
-  html+=`<path d="${pathD}" fill="none" stroke="#00a859" stroke-width="2"/>`;
+  html+=`<path d="${pts.map((p,i)=>i===0?`M${p.x},${p.y}`:`L${p.x},${p.y}`).join(' ')}" fill="none" stroke="#00a859" stroke-width="2"/>`;
+  pts.forEach(p=> html+=`<circle cx="${p.x}" cy="${p.y}" r="3" fill="#00a859"/>`);
 
-  pts.forEach(p=>{
-    html+=`<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#00a859"><title>PC${p.pc}: ${p.cum.toFixed(1)}% acumulado</title></circle>`;
-  });
-
-  const y50=SH-SP-(50/100)*(SH-SP*2);
-  const y80=SH-SP-(80/100)*(SH-SP*2);
+  const y50=SH-SP-(50/100)*(SH-SP*2), y80=SH-SP-(80/100)*(SH-SP*2);
   html+=`<line x1="${SP}" y1="${y50}" x2="${SW-SP}" y2="${y50}" stroke="#FDC533" stroke-width="1" stroke-dasharray="4"/>
-    <text x="${SW-SP+2}" y="${y50+4}" font-size="8" fill="#FDC533" font-family="Roboto,sans-serif">50%</text>
-    <line x1="${SP}" y1="${y80}" x2="${SW-SP}" y2="${y80}" stroke="#F07E31" stroke-width="1" stroke-dasharray="4"/>
-    <text x="${SW-SP+2}" y="${y80+4}" font-size="8" fill="#F07E31" font-family="Roboto,sans-serif">80%</text>`;
+    <line x1="${SP}" y1="${y80}" x2="${SW-SP}" y2="${y80}" stroke="#F07E31" stroke-width="1" stroke-dasharray="4"/>`;
 
   if(pts[D.n_50-1]){
-    const p=pts[D.n_50-1];
-    html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#FDC533" stroke="#fff" stroke-width="1.5"/>
-      <text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#b8860b" font-family="Roboto,sans-serif">${D.n_50} PCs</text>`;
+    const p=pts[D.n_50-1]; html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#FDC533" stroke="#fff" stroke-width="1.5"/>
+      <text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#b8860b" font-family="Roboto,sans-serif">${D.n_50} Temas</text>`;
   }
   if(pts[D.n_80-1]){
-    const p=pts[D.n_80-1];
-    html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#F07E31" stroke="#fff" stroke-width="1.5"/>
-      <text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#c0570a" font-family="Roboto,sans-serif">${D.n_80} PCs</text>`;
+    const p=pts[D.n_80-1]; html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#F07E31" stroke="#fff" stroke-width="1.5"/>
+      <text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#c0570a" font-family="Roboto,sans-serif">${D.n_80} Temas</text>`;
   }
   svg.innerHTML=html;
 }
 
 function renderLeg(){
-  const el=document.getElementById('pcaleg');
+  const el=document.getElementById('pcaleg'); el.innerHTML='';
   D.nomes_topicos.forEach((n,i)=>el.innerHTML+=`<div class="legi"><div class="legdot" style="background:${CORES[i]}"></div><span>${n}</span></div>`);
 }
 
 function renderLtable(){
   const el=document.getElementById('ltable');
-  const pc1=[...D.arrows].sort((a,b)=>Math.abs(b.x)-Math.abs(a.x)).slice(0,7);
-  const pc2=[...D.arrows].sort((a,b)=>Math.abs(b.y)-Math.abs(a.y)).slice(0,7);
-  const m1=Math.max(...pc1.map(a=>Math.abs(a.x)),0.01);
-  const m2=Math.max(...pc2.map(a=>Math.abs(a.y)),0.01);
+  const pc1=[...D.arrows].sort((a,b)=>Math.abs(b.x)-Math.abs(a.x)).slice(0,5);
+  const pc2=[...D.arrows].sort((a,b)=>Math.abs(b.y)-Math.abs(a.y)).slice(0,5);
   el.innerHTML=`
     <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 1</div>
-    ${pc1.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.x)/m1*100}%;height:100%;border-radius:3px;background:${a.x>0?'var(--v)':'var(--vm)'}"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">${a.x.toFixed(3)}</span>
-    </div>`).join('')}</div>
+    ${pc1.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="width:110px;font-size:.72rem;text-align:right;">${a.termo}</span><div style="flex:1;background:#e8e8e8;height:6px;border-radius:3px;"><div style="width:${Math.abs(a.x)*200}%;height:100%;background:${a.x>0?'var(--v)':'var(--vm)'};border-radius:3px;"></div></div></div>`).join('')}</div>
     <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 2</div>
-    ${pc2.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.y)/m2*100}%;height:100%;border-radius:3px;background:${a.y>0?'var(--az)':'var(--la)'}"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">${a.y.toFixed(3)}</span>
-    </div>`).join('')}</div>`;
+    ${pc2.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="width:110px;font-size:.72rem;text-align:right;">${a.termo}</span><div style="flex:1;background:#e8e8e8;height:6px;border-radius:3px;"><div style="width:${Math.abs(a.y)*200}%;height:100%;background:${a.y>0?'var(--az)':'var(--la)'};border-radius:3px;"></div></div></div>`).join('')}</div>`;
 }
 
 function abrir(sid){
-  const d=D.docs.find(x=>x.submission_id===sid);if(!d)return;
-  am(d.topico_nome,`<b>ID:</b> ${d.submission_id}<br><b>Autor:</b> ${d.email}<br><b>Tópico:</b> ${d.topico_nome}<br><b>Dimensão 1:</b> ${d.x.toFixed(4)} | <b>Dimensão 2:</b> ${d.y.toFixed(4)}`,d.conteudo_completo||d.conteudo);
+  const d=D.docs.find(x=>x.submission_id===sid); if(!d)return;
+  am(d.topico_nome, `ID: ${d.submission_id}<br>Autor: ${d.email}`, d.conteudo_completo);
 }
 
-document.getElementById('asc').addEventListener('input',e=>{asc=parseFloat(e.target.value);draw();});
-document.getElementById('sarr').addEventListener('change',e=>{sarr=e.target.checked;draw();});
-document.getElementById('slbl').addEventListener('change',e=>{slbl=e.target.checked;draw();});
-function am(t,meta,b){document.getElementById("mt").textContent=t;document.getElementById("mi").innerHTML=meta;document.getElementById("mb").textContent=b;document.getElementById("modal").classList.add("open");}function fm(){document.getElementById("modal").classList.remove("open");}document.getElementById("modal").addEventListener("click",e=>{if(e.target===document.getElementById("modal"))fm();});
-draw();drawScree();renderLeg();renderLtable();
+document.getElementById('asc').addEventListener('input', draw);
+document.getElementById('sarr').addEventListener('change', draw);
+document.getElementById('slbl').addEventListener('change', draw);
+function am(t,m,b){document.getElementById("mt").textContent=t;document.getElementById("mi").innerHTML=m;document.getElementById("mb").textContent=b;document.getElementById("modal").classList.add("open");}
+function fm(){document.getElementById("modal").classList.remove("open");}
+draw(); drawScree(); renderLeg(); renderLtable();
 </script></body></html>
