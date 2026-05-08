@@ -163,7 +163,7 @@ def processar_minuta(df_raw):
     total_bruto = len(df_raw)
     df = df_raw[df_raw['conteudo'].notna()].copy()
     df = df[df['conteudo'].astype(str).str.strip() != ''].copy()
-    df = df[df['conteudo'].astype(str).str.len() > 20].copy()
+    df = df[df['conteudo'].astype(str).str.len() > 1].copy()
     df['texto_limpo'] = df['conteudo'].apply(limpar_nlp)
     df = df[df['texto_limpo'].str.len() > 10].copy().reset_index(drop=True)
     df['conteudo_display'] = df['conteudo'].apply(limpar_display)
