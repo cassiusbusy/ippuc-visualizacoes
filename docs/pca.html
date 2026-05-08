@@ -39,21 +39,21 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 <div class="stripe"><div style="background:#00a859"></div><div style="background:#447EC0"></div><div style="background:#8E6CAD"></div><div style="background:#8EC899"></div><div style="background:#FDC533"></div><div style="background:#F07E31"></div><div style="background:#EA535E"></div><div style="background:#CA6673"></div></div>
 <div class="cnt">
   <a class="back" href="index.html">← Voltar</a>
-  <div class="ptitle">PCA — Espaco Semantico das Contribuicoes</div>
-  <div class="psub">Reducao dimensional TF-IDF com biplot de loadings e scree plot de variancia acumulada</div>
+  <div class="ptitle">PCA — Espaço Semântico das Contribuições</div>
+  <div class="psub">Agrupamento estatístico de temas por relevância de palavras-chave e precisão do modelo</div>
   <div class="krow">
-    <div class="kpi"><div class="knum">19.0%</div><div class="klbl">Variancia PC1</div></div>
-    <div class="kpi"><div class="knum">13.1%</div><div class="klbl">Variancia PC2</div></div>
-    <div class="kpi"><div class="knum">32.1%</div><div class="klbl">Total 2 PCs</div></div>
-    <div class="kpi"><div class="knum">5</div><div class="klbl">PCs para 50%</div></div>
-    <div class="kpi"><div class="knum">11</div><div class="klbl">PCs para 80%</div></div>
+    <div class="kpi"><div class="knum">19.0%</div><div class="klbl">Variancia Dimensão 1</div></div>
+    <div class="kpi"><div class="knum">13.1%</div><div class="klbl">Variancia Dimensão 2</div></div>
+    <div class="kpi"><div class="knum">32.1%</div><div class="klbl">Total 2 Dimensões</div></div>
+    <div class="kpi"><div class="knum">5</div><div class="klbl">Dimensões para 50%</div></div>
+    <div class="kpi"><div class="knum">11</div><div class="klbl">Dimensões para 80%</div></div>
     <div class="kpi"><div class="knum">27</div><div class="klbl">Documentos</div></div>
   </div>
   <div class="card" style="margin-bottom:14px;">
     <h3>Biplot 2D</h3>
     <div class="ctrl">
       <label>Escala setas: <input type="range" id="asc" min="1" max="10" step=".5" value="4"></label>
-      <label><input type="checkbox" id="sarr" checked> Loadings</label>
+      <label><input type="checkbox" id="sarr" checked> Direção dos temas</label>
       <label><input type="checkbox" id="slbl"> Labels</label>
     </div>
     <svg id="pcasvg" viewBox="0 0 820 480">
@@ -64,11 +64,11 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
   </div>
   <div class="g2">
     <div class="card">
-      <h3>Scree Plot — Variancia Acumulada</h3>
+      <h3>Scree Plot — Variância Acumulada</h3>
       <svg id="screesvg" viewBox="0 0 480 280"></svg>
     </div>
     <div class="card">
-      <h3>Top Loadings PC1 e PC2</h3>
+      <h3>Principais Termos da Dimensão 1 e 2</h3>
       <div id="ltable" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"></div>
     </div>
   </div>
