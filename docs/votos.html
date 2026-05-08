@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Resultado da Votacao — Plano Diretor Curitiba</title>
+<title>Resultado da Votação — Plano Diretor Curitiba</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 :root{--v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;--la:#F07E31;
@@ -75,8 +75,8 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 
 <div class="cnt">
   <a class="back" href="index.html">← Voltar</a>
-  <div class="ptitle">Resultado da Votacao</div>
-  <div class="psub">Avaliacao da minuta pelos participantes da consulta publica — Plano Diretor de Curitiba 2025</div>
+  <div class="ptitle">Resultado da Votação</div>
+  <div class="psub">Avaliação da minuta pelos participantes da consulta pública — Plano Diretor de Curitiba 2025</div>
 
   <div class="updated" id="updated-lbl">Carregando dados…</div>
 
@@ -107,7 +107,7 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
   </div>
 
   <div class="chart-wrap">
-    <div class="chart-title" id="chart-title">Por Titulo</div>
+    <div class="chart-title" id="chart-title">Por Título</div>
     <div id="chart"><div class="chart-loading"><div class="spinner"></div>&nbsp;Carregando votos…</div></div>
     <div class="nota" id="nota"></div>
   </div>
@@ -117,10 +117,10 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 const SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv';
 
 const NIVEIS = [
-  {id:'titulo',   label:'Titulo'},
-  {id:'capitulo', label:'Capitulo'},
-  {id:'secao',    label:'Secao'},
-  {id:'subsecao', label:'Subsecao'},
+  {id:'titulo',   label:'Título'},
+  {id:'capitulo', label:'Capítulo'},
+  {id:'secao',    label:'Seção'},
+  {id:'subsecao', label:'Subseção'},
 ];
 
 let nivelAtivo = 'titulo';
