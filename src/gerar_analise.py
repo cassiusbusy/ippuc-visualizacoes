@@ -36,11 +36,11 @@ import networkx as nx
 
 N_TOPICOS = 5
 NOMES_TOPICOS = [
-    'Regulamentacao Profissional',
-    'Uso do Solo e Zoneamento',
-    'Mobilidade e Infraestrutura',
-    'Habitacao e Inclusao Social',
-    'Participacao e Gestao',
+    'Grupo 1',
+    'Grupo 2',
+    'Grupo 3',
+    'Grupo 4',
+    'Grupo 5',
 ]
 CORES_TOPICOS  = ['#00a859','#F07E31','#447EC0','#EA535E','#8E6CAD']
 CORES_COMUNIDADES = ['#1a3a5c','#8E6CAD','#F07E31','#EA535E']
