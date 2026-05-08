@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,33 +12,27 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .cnt{max-width:1100px;margin:0 auto;padding:28px 24px;}
 .ptitle{font-size:1.15rem;font-weight:700;color:var(--azd);margin-bottom:4px;}
 .psub{font-size:.8rem;color:#888;margin-bottom:20px;}
-
-/* KPIs gerais — topo */
 .krow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px;}
 .kpi{background:var(--cd);border-radius:10px;padding:14px 10px;border:.5px solid var(--bd);text-align:center;}
 .knum{font-size:1.7rem;font-weight:900;}
 .klbl{font-size:.7rem;color:#888;margin-top:2px;font-weight:500;line-height:1.3;}
-
-/* Bloco votacao */
-.vbloco{
-  background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
-  margin-bottom:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;
-  transition:border-color .15s;
-}
+.spinner{display:inline-block;width:22px;height:22px;border:3px solid var(--bd);
+  border-top-color:var(--az);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kpi.loading .knum{display:none;}
+.kpi.loading .spin-wrap{display:flex;justify-content:center;align-items:center;height:2rem;}
+.spin-wrap{display:none;}
+.vbloco{background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
+  margin-bottom:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color .15s;}
 .vbloco:hover{border-color:var(--v);}
-.vinner{padding:14px 20px;display:flex;align-items:center;gap:0;}
-.vbar-wrap{padding:0 20px 14px;}
-.vbar{height:7px;border-radius:4px;overflow:hidden;display:flex;}
-.vbar-ad{background:var(--v);}
-.vbar-pr{background:var(--la);}
+.vbar-wrap{padding:14px 20px 10px;}
+.vbar{height:7px;border-radius:4px;overflow:hidden;display:flex;background:var(--bd);}
+.vbar-ad{background:var(--v);transition:width .6s ease;}
+.vbar-pr{background:var(--la);transition:width .6s ease;}
 .vbar-leg{display:flex;justify-content:space-between;margin-top:5px;font-size:.68rem;}
-
-/* Corte */
 .cut{display:flex;align-items:center;gap:12px;margin:22px 0 16px;}
 .cut-line{flex:1;height:.5px;background:var(--bd);}
 .cut-lbl{font-size:.7rem;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
-
-/* Cards analise */
 .ncards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .nc{background:var(--cd);border-radius:10px;padding:18px;border:.5px solid var(--bd);
      text-decoration:none;color:inherit;transition:all .2s;display:block;}
@@ -48,19 +41,10 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
 .ncd{font-size:.74rem;color:#666;line-height:1.5;}
 .ncb{display:inline-block;margin-top:10px;background:var(--vl);color:var(--v);
       border-radius:10px;padding:2px 10px;font-size:.68rem;font-weight:600;}
-
-footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
-        padding:14px;border-top:.5px solid var(--bd);}
-
-@media(max-width:800px){
-  .krow{grid-template-columns:repeat(3,1fr);}
-  .ncards{grid-template-columns:1fr 1fr;}
-  .vinner{flex-wrap:wrap;}
-}
-@media(max-width:500px){
-  .krow{grid-template-columns:1fr 1fr;}
-  .ncards{grid-template-columns:1fr;}
-}
+.updated{font-size:.65rem;color:#bbb;text-align:right;margin-bottom:6px;min-height:14px;}
+footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;padding:14px;border-top:.5px solid var(--bd);}
+@media(max-width:800px){.krow{grid-template-columns:repeat(3,1fr);}.ncards{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.krow{grid-template-columns:1fr 1fr;}.ncards{grid-template-columns:1fr;}}
 </style></head><body>
 
 <div class="stripe">
@@ -76,22 +60,27 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
     <div class="psub">Minuta Interativa — Revisao Colaborativa do Plano Diretor de Curitiba 2025</div>
   </div>
 
-  <!-- 1. KPIs gerais -->
+  <div class="updated" id="updated-lbl">Carregando dados…</div>
+
   <div class="krow">
-    <div class="kpi">
-      <div class="knum" style="color:var(--az);">45</div>
+    <div class="kpi loading" id="kpi-votantes">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum" style="color:var(--az);" id="n-votantes">—</div>
       <div class="klbl">Votantes</div>
     </div>
-    <div class="kpi">
-      <div class="knum" style="color:var(--azd);">291</div>
+    <div class="kpi loading" id="kpi-votos">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum" style="color:var(--azd);" id="n-votos">—</div>
       <div class="klbl">Votos</div>
     </div>
-    <div class="kpi">
-      <div class="knum" style="color:var(--la);">65</div>
+    <div class="kpi loading" id="kpi-ajuste">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum" style="color:var(--la);" id="n-ajuste">—</div>
       <div class="klbl">Precisa de Ajuste</div>
     </div>
-    <div class="kpi">
-      <div class="knum" style="color:var(--v);">226</div>
+    <div class="kpi loading" id="kpi-adequado">
+      <div class="spin-wrap"><div class="spinner"></div></div>
+      <div class="knum" style="color:var(--v);" id="n-adequado">—</div>
       <div class="klbl">Adequado</div>
     </div>
     <div class="kpi">
@@ -104,32 +93,29 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
     </div>
   </div>
 
-  <!-- 2. Bloco votacao -->
   <a class="vbloco" href="votos.html">
-    <div class="vbar-wrap" style="padding:14px 20px 10px;">
+    <div class="vbar-wrap">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <span style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;">Resultado da Votacao por Titulo</span>
         <span style="font-size:.7rem;color:var(--az);font-weight:500;">Ver detalhe →</span>
       </div>
       <div class="vbar">
-        <div class="vbar-ad" style="width:77.7%"></div>
-        <div class="vbar-pr" style="width:22.3%"></div>
+        <div class="vbar-ad" id="bar-ad" style="width:0%"></div>
+        <div class="vbar-pr" id="bar-pr" style="width:0%"></div>
       </div>
       <div class="vbar-leg">
-        <span style="color:var(--v);font-weight:600;">Adequado 77.7%</span>
-        <span style="color:var(--la);font-weight:600;">Precisa de Ajuste 22.3%</span>
+        <span style="color:var(--v);font-weight:600;" id="leg-ad">Adequado —%</span>
+        <span style="color:var(--la);font-weight:600;" id="leg-pr">Precisa de Ajuste —%</span>
       </div>
     </div>
   </a>
 
-  <!-- 3. Corte analise semantica -->
   <div class="cut">
     <div class="cut-line"></div>
     <div class="cut-lbl">Analise Semantica</div>
     <div class="cut-line"></div>
   </div>
 
-  <!-- 4. Cards analises -->
   <div class="ncards">
     <a class="nc" href="palavras_chave.html">
       <div class="nct">Palavras-Chave</div>
@@ -153,8 +139,6 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
     </a>
   </div>
 
-  
-  <!-- Box contribuições -->
   <a href="grafo_contribuicoes.html" style="text-decoration:none;display:block;margin-top:14px;">
     <div style="background:var(--cd);border-radius:12px;border:.5px solid var(--bd);
                 padding:18px 24px;transition:border-color .15s;display:flex;
@@ -162,23 +146,95 @@ footer{margin-top:28px;font-size:.7rem;color:#bbb;text-align:center;
          onmouseover="this.style.borderColor='var(--v)'"
          onmouseout="this.style.borderColor='var(--bd)'">
       <div>
-        <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;
-                    letter-spacing:.08em;margin-bottom:5px;">Visualização Interativa</div>
-        <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">
-          Confira todas as contribuições
-        </div>
-        <div style="font-size:.78rem;color:#666;">
-          Grafo de rede conectando todas as contribuições à estrutura do Plano Diretor — por fonte, nível hierárquico e similaridade.
-        </div>
+        <div style="font-size:.72rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Visualizacao Interativa</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--azd);margin-bottom:4px;">Confira todas as contribuicoes</div>
+        <div style="font-size:.78rem;color:#666;">Grafo de rede conectando todas as contribuicoes a estrutura do Plano Diretor — por fonte, nivel hierarquico e similaridade.</div>
       </div>
-      <div style="flex-shrink:0;font-size:.78rem;color:var(--az);font-weight:500;white-space:nowrap;">
-        Ver grafo →
-      </div>
+      <div style="flex-shrink:0;font-size:.78rem;color:var(--az);font-weight:500;white-space:nowrap;">Ver grafo →</div>
     </div>
   </a>
 
-  <footer>
-    IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Analise gerada automaticamente
-  </footer>
+  <footer>IPPUC · Prefeitura de Curitiba · Plano Diretor 2025 · Analise gerada automaticamente</footer>
 </div>
+
+<script>
+const SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv';
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/^"|"$/g, '')));
+  const headers = lines[0].map(h => h.toLowerCase());
+  return lines.slice(1).map(row => {
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = row[i] || '');
+    return obj;
+  });
+}
+
+function setKpi(id, kpiId, value) {
+  const el = document.getElementById(id);
+  const kpi = document.getElementById(kpiId);
+  if (el) el.textContent = value;
+  if (kpi) kpi.classList.remove('loading');
+}
+
+function updateBar(adequado, ajuste) {
+  const total = adequado + ajuste;
+  if (total === 0) return;
+  const pAd = (adequado / total * 100).toFixed(1);
+  const pPr = (ajuste   / total * 100).toFixed(1);
+  document.getElementById('bar-ad').style.width = pAd + '%';
+  document.getElementById('bar-pr').style.width = pPr + '%';
+  document.getElementById('leg-ad').textContent = 'Adequado ' + pAd + '%';
+  document.getElementById('leg-pr').textContent = 'Precisa de Ajuste ' + pPr + '%';
+}
+
+async function loadData() {
+  try {
+    const res = await fetch(SHEETS_CSV + '&t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    const col = (row, ...names) => {
+      for (const n of names) {
+        const k = Object.keys(row).find(k =>
+          k.replace(/[\s_\-]/g,'').toLowerCase() === n.replace(/[\s_\-]/g,'').toLowerCase()
+        );
+        if (k && row[k] !== '') return row[k];
+      }
+      return null;
+    };
+
+    let votantes = 0, votos = 0, ajuste = 0, adequado = 0;
+    rows.forEach(row => {
+      votantes  += parseInt(col(row,'votantes','voters','participantes') || 0) || 0;
+      votos     += parseInt(col(row,'votos','votes','total_votos','totalvotos') || 0) || 0;
+      ajuste    += parseInt(col(row,'precisa_de_ajuste','precisadeajuste','ajuste','needs_adjustment') || 0) || 0;
+      adequado  += parseInt(col(row,'adequado','adequate','ok') || 0) || 0;
+    });
+
+    setKpi('n-votantes', 'kpi-votantes', votantes || '—');
+    setKpi('n-votos',    'kpi-votos',    votos    || '—');
+    setKpi('n-ajuste',   'kpi-ajuste',   ajuste   || '—');
+    setKpi('n-adequado', 'kpi-adequado', adequado || '—');
+    if (votos > 0) updateBar(adequado, ajuste);
+
+    const now = new Date();
+    document.getElementById('updated-lbl').textContent =
+      'Atualizado em ' + now.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  } catch(e) {
+    console.error('Erro ao carregar Sheets:', e);
+    setKpi('n-votantes', 'kpi-votantes', 45);
+    setKpi('n-votos',    'kpi-votos',    291);
+    setKpi('n-ajuste',   'kpi-ajuste',   65);
+    setKpi('n-adequado', 'kpi-adequado', 226);
+    updateBar(226, 65);
+    document.getElementById('updated-lbl').textContent = 'Dados estáticos (falha ao carregar Sheets)';
+  }
+}
+
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
+</script>
 </body></html>
