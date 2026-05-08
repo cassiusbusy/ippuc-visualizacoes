@@ -64,7 +64,7 @@ body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-s
   </div>
   <div class="g2">
     <div class="card">
-      <h3>Scree Plot — Variância Acumulada</h3>
+      <h3>Representatividade dos dados para explicar o conteúdo</h3>
       <svg id="screesvg" viewBox="0 0 480 280"></svg>
     </div>
     <div class="card">
@@ -124,8 +124,8 @@ function drawScree(){
 
   let html=`<line x1="${SP}" y1="${SP}" x2="${SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
     <line x1="${SP}" y1="${SH-SP}" x2="${SW-SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
-    <text x="${SW/2}" y="${SH-4}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif">Componente Principal</text>
-    <text x="10" y="${SH/2}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 10 ${SH/2})">Variancia (%)</text>`;
+    <text x="${SW/2}" y="${SH-4}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif">Quantidade de Dimensões</text>
+    <text x="10" y="${SH/2}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 10 ${SH/2})">Cobertura do conteúdo (%)</text>`;
 
   // Barras variancia individual
   data.forEach((d,i)=>{
