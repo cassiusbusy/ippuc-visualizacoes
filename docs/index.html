@@ -252,3 +252,16 @@ async function loadData() {
   } catch(e) {
     console.error('Erro ao carregar Sheets:', e);
     // Fallback estático
+    setKpi('n-votantes', 'kpi-votantes', 45);
+    setKpi('n-votos',    'kpi-votos',    291);
+    setKpi('n-ajuste',   'kpi-ajuste',   65);
+    setKpi('n-adequado', 'kpi-adequado', 226);
+    updateBar(226, 65);
+    document.getElementById('updated-lbl').textContent = 'Dados estaticos (falha ao carregar Sheets)';
+  }
+}
+
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
+</script>
+</body></html>
