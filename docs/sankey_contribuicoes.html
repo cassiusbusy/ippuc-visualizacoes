@@ -123,18 +123,17 @@ async function carregar(){
     else{selE.value=etapas[0];popularOficinas(etapas[0]);}
     // Carregar votos em paralelo (não bloqueia se falhar)
     fetch(VURL).then(function(rv){ return rv.text(); }).then(function(vtxt){
-      var vrows=[], cur='',inQ=false,fields=[],i=0;
-      while(i<vtxt.length){
-        var ch=vtxt[i];
-        if(ch==='"'){if(inQ&&vtxt[i+1]==='"'){cur+='"';i+=2;continue;}inQ=!inQ;i++;continue;}
-        if(ch===','&&!inQ){fields.push(cur);cur='';i++;continue;}
-        if(ch==='
-'&&!inQ){fields.push(cur);cur='';vrows.push(fields);fields=[];i++;continue;}
-        if(ch==='
-'){i++;continue;}
-        cur+=ch;i++;
+      var vrows=[], vcur='',vinQ=false,vfields=[],vi=0;
+      while(vi<vtxt.length){
+        var vch=vtxt.charCodeAt(vi);
+        var vchStr=vtxt[vi];
+        if(vchStr==='"'){if(vinQ&&vtxt[vi+1]==='"'){vcur+='"';vi+=2;continue;}vinQ=!vinQ;vi++;continue;}
+        if(vchStr===','&&!vinQ){vfields.push(vcur);vcur='';vi++;continue;}
+        if(vch===10&&!vinQ){vfields.push(vcur);vcur='';vrows.push(vfields);vfields=[];vi++;continue;}
+        if(vch===13){vi++;continue;}
+        vcur+=vchStr;vi++;
       }
-      if(cur||fields.length){fields.push(cur);vrows.push(fields);}
+      if(vcur||vfields.length){vfields.push(vcur);vrows.push(vfields);}
       if(vrows.length<2)return;
       var vh=vrows[0].map(function(h){return h.trim().replace(/^"|"$/g,'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9_]/g,'');});
       var viId=vh.findIndex(function(h){return h.includes('estrutura')||h.includes('codigo')||h==='id';});
