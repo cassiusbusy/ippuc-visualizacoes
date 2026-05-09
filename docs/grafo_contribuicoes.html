@@ -272,7 +272,7 @@ function render(mv,cv,ms){
     if(!c||!m||!fonteF.has(c.fonte)||!ms.has(m.id))return;
     if(titF!=='todos'&&c.titulo_pai!==titF)return;
     if(oficF!=='todas'&&c.nome_oficina!==oficF)return;
-    cL+='<line class="contrib-link" data-proposta="'+(c.proposta||\'\').replace(/"/g,\'&quot;\')+\'" data-codigo="'+(c.codigo||'')+'\'" x1="'+c.x.toFixed(1)+'" y1="'+c.y.toFixed(1)+'" x2="'+m.x.toFixed(1)+'" y2="'+m.y.toFixed(1)+'" stroke="#CA6673" stroke-width=".3" stroke-opacity=".12" pointer-events="none"/>';
+    cL+='<line class="contrib-link" data-contrib="'+(c.codigo||'')+'" x1="'+c.x.toFixed(1)+'" y1="'+c.y.toFixed(1)+'" x2="'+m.x.toFixed(1)+'" y2="'+m.y.toFixed(1)+'" stroke="#CA6673" stroke-width=".3" stroke-opacity=".4"/>';
   });
   document.getElementById('lc').innerHTML=cL;
   let cH='';
@@ -425,8 +425,7 @@ function aplicarBusca() {
   // Links: opaco se a contribuição de origem não bate
   document.querySelectorAll('.contrib-link').forEach(function(el) {
     var cod = (el.dataset.contrib || '').toLowerCase();
-    var txt = (el.dataset.proposta || '').toLowerCase();
-    var bate = txt.includes(buscaAtiva) || cod.includes(buscaAtiva);
+    var bate = cod.includes(buscaAtiva);
     el.style.opacity = bate ? '' : '0.04';
   });
 
