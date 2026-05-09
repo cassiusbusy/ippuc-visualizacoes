@@ -95,6 +95,11 @@ input[type=range]{width:100%;accent-color:var(--v);}
     <div style="font-size:.78rem;color:#333;line-height:1.5;" id="ibox-txt"></div>
     <button id="ibox-ver" onclick="abrirModal(window._sel)" style="margin-top:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--bordo);background:var(--bordol);color:var(--bordo);cursor:pointer;font-size:.71rem;font-family:Roboto,sans-serif;display:none;">Ver completo</button>
   </div>
+  <div class="busca-wrap" id="busca-wrap" style="display:none;">
+    <input class="busca-input" id="busca-inp" type="text" placeholder="Buscar contribuição por texto ou código...">
+    <span class="busca-count" id="busca-count"></span>
+    <button class="busca-clear" id="busca-clear" onclick="limparBusca()">&#10005; Limpar</button>
+  </div>
   <div class="card">
     <h3>Rede Circular</h3>
     <div id="loading-msg" class="loading"><div class="spinner"></div><span>Carregando contribuições...</span></div>
@@ -216,7 +221,7 @@ async function carregar(){
     ofs.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;document.getElementById('sel-oficina').appendChild(op);});
     initFontes();
     document.getElementById('loading-msg').style.display='none';
-    ['gsvg','hint','legenda','card-filtros'].forEach(id=>document.getElementById(id).style.display='block');
+    ['gsvg','hint','legenda','card-filtros','busca-wrap'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('ctrl-panel').style.display='flex';
     setInterval(tick,30);
   }catch(e){console.error(e);document.getElementById('loading-msg').innerHTML='<span style="color:#CA6673">Erro: '+e.message+'</span>';}
