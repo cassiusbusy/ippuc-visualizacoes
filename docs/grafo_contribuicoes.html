@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grafo Contribuições — Plano Diretor Curitiba</title>
+<title>Grafo Contribuições — Análise PARCIAL do Plano Diretor Curitiba</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 :root{--v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;--bordo:#CA6673;--bordol:#fdeef0;--bg:#fff;--cd:#f3f3f3;--bd:#e2e4e8;--tx:#1a1a2e;}
@@ -48,14 +47,6 @@ input[type=range]{width:100%;accent-color:var(--v);}
 @keyframes spin{to{transform:rotate(360deg)}}
 .tooltip{position:fixed;background:rgba(26,26,46,.92);color:#fff;border-radius:8px;padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:280px;pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
 .tooltip.vis{display:block;}
-.busca-wrap{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.busca-input{flex:1;border:1.5px solid var(--bd);border-radius:8px;padding:7px 12px;
-  font-size:.8rem;font-family:Roboto,sans-serif;outline:none;background:#fff;color:var(--tx);}
-.busca-input:focus{border-color:var(--v);}
-.busca-count{font-size:.72rem;color:#888;white-space:nowrap;}
-.busca-clear{background:var(--cd);border:none;border-radius:6px;padding:5px 10px;
-  font-size:.72rem;cursor:pointer;color:#666;display:none;}
-.busca-clear.vis{display:block;}
 .mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;align-items:center;justify-content:center;padding:20px;}
 .mov.open{display:flex;}
 .mo{background:#fff;border-radius:12px;max-width:660px;width:100%;max-height:80vh;overflow-y:auto;padding:24px;position:relative;border-top:4px solid var(--bordo);}
@@ -94,11 +85,6 @@ input[type=range]{width:100%;accent-color:var(--v);}
     <div id="ibox-pills" style="margin-bottom:7px;"></div>
     <div style="font-size:.78rem;color:#333;line-height:1.5;" id="ibox-txt"></div>
     <button id="ibox-ver" onclick="abrirModal(window._sel)" style="margin-top:8px;padding:3px 10px;border-radius:5px;border:1px solid var(--bordo);background:var(--bordol);color:var(--bordo);cursor:pointer;font-size:.71rem;font-family:Roboto,sans-serif;display:none;">Ver completo</button>
-  </div>
-  <div class="busca-wrap" id="busca-wrap" style="display:none;">
-    <input class="busca-input" id="busca-inp" type="text" placeholder="Buscar contribuição por texto ou código...">
-    <span class="busca-count" id="busca-count"></span>
-    <button class="busca-clear" id="busca-clear" onclick="limparBusca()">&#10005; Limpar</button>
   </div>
   <div class="card">
     <h3>Rede Circular</h3>
@@ -161,31 +147,47 @@ let nM=MINUTA.minuta.map(n=>({...n,x:n.px,y:n.py,vx:0,vy:0,fixed:false}));
 const mM={};nM.forEach(n=>mM[n.id]=n);
 const tIds=nM.filter(n=>n.nivel===1).map(n=>n.id);
 
-function nc(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');}
+function nc(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
 
 function parseCSV(txt){
-  var rows=[],cur='',inQ=false,fields=[],i=0;
-  while(i<txt.length){
-    var ch=txt[i];
-    if(ch==='"'){if(inQ&&txt[i+1]==='"'){cur+='"';i+=2;continue;}inQ=!inQ;i++;continue;}
-    if(ch===','&&!inQ){fields.push(cur);cur='';i++;continue;}
-    if(txt.charCodeAt(i)===10&&!inQ){fields.push(cur);cur='';rows.push(fields);fields=[];i++;continue;}
-    if(txt.charCodeAt(i)===13){i++;continue;}
-    cur+=ch;i++;
+  // Parser robusto: suporta campos com \n e vírgulas dentro de aspas
+  const campos = [];
+  let cur = '', inQ = false, i = 0;
+  while(i < txt.length){
+    const ch = txt[i];
+    if(ch === '"'){
+      if(inQ && txt[i+1] === '"'){cur += '"'; i+=2; continue;} // "" escapa aspas
+      inQ = !inQ; i++; continue;
+    }
+    if(ch === ',' && !inQ){campos.push(cur); cur=''; i++; continue;}
+    if(ch === '\n' && !inQ){campos.push(cur); cur=''; campos.push('\x00ROW\x00'); i++; continue;}
+    if(ch === '\r'){i++; continue;}
+    cur += ch; i++;
   }
-  if(cur||fields.length){fields.push(cur);rows.push(fields);}
-  if(rows.length<2)return[];
-  var raw=rows[0].map(function(h){return h.trim().replace(/^"|"$/g,'');});
-  var norm=raw.map(nc);
-  var iC=norm.findIndex(function(h){return h.includes('cdigo')||h==='codigo';});
-  var iP=norm.findIndex(function(h){return h.includes('proposta');});
-  var iF=norm.findIndex(function(h){return h==='fonte';});
-  var iO=norm.findIndex(function(h){return h.includes('oficina');});
-  var iE=norm.findIndex(function(h){return h.includes('explic');});
-  var iS=norm.findIndex(function(h){return h.includes('similar');});
+  campos.push(cur);
+
+  // Separar em linhas usando marcador
+  const linhas = [];
+  let row = [];
+  for(const f of campos){
+    if(f === '\x00ROW\x00'){linhas.push(row); row=[];}
+    else row.push(f.trim());
+  }
+  if(row.length>0)linhas.push(row);
+
+  if(linhas.length < 2) return [];
+  const raw = linhas[0];
+  const norm = raw.map(nc);
+  const iC = norm.findIndex(h=>h.includes('cdigo')||h==='codigo');
+  const iP = norm.findIndex(h=>h.includes('proposta'));
+  const iF = norm.findIndex(h=>h==='fonte');
+  const iO = norm.findIndex(h=>h.includes('oficina'));
+  const iE = norm.findIndex(h=>h.includes('explic'));
+  const iS = norm.findIndex(h=>h.includes('similar'));
   console.log('Headers:',raw,'iC:',iC,'iP:',iP,'iF:',iF,'iO:',iO);
-  return rows.slice(1).filter(function(r){return r.length>1;}).map(function(v){
-    function g(idx){return idx>=0?(v[idx]||'').trim().replace(/^"|"$/g,''):'';};
+
+  return linhas.slice(1).filter(r=>r.length>1).map(v=>{
+    const g=i=>i>=0?(v[i]||'').trim():'';
     return{codigo:g(iC),proposta:g(iP),fonte:g(iF)||'outros',oficina:g(iO),explicacao:g(iE),similaridade:g(iS)};
   });
 }
@@ -221,7 +223,7 @@ async function carregar(){
     ofs.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;document.getElementById('sel-oficina').appendChild(op);});
     initFontes();
     document.getElementById('loading-msg').style.display='none';
-    ['gsvg','hint','legenda','card-filtros','busca-wrap'].forEach(id=>document.getElementById(id).style.display='block');
+    ['gsvg','hint','legenda','card-filtros'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('ctrl-panel').style.display='flex';
     setInterval(tick,30);
   }catch(e){console.error(e);document.getElementById('loading-msg').innerHTML='<span style="color:#CA6673">Erro: '+e.message+'</span>';}
@@ -277,15 +279,11 @@ function render(mv,cv,ms){
     if(!c||!m||!fonteF.has(c.fonte)||!ms.has(m.id))return;
     if(titF!=='todos'&&c.titulo_pai!==titF)return;
     if(oficF!=='todas'&&c.nome_oficina!==oficF)return;
-    cL+='<line class="contrib-link" data-contrib="'+(c.codigo||'')+'" x1="'+c.x.toFixed(1)+'" y1="'+c.y.toFixed(1)+'" x2="'+m.x.toFixed(1)+'" y2="'+m.y.toFixed(1)+'" stroke="#CA6673" stroke-width=".3" stroke-opacity=".4"/>';
+    cL+='<line x1="'+c.x.toFixed(1)+'" y1="'+c.y.toFixed(1)+'" x2="'+m.x.toFixed(1)+'" y2="'+m.y.toFixed(1)+'" stroke="#CA6673" stroke-width=".3" stroke-opacity=".12" pointer-events="none"/>';
   });
   document.getElementById('lc').innerHTML=cL;
   let cH='';
-  if(showC)cv.forEach(c=>{
-    var prop=(c.proposta||'').replace(/"/g,'&quot;');
-    var cod=(c.codigo||'');
-    cH+='<circle class="contrib-node" data-tp="c" data-id="'+c.id+'" data-proposta="'+prop+'" data-codigo="'+cod+'" cx="'+c.x.toFixed(1)+'" cy="'+c.y.toFixed(1)+'" r="3" fill="#CA6673" fill-opacity=".65" style="cursor:pointer"/>';
-  });
+  if(showC)cv.forEach(c=>{cH+='<circle data-tp="c" data-id="'+c.id+'" cx="'+c.x.toFixed(1)+'" cy="'+c.y.toFixed(1)+'" r="3" fill="#CA6673" fill-opacity=".65" style="cursor:pointer"/>';});
   document.getElementById('nc').innerHTML=cH;
   let mH='';
   mv.forEach(n=>{
@@ -396,55 +394,5 @@ function resetar(){
   nC.forEach(c=>{const m=mM[c.id_estrutura];const a=m?m.ang:Math.random()*Math.PI*2;c.x=CX+Math.cos(a+(Math.random()-.5)*.5)*RC;c.y=CY+Math.sin(a+(Math.random()-.5)*.5)*RC;c.vx=0;c.vy=0;c.fixed=false;});
 }
 carregar();
-
-// ── BUSCA ──────────────────────────────────────────────────────────────
-var buscaAtiva = '';
-
-function aplicarBusca() {
-  buscaAtiva = document.getElementById('busca-inp').value.trim().toLowerCase();
-  const btn = document.getElementById('busca-clear');
-  const cnt = document.getElementById('busca-count');
-  btn.classList.toggle('vis', buscaAtiva.length > 0);
-
-  if (!buscaAtiva) {
-    // Restaurar opacidade de todas as contribuições
-    document.querySelectorAll('.contrib-node').forEach(function(el) {
-      el.style.opacity = '';
-    });
-    document.querySelectorAll('.contrib-link').forEach(function(el) {
-      el.style.opacity = '';
-    });
-    cnt.textContent = '';
-    return;
-  }
-
-  var encontrados = 0;
-  document.querySelectorAll('.contrib-node').forEach(function(el) {
-    var txt = (el.dataset.proposta || '').toLowerCase();
-    var cod = (el.dataset.codigo || '').toLowerCase();
-    var bate = txt.includes(buscaAtiva) || cod.includes(buscaAtiva);
-    el.style.opacity = bate ? '1' : '0.08';
-    if (bate) encontrados++;
-  });
-
-  // Links: opaco se a contribuição de origem não bate
-  document.querySelectorAll('.contrib-link').forEach(function(el) {
-    var cod = (el.dataset.contrib || '').toLowerCase();
-    var bate = cod.includes(buscaAtiva);
-    el.style.opacity = bate ? '' : '0.04';
-  });
-
-  cnt.textContent = encontrados + ' encontrada' + (encontrados !== 1 ? 's' : '');
-}
-
-function limparBusca() {
-  document.getElementById('busca-inp').value = '';
-  aplicarBusca();
-}
-
-document.getElementById('busca-inp').addEventListener('input', aplicarBusca);
-document.getElementById('busca-inp').addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') limparBusca();
-});
 </script>
 </body></html>
