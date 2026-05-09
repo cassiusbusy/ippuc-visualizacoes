@@ -164,10 +164,8 @@ function parseCSV(txt){
     var ch=txt[i];
     if(ch==='"'){if(inQ&&txt[i+1]==='"'){cur+='"';i+=2;continue;}inQ=!inQ;i++;continue;}
     if(ch===','&&!inQ){fields.push(cur);cur='';i++;continue;}
-    if(ch==='
-'&&!inQ){fields.push(cur);cur='';rows.push(fields);fields=[];i++;continue;}
-    if(ch==='
-'){i++;continue;}
+    if(txt.charCodeAt(i)===10&&!inQ){fields.push(cur);cur='';rows.push(fields);fields=[];i++;continue;}
+    if(txt.charCodeAt(i)===13){i++;continue;}
     cur+=ch;i++;
   }
   if(cur||fields.length){fields.push(cur);rows.push(fields);}
