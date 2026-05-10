@@ -1,111 +1,7 @@
 
-<!DOCTYPE html><html lang="pt-BR"><head><style>
-@charset "utf-8";
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
-:root { --v: #00a859; --vl: #e6f7ee; --az: #447EC0; --azd: #1a3a5c; --la: #F07E31; --bg: #fff; --cd: #f3f3f3; --bd: #e2e4e8; --tx: #1a1a2e; }
-
-* { box-sizing: border-box; margin: 0px; padding: 0px; }
-
-body { font-family: Roboto, sans-serif; background: var(--bg); color: var(--tx); font-size: 14px; }
-
-.stripe { height: 5px; display: flex; }
-
-.stripe div { flex: 1 1 0%; }
-
-.cnt { max-width: 1100px; margin: 0px auto; padding: 24px; }
-
-.ptitle { font-size: 1.1rem; font-weight: 700; color: var(--azd); margin-bottom: 4px; }
-
-.psub { font-size: 0.8rem; color: rgb(136, 136, 136); margin-bottom: 20px; }
-
-.back { display: inline-flex; align-items: center; gap: 6px; color: var(--az); font-size: 0.78rem; font-weight: 500; text-decoration: none; margin-bottom: 14px; }
-
-.krow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-
-.kpi { background: var(--cd); border-radius: 10px; padding: 16px; border: .5px solid var(--bd); text-align: center; }
-
-.knum { font-size: 2.2rem; font-weight: 900; }
-
-.klbl { font-size: 0.75rem; color: rgb(136, 136, 136); margin-top: 3px; font-weight: 500; }
-
-.knum.tot { color: var(--azd); }
-
-.knum.ad { color: var(--v); }
-
-.knum.pr { color: var(--la); }
-
-.knum.vt { color: var(--az); }
-
-.spinner { display: inline-block; width: 24px; height: 24px; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--az); border-radius: 50%; animation: 0.7s linear 0s infinite normal none running spin; }
-
-@keyframes spin { 
-  100% { transform: rotate(360deg); }
-}
-
-.kpi.loading .knum { display: none; }
-
-.kpi.loading .spin-wrap { display: flex; justify-content: center; align-items: center; height: 2.6rem; }
-
-.spin-wrap { display: none; }
-
-.updated { font-size: 0.65rem; color: rgb(187, 187, 187); text-align: right; margin-bottom: 8px; min-height: 14px; }
-
-.filtro-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-
-.fbtn { padding: 7px 18px; border-radius: 20px; border: 1.5px solid var(--bd); background: rgb(255, 255, 255); cursor: pointer; font-family: Roboto, sans-serif; font-size: 0.78rem; font-weight: 500; color: rgb(102, 102, 102); transition: 0.15s; }
-
-.fbtn:hover { border-color: var(--v); color: var(--v); }
-
-.fbtn.ativo { background: var(--v); border-color: var(--v); color: rgb(255, 255, 255); font-weight: 700; }
-
-.fbtn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-.leg { display: flex; gap: 18px; margin-bottom: 16px; font-size: 0.78rem; }
-
-.leg-item { display: flex; align-items: center; gap: 6px; font-weight: 500; }
-
-.leg-dot { width: 14px; height: 14px; border-radius: 3px; }
-
-.chart-wrap { background: var(--cd); border-radius: 12px; padding: 20px; border: .5px solid var(--bd); }
-
-.chart-title { font-size: 0.8rem; font-weight: 700; color: var(--azd); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
-
-.bar-row { display: flex; align-items: center; margin-bottom: 10px; gap: 8px; }
-
-.bar-label { width: 240px; font-size: 0.74rem; color: rgb(68, 68, 68); text-align: right; flex-shrink: 0; line-height: 1.3; padding-right: 6px; }
-
-.bar-center { flex: 1 1 0%; display: flex; align-items: center; }
-
-.bar-precisa { height: 26px; background: var(--la); border-radius: 4px 0px 0px 4px; display: flex; align-items: center; padding-left: 5px; transition: width 0.5s; min-width: 0px; }
-
-.bar-adequado { height: 26px; background: var(--v); border-radius: 0px 4px 4px 0px; display: flex; align-items: center; justify-content: flex-end; padding-right: 5px; transition: width 0.5s; min-width: 0px; }
-
-.bar-val { font-size: 0.72rem; font-weight: 700; color: rgb(255, 255, 255); white-space: nowrap; }
-
-.bar-zero { width: 2px; background: rgb(204, 204, 204); height: 26px; flex-shrink: 0; }
-
-.axis-line { border-top: 1.5px solid rgb(208, 208, 208); margin: 4px 0px 12px; }
-
-.sem-dados { text-align: center; padding: 40px; color: rgb(187, 187, 187); font-size: 0.9rem; }
-
-.nota { font-size: 0.7rem; color: rgb(170, 170, 170); margin-top: 12px; text-align: center; }
-
-.chart-loading { display: flex; justify-content: center; align-items: center; padding: 60px; gap: 10px; color: rgb(170, 170, 170); font-size: 0.85rem; }
-
-@media (max-width: 700px) {
-  .krow { grid-template-columns: 1fr 1fr; }
-  .bar-label { width: 140px; font-size: 0.68rem; }
-}
-
-</style><style>
-@charset "utf-8";
-
-
-
-</style>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resultado da Votação — Plano Diretor Curitiba</title>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWF337NDW8"></script>
@@ -115,183 +11,255 @@ body { font-family: Roboto, sans-serif; background: var(--bg); color: var(--tx);
   gtag('js', new Date());
   gtag('config', 'G-BWF337NDW8');
 </script>
-</head><body>
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+:root{--v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;--la:#F07E31;
+      --bg:#fff;--cd:#f3f3f3;--bd:#e2e4e8;--tx:#1a1a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;}
+.stripe{height:5px;display:flex;}.stripe div{flex:1;}
+.cnt{max-width:1100px;margin:0 auto;padding:24px;}
+.ptitle{font-size:1.1rem;font-weight:700;color:var(--azd);margin-bottom:4px;}
+.psub{font-size:.8rem;color:#888;margin-bottom:20px;}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--az);font-size:.78rem;font-weight:500;text-decoration:none;margin-bottom:14px;}
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.kpi{background:var(--cd);border-radius:10px;padding:16px;border:.5px solid var(--bd);text-align:center;}
+.knum{font-size:2.2rem;font-weight:900;}
+.klbl{font-size:.75rem;color:#888;margin-top:3px;font-weight:500;}
+.knum.tot{color:var(--azd);} .knum.ad{color:var(--v);} .knum.pr{color:var(--la);} .knum.vt{color:var(--az);}
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--bd);
+  border-top-color:var(--az);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kpi.loading .knum{display:none;}
+.kpi.loading .spin-wrap{display:flex;justify-content:center;align-items:center;height:2.6rem;}
+.spin-wrap{display:none;}
+.updated{font-size:.65rem;color:#bbb;text-align:right;margin-bottom:8px;min-height:14px;}
+.filtro-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.fbtn{padding:7px 18px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;
+       cursor:pointer;font-family:Roboto,sans-serif;font-size:.78rem;font-weight:500;
+       color:#666;transition:all .15s;}
+.fbtn:hover{border-color:var(--v);color:var(--v);}
+.fbtn.ativo{background:var(--v);border-color:var(--v);color:#fff;font-weight:700;}
+.fbtn:disabled{opacity:.35;cursor:not-allowed;}
+.leg{display:flex;gap:18px;margin-bottom:16px;font-size:.78rem;}
+.leg-item{display:flex;align-items:center;gap:6px;font-weight:500;}
+.leg-dot{width:14px;height:14px;border-radius:3px;}
+.chart-wrap{background:var(--cd);border-radius:12px;padding:20px;border:.5px solid var(--bd);}
+.chart-title{font-size:.8rem;font-weight:700;color:var(--azd);text-transform:uppercase;
+              letter-spacing:.06em;margin-bottom:16px;}
+.bar-row{display:flex;align-items:center;margin-bottom:10px;gap:8px;}
+.bar-label{width:240px;font-size:.74rem;color:#444;text-align:right;flex-shrink:0;
+            line-height:1.3;padding-right:6px;}
+.bar-center{flex:1;display:flex;align-items:center;}
+.bar-precisa{height:26px;background:var(--la);border-radius:4px 0 0 4px;
+              display:flex;align-items:center;padding-left:5px;transition:width .5s ease;min-width:0;}
+.bar-adequado{height:26px;background:var(--v);border-radius:0 4px 4px 0;
+               display:flex;align-items:center;justify-content:flex-end;
+               padding-right:5px;transition:width .5s ease;min-width:0;}
+.bar-val{font-size:.72rem;font-weight:700;color:#fff;white-space:nowrap;}
+.bar-zero{width:2px;background:#ccc;height:26px;flex-shrink:0;}
+.axis-line{border-top:1.5px solid #d0d0d0;margin:4px 0 12px;}
+.sem-dados{text-align:center;padding:40px;color:#bbb;font-size:.9rem;}
+.nota{font-size:.7rem;color:#aaa;margin-top:12px;text-align:center;}
+.chart-loading{display:flex;justify-content:center;align-items:center;padding:60px;gap:10px;color:#aaa;font-size:.85rem;}
+@media(max-width:700px){
+  .krow{grid-template-columns:1fr 1fr;}
+  .bar-label{width:140px;font-size:.68rem;}
+}
+</style></head><body>
 <div class="stripe">
   <div style="background:#00a859"></div><div style="background:#447EC0"></div>
   <div style="background:#8E6CAD"></div><div style="background:#8EC899"></div>
   <div style="background:#FDC533"></div><div style="background:#F07E31"></div>
   <div style="background:#EA535E"></div><div style="background:#CA6673"></div>
 </div>
-
 <div class="cnt">
-  <a class="back" href="https://cassiusbusy.github.io/ippuc-visualizacoes/docs/index.html" onclick="gtag(\'event\',\'voltar\',{event_category:\'navigation\',event_label:\'votos\'})">← Voltar</a>
+  <a class="back" href="index.html" onclick="gtag('event','voltar',{event_category:'navigation',event_label:'votos'})">← Voltar</a>
   <div class="ptitle">Resultado da Votação</div>
   <div class="psub">Avaliação da minuta pelos participantes da consulta pública — Plano Diretor de Curitiba 2025</div>
-
-  <div class="updated" id="updated-lbl">Atualizado em 09/05/2026, 22:00</div>
-
+  <div class="updated" id="updated-lbl">Carregando dados…</div>
   <div class="krow">
-    <div class="kpi" id="kpi-vt">
+    <div class="kpi loading" id="kpi-vt">
       <div class="spin-wrap"><div class="spinner"></div></div>
-      <div class="knum vt" id="n-vt">46</div><div class="klbl">Votantes</div>
+      <div class="knum vt" id="n-vt">—</div><div class="klbl">Votantes</div>
     </div>
-    <div class="kpi" id="kpi-tot">
+    <div class="kpi loading" id="kpi-tot">
       <div class="spin-wrap"><div class="spinner"></div></div>
-      <div class="knum tot" id="n-tot">300</div><div class="klbl">Votos</div>
+      <div class="knum tot" id="n-tot">—</div><div class="klbl">Votos</div>
     </div>
-    <div class="kpi" id="kpi-pr">
+    <div class="kpi loading" id="kpi-pr">
       <div class="spin-wrap"><div class="spinner"></div></div>
-      <div class="knum pr" id="n-pr">65</div><div class="klbl">Precisa de Ajuste</div>
+      <div class="knum pr" id="n-pr">—</div><div class="klbl">Precisa de Ajuste</div>
     </div>
-    <div class="kpi" id="kpi-ad">
+    <div class="kpi loading" id="kpi-ad">
       <div class="spin-wrap"><div class="spinner"></div></div>
-      <div class="knum ad" id="n-ad">235</div><div class="klbl">Adequado</div>
+      <div class="knum ad" id="n-ad">—</div><div class="klbl">Adequado</div>
     </div>
   </div>
-
-  <div class="filtro-row" id="filtros"><button class="fbtn ativo" data-nivel="titulo">Título</button><button class="fbtn" data-nivel="capitulo">Capítulo</button><button class="fbtn" data-nivel="secao">Seção</button><button class="fbtn" data-nivel="subsecao">Subseção</button></div>
-
+  <div class="filtro-row" id="filtros"></div>
   <div class="leg">
     <div class="leg-item"><div class="leg-dot" style="background:var(--la)"></div><span>Precisa de Ajuste</span></div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--v)"></div><span>Adequado</span></div>
   </div>
-
   <div class="chart-wrap">
     <div class="chart-title" id="chart-title">Por Título</div>
-    <div id="chart"><div class="axis-line"></div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO I – DO DESENVOLVIMENTO URBANO SUSTENTÁVEL">TÍTULO I – DO DESENVOLVIMENTO URBANO SUSTENTÁVEL</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:128px;">
-            <span class="bar-val">-14</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:220px;">
-            <span class="bar-val">24</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA">TÍTULO III – DA POLÍTICA TERRITORIAL INTEGRADA</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:64px;">
-            <span class="bar-val">-7</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:174px;">
-            <span class="bar-val">19</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO II – DA INTEGRAÇÃO METROPOLITANA">TÍTULO II – DA INTEGRAÇÃO METROPOLITANA</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:64px;">
-            <span class="bar-val">-7</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:174px;">
-            <span class="bar-val">19</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO">TÍTULO IV – DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRIT…</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:55px;">
-            <span class="bar-val">-6</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:165px;">
-            <span class="bar-val">18</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO VII – DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS">TÍTULO VII – DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:73px;">
-            <span class="bar-val">-8</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:110px;">
-            <span class="bar-val">12</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE">TÍTULO VI – DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTIC…</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:37px;">
-            <span class="bar-val">-4</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:110px;">
-            <span class="bar-val">12</span>
-          </div>
-        </div>
-      </div>
-    </div><div class="bar-row">
-      <div class="bar-label" title="TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA">TÍTULO V – DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGR…</div>
-      <div class="bar-center">
-        <div style="flex:1;display:flex;justify-content:flex-end;">
-          <div class="bar-precisa" style="width:46px;">
-            <span class="bar-val">-5</span>
-          </div>
-        </div>
-        <div class="bar-zero"></div>
-        <div style="flex:1;display:flex;justify-content:flex-start;">
-          <div class="bar-adequado" style="width:92px;">
-            <span class="bar-val">10</span>
-          </div>
-        </div>
-      </div>
-    </div></div>
+    <div id="chart"><div class="chart-loading"><div class="spinner"></div>&nbsp;Carregando votos…</div></div>
     <div class="nota" id="nota"></div>
   </div>
 </div>
-
-
-
-<div id="give-freely-root-mbnbehikldjhnfehhnaidhjhoofhpehk" class="give-freely-root" data-extension-id="mbnbehikldjhnfehhnaidhjhoofhpehk" data-extension-name="CSS Peeper" style="display: block;"><template shadowmode="open"><div><div class="gf-app"></div></div></template></div><script>
-// GA: track filtro nivel clicks
-document.addEventListener('DOMContentLoaded', function() {
-  // Delegate — observe clicks on .fbtn after they're created
-  document.getElementById('filtros').addEventListener('click', function(e) {
-    var btn = e.target.closest('.fbtn');
-    if(btn && btn.dataset.nivel) {
-      gtag('event', 'filtro_nivel', {event_category: 'interaction', event_label: btn.dataset.nivel});
-    }
+<script>
+const SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv';
+const NIVEIS = [
+  {id:'titulo',   label:'Título'},
+  {id:'capitulo', label:'Capítulo'},
+  {id:'secao',    label:'Seção'},
+  {id:'subsecao', label:'Subseção'},
+];
+let nivelAtivo = 'titulo';
+let dadosGlobais = null;
+function splitCSVLine(line) {
+  const result = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; continue; }
+    if (c === ',' && !inQ) { result.push(cur); cur = ''; continue; }
+    cur += c;
+  }
+  result.push(cur);
+  return result;
+}
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase().trim());
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = splitCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = (vals[i] || '').trim().replace(/^"|"$/g, ''));
+    return obj;
   });
-});
+}
+function normalizeNivel(s) {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+}
+function agregaDados(rows) {
+  const emails = new Set();
+  const niveis = { titulo: {}, capitulo: {}, secao: {}, subsecao: {} };
+  let totalVotos = 0, totalAd = 0, totalPr = 0;
+  rows.forEach(row => {
+    const email = row['email'] || '';
+    const nivel = normalizeNivel(row['nivel'] || '');
+    const nome  = (row['nome'] || '').trim();
+    const voto  = (row['voto'] || '').toLowerCase().trim();
+    if (email) emails.add(email);
+    const nivelKey = nivel.startsWith('tit') ? 'titulo'
+                   : nivel.startsWith('cap') ? 'capitulo'
+                   : nivel.startsWith('sec') ? 'secao'
+                   : nivel.startsWith('sub') ? 'subsecao'
+                   : null;
+    if (!nivelKey || !nome) return;
+    if (!niveis[nivelKey][nome]) niveis[nivelKey][nome] = { nome, adequado: 0, precisa: 0 };
+    if (voto === 'adequado') { niveis[nivelKey][nome].adequado++; totalAd++; totalVotos++; }
+    else if (voto === 'precisa_ajuste' || voto === 'precisa de ajuste' || voto === 'precisa') { niveis[nivelKey][nome].precisa++; totalPr++; totalVotos++; }
+  });
+  const niveisArr = {};
+  Object.keys(niveis).forEach(k => {
+    niveisArr[k] = Object.values(niveis[k]).sort((a, b) => (b.adequado + b.precisa) - (a.adequado + a.precisa));
+  });
+  return { kpis: { votantes: emails.size, total: totalVotos, adequado: totalAd, precisa: totalPr }, niveis: niveisArr };
+}
+function setKpi(elId, kpiId, value) {
+  const el = document.getElementById(elId);
+  const kpi = document.getElementById(kpiId);
+  if (el) el.textContent = value;
+  if (kpi) kpi.classList.remove('loading');
+}
+function renderChart() {
+  if (!dadosGlobais) return;
+  const el    = document.getElementById('chart');
+  const nota  = document.getElementById('nota');
+  const dados = dadosGlobais.niveis[nivelAtivo] || [];
+  const lbl   = NIVEIS.find(n => n.id === nivelAtivo)?.label || '';
+  document.getElementById('chart-title').textContent = 'Por ' + lbl;
+  document.querySelectorAll('.fbtn').forEach(btn => {
+    const nid = btn.dataset.nivel;
+    btn.disabled = !(dadosGlobais.niveis[nid]?.length > 0);
+  });
+  if (!dados.length) {
+    el.innerHTML = '<div class="sem-dados">Nenhum voto registrado neste nível ainda.</div>';
+    nota.textContent = ''; return;
+  }
+  const maxVal = Math.max(...dados.map(d => Math.max(d.adequado, d.precisa)), 1);
+  const BAR_MAX = 220;
+  let html = '<div class="axis-line"></div>';
+  dados.forEach(d => {
+    const wA  = Math.round(d.adequado / maxVal * BAR_MAX);
+    const wP  = Math.round(d.precisa  / maxVal * BAR_MAX);
+    const nom = d.nome.length > 60 ? d.nome.slice(0, 58) + '…' : d.nome;
+    html += `<div class="bar-row">
+      <div class="bar-label" title="${d.nome}">${nom}</div>
+      <div class="bar-center">
+        <div style="flex:1;display:flex;justify-content:flex-end;">
+          <div class="bar-precisa" style="width:${wP}px;">${d.precisa > 0 ? `<span class="bar-val">-${d.precisa}</span>` : ''}</div>
+        </div>
+        <div class="bar-zero"></div>
+        <div style="flex:1;display:flex;justify-content:flex-start;">
+          <div class="bar-adequado" style="width:${wA}px;">${d.adequado > 0 ? `<span class="bar-val">${d.adequado}</span>` : ''}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+  const disponiveis = NIVEIS.filter(n => dadosGlobais.niveis[n.id]?.length > 0).map(n => n.label);
+  nota.textContent = disponiveis.length < 4 ? 'Níveis com dados: ' + disponiveis.join(', ') + '. Demais níveis aparecerão com novas submissões.' : '';
+}
+function initFiltros() {
+  const fr = document.getElementById('filtros');
+  NIVEIS.forEach(n => {
+    const btn = document.createElement('button');
+    btn.className = 'fbtn' + (n.id === 'titulo' ? ' ativo' : '');
+    btn.textContent = n.label;
+    btn.dataset.nivel = n.id;
+    btn.disabled = true;
+    btn.onclick = () => {
+      nivelAtivo = n.id;
+      gtag('event','filtro_nivel',{event_category:'interaction',event_label:n.id});
+      document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('ativo'));
+      btn.classList.add('ativo');
+      renderChart();
+    };
+    fr.appendChild(btn);
+  });
+}
+async function loadData() {
+  try {
+    const res = await fetch(SHEETS_CSV + '&t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+    dadosGlobais = agregaDados(rows);
+    const k = dadosGlobais.kpis;
+    setKpi('n-vt','kpi-vt',k.votantes);setKpi('n-tot','kpi-tot',k.total);
+    setKpi('n-pr','kpi-pr',k.precisa);setKpi('n-ad','kpi-ad',k.adequado);
+    renderChart();
+    const now = new Date();
+    document.getElementById('updated-lbl').textContent = 'Atualizado em ' + now.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  } catch(e) {
+    console.error('Erro ao carregar Sheets:', e);
+    document.getElementById('chart').innerHTML = '<div class="sem-dados">Erro ao carregar os dados. Verifique a conexão e recarregue a página.</div>';
+    document.getElementById('updated-lbl').textContent = 'Falha ao carregar dados do Sheets.';
+    ['kpi-vt','kpi-tot','kpi-pr','kpi-ad'].forEach(id => document.getElementById(id)?.classList.remove('loading'));
+  }
+}
+initFiltros();
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
 </script>
-
 <script>
 (function(){
-  var ms = {25:false,50:false,75:false,100:false};
-  window.addEventListener('scroll', function(){
-    var pct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
-    [25,50,75,100].forEach(function(m){
-      if(pct >= m && !ms[m]){ ms[m]=true; gtag('event','scroll_depth',{event_category:'scroll',event_label:'votos',value:m}); }
-    });
+  var ms={25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll',function(){
+    var pct=Math.round((window.scrollY+window.innerHeight)/document.body.scrollHeight*100);
+    [25,50,75,100].forEach(function(m){if(pct>=m&&!ms[m]){ms[m]=true;gtag('event','scroll_depth',{event_category:'scroll',event_label:'votos',value:m});}});
   });
 })();
 </script>
