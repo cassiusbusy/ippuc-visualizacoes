@@ -1,78 +1,42 @@
 
-<!DOCTYPE html><html lang="pt-BR"><head><style>
-@charset "utf-8";
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
-:root { --v: #00a859; --vl: #e6f7ee; --az: #447EC0; --azd: #1a3a5c; --rx: #8E6CAD; --am: #FDC533; --la: #F07E31; --vm: #EA535E; --ci: #B2B2B2; --bg: #fff; --cd: #f3f3f3; --bd: #e2e4e8; --tx: #1a1a2e; }
-
-* { box-sizing: border-box; margin: 0px; padding: 0px; }
-
-body { font-family: Roboto, sans-serif; background: var(--bg); color: var(--tx); font-size: 14px; }
-
-.stripe { height: 5px; display: flex; }
-
-.stripe div { flex: 1 1 0%; }
-
-.cnt { max-width: 1280px; margin: 0px auto; padding: 24px; }
-
-.ptitle { font-size: 1.1rem; font-weight: 700; color: var(--azd); margin-bottom: 4px; }
-
-.psub { font-size: 0.8rem; color: rgb(136, 136, 136); margin-bottom: 18px; }
-
-.card { background: var(--cd); border-radius: 10px; padding: 18px; border: .5px solid var(--bd); }
-
-.card h3 { font-size: 0.78rem; font-weight: 700; color: var(--azd); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
-
-.krow { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
-
-.kpi { background: var(--cd); border-radius: 10px; padding: 14px; border: .5px solid var(--bd); }
-
-.knum { font-size: 1.8rem; font-weight: 900; color: var(--v); }
-
-.klbl { font-size: 0.72rem; color: rgb(136, 136, 136); margin-top: 2px; }
-
-.back { display: inline-flex; align-items: center; gap: 6px; color: var(--az); font-size: 0.78rem; font-weight: 500; text-decoration: none; margin-bottom: 14px; }
-
-.mov { display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.4); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-
-.mov.open { display: flex; }
-
-.mo { background: rgb(255, 255, 255); border-radius: 12px; max-width: 660px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 26px; position: relative; border-top: 4px solid var(--v); }
-
-.mc { position: absolute; top: 12px; right: 12px; background: var(--cd); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 0.85rem; }
-
-.mid { font-family: monospace; font-size: 0.71rem; color: rgb(119, 119, 119); background: var(--cd); padding: 7px 11px; border-radius: 6px; margin-bottom: 11px; line-height: 1.7; word-break: break-all; }
-
-.mbody { font-size: 0.86rem; line-height: 1.75; color: rgb(34, 34, 34); white-space: pre-wrap; }
-
-#pcasvg { width: 100%; border-radius: 8px; background: rgb(250, 250, 250); border: .5px solid var(--bd); cursor: crosshair; }
-
-#screesvg { width: 100%; border-radius: 8px; background: rgb(250, 250, 250); border: .5px solid var(--bd); }
-
-.legrow { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.73rem; margin-top: 9px; }
-
-.legi { display: flex; align-items: center; gap: 4px; }
-
-.legdot { width: 10px; height: 10px; border-radius: 50%; }
-
-.ctrl { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; font-size: 0.76rem; color: rgb(85, 85, 85); }
-
-.ctrl label { display: flex; align-items: center; gap: 4px; }
-
-.ctrl input[type="range"] { width: 80px; accent-color: var(--v); }
-
-.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-
-</style><style>
-@charset "utf-8";
-
-
-
-</style>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PCA — Plano Diretor Curitiba</title>
-<!-- Google Analytics -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+:root{--v:#00a859;--vl:#e6f7ee;--az:#447EC0;--azd:#1a3a5c;--rx:#8E6CAD;
+  --am:#FDC533;--la:#F07E31;--vm:#EA535E;--ci:#B2B2B2;
+  --bg:#fff;--cd:#f3f3f3;--bd:#e2e4e8;--tx:#1a1a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;}
+.stripe{height:5px;display:flex;}.stripe div{flex:1;}
+.cnt{max-width:1280px;margin:0 auto;padding:24px;}
+.ptitle{font-size:1.1rem;font-weight:700;color:var(--azd);margin-bottom:4px;}
+.psub{font-size:.8rem;color:#888;margin-bottom:18px;}
+.card{background:var(--cd);border-radius:10px;padding:18px;border:.5px solid var(--bd);}
+.card h3{font-size:.78rem;font-weight:700;color:var(--azd);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;}
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px;}
+.kpi{background:var(--cd);border-radius:10px;padding:14px;border:.5px solid var(--bd);}
+.knum{font-size:1.8rem;font-weight:900;color:var(--v);}
+.klbl{font-size:.72rem;color:#888;margin-top:2px;}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--az);font-size:.78rem;font-weight:500;text-decoration:none;margin-bottom:14px;}
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.mov.open{display:flex;}
+.mo{background:#fff;border-radius:12px;max-width:660px;width:100%;max-height:80vh;overflow-y:auto;padding:26px;position:relative;border-top:4px solid var(--v);}
+.mc{position:absolute;top:12px;right:12px;background:var(--cd);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:.85rem;}
+.mid{font-family:monospace;font-size:.71rem;color:#777;background:var(--cd);padding:7px 11px;border-radius:6px;margin-bottom:11px;line-height:1.7;word-break:break-all;}
+.mbody{font-size:.86rem;line-height:1.75;color:#222;white-space:pre-wrap;}
+#pcasvg{width:100%;border-radius:8px;background:#fafafa;border:.5px solid var(--bd);cursor:crosshair;}
+#screesvg{width:100%;border-radius:8px;background:#fafafa;border:.5px solid var(--bd);}
+.legrow{display:flex;flex-wrap:wrap;gap:10px;font-size:.73rem;margin-top:9px;}
+.legi{display:flex;align-items:center;gap:4px;}
+.legdot{width:10px;height:10px;border-radius:50%;}
+.ctrl{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;align-items:center;font-size:.76rem;color:#555;}
+.ctrl label{display:flex;align-items:center;gap:4px;}
+.ctrl input[type=range]{width:80px;accent-color:var(--v);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+</style><!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWF337NDW8"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -83,186 +47,184 @@ body { font-family: Roboto, sans-serif; background: var(--bg); color: var(--tx);
 </head><body>
 <div class="stripe"><div style="background:#00a859"></div><div style="background:#447EC0"></div><div style="background:#8E6CAD"></div><div style="background:#8EC899"></div><div style="background:#FDC533"></div><div style="background:#F07E31"></div><div style="background:#EA535E"></div><div style="background:#CA6673"></div></div>
 <div class="cnt">
-  <a class="back" href="https://cassiusbusy.github.io/ippuc-visualizacoes/docs/index.html" onclick="gtag(\'event\',\'voltar\',{event_category:\'navigation\',event_label:\'pca\'})">← Voltar</a>
-  <div class="ptitle">PCA — Análise PARCIAL do Espaço Semântico das Contribuições</div>
-  <div class="psub">Agrupamento estatístico de temas por relevância de palavras-chave e precisão do modelo</div>
+  <a class="back" href="index.html" onclick="gtag(\'event\',\'voltar\',{event_category:\'navigation\',event_label:\'pca\'})">&#8592; Voltar</a>
+  <div class="ptitle">PCA &mdash; Espa&ccedil;o Sem&acirc;ntico das Contribui&ccedil;&otilde;es</div>
+  <div class="psub">Agrupamento estat&iacute;stico de temas por relev&acirc;ncia de palavras-chave e precis&atilde;o do modelo</div>
   <div class="krow">
-    <div class="kpi"><div class="knum" id="k1">20.6%</div><div class="klbl">% de Explicação Dimensão 1</div></div>
-    <div class="kpi"><div class="knum" id="k2">14.1%</div><div class="klbl">% de Explicação Dimensão 2</div></div>
-    <div class="kpi"><div class="knum" id="k3">34.7%</div><div class="klbl">Total 2 Dimensões</div></div>
-    <div class="kpi"><div class="knum" id="k4">4</div><div class="klbl">Termos para explicar 50%</div></div>
-    <div class="kpi"><div class="knum" id="k5">11</div><div class="klbl">Termos para explicar 80%</div></div>
-    <div class="kpi"><div class="knum" id="k6">16</div><div class="klbl">Documentos</div></div>
+    <div class="kpi"><div class="knum" id="k1">—</div><div class="klbl">% de Explica&ccedil;&atilde;o Dimens&atilde;o 1</div></div>
+    <div class="kpi"><div class="knum" id="k2">—</div><div class="klbl">% de Explica&ccedil;&atilde;o Dimens&atilde;o 2</div></div>
+    <div class="kpi"><div class="knum" id="k3">—</div><div class="klbl">Total 2 Dimens&otilde;es</div></div>
+    <div class="kpi"><div class="knum" id="k4">—</div><div class="klbl">Termos para explicar 50%</div></div>
+    <div class="kpi"><div class="knum" id="k5">—</div><div class="klbl">Termos para explicar 80%</div></div>
+    <div class="kpi"><div class="knum" id="k6">—</div><div class="klbl">Documentos</div></div>
   </div>
   <div class="card" style="margin-bottom:14px;">
     <h3>Biplot 2D</h3>
     <div class="ctrl">
       <label>Escala setas: <input type="range" id="asc" min="1" max="10" step=".5" value="4"></label>
-      <label><input type="checkbox" id="sarr" checked=""> Direção dos termos</label>
+      <label><input type="checkbox" id="sarr" checked> Dire&ccedil;&atilde;o dos termos</label>
       <label><input type="checkbox" id="slbl"> Labels</label>
     </div>
     <svg id="pcasvg" viewBox="0 0 820 480">
-      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"></path></marker></defs>
-      <g id="pcag">
-    <line x1="55" y1="55" x2="55" y2="425" stroke="#ddd" stroke-width="1"></line>
-    <line x1="55" y1="425" x2="765" y2="425" stroke="#ddd" stroke-width="1"></line>
-    <line x1="55" y1="240" x2="765" y2="240" stroke="#eee" stroke-width="1" stroke-dasharray="4"></line>
-    <line x1="410" y1="55" x2="410" y2="425" stroke="#eee" stroke-width="1" stroke-dasharray="4"></line>
-    <text x="410" y="474" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif">Dimensão 1 (20.6%)</text>
-    <text x="11" y="240" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 11 240)">Dimensão 2 (14.1%)</text><circle cx="709.6162918035549" cy="223.9212234999609" r="8" fill="#EA535E" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 4</title></circle><circle cx="765" cy="219.7821325197528" r="8" fill="#8E6CAD" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 5</title></circle><circle cx="286.16418161907166" cy="425" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="272.5275882402494" cy="310.9000234686693" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="146.03024176564736" cy="161.4296331064695" r="8" fill="#F07E31" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 2</title></circle><circle cx="289.5135203436947" cy="298.04858014550575" r="8" fill="#8E6CAD" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 5</title></circle><circle cx="267.2643416729846" cy="266.03575060627395" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="210.50501221464071" cy="333.85316435891417" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="55" cy="55" r="8" fill="#F07E31" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 2</title></circle><circle cx="316.96613596158704" cy="349.3964640538215" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="253.98660601465758" cy="314.66283345067666" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="267.6231993934799" cy="279.29241961980756" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="353.988290792688" cy="271.99835719314717" r="8" fill="#8E6CAD" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 5</title></circle><circle cx="317.6838514025777" cy="332.6374872878041" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><circle cx="210.62463145480584" cy="333.18743643902053" r="8" fill="#447EC0" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 3</title></circle><circle cx="372.52927301827987" cy="343.607525619964" r="8" fill="#00a859" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer"><title>Grupo 1</title></circle><line x1="374.4431808609216" y1="261.60721270437296" x2="516.4431808609215" y2="237.6604189779485" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="520.4431808609215" y="233.6604189779485" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">técnicos</text><line x1="374.4431808609216" y1="261.60721270437296" x2="431.84083819663726" y2="251.82281723087684" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="435.84083819663726" y="247.82281723087684" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">técnicos industriais</text><line x1="374.4431808609216" y1="261.60721270437296" x2="431.84083819663726" y2="251.82281723087684" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="435.84083819663726" y="247.82281723087684" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">industriais</text><line x1="374.4431808609216" y1="261.60721270437296" x2="431.6716898940762" y2="257.5818007528145" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="435.6716898940762" y="253.5818007528145" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">regularização</text><line x1="374.4431808609216" y1="261.60721270437296" x2="422.05842803185664" y2="253.33601953383493" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="426.05842803185664" y="249.33601953383493" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">técnicos edificações</text><line x1="374.4431808609216" y1="261.60721270437296" x2="420.0286484011241" y2="253.74737549968762" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="424.0286484011241" y="249.74737549968762" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">profissionais</text><line x1="374.4431808609216" y1="261.60721270437296" x2="419.83130871480284" y2="253.9236709136245" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="423.83130871480284" y="249.9236709136245" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">edificações</text><line x1="374.4431808609216" y1="261.60721270437296" x2="414.50313718412986" y2="252.83651586101382" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="418.50313718412986" y="248.83651586101382" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">conselhos</text><line x1="374.4431808609216" y1="261.60721270437296" x2="414.1930319627679" y2="258.56611681396197" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="418.1930319627679" y="254.56611681396197" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="start">conselho</text><line x1="374.4431808609216" y1="261.60721270437296" x2="337.9071475077352" y2="225.9661565201363" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="333.9071475077352" y="221.9661565201363" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="end">eixo</text><line x1="374.4431808609216" y1="261.60721270437296" x2="340.8954341863137" y2="227.37651983163124" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="336.8954341863137" y="223.37651983163124" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="end">ribas</text><line x1="374.4431808609216" y1="261.60721270437296" x2="340.8954341863137" y2="227.37651983163124" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="336.8954341863137" y="223.37651983163124" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="end">manoel ribas</text><line x1="374.4431808609216" y1="261.60721270437296" x2="340.8954341863137" y2="227.37651983163124" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="336.8954341863137" y="223.37651983163124" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="end">misto</text><line x1="374.4431808609216" y1="261.60721270437296" x2="340.8954341863137" y2="227.37651983163124" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"></line>
-        <text x="336.8954341863137" y="223.37651983163124" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="end">manoel</text></g>
+      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#999"/></marker></defs>
+      <g id="pcag"></g>
     </svg>
-    <div class="legrow" id="pcaleg"><div class="legi"><div class="legdot" style="background:#00a859"></div><span>Grupo 1</span></div><div class="legi"><div class="legdot" style="background:#F07E31"></div><span>Grupo 2</span></div><div class="legi"><div class="legdot" style="background:#447EC0"></div><span>Grupo 3</span></div><div class="legi"><div class="legdot" style="background:#EA535E"></div><span>Grupo 4</span></div><div class="legi"><div class="legdot" style="background:#8E6CAD"></div><span>Grupo 5</span></div></div>
+    <div class="legrow" id="pcaleg"></div>
   </div>
   <div class="g2">
     <div class="card">
-      <h3>Representatividade dos Dados para Explicar o Conteúdo</h3>
-      <svg id="screesvg" viewBox="0 0 480 280"><line x1="40" y1="40" x2="40" y2="240" stroke="#ddd" stroke-width="1"></line>
-    <line x1="40" y1="240" x2="440" y2="240" stroke="#ddd" stroke-width="1"></line>
-    <text x="240" y="276" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif">Quantidade de Dimensões</text>
-    <text x="10" y="140" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 10 140)">Quantidade de conteúdo (%)</text><rect x="44" y="40" width="12" height="200" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="50" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">1</text><rect x="64" y="103.49975763451283" width="12" height="136.50024236548717" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="70" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">2</text><rect x="84" y="158.66214251090645" width="12" height="81.33785748909357" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="90" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">3</text><rect x="104" y="171.55598642753273" width="12" height="68.44401357246727" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="110" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">4</text><rect x="124" y="181.92922927775084" width="12" height="58.07077072224915" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="130" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">5</text><rect x="144" y="189.78187106156082" width="12" height="50.218128938439165" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="150" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">6</text><rect x="164" y="196.2772661173049" width="12" height="43.7227338826951" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="170" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">7</text><rect x="184" y="201.12457586039747" width="12" height="38.87542413960252" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="190" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">8</text><rect x="204" y="202.57876878332524" width="12" height="37.42123121667474" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="210" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">9</text><rect x="224" y="205.0993698497334" width="12" height="34.9006301502666" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="230" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">10</text><rect x="244" y="208.00775569558894" width="12" height="31.99224430441105" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="250" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">11</text><rect x="264" y="209.17111003393117" width="12" height="30.828889966068836" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="270" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">12</text><rect x="284" y="211.78865729520115" width="12" height="28.21134270479884" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="290" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">13</text><rect x="304" y="213.33979641299078" width="12" height="26.660203587009214" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="310" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">14</text><rect x="324" y="214.40620455647115" width="12" height="25.593795443528844" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="330" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">15</text><rect x="344" y="219.05962190984005" width="12" height="20.940378090159964" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="350" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">16</text><rect x="364" y="221.28938439166262" width="12" height="18.71061560833737" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="370" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">17</text><rect x="384" y="226.52447891420263" width="12" height="13.475521085797382" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="390" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">18</text><rect x="404" y="228.7542413960252" width="12" height="11.245758603974794" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="410" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">19</text><rect x="424" y="230.59621909840038" width="12" height="9.403780901599612" fill="#447EC0" fill-opacity=".6" rx="2"></rect>
-      <text x="430" y="251" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">20</text><path d="M50,198.74 L70,170.57999999999998 L90,153.82 L110,139.68 L130,127.7 L150,117.34 L170,108.32 L190,100.30000000000001 L210,92.58000000000001 L230,85.36000000000001 L250,78.75999999999999 L270,72.41999999999999 L290,66.6 L310,61.08000000000001 L330,55.81999999999999 L350,51.5 L370,47.639999999999986 L390,44.860000000000014 L410,42.56 L430,40.599999999999994" fill="none" stroke="#00a859" stroke-width="2"></path><circle cx="50" cy="198.74" r="3.5" fill="#00a859"><title>Dim1: 20.6% acumulado</title></circle><circle cx="70" cy="170.57999999999998" r="3.5" fill="#00a859"><title>Dim2: 34.7% acumulado</title></circle><circle cx="90" cy="153.82" r="3.5" fill="#00a859"><title>Dim3: 43.1% acumulado</title></circle><circle cx="110" cy="139.68" r="3.5" fill="#00a859"><title>Dim4: 50.2% acumulado</title></circle><circle cx="130" cy="127.7" r="3.5" fill="#00a859"><title>Dim5: 56.1% acumulado</title></circle><circle cx="150" cy="117.34" r="3.5" fill="#00a859"><title>Dim6: 61.3% acumulado</title></circle><circle cx="170" cy="108.32" r="3.5" fill="#00a859"><title>Dim7: 65.8% acumulado</title></circle><circle cx="190" cy="100.30000000000001" r="3.5" fill="#00a859"><title>Dim8: 69.8% acumulado</title></circle><circle cx="210" cy="92.58000000000001" r="3.5" fill="#00a859"><title>Dim9: 73.7% acumulado</title></circle><circle cx="230" cy="85.36000000000001" r="3.5" fill="#00a859"><title>Dim10: 77.3% acumulado</title></circle><circle cx="250" cy="78.75999999999999" r="3.5" fill="#00a859"><title>Dim11: 80.6% acumulado</title></circle><circle cx="270" cy="72.41999999999999" r="3.5" fill="#00a859"><title>Dim12: 83.8% acumulado</title></circle><circle cx="290" cy="66.6" r="3.5" fill="#00a859"><title>Dim13: 86.7% acumulado</title></circle><circle cx="310" cy="61.08000000000001" r="3.5" fill="#00a859"><title>Dim14: 89.5% acumulado</title></circle><circle cx="330" cy="55.81999999999999" r="3.5" fill="#00a859"><title>Dim15: 92.1% acumulado</title></circle><circle cx="350" cy="51.5" r="3.5" fill="#00a859"><title>Dim16: 94.3% acumulado</title></circle><circle cx="370" cy="47.639999999999986" r="3.5" fill="#00a859"><title>Dim17: 96.2% acumulado</title></circle><circle cx="390" cy="44.860000000000014" r="3.5" fill="#00a859"><title>Dim18: 97.6% acumulado</title></circle><circle cx="410" cy="42.56" r="3.5" fill="#00a859"><title>Dim19: 98.7% acumulado</title></circle><circle cx="430" cy="40.599999999999994" r="3.5" fill="#00a859"><title>Dim20: 99.7% acumulado</title></circle><line x1="40" y1="140" x2="440" y2="140" stroke="#FDC533" stroke-width="1" stroke-dasharray="4"></line>
-    <text x="442" y="144" font-size="8" fill="#FDC533" font-family="Roboto,sans-serif">50%</text>
-    <line x1="40" y1="80" x2="440" y2="80" stroke="#F07E31" stroke-width="1" stroke-dasharray="4"></line>
-    <text x="442" y="84" font-size="8" fill="#F07E31" font-family="Roboto,sans-serif">80%</text><circle cx="110" cy="139.68" r="5" fill="#FDC533" stroke="#fff" stroke-width="1.5"></circle><text x="110" y="131.68" text-anchor="middle" font-size="8" fill="#b8860b" font-family="Roboto,sans-serif">4 Termos</text><circle cx="250" cy="78.75999999999999" r="5" fill="#F07E31" stroke="#fff" stroke-width="1.5"></circle><text x="250" y="70.75999999999999" text-anchor="middle" font-size="8" fill="#c0570a" font-family="Roboto,sans-serif">11 Termos</text></svg>
+      <h3>Representatividade dos Dados para Explicar o Conte&uacute;do</h3>
+      <svg id="screesvg" viewBox="0 0 480 280"></svg>
     </div>
     <div class="card">
-      <h3>Principais Termos da Dimensão 1 e 2</h3>
-      <div id="ltable" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 1</div>
-    <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">técnicos</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:100%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.504</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">técnicos industriais</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:40.42088544768711%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.204</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">industriais</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:40.42088544768711%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.204</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">regularização</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:40.3017669247568%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.203</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">técnicos edificações</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:33.53186420488385%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.169</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">profissionais</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:32.10244192972007%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.162</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">edificações</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:31.963470319634702%;height:100%;border-radius:3px;background:var(--v)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.161</span>
-    </div></div>
-    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimensão 2</div>
-    <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">eixo</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:100%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.243</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">ribas</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:96.04286892003297%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.233</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">manoel ribas</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:96.04286892003297%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.233</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">misto</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:96.04286892003297%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.233</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">manoel</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:96.04286892003297%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.233</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">técnicos</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:67.18878812860676%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.163</span>
-    </div><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">técnicos industriais</span>
-      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:27.45259686727123%;height:100%;border-radius:3px;background:var(--az)"></div></div>
-      <span style="width:38px;font-size:.68rem;color:#aaa">0.067</span>
-    </div></div></div>
+      <h3>Principais Termos da Dimens&atilde;o 1 e 2</h3>
+      <div id="ltable" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"></div>
     </div>
   </div>
 </div>
-<div class="mov" id="modal"><div class="mo"><button class="mc">x</button><div style="font-size:.93rem;font-weight:700;color:var(--azd);margin-bottom:9px" id="mt"></div><div class="mid" id="mi"></div><div class="mbody" id="mb"></div></div></div>
-
-
-
-<div id="give-freely-root-mbnbehikldjhnfehhnaidhjhoofhpehk" class="give-freely-root" data-extension-id="mbnbehikldjhnfehhnaidhjhoofhpehk" data-extension-name="CSS Peeper" style="display: block;"><template shadowmode="open"><div><div class="gf-app"></div></div></template></div>
+<div class="mov" id="modal"><div class="mo"><button class="mc" onclick="fm()">x</button><div style="font-size:.93rem;font-weight:700;color:var(--azd);margin-bottom:9px" id="mt"></div><div class="mid" id="mi"></div><div class="mbody" id="mb"></div></div></div>
+<script id="pca-data" type="application/json">{"docs": [{"submission_id": "01799e3b-19ad-45bc-b8ac-816c115a8f9b", "email": "d****@gmail.com", "titulo": "T\u00cdTULO V \u2013 DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 3, "topico_nome": "Grupo 4", "x": 0.5604, "y": 0.1302, "conteudo": "T\u00cdTULO V DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA CAP\u00cdTULO DA REGULARIZA\u00c7\u00c3O EDIL\u00cdCIA E SIMPLIFICA\u00c7\u00c3O DE PROCESSOS Art. 1\u00ba Fica assegurada a atua\u00e7\u00e3o aut\u00f4noma dos T\u00e9cnicos em Edifica\u00e7\u00f5es, bem ...", "conteudo_completo": "T\u00cdTULO V DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA CAP\u00cdTULO DA REGULARIZA\u00c7\u00c3O EDIL\u00cdCIA E SIMPLIFICA\u00c7\u00c3O DE PROCESSOS Art. 1\u00ba Fica assegurada a atua\u00e7\u00e3o aut\u00f4noma dos T\u00e9cnicos em Edifica\u00e7\u00f5es, bem como dos demais profissionais legalmente habilitados, nos processos de regulariza\u00e7\u00e3o edil\u00edcia, elabora\u00e7\u00e3o de projetos e acompanhamento de obras no Munic\u00edpio. 1\u00ba O Munic\u00edpio reconhecer\u00e1 a compet\u00eancia t\u00e9cnica desses profissionais para assinatura de laudos e assun\u00e7\u00e3o de responsabilidade t\u00e9cnica (TRT ART RRT), observados os limites de \u00e1rea e especifica\u00e7\u00f5es definidos por seus respectivos conselhos de classe federais. 2\u00ba A inclus\u00e3o desta diretriz no Plano Diretor visa alinhar a legisla\u00e7\u00e3o municipal \u00e0 legisla\u00e7\u00e3o federal vigente, especialmente \u00e0 Lei Federal n\u00ba 13.639 2018, que instituiu o Conselho Federal dos T\u00e9cnicos Industriais (CFT), e \u00e0 Resolu\u00e7\u00e3o CFT n\u00ba 58 2019, que define as prerrogativas e atribui\u00e7\u00f5es dos T\u00e9cnicos em Edifica\u00e7\u00f5es. 3\u00ba \u00c9 vedado ao Munic\u00edpio criar restri\u00e7\u00f5es administrativas que se sobreponham \u00e0 legisla\u00e7\u00e3o federal de exerc\u00edcio profissional. 4\u00ba O reconhecimento expresso da atua\u00e7\u00e3o dos T\u00e9cnicos em Edifica\u00e7\u00f5es no Plano Diretor atende aos princ\u00edpios da efici\u00eancia e da desburocratiza\u00e7\u00e3o, ampliando a oferta de servi\u00e7os t\u00e9cnicos qualificados \u00e0 popula\u00e7\u00e3o, facilitando a regulariza\u00e7\u00e3o de im\u00f3veis, especialmente para fam\u00edlias de baixa e m\u00e9dia renda, e contribuindo para a redu\u00e7\u00e3o das irregularidades edil\u00edcias e para o desenvolvimento urbano ordenado do Munic\u00edpio. O texto est\u00e1 escrito em formato legal, entretanto passar\u00e1 por revis\u00e3o do corpo t\u00e9cnico do IPPUC, sendo assim \u00e9 apenas uma sugest\u00e3o de uso."}, {"submission_id": "d29937db-10a3-4d44-8e52-f24d07cacf3a", "email": "d****@gmail.com", "titulo": "T\u00cdTULO IV \u2013 DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": 0.653, "y": 0.1445, "conteudo": "T\u00cdTULO IV DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO CAP\u00cdTULO DA INCLUS\u00c3O DE T\u00c9CNICOS INDUSTRIAIS NAS POL\u00cdTICAS DE HABITA\u00c7\u00c3O E REGULARIZA\u00c7\u00c3O FUNDI\u00c1RIA Art. 1\u00ba O Poder P\u00fablico Municipal garanti...", "conteudo_completo": "T\u00cdTULO IV DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO CAP\u00cdTULO DA INCLUS\u00c3O DE T\u00c9CNICOS INDUSTRIAIS NAS POL\u00cdTICAS DE HABITA\u00c7\u00c3O E REGULARIZA\u00c7\u00c3O FUNDI\u00c1RIA Art. 1\u00ba O Poder P\u00fablico Municipal garantir\u00e1 a inclus\u00e3o e a contrata\u00e7\u00e3o de T\u00e9cnicos em Edifica\u00e7\u00f5es e demais profissionais t\u00e9cnicos industriais nas equipes multidisciplinares respons\u00e1veis pelos programas de Regulariza\u00e7\u00e3o Fundi\u00e1ria Urbana de Interesse Social (REURB-S) e nas a\u00e7\u00f5es de Assist\u00eancia T\u00e9cnica para Habita\u00e7\u00e3o de Interesse Social (ATHIS)."}, {"submission_id": "178303de-ba2c-4b79-a28f-c588ee5722da", "email": "e****@gmail.com", "titulo": "T\u00cdTULO V \u2013 DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.1476, "y": -0.5645, "conteudo": "T\u00cdTULO IV DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO CAP\u00cdTULO I DO DESENVOLVIMENTO SOCIAL SE\u00c7\u00c3O III Da Educa\u00e7\u00e3o Art. 1\u00ba Fica estabelecido o incentivo \u00e0 participa\u00e7\u00e3o dos pequenos cidad\u00e3os...", "conteudo_completo": "T\u00cdTULO IV DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO CAP\u00cdTULO I DO DESENVOLVIMENTO SOCIAL SE\u00c7\u00c3O III Da Educa\u00e7\u00e3o Art. 1\u00ba Fica estabelecido o incentivo \u00e0 participa\u00e7\u00e3o dos pequenos cidad\u00e3os, especialmente estudantes da Rede Municipal de Ensino, no \u00e2mbito efetivo das decis\u00f5es municipais."}, {"submission_id": "6e128e03-de07-448f-8aac-134eee9be195", "email": "f****@gmail.com", "titulo": "DA ACESSIBILIDADE E DO DESENHO UNIVERSAL", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.1704, "y": -0.1703, "conteudo": "T\u00cdTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL CAP\u00cdTULO I DISPOSI\u00c7\u00d5ES GERAIS Art. X. Fica estabelecido que a Pol\u00edtica Territorial Integrada do Munic\u00edpio assegurar\u00e1 acessibilidade...", "conteudo_completo": "T\u00cdTULO VIII DA ACESSIBILIDADE E DO DESENHO UNIVERSAL CAP\u00cdTULO I DISPOSI\u00c7\u00d5ES GERAIS Art. X. Fica estabelecido que a Pol\u00edtica Territorial Integrada do Munic\u00edpio assegurar\u00e1, de forma transversal, a promo\u00e7\u00e3o da acessibilidade e a ado\u00e7\u00e3o do desenho universal como princ\u00edpios estruturantes."}, {"submission_id": "f39926fc-a2d9-4220-8a38-f9cf2cdd0514", "email": "f****@gmail.com", "titulo": "Aumento verticaliza\u00e7\u00e3o controlada", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.3819, "y": 0.3461, "conteudo": "Substituicao das ruas paralelep\u00edpedos por asfalto...", "conteudo_completo": "Substituicao das ruas paralelep\u00edpedos por asfalto em ruas n\u00e3o pertencente ao centro hist\u00f3rico, trazendo maior conforto mobilidade e seguran\u00e7a."}, {"submission_id": "d8a2062e-d793-4652-aa83-1763b7c02f4f", "email": "g****@gmail.com", "titulo": "T\u00cdTULO VI \u2013 DO SISTEMA DE PLANEJAMENTO E GEST\u00c3O DEMOCR\u00c1TICA DA CIDADE", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": -0.142, "y": -0.1259, "conteudo": "Todos os planos, projetos, regulamenta\u00e7\u00f5es e demais desdobramentos do Plano Diretor dever\u00e3o contar com processos participativos...", "conteudo_completo": "Todos os planos, projetos, regulamenta\u00e7\u00f5es e demais desdobramentos do Plano Diretor dever\u00e3o contar com processos participativos com din\u00e2micas que propiciem a possibilidade de segmentos interessados da sociedade civil incidirem sobre a pol\u00edtica urbana."}, {"submission_id": "b3802130-32d1-41e5-88ad-35fc6ba7e696", "email": "i****@gmail.com", "titulo": "T\u00cdTULO VII \u2013 DAS DISPOSI\u00c7\u00d5ES FINAIS E TRANSIT\u00d3RIAS", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.1792, "y": -0.0153, "conteudo": "N\u00e3o \u00e9 poss\u00edvel avaliar a minuta, pois n\u00e3o h\u00e1 minuta. T\u00edtulos e cap\u00edtulos n\u00e3o dizem nada.", "conteudo_completo": "N\u00e3o \u00e9 poss\u00edvel avaliar a minuta, pois n\u00e3o h\u00e1 minuta. T\u00edtulos e cap\u00edtulos n\u00e3o dizem nada."}, {"submission_id": "ed6df32a-e583-45ab-8dea-3d69e5a87c14", "email": "i****@gmail.com", "titulo": "T\u00cdTULO V \u2013 DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.2741, "y": -0.2496, "conteudo": "CAP\u00cdTULO VIII - INSTRUMENTOS DE PROMO\u00c7\u00c3O DO ACESSO JUSTO E IGUALIT\u00c1RIO AO SOLO...", "conteudo_completo": "CAP\u00cdTULO VIII - INSTRUMENTOS DE PROMO\u00c7\u00c3O DO ACESSO JUSTO E IGUALIT\u00c1RIO AO SOLO. Cap\u00edtulo orientado para a promo\u00e7\u00e3o da diversifica\u00e7\u00e3o social no territ\u00f3rio, promovendo a inclus\u00e3o de camadas sociais menos abastadas nas \u00e1reas centrais."}, {"submission_id": "5a952a0e-ac94-48e9-825b-c83f65c2f28c", "email": "l****@gmail.com", "titulo": "T\u00cdTULO III \u2013 DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 1, "topico_nome": "Grupo 2", "x": -0.5341, "y": 0.7138, "conteudo": "PROPOSTA DE ALTERA\u00c7\u00c3O DE PAR\u00c2METROS URBANISTICOS Eixo Manoel Ribas e Entorno...", "conteudo_completo": "PROPOSTA DE ALTERA\u00c7\u00c3O DE PAR\u00c2METROS URBANISTICOS Eixo Manoel Ribas e Entorno. Objeto: Readequa\u00e7\u00e3o de Zoneamento, Potencial Construtivo e Incentivo Misto."}, {"submission_id": "dcb1615c-dccc-4c93-9dcd-0946e35d7263", "email": "m****@hotmail.com", "titulo": "T\u00cdTULO V \u2013 DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0961, "y": -0.3033, "conteudo": "T\u00cdTULO V DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA CAP\u00cdTULO V INSTRUMENTOS DE GEST\u00c3O URBANA E AMBIENTAL...", "conteudo_completo": "T\u00cdTULO V DOS INSTRUMENTOS DA POL\u00cdTICA TERRITORIAL INTEGRADA CAP\u00cdTULO V INSTRUMENTOS DE GEST\u00c3O URBANA E AMBIENTAL Art. 1\u00ba Fica estabelecido que a autoridade respons\u00e1vel pelo sistema de controle semaf\u00f3rico dever\u00e1 otimizar o funcionamento dos sem\u00e1foros."}, {"submission_id": "75f9f486-5d77-44a7-ab02-658771380aa1", "email": "r****@hotmail.com", "titulo": "T\u00cdTULO IV \u2013 DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.2014, "y": -0.1833, "conteudo": "As mulheres s\u00e3o extremamente afetadas por quest\u00f5es sociais...", "conteudo_completo": "As mulheres s\u00e3o extremamente afetadas por quest\u00f5es sociais. H\u00e1 a Secretaria da Mulher e Igualdade \u00c9tnico-racial. Incluir um cap\u00edtulo para a pol\u00edticas p\u00fablica para mulheres refor\u00e7a o programa Curitiba mais mulheres."}, {"submission_id": "797de603-8a65-4cd6-a117-951cfeda240c", "email": "w****@gmail.com", "titulo": "T\u00cdTULO IV \u2013 DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.1786, "y": -0.0611, "conteudo": "Onde est\u00e1 o t\u00f3pico de Emprego e Ocupa\u00e7\u00e3o?", "conteudo_completo": "Onde est\u00e1 o t\u00f3pico de Emprego e Ocupa\u00e7\u00e3o? Nesse caso necess\u00e1rio uma vis\u00e3o local e necessariamente metropolitana."}, {"submission_id": "b18ce90a-73ba-421c-9138-06c3bbc3fa7c", "email": "g****@gmail.com", "titulo": "T\u00cdTULO III \u2013 DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 4, "topico_nome": "Grupo 5", "x": -0.0342, "y": -0.0359, "conteudo": "Pol\u00edticas que v\u00e3o al\u00e9m da titula\u00e7\u00e3o...", "conteudo_completo": "Pol\u00edticas que v\u00e3o al\u00e9m da titula\u00e7\u00e3o: Pol\u00edtica de melhorias habitacionais e urban\u00edsticas pautada na Assist\u00eancia T\u00e9cnica em Habita\u00e7\u00e3o de Interesse Social (Athis)."}, {"submission_id": "b7585a5d-fcf6-4c14-b5a4-288f22e72e6b", "email": "g****@pucpr.br", "titulo": "T\u00cdTULO VI \u2013 DO SISTEMA DE PLANEJAMENTO E GEST\u00c3O DEMOCR\u00c1TICA DA CIDADE", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0949, "y": -0.2454, "conteudo": "T\u00cdTULO III DA GEST\u00c3O DEMOCR\u00c1TICA DA CIDADE CAP\u00cdTULO III DA PARTICIPA\u00c7\u00c3O POPULAR...", "conteudo_completo": "Conselho Municipal de Urbanismo e o Conselho de Participa\u00e7\u00e3o Popular dever\u00e3o ser unificados em Conselho Municipal de Gest\u00e3o Urbana com car\u00e1ter deliberativo."}, {"submission_id": "e9e7b3e1-75f7-4666-b90b-d5916dcec27c", "email": "j****@institutolegado.org", "titulo": "T\u00cdTULO IV \u2013 DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS NO TERRIT\u00d3RIO", "tipo": "ideia", "topico": 2, "topico_nome": "Grupo 3", "x": -0.2739, "y": -0.2473, "conteudo": "Proposta: Inclus\u00e3o de Se\u00e7\u00f5es espec\u00edficas para Inova\u00e7\u00e3o Social, Empreendedorismo Social e Economia de Impacto...", "conteudo_completo": "Inclus\u00e3o de Se\u00e7\u00f5es espec\u00edficas para Inova\u00e7\u00e3o Social, Empreendedorismo Social e Economia de Impacto no Plano Diretor de Curitiba."}, {"submission_id": "29c80bee-7c55-4312-8a0e-34ae81800feb", "email": "s****@alunos.utfpr.edu.br", "titulo": "T\u00cdTULO III \u2013 DA POL\u00cdTICA TERRITORIAL INTEGRADA", "tipo": "ideia", "topico": 0, "topico_nome": "Grupo 1", "x": -0.0032, "y": -0.2833, "conteudo": "T\u00cdTULO III DA POL\u00cdTICA TERRITORIAL INTEGRADA CAP\u00cdTULO III DO SISTEMA MUNICIPAL DE HABITA\u00c7\u00c3O...", "conteudo_completo": "Munic\u00edpio promover\u00e1 a atualiza\u00e7\u00e3o e a transpar\u00eancia dos dados referentes aos assentamentos irregulares e aos vazios urbanos."}], "var_exp": [20.6, 14.1], "arrows": [{"termo": "t\u00e9cnicos", "x": 0.5037, "y": 0.163}, {"termo": "t\u00e9cnicos industriais", "x": 0.2036, "y": 0.0666}, {"termo": "industriais", "x": 0.2036, "y": 0.0666}, {"termo": "regulariza\u00e7\u00e3o", "x": 0.203, "y": 0.0274}, {"termo": "t\u00e9cnicos edifica\u00e7\u00f5es", "x": 0.1689, "y": 0.0563}, {"termo": "profissionais", "x": 0.1617, "y": 0.0535}, {"termo": "edifica\u00e7\u00f5es", "x": 0.161, "y": 0.0523}, {"termo": "conselhos", "x": 0.1421, "y": 0.0597}, {"termo": "conselho", "x": 0.141, "y": 0.0207}, {"termo": "eixo", "x": -0.1296, "y": 0.2426}, {"termo": "ribas", "x": -0.119, "y": 0.233}, {"termo": "manoel ribas", "x": -0.119, "y": 0.233}, {"termo": "misto", "x": -0.119, "y": 0.233}, {"termo": "manoel", "x": -0.119, "y": 0.233}], "scree": [{"pc": 1, "var": 20.63, "cum": 20.63}, {"pc": 2, "var": 14.08, "cum": 34.71}, {"pc": 3, "var": 8.39, "cum": 43.09}, {"pc": 4, "var": 7.06, "cum": 50.16}, {"pc": 5, "var": 5.99, "cum": 56.15}, {"pc": 6, "var": 5.18, "cum": 61.33}, {"pc": 7, "var": 4.51, "cum": 65.84}, {"pc": 8, "var": 4.01, "cum": 69.85}, {"pc": 9, "var": 3.86, "cum": 73.71}, {"pc": 10, "var": 3.6, "cum": 77.32}, {"pc": 11, "var": 3.3, "cum": 80.62}, {"pc": 12, "var": 3.18, "cum": 83.79}, {"pc": 13, "var": 2.91, "cum": 86.7}, {"pc": 14, "var": 2.75, "cum": 89.46}, {"pc": 15, "var": 2.64, "cum": 92.09}, {"pc": 16, "var": 2.16, "cum": 94.25}, {"pc": 17, "var": 1.93, "cum": 96.18}, {"pc": 18, "var": 1.39, "cum": 97.57}, {"pc": 19, "var": 1.16, "cum": 98.72}, {"pc": 20, "var": 0.97, "cum": 99.7}], "n_80": 11, "n_50": 4, "n_topicos": 5, "nomes_topicos": ["Grupo 1", "Grupo 2", "Grupo 3", "Grupo 4", "Grupo 5"]}</script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Track slider interactions
-  var sliders = document.querySelectorAll('input[type=range]');
-  sliders.forEach(function(sl) {
-    sl.addEventListener('change', function() {
-      gtag('event', 'slider', {event_category: 'interaction', event_label: sl.id || sl.name || 'slider', value: sl.value});
-    });
-  });
-  // Track checkbox toggles
-  var checks = document.querySelectorAll('input[type=checkbox]');
-  checks.forEach(function(cb) {
-    cb.addEventListener('change', function() {
-      gtag('event', 'checkbox', {event_category: 'interaction', event_label: cb.id || cb.name || 'checkbox', value: cb.checked ? 'on' : 'off'});
-    });
-  });
-  // Track select changes
-  var selects = document.querySelectorAll('select');
-  selects.forEach(function(sel) {
-    sel.addEventListener('change', function() {
-      gtag('event', 'filtro', {event_category: 'interaction', event_label: sel.id || sel.name || 'select', value: sel.value});
-    });
-  });
-});
-</script>
+const D=JSON.parse(document.getElementById('pca-data').textContent);
+const CORES=["#00a859","#F07E31","#447EC0","#EA535E","#8E6CAD"];
+const W=820,H=480,PAD=55;
+let asc=4,sarr=true,slbl=false;
 
+// KPIs
+document.getElementById('k1').textContent=D.var_exp[0].toFixed(1)+'%';
+document.getElementById('k2').textContent=D.var_exp[1].toFixed(1)+'%';
+document.getElementById('k3').textContent=(D.var_exp[0]+D.var_exp[1]).toFixed(1)+'%';
+document.getElementById('k4').textContent=D.n_50;
+document.getElementById('k5').textContent=D.n_80;
+document.getElementById('k6').textContent=D.docs.length;
+
+function scl(){
+  const xs=D.docs.map(d=>d.x),ys=D.docs.map(d=>d.y);
+  const xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
+  const rx=xmax-xmin||1,ry=ymax-ymin||1;
+  return{x:v=>(v-xmin)/rx*(W-PAD*2)+PAD,y:v=>H-PAD-(v-ymin)/ry*(H-PAD*2)};
+}
+
+function draw(){
+  const sc=scl(),g=document.getElementById('pcag');
+  const p1=D.var_exp[0].toFixed(1),p2=D.var_exp[1].toFixed(1);
+  g.innerHTML=`
+    <line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${H-PAD}" stroke="#ddd" stroke-width="1"/>
+    <line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#ddd" stroke-width="1"/>
+    <line x1="${PAD}" y1="${H/2}" x2="${W-PAD}" y2="${H/2}" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="${W/2}" y1="${PAD}" x2="${W/2}" y2="${H-PAD}" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
+    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif">Dimens\u00e3o 1 (${p1}%)</text>
+    <text x="11" y="${H/2}" text-anchor="middle" font-size="10" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 11 ${H/2})">Dimens\u00e3o 2 (${p2}%)</text>`;
+  D.docs.forEach(d=>{
+    const cx=sc.x(d.x),cy=sc.y(d.y),cor=CORES[d.topico]||'#ccc';
+    g.innerHTML+=`<circle cx="${cx}" cy="${cy}" r="8" fill="${cor}" fill-opacity=".82" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="abrir('${d.submission_id}')"><title>${d.topico_nome}</title></circle>`;
+    if(slbl)g.innerHTML+=`<text x="${cx+9}" y="${cy+4}" font-size="8" fill="#888" font-family="Roboto,sans-serif">${d.submission_id.slice(0,8)}</text>`;
+  });
+  if(sarr){
+    const maxA=Math.max(...D.arrows.map(a=>Math.max(Math.abs(a.x),Math.abs(a.y))),0.01);
+    const cx0=sc.x(0),cy0=sc.y(0);
+    D.arrows.forEach(a=>{
+      const dx=a.x/maxA*(W-PAD*2)/2*asc/10;
+      const dy=-a.y/maxA*(H-PAD*2)/2*asc/10;
+      const ex=cx0+dx,ey=cy0+dy;
+      g.innerHTML+=`<line x1="${cx0}" y1="${cy0}" x2="${ex}" y2="${ey}" stroke="#999" stroke-width="1.4" marker-end="url(#arr)" opacity=".6"/>
+        <text x="${ex+(dx>0?4:-4)}" y="${ey+(dy>0?10:-4)}" font-size="9" fill="#555" font-family="Roboto,sans-serif" text-anchor="${dx>0?'start':'end'}">${a.termo}</text>`;
+    });
+  }
+}
+
+function drawScree(){
+  const svg=document.getElementById('screesvg');
+  const SW=480,SH=280,SP=40;
+  const data=D.scree,n=data.length;
+  const barW=(SW-SP*2)/n*0.6;
+  const maxVar=Math.max(...data.map(d=>d.var));
+  let html=`<line x1="${SP}" y1="${SP}" x2="${SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
+    <line x1="${SP}" y1="${SH-SP}" x2="${SW-SP}" y2="${SH-SP}" stroke="#ddd" stroke-width="1"/>
+    <text x="${SW/2}" y="${SH-4}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif">Quantidade de Dimens\u00f5es</text>
+    <text x="10" y="${SH/2}" text-anchor="middle" font-size="9" fill="#999" font-family="Roboto,sans-serif" transform="rotate(-90 10 ${SH/2})">Quantidade de conte\u00fado (%)</text>`;
+  data.forEach((d,i)=>{
+    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.2;
+    const bh=(d.var/maxVar)*(SH-SP*2),y=SH-SP-bh;
+    html+=`<rect x="${x}" y="${y}" width="${barW}" height="${bh}" fill="#447EC0" fill-opacity=".6" rx="2"/>
+      <text x="${x+barW/2}" y="${SH-SP+11}" text-anchor="middle" font-size="8" fill="#888" font-family="Roboto,sans-serif">${d.pc}</text>`;
+  });
+  const pts=data.map((d,i)=>{
+    const x=SP+(SW-SP*2)/n*i+(SW-SP*2)/n*0.5;
+    const y=SH-SP-(d.cum/100)*(SH-SP*2);
+    return{x,y,cum:d.cum,pc:d.pc};
+  });
+  html+=`<path d="${pts.map((p,i)=>i===0?`M${p.x},${p.y}`:`L${p.x},${p.y}`).join(' ')}" fill="none" stroke="#00a859" stroke-width="2"/>`;
+  pts.forEach(p=>{html+=`<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#00a859"><title>Dim${p.pc}: ${p.cum.toFixed(1)}% acumulado</title></circle>`;});
+  const y50=SH-SP-(50/100)*(SH-SP*2),y80=SH-SP-(80/100)*(SH-SP*2);
+  html+=`<line x1="${SP}" y1="${y50}" x2="${SW-SP}" y2="${y50}" stroke="#FDC533" stroke-width="1" stroke-dasharray="4"/>
+    <text x="${SW-SP+2}" y="${y50+4}" font-size="8" fill="#FDC533" font-family="Roboto,sans-serif">50%</text>
+    <line x1="${SP}" y1="${y80}" x2="${SW-SP}" y2="${y80}" stroke="#F07E31" stroke-width="1" stroke-dasharray="4"/>
+    <text x="${SW-SP+2}" y="${y80+4}" font-size="8" fill="#F07E31" font-family="Roboto,sans-serif">80%</text>`;
+  if(pts[D.n_50-1]){const p=pts[D.n_50-1];html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#FDC533" stroke="#fff" stroke-width="1.5"/><text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#b8860b" font-family="Roboto,sans-serif">${D.n_50} Termos</text>`;}
+  if(pts[D.n_80-1]){const p=pts[D.n_80-1];html+=`<circle cx="${p.x}" cy="${p.y}" r="5" fill="#F07E31" stroke="#fff" stroke-width="1.5"/><text x="${p.x}" y="${p.y-8}" text-anchor="middle" font-size="8" fill="#c0570a" font-family="Roboto,sans-serif">${D.n_80} Termos</text>`;}
+  svg.innerHTML=html;
+}
+
+function renderLeg(){
+  const el=document.getElementById('pcaleg');
+  D.nomes_topicos.forEach((n,i)=>el.innerHTML+=`<div class="legi"><div class="legdot" style="background:${CORES[i]}"></div><span>${n}</span></div>`);
+}
+
+function renderLtable(){
+  const el=document.getElementById('ltable');
+  const pc1=[...D.arrows].sort((a,b)=>Math.abs(b.x)-Math.abs(a.x)).slice(0,7);
+  const pc2=[...D.arrows].sort((a,b)=>Math.abs(b.y)-Math.abs(a.y)).slice(0,7);
+  const m1=Math.max(...pc1.map(a=>Math.abs(a.x)),0.01);
+  const m2=Math.max(...pc2.map(a=>Math.abs(a.y)),0.01);
+  el.innerHTML=`
+    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimens\u00e3o 1</div>
+    ${pc1.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
+      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
+      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.x)/m1*100}%;height:100%;border-radius:3px;background:${a.x>0?'var(--v)':'var(--vm)'}"></div></div>
+      <span style="width:38px;font-size:.68rem;color:#aaa">${a.x.toFixed(3)}</span>
+    </div>`).join('')}</div>
+    <div><div style="font-size:.76rem;font-weight:700;color:var(--azd);margin-bottom:7px;">Dimens\u00e3o 2</div>
+    ${pc2.map(a=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
+      <span style="width:110px;font-size:.72rem;text-align:right;color:#444">${a.termo}</span>
+      <div style="flex:1;background:#e8e8e8;border-radius:3px;height:6px;"><div style="width:${Math.abs(a.y)/m2*100}%;height:100%;border-radius:3px;background:${a.y>0?'var(--az)':'var(--la)'}"></div></div>
+      <span style="width:38px;font-size:.68rem;color:#aaa">${a.y.toFixed(3)}</span>
+    </div>`).join('')}</div>`;
+}
+
+function abrir(sid){
+  const d=D.docs.find(x=>x.submission_id===sid);if(!d)return;
+  am(d.topico_nome,`<b>ID:</b> ${d.submission_id}<br><b>Autor:</b> ${d.email}<br><b>Grupo:</b> ${d.topico_nome}<br><b>Dimens\u00e3o 1:</b> ${d.x.toFixed(4)} | <b>Dimens\u00e3o 2:</b> ${d.y.toFixed(4)}`,d.conteudo_completo||d.conteudo);
+}
+
+document.getElementById('asc').addEventListener('input',e=>{asc=parseFloat(e.target.value);draw();});
+document.getElementById('sarr').addEventListener('change',e=>{sarr=e.target.checked;draw();});
+document.getElementById('slbl').addEventListener('change',e=>{slbl=e.target.checked;draw();});
+function am(t,meta,b){document.getElementById("mt").textContent=t;document.getElementById("mi").innerHTML=meta;document.getElementById("mb").textContent=b;document.getElementById("modal").classList.add("open");}
+function fm(){document.getElementById("modal").classList.remove("open");}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===document.getElementById("modal"))fm();});
+draw();drawScree();renderLeg();renderLtable();
+</script>
 <script>
 (function(){
-  var ms = {25:false,50:false,75:false,100:false};
-  window.addEventListener('scroll', function(){
-    var pct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
-    [25,50,75,100].forEach(function(m){
-      if(pct >= m && !ms[m]){ ms[m]=true; gtag('event','scroll_depth',{event_category:'scroll',event_label:'pca',value:m}); }
+  var ms={25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll',function(){
+    var pct=Math.round((window.scrollY+window.innerHeight)/document.body.scrollHeight*100);
+    [25,50,75,100].forEach(function(m){if(pct>=m&&!ms[m]){ms[m]=true;gtag('event','scroll_depth',{event_category:'scroll',event_label:'pca',value:m});}
     });
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('input[type=range]').forEach(function(sl){
+    sl.addEventListener('change',function(){gtag('event','slider',{event_category:'interaction',event_label:sl.id||'slider',value:sl.value});});
+  });
+  document.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change',function(){gtag('event','checkbox',{event_category:'interaction',event_label:cb.id||'checkbox',value:cb.checked?'on':'off'});});
+  });
+  document.querySelectorAll('select').forEach(function(sel){
+    sel.addEventListener('change',function(){gtag('event','filtro',{event_category:'interaction',event_label:sel.id||'select',value:sel.value});});
   });
 })();
 </script>
