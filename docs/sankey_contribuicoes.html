@@ -144,7 +144,7 @@ function parseCSV(txt){
     });
 }
 
-// LOGICA DE VOTOS (AQUI ESTAVA O ERRO)
+// LOGICA DE VOTOS 
 async function carregarVotos() {
     try {
         const resp = await fetch(VURL);
@@ -272,11 +272,40 @@ function desenhar(){
     });
 
     // Desenha Contribuições
+// Substitua o loop das contribuições (posC.forEach) por este:
     posC.forEach(c => {
-        out.push(`<g class="nc" style="cursor:pointer" onclick="verDetalhe('${c.texto.replace(/'/g,"\\'")}')">
+        const maxChars = 85; // Ajuste conforme a largura da caixa
+        const palavras = c.texto.split(' ');
+        let linhas = [];
+        let linhaAtual = '';
+    
+        // Lógica de quebra de linha (Word Wrap)
+        palavras.forEach(palavra => {
+            if ((linhaAtual + palavra).length < maxChars) {
+                linhaAtual += (linhaAtual === '' ? '' : ' ') + palavra;
+            } else {
+                linhas.push(linhaAtual);
+                linhaAtual = palavra;
+            }
+        });
+        linhas.push(linhaAtual); // Adiciona a última linha
+    
+        // Limita a exibição visual para não estourar a caixa
+        const linhasVisiveis = linhas.slice(0, 4);
+    
+        // Ajusta a altura da caixa baseada no número real de linhas
+        c.h = Math.max(32, linhasVisiveis.length * 16 + 15);
+    
+        let gHtml = `<g class="nc" style="cursor:pointer" onclick="verDetalhe('${c.texto.replace(/'/g, "\\'")}')">
             <rect x="${xC}" y="${c.py}" width="${NODE_W_C}" height="${c.h}" rx="6" fill="${COR_CONTRIB}" fill-opacity="0.85"/>
-            <text x="${xC+12}" y="${c.py+18}" font-size="11" fill="white">${c.texto.slice(0, 90)}...</text>
-        </g>`);
+            <text x="${xC + 12}" y="${c.py + 18}" font-size="11" fill="white" font-family="Roboto">`;
+    
+        linhasVisiveis.forEach((txt, idx) => {
+            gHtml += `<tspan x="${xC + 12}" dy="${idx === 0 ? 0 : 15}">${esc(txt)}${idx === 3 && linhas.length > 4 ? '...' : ''}</tspan>`;
+        });
+    
+        gHtml += `</text></g>`;
+        out.push(gHtml);
     });
 
     // Desenha Minuta com BARRAS DE VOTAÇÃO
