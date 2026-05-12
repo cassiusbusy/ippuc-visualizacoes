@@ -136,7 +136,7 @@ var COR_NIV      = {1:'#444', 2:'#666', 3:'#888', 4:'#aaa'};
 var ALT_NIV      = {1:44, 2:36, 3:30, 4:26};
 var IND_NIV      = {1:0,  2:14, 3:28, 4:40};
 var NODE_W_C     = 640;
-var NODE_W_M     = 340;
+var NODE_W_M     = 640;
 var COL_GAP      = 120;
 var PAD          = 20;
 var GAP_CONTRIB  = 10;
@@ -423,7 +423,7 @@ function desenhar(){
         var w      = NODE_W_M - ind;
         var votos  = mapVotos[n.id] || {adequado:0, precisa:0, total:0};
         var label  = n.tipo + ' — ' + n.nome;
-        var short  = esc(label.length > 40 ? label.slice(0,39)+'…' : label);
+        var short  = esc(label.length > 120 ? label.slice(0,39)+'…' : label);
         var fs     = n.nivel === 1 ? 11 : n.nivel === 2 ? 10 : 9;
         var fw     = n.nivel <= 2 ? '700' : '500';
         var cor    = COR_NIV[n.nivel] || '#999';
