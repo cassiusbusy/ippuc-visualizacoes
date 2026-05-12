@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,47 +26,61 @@
         .spinner{width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--bordo);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
         @keyframes spin{to{transform:rotate(360deg)}}
         .empty{text-align:center;padding:60px;color:#aaa;font-size:.85rem;display:none;}
-        #sankey-wrap{overflow-x:auto;margin-top:4px;display:flex;justify-content:center;}
+        #sankey-wrap{overflow-x:auto;margin-top:4px;}
         .tooltip{position:fixed;background:rgba(26,26,46,.95);color:#fff;border-radius:8px;padding:8px 12px;font-size:.72rem;line-height:1.5;max-width:320px;pointer-events:none;z-index:500;display:none;box-shadow:0 4px 16px rgba(0,0,0,.25);}
         .tooltip.vis{display:block;}
         .busca-wrap{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-        .busca-input{flex:1;border:1.5px solid var(--bd);border-radius:8px;padding:7px 12px; font-size:.8rem;outline:none;background:#fff;color:var(--tx);}
-        .busca-clear{background:var(--cd);border:none;border-radius:6px;padding:5px 10px; font-size:.72rem;cursor:pointer;display:none;}
+        .busca-input{flex:1;border:1.5px solid var(--bd);border-radius:8px;padding:7px 12px;font-size:.8rem;outline:none;background:#fff;color:var(--tx);}
+        .busca-input:focus{border-color:var(--v);}
+        .busca-clear{background:var(--cd);border:none;border-radius:6px;padding:5px 10px;font-size:.72rem;cursor:pointer;color:#666;display:none;}
         .busca-clear.vis{display:block;}
-        .ibox{background:#fff;border-radius:9px;padding:12px 14px;border:.5px solid var(--bd); margin-bottom:10px;display:none;position:relative;}
+        .ibox{background:#fff;border-radius:9px;padding:12px 14px;border:.5px solid var(--bd);margin-bottom:10px;display:none;position:relative;}
         .ibox.vis{display:block;}
-        .ibox-close{position:absolute;top:8px;right:8px;background:var(--cd);border:none; border-radius:50%;width:24px;height:24px;cursor:pointer;}
+        .ibox-close{position:absolute;top:8px;right:8px;background:var(--cd);border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:.8rem;color:#555;}
         .mpill{border-radius:7px;padding:2px 8px;font-size:.67rem;font-weight:600;display:inline-block;margin:2px;}
-        .pag-wrap{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-bottom:10px;}
-        .pag-btn{background:#fff;border:1px solid var(--bd);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--azd);}
-        .pag-btn:hover{background:var(--vl);border-color:var(--v);}
-        .pag-info{font-size:.75rem;font-weight:700;color:#666;min-width:100px;text-align:center;}
+        .pag-wrap{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;background:var(--cd);border-radius:10px;padding:10px 16px;border:.5px solid var(--bd);}
+        .pag-btn{background:#fff;border:1.5px solid var(--bd);padding:6px 16px;border-radius:7px;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--azd);transition:all .15s;}
+        .pag-btn:hover:not(:disabled){background:var(--vl);border-color:var(--v);color:var(--v);}
+        .pag-btn:disabled{opacity:.35;cursor:not-allowed;}
+        .pag-info{font-size:.78rem;font-weight:700;color:#444;}
+        .pag-total{font-size:.72rem;color:#888;}
     </style>
 </head>
 <body>
-<div class="stripe"><div style="background:#00a859"></div><div style="background:#447EC0"></div><div style="background:#8E6CAD"></div><div style="background:#8EC899"></div><div style="background:#FDC533"></div><div style="background:#F07E31"></div><div style="background:#EA535E"></div><div style="background:#CA6673"></div></div>
+<div class="stripe">
+    <div style="background:#00a859"></div><div style="background:#447EC0"></div>
+    <div style="background:#8E6CAD"></div><div style="background:#8EC899"></div>
+    <div style="background:#FDC533"></div><div style="background:#F07E31"></div>
+    <div style="background:#EA535E"></div><div style="background:#CA6673"></div>
+</div>
 
 <div class="cnt">
     <a class="back" href="index.html">&#8592; Voltar</a>
-    <div class="ptitle">Fluxo de Contribuições - Análise Parcial do Plano Diretor Curitiba</div>
+    <div class="ptitle">Fluxo de Contribuições — Análise Parcial do Plano Diretor Curitiba</div>
     <div class="psub">Visualize a relação entre as propostas da população e a estrutura da minuta técnica.</div>
 
     <div class="card">
         <h3>Filtros</h3>
         <div class="filtros-row">
-            <div class="filtro-g"><label>Etapa</label><select id="sel-etapa"><option value="">Carregando...</option></select></div>
-            <div class="filtro-g"><label>Oficina</label><select id="sel-oficina"><option value="">Selecione a etapa primeiro</option></select></div>
             <div class="filtro-g">
-                <label>Titulo da Minuta</label>
+                <label>Etapa</label>
+                <select id="sel-etapa"><option value="">Carregando...</option></select>
+            </div>
+            <div class="filtro-g">
+                <label>Oficina</label>
+                <select id="sel-oficina"><option value="">Selecione a etapa primeiro</option></select>
+            </div>
+            <div class="filtro-g">
+                <label>Título da Minuta</label>
                 <select id="sel-titulo">
-                    <option value="">Todos os titulos</option>
-                    <option value="T1">T1 &mdash; DO DESENVOLVIMENTO URBANO SUSTENTÁVEL</option>
-                    <option value="T2">T2 &mdash; DA INTEGRAÇÃO METROPOLITANA</option>
-                    <option value="T3">T3 &mdash; DA POLÍTICA TERRITORIAL INTEGRADA</option>
-                    <option value="T4">T4 &mdash; DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIOL</option>
-                    <option value="T5">T5 &mdash; DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA</option>
-                    <option value="T6">T6 &mdash; DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE</option>
-                    <option value="T7">T7 &mdash; DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS</option>
+                    <option value="">Todos os títulos</option>
+                    <option value="T1">T1 — DO DESENVOLVIMENTO URBANO SUSTENTÁVEL</option>
+                    <option value="T2">T2 — DA INTEGRAÇÃO METROPOLITANA</option>
+                    <option value="T3">T3 — DA POLÍTICA TERRITORIAL INTEGRADA</option>
+                    <option value="T4">T4 — DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO</option>
+                    <option value="T5">T5 — DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA</option>
+                    <option value="T6">T6 — DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA</option>
+                    <option value="T7">T7 — DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS</option>
                 </select>
             </div>
         </div>
@@ -73,8 +88,7 @@
 
     <div class="ibox" id="ibox">
         <button class="ibox-close" onclick="document.getElementById('ibox').classList.remove('vis')">&#10005;</button>
-        <div style="font-size:.88rem;font-weight:700;color:var(--bordo);margin-bottom:6px;" id="ibox-titulo"></div>
-        <div id="ibox-pills" style="margin-bottom:8px;"></div>
+        <div style="font-size:.88rem;font-weight:700;color:var(--bordo);margin-bottom:6px;">Contribuição completa</div>
         <div style="font-size:.82rem;color:#333;line-height:1.7;" id="ibox-txt"></div>
     </div>
 
@@ -83,10 +97,13 @@
         <button class="busca-clear" id="busca-clear" onclick="limparBusca()">✕ Limpar</button>
     </div>
 
-    <div class="pag-wrap">
-        <button class="pag-btn" onclick="mudarPagina(-1)">← Anterior</button>
-        <span class="pag-info" id="pag-info">Página 1</span>
-        <button class="pag-btn" onclick="mudarPagina(1)">Próxima →</button>
+    <div class="pag-wrap" id="pag-wrap" style="display:none;">
+        <button class="pag-btn" id="btn-ant" onclick="mudarPagina(-1)">← Anterior</button>
+        <div style="text-align:center;">
+            <div class="pag-info" id="pag-info">Página 1 de 1</div>
+            <div class="pag-total" id="pag-total"></div>
+        </div>
+        <button class="pag-btn" id="btn-prox" onclick="mudarPagina(1)">Próxima →</button>
     </div>
 
     <div class="card">
@@ -99,258 +116,376 @@
 
 <div class="tooltip" id="ttp"></div>
 
-<script id="data-minuta" type="application/json">{"minuta": [{"id": "T1", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENT\u00c1VEL", "titulo_pai": "T1"}, {"id": "T1-C1", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DAS DISPOSI\u00c7\u00d5ES PRELIMINARES", "titulo_pai": "T1"}, {"id": "T1-C2", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DA VIS\u00c3O DE FUTURO DE DESENVOLVIMENTO URBANO SUSTENT\u00c1VEL", "titulo_pai": "T1"}, {"id": "T1-C2-S1", "nivel": 3, "tipo": "SE\u00c7\u00c3O", "nome": "Dos Princ\u00edpios e da Vis\u00e3o 2050", "titulo_pai": "T1"}, {"id": "T1-C3", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DAS ESTRAT\u00c9GIAS DE DESENVOLVIMENTO", "titulo_pai": "T1"}, {"id": "T1-C3-S2", "nivel": 3, "tipo": "SE\u00c7\u00c3O", "nome": "Da Cidade Inteligente, Inovadora...", "titulo_pai": "T1"}, {"id": "T2", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DA INTEGRA\u00c7\u00c3O METROPOLITANA", "titulo_pai": "T2"}, {"id": "T3", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DA POL\u00cdTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3"}, {"id": "T3-C6", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DA GEST\u00c3O E REDU\u00c7\u00c3O DE RISCO", "titulo_pai": "T3"}, {"id": "T4", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DA ARTICULA\u00c7\u00c3O DE POL\u00cdTICAS P\u00daBLICAS", "titulo_pai": "T4"}, {"id": "T4-C1", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DO DESENVOLVIMENTO SOCIAL", "titulo_pai": "T4"}, {"id": "T4-C2", "nivel": 2, "tipo": "CAP\u00cdTULO", "nome": "DO DESENVOLVIMENTO ECON\u00d4MICO", "titulo_pai": "T4"}, {"id": "T5", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DOS INSTRUMENTOS DA POL\u00cdTICA", "titulo_pai": "T5"}, {"id": "T6", "nivel": 1, "tipo": "T\u00cdTULO", "nome": "DO SISTEMA DE PLANEJAMENTO", "titulo_pai": "T6"}]}</script>
+<script id="data-minuta" type="application/json">{"minuta": [{"id": "T1", "nivel": 1, "tipo": "TÍTULO", "nome": "DO DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1"}, {"id": "T1-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS DISPOSIÇÕES PRELIMINARES", "titulo_pai": "T1"}, {"id": "T1-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA VISÃO DE FUTURO DE DESENVOLVIMENTO URBANO SUSTENTÁVEL", "titulo_pai": "T1"}, {"id": "T1-C2-S1", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Princípios e da Visão 2050", "titulo_pai": "T1"}, {"id": "T1-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DAS ESTRATÉGIAS DE DESENVOLVIMENTO", "titulo_pai": "T1"}, {"id": "T1-C3-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cidade Inteligente, Inovadora e Educadora", "titulo_pai": "T1"}, {"id": "T2", "nivel": 1, "tipo": "TÍTULO", "nome": "DA INTEGRAÇÃO METROPOLITANA", "titulo_pai": "T2"}, {"id": "T2-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ALINHAMENTO MUNICIPAL COM A MACROESTRUTURAÇÃO METROPOLITANA", "titulo_pai": "T2"}, {"id": "T2-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA ARTICULAÇÃO DAS POLÍTICAS PÚBLICAS MUNICIPAIS COM AS FPICS", "titulo_pai": "T2"}, {"id": "T3", "nivel": 1, "tipo": "TÍTULO", "nome": "DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T3"}, {"id": "T3-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE ESTRUTURAÇÃO URBANO-AMBIENTAL", "titulo_pai": "T3"}, {"id": "T3-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO ORDENAMENTO TERRITORIAL", "titulo_pai": "T3"}, {"id": "T3-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA MUNICIPAL DE HABITAÇÃO", "titulo_pai": "T3"}, {"id": "T3-C3-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Habitação de Interesse Social", "titulo_pai": "T3"}, {"id": "T3-C3-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Regularização Fundiária Urbana", "titulo_pai": "T3"}, {"id": "T3-C4", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA DE SANEAMENTO AMBIENTAL", "titulo_pai": "T3"}, {"id": "T3-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO SISTEMA INTEGRADO DE MOBILIDADE", "titulo_pai": "T3"}, {"id": "T3-C5-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Mobilidade Ativa", "titulo_pai": "T3"}, {"id": "T3-C5-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Dos Sistemas Viário, de Circulação e Estacionamentos", "titulo_pai": "T3"}, {"id": "T3-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO E REDUÇÃO DE RISCO DE DESASTRES", "titulo_pai": "T3"}, {"id": "T3-C7", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO PATRIMÔNIO AMBIENTAL NATURAL E CULTURAL", "titulo_pai": "T3"}, {"id": "T4", "nivel": 1, "tipo": "TÍTULO", "nome": "DA ARTICULAÇÃO DE POLÍTICAS PÚBLICAS NO TERRITÓRIO", "titulo_pai": "T4"}, {"id": "T4-C1", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO SOCIAL", "titulo_pai": "T4"}, {"id": "T4-C1-S3", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Educação", "titulo_pai": "T4"}, {"id": "T4-C1-S4", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Cultura", "titulo_pai": "T4"}, {"id": "T4-C1-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Esporte, Lazer e Juventude", "titulo_pai": "T4"}, {"id": "T4-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DO DESENVOLVIMENTO ECONÔMICO", "titulo_pai": "T4"}, {"id": "T4-C2-S2", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Inovação", "titulo_pai": "T4"}, {"id": "T4-C2-S5", "nivel": 3, "tipo": "SEÇÃO", "nome": "Da Economia Criativa", "titulo_pai": "T4"}, {"id": "T4-C2-S7", "nivel": 3, "tipo": "SEÇÃO", "nome": "Do Empreendedorismo", "titulo_pai": "T4"}, {"id": "T5", "nivel": 1, "tipo": "TÍTULO", "nome": "DOS INSTRUMENTOS DA POLÍTICA TERRITORIAL INTEGRADA", "titulo_pai": "T5"}, {"id": "T5-C2", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE INDUÇÃO AO CUMPRIMENTO DA FUNÇÃO SOCIAL", "titulo_pai": "T5"}, {"id": "T5-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE OTIMIZAÇÃO DO USO DO SOLO", "titulo_pai": "T5"}, {"id": "T5-C5", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE GESTÃO URBANA E AMBIENTAL", "titulo_pai": "T5"}, {"id": "T5-C6", "nivel": 2, "tipo": "CAPÍTULO", "nome": "INSTRUMENTOS DE REGULARIZAÇÃO FUNDIÁRIA E PROVISÃO DE HABITAÇÃO", "titulo_pai": "T5"}, {"id": "T6", "nivel": 1, "tipo": "TÍTULO", "nome": "DO SISTEMA DE PLANEJAMENTO E GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6"}, {"id": "T6-C3", "nivel": 2, "tipo": "CAPÍTULO", "nome": "DA GESTÃO DEMOCRÁTICA DA CIDADE", "titulo_pai": "T6"}, {"id": "T7", "nivel": 1, "tipo": "TÍTULO", "nome": "DAS DISPOSIÇÕES FINAIS E TRANSITÓRIAS", "titulo_pai": "T7"}]}</script>
 <script id="data-surl" type="application/json">"https://docs.google.com/spreadsheets/d/e/2PACX-1vSQDMje4w1kwNnGKcE4FyQgs8cVKa9CjpwOGa6QZ1FDxo3QITxIeJxFcgR5DPzI3Sgq_bosiHMI9qFZ/pub?output=csv"</script>
-<script id="data-vurl" type="application/json">"https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumm3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv"</script>
+<script id="data-vurl" type="application/json">"https://docs.google.com/spreadsheets/d/e/2PACX-1vRTkDilIYq08rDXuEvDHjpz_VO70WbNx7GJKqKEpHVKosapNqqGaYudumM3aOUjvsT5dHV71ZU8j6Cv/pub?gid=0&single=true&output=csv"</script>
 
 <script>
-// CONFIGURAÇÕES E VARIÁVEIS
 var MINUTA = JSON.parse(document.getElementById('data-minuta').textContent);
-var SURL = document.getElementById('data-surl').textContent.trim().replace(/^"|"$/g,'');
-var VURL = document.getElementById('data-vurl').textContent.trim().replace(/^"|"$/g,'');
+var SURL   = document.getElementById('data-surl').textContent.trim().replace(/^"|"$/g,'');
+var VURL   = document.getElementById('data-vurl').textContent.trim().replace(/^"|"$/g,'');
 
-var paginaAtual = 0;
-var itensPorPagina = 10;
-var buscaTexto = '';
-var mapVotos = {}; 
-var todosRows = [], etapas = [], oficPorEtapa = {}, mapM = {};
+var paginaAtual  = 0;
+var POR_PAGINA   = 20;          // máximo por slide
+var buscaTexto   = '';
+var mapVotos     = {};
+var todosRows    = [], etapas = [], oficPorEtapa = {}, mapM = {};
 
-var COR_CONTRIB = '#CA6673';
-var COR_NIV = {1:'#555', 2:'#777', 3:'#999', 4:'#bbb'};
-var ALT_NIV = {1:44, 2:36, 3:30, 4:26, contrib: 75};
-var IND_NIV = {1:0, 2:14, 3:28, 4:40, 5:40};
-var NODE_W_C = 650, NODE_W_M = 340, COL_GAP = 120, PAD = 20, GAP_CONTRIB = 12;
+var COR_CONTRIB  = '#CA6673';
+var COR_NIV      = {1:'#444', 2:'#666', 3:'#888', 4:'#aaa'};
+var ALT_NIV      = {1:44, 2:36, 3:30, 4:26};
+var IND_NIV      = {1:0,  2:14, 3:28, 4:40};
+var NODE_W_C     = 640;
+var NODE_W_M     = 340;
+var COL_GAP      = 120;
+var PAD          = 20;
+var GAP_CONTRIB  = 10;
+var CHARS_POR_LINHA = 82;      // chars antes de quebrar linha
+var LINHA_H      = 16;         // altura por linha de texto
+var PAD_TOPO_TEXTO = 14;       // distância do topo da caixa ao primeiro texto
+var PAD_V_CAIXA  = 12;         // padding vertical extra na caixa
 
-MINUTA.minuta.forEach(n => mapM[n.id] = n);
+MINUTA.minuta.forEach(function(n){ mapM[n.id] = n; });
 
+// ── Utilitários ─────────────────────────────────────────────────────────────
 function nc(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,''); }
 
-// CARREGAMENTO DE CSV
-function parseCSV(txt){
-    var rows=[],cur='',inQ=false,fields=[],i=0;
-    while(i<txt.length){
-        var ch=txt[i];
-        if(ch==='"'){if(inQ&&txt[i+1]==='"'){cur+='"';i+=2;continue;}inQ=!inQ;i++;continue;}
-        if(ch===','&&!inQ){fields.push(cur);cur='';i++;continue;}
-        if(ch==='\n'&&!inQ){fields.push(cur);cur='';rows.push(fields);fields=[];i++;continue;}
-        cur+=ch;i++;
-    }
-    if(cur||fields.length){fields.push(cur);rows.push(fields);}
-    var norm=rows[0].map(nc);
-    var iC=norm.findIndex(h=>h.includes('cdigo')||h==='codigo'), iP=norm.findIndex(h=>h.includes('proposta')), iF=norm.findIndex(h=>h==='fonte'), iO=norm.findIndex(h=>h.includes('oficina'));
-    return rows.slice(1).map(v=>{
-        function g(idx){return idx>=0?(v[idx]||'').trim().replace(/^"|"$/g,''):'';}
-        return {codigo:g(iC), proposta:g(iP), fonte:g(iF), oficina:g(iO)};
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// Word-wrap: divide texto em array de linhas com no máx CHARS_POR_LINHA chars
+function wrapTexto(texto){
+    var palavras = texto.split(' ');
+    var linhas = [], linha = '';
+    palavras.forEach(function(p){
+        if((linha + (linha ? ' ' : '') + p).length <= CHARS_POR_LINHA){
+            linha += (linha ? ' ' : '') + p;
+        } else {
+            if(linha) linhas.push(linha);
+            // palavra maior que o limite: divide forçado
+            while(p.length > CHARS_POR_LINHA){
+                linhas.push(p.slice(0, CHARS_POR_LINHA));
+                p = p.slice(CHARS_POR_LINHA);
+            }
+            linha = p;
+        }
     });
+    if(linha) linhas.push(linha);
+    return linhas;
 }
 
-// LOGICA DE VOTOS 
-async function carregarVotos() {
-    try {
-        const resp = await fetch(VURL);
-        const txt = await resp.text();
-        const rows = txt.split('\n').map(r => r.split(','));
-        const head = rows[0].map(nc);
-        const iId = head.findIndex(h => h.includes('estrutura') || h==='id');
-        const iV = head.findIndex(h => h.includes('voto'));
-
-        rows.slice(1).forEach(r => {
-            const id = (r[iId]||'').trim();
-            const voto = (r[iV]||'').toLowerCase();
-            if(!id) return;
-            if(!mapVotos[id]) mapVotos[id] = {adequado:0, precisa:0, total:0};
-            if(voto.includes('adequado')) mapVotos[id].adequado++;
-            else if(voto.includes('ajuste') || voto.includes('precisa')) mapVotos[id].precisa++;
-            mapVotos[id].total = mapVotos[id].adequado + mapVotos[id].precisa;
-        });
-        console.log("Votos carregados:", Object.keys(mapVotos).length);
-    } catch(e) { console.warn("Erro votos:", e); }
-}
-
-async function carregar(){
-    await carregarVotos();
-    try{
-        const r = await fetch(SURL);
-        todosRows = parseCSV(await r.text()).filter(r=>r.codigo);
-        etapas = [...new Set(todosRows.map(r=>r.fonte))].sort();
-        etapas.forEach(e => {
-            oficPorEtapa[e] = [...new Set(todosRows.filter(r=>r.fonte===e).map(r=>r.oficina))].filter(o=>o).sort();
-        });
-        const selE = document.getElementById('sel-etapa');
-        selE.innerHTML = etapas.map(e => `<option value="${e}">${e}</option>`).join('');
-        popularOficinas(etapas[0]);
-        document.getElementById('loading-msg').style.display='none';
-    } catch(e){ console.error(e); }
-}
-
-function popularOficinas(etapa){
-    const selO = document.getElementById('sel-oficina');
-    const ofs = oficPorEtapa[etapa] || [];
-    selO.innerHTML = ofs.map(o => `<option value="${o}">${o}</option>`).join('');
-    paginaAtual = 0;
-    desenhar();
+// Altura da caixa para um texto
+function alturaContrib(texto){
+    var linhas = wrapTexto(texto);
+    return linhas.length * LINHA_H + PAD_TOPO_TEXTO + PAD_V_CAIXA;
 }
 
 function resolverCod(cod){
-    if(!cod) return null; if(mapM[cod]) return cod;
-    let partes = cod.split('-');
-    for(let i=partes.length-1; i>0; i--){
-        let pai = partes.slice(0,i).join('-');
+    if(!cod) return null;
+    if(mapM[cod]) return cod;
+    var p = cod.split('-');
+    for(var i = p.length-1; i > 0; i--){
+        var pai = p.slice(0,i).join('-');
         if(mapM[pai]) return pai;
     }
     return null;
 }
 
-function mudarPagina(dir) {
-    paginaAtual += dir;
-    if(paginaAtual < 0) paginaAtual = 0;
+// ── CSV ──────────────────────────────────────────────────────────────────────
+function parseCSV(txt){
+    var rows=[], cur='', inQ=false, fields=[], i=0;
+    while(i < txt.length){
+        var ch = txt[i];
+        if(ch === '"'){ if(inQ && txt[i+1]==='"'){cur+='"';i+=2;continue;} inQ=!inQ; i++; continue; }
+        if(ch === ',' && !inQ){ fields.push(cur); cur=''; i++; continue; }
+        if(txt.charCodeAt(i) === 10 && !inQ){ fields.push(cur); cur=''; rows.push(fields); fields=[]; i++; continue; }
+        if(txt.charCodeAt(i) === 13){ i++; continue; }  // FIX: trata \r
+        cur += ch; i++;
+    }
+    if(cur || fields.length){ fields.push(cur); rows.push(fields); }
+    if(rows.length < 2) return [];
+    var norm = rows[0].map(nc);
+    var iC = norm.findIndex(function(h){ return h.includes('cdigo') || h==='codigo'; });
+    var iP = norm.findIndex(function(h){ return h.includes('proposta'); });
+    var iF = norm.findIndex(function(h){ return h==='fonte'; });
+    var iO = norm.findIndex(function(h){ return h.includes('oficina'); });
+    return rows.slice(1).filter(function(v){ return v.length > 1; }).map(function(v){
+        function g(idx){ return idx>=0 ? (v[idx]||'').trim().replace(/^"|"$/g,'') : ''; }
+        return { codigo:g(iC), proposta:g(iP), fonte:g(iF)||'outros', oficina:g(iO) };
+    });
+}
+
+// ── Votos ────────────────────────────────────────────────────────────────────
+async function carregarVotos(){
+    try{
+        var resp = await fetch(VURL);
+        var txt  = await resp.text();
+        // Reusar parseCSV robusto
+        var linhas = txt.split('\n');
+        var head = linhas[0].split(',').map(nc);
+        var iId = head.findIndex(function(h){ return h.includes('estrutura')||h.includes('codigo')||h==='id'; });
+        var iV  = head.findIndex(function(h){ return h.includes('voto'); });
+        linhas.slice(1).forEach(function(linha){
+            var cols = linha.split(',');
+            var id   = (cols[iId]||'').trim().replace(/^"|"$/g,'');
+            var voto = (cols[iV]||'').toLowerCase();
+            if(!id) return;
+            if(!mapVotos[id]) mapVotos[id] = {adequado:0, precisa:0, total:0};
+            if(voto.includes('adequado')) mapVotos[id].adequado++;
+            else if(voto.includes('ajuste')||voto.includes('precisa')) mapVotos[id].precisa++;
+            mapVotos[id].total = mapVotos[id].adequado + mapVotos[id].precisa;
+            // Acumular nos ancestrais
+            var partes = id.split('-');
+            for(var pi=1; pi<partes.length; pi++){
+                var pai = partes.slice(0,pi).join('-');
+                if(!mapVotos[pai]) mapVotos[pai] = {adequado:0, precisa:0, total:0};
+                mapVotos[pai].adequado += (voto.includes('adequado') ? 1 : 0);
+                mapVotos[pai].precisa  += ((voto.includes('ajuste')||voto.includes('precisa')) ? 1 : 0);
+                mapVotos[pai].total    = mapVotos[pai].adequado + mapVotos[pai].precisa;
+            }
+        });
+    } catch(e){ console.warn('Votos não carregados:', e.message); }
+}
+
+// ── Carga principal ───────────────────────────────────────────────────────────
+async function carregar(){
+    await carregarVotos();
+    try{
+        var r = await fetch(SURL);
+        todosRows = parseCSV(await r.text()).filter(function(r){ return r.codigo && r.codigo !== 'nan'; });
+        etapas = [...new Set(todosRows.map(function(r){ return r.fonte; }))].sort();
+        etapas.forEach(function(e){
+            oficPorEtapa[e] = [...new Set(
+                todosRows.filter(function(r){ return r.fonte===e; }).map(function(r){ return r.oficina; })
+            )].filter(function(o){ return o && o!=='nan' && o!==''; }).sort();
+        });
+        var selE = document.getElementById('sel-etapa');
+        selE.innerHTML = etapas.map(function(e){ return '<option value="'+e+'">'+e+'</option>'; }).join('');
+
+        // Defaults: etapa3 / Site Minuta Interativa
+        var defEtapa = etapas.includes('etapa3') ? 'etapa3' : etapas[0];
+        selE.value = defEtapa;
+        popularOficinas(defEtapa, 'Site Minuta Interativa');
+
+        document.getElementById('loading-msg').style.display = 'none';
+    } catch(e){
+        console.error(e);
+        document.getElementById('loading-msg').innerHTML = '<span style="color:#CA6673">Erro ao carregar: '+e.message+'</span>';
+    }
+}
+
+function popularOficinas(etapa, selecionar){
+    var selO = document.getElementById('sel-oficina');
+    var ofs  = oficPorEtapa[etapa] || [];
+    selO.innerHTML = ofs.map(function(o){ return '<option value="'+o+'">'+o+'</option>'; }).join('');
+    if(selecionar && ofs.includes(selecionar)) selO.value = selecionar;
+    paginaAtual = 0;
     desenhar();
 }
 
+// ── Paginação ────────────────────────────────────────────────────────────────
+function mudarPagina(dir){
+    paginaAtual += dir;
+    desenhar();
+}
+
+function resetarPagina(){
+    paginaAtual = 0;
+}
+
+// ── Desenhar ─────────────────────────────────────────────────────────────────
 function desenhar(){
-    const etapa = document.getElementById('sel-etapa').value;
-    const oficina = document.getElementById('sel-oficina').value;
-    const tituloF = document.getElementById('sel-titulo').value;
+    var etapa   = document.getElementById('sel-etapa').value;
+    var oficina = document.getElementById('sel-oficina').value;
+    var tituloF = document.getElementById('sel-titulo').value;
     if(!oficina) return;
 
-    let f = todosRows.filter(r => r.fonte === etapa && r.oficina === oficina);
-    if(tituloF) f = f.filter(r => (r.codigo||'').startsWith(tituloF));
-    if(buscaTexto) f = f.filter(r => r.proposta.toLowerCase().includes(buscaTexto));
+    // Filtros
+    var filtrado = todosRows.filter(function(r){ return r.fonte===etapa && r.oficina===oficina; });
+    if(tituloF) filtrado = filtrado.filter(function(r){ return (resolverCod(r.codigo)||'').split('-')[0] === tituloF; });
+    if(buscaTexto) filtrado = filtrado.filter(function(r){ return (r.proposta||'').toLowerCase().includes(buscaTexto); });
 
-    const totalP = Math.ceil(f.length / itensPorPagina);
-    if(paginaAtual >= totalP) paginaAtual = Math.max(0, totalP - 1);
-    
-    document.getElementById('pag-info').textContent = `Página ${paginaAtual + 1} de ${totalP || 1}`;
-    const rows = f.slice(paginaAtual * itensPorPagina, (paginaAtual + 1) * itensPorPagina);
+    var total    = filtrado.length;
+    var totalPag = Math.max(1, Math.ceil(total / POR_PAGINA));
+    paginaAtual  = Math.min(paginaAtual, totalPag - 1);
+    paginaAtual  = Math.max(0, paginaAtual);
 
-    if(rows.length === 0) {
-        document.getElementById('sankey-wrap').style.display='none';
-        document.getElementById('empty-msg').style.display='block';
+    // Atualizar UI de paginação
+    var pagWrap = document.getElementById('pag-wrap');
+    pagWrap.style.display = total > 0 ? 'flex' : 'none';
+    document.getElementById('pag-info').textContent  = 'Página ' + (paginaAtual+1) + ' de ' + totalPag;
+    document.getElementById('pag-total').textContent = total + ' contribuições encontradas';
+    document.getElementById('btn-ant').disabled  = paginaAtual === 0;
+    document.getElementById('btn-prox').disabled = paginaAtual >= totalPag - 1;
+
+    var rows = filtrado.slice(paginaAtual * POR_PAGINA, (paginaAtual+1) * POR_PAGINA);
+
+    // Label do card
+    var label = etapa + ' / ' + oficina + (tituloF ? ' / ' + tituloF : '');
+    document.getElementById('card-titulo').textContent = 'Fluxo: ' + label + ' (' + total + ' contrib. · pág. ' + (paginaAtual+1) + '/' + totalPag + ')';
+
+    if(rows.length === 0){
+        document.getElementById('sankey-wrap').style.display = 'none';
+        document.getElementById('empty-msg').style.display   = 'block';
         return;
     }
+    document.getElementById('empty-msg').style.display   = 'none';
+    document.getElementById('sankey-wrap').style.display = 'block';
 
-    document.getElementById('empty-msg').style.display='none';
-    document.getElementById('sankey-wrap').style.display='block';
+    // ── PASSO 1: calcular word-wrap e alturas ANTES de qualquer posição ──────
+    var contribs = rows.map(function(r, i){
+        var cod    = resolverCod(r.codigo);
+        var linhas = wrapTexto(r.proposta || '');
+        var h      = linhas.length * LINHA_H + PAD_TOPO_TEXTO + PAD_V_CAIXA;
+        return { id:'c'+i, texto:r.proposta, codigo:cod, linhas:linhas, h:h };
+    });
 
-    const contribs = rows.map((r, i) => ({id:'c'+i, texto:r.proposta, codigo:resolverCod(r.codigo)}));
-    const vMin = new Set(), minutaOrdem = [];
-    contribs.forEach(c => {
+    // ── PASSO 2: calcular posições Y com alturas reais ───────────────────────
+    var yC = PAD + 24;   // 24 = espaço do cabeçalho "CONTRIBUIÇÕES"
+    contribs.forEach(function(c){
+        c.py = yC;
+        yC  += c.h + GAP_CONTRIB;
+    });
+
+    // ── PASSO 3: nós da minuta referenciados (ordem hierárquica) ────────────
+    var minutaVisto = new Set();
+    var minutaOrdem = [];
+    contribs.forEach(function(c){
         if(!c.codigo) return;
-        let p = c.codigo.split('-');
-        for(let n=1; n<=p.length; n++) {
-            let id = p.slice(0,n).join('-');
-            if(mapM[id] && !vMin.has(id)) { vMin.add(id); minutaOrdem.push(mapM[id]); }
+        var partes = c.codigo.split('-');
+        for(var n=1; n<=partes.length; n++){
+            var id = partes.slice(0,n).join('-');
+            if(mapM[id] && !minutaVisto.has(id)){ minutaVisto.add(id); minutaOrdem.push(mapM[id]); }
         }
     });
 
-    // Renderização SVG
-    let yC = PAD + 20, posC = [];
-    contribs.forEach(c => {
-        let nL = c.texto.length > 160 ? 3 : c.texto.length > 80 ? 2 : 1;
-        let h = nL === 3 ? 58 : nL === 2 ? 44 : 32;
-        posC.push({...c, py: yC, h: h});
-        yC += h + GAP_CONTRIB;
+    // ── PASSO 4: posições Y dos nós da minuta ───────────────────────────────
+    var mapPY  = {};
+    var yMAcc  = PAD + 24;
+    minutaOrdem.forEach(function(n){
+        mapPY[n.id] = yMAcc;
+        yMAcc += ALT_NIV[n.nivel] + 5;
     });
 
-    let hM = minutaOrdem.reduce((s, n) => s + ALT_NIV[n.nivel] + 5, 0);
-    let svgH = Math.max(yC, hM + 40, 400);
-    let xC = PAD, xM = PAD + NODE_W_C + COL_GAP;
-    let out = [`<svg width="${xM + NODE_W_M + PAD}" height="${svgH}" xmlns="http://www.w3.org/2000/svg">`];
+    var svgH   = Math.max(yC, yMAcc, 300) + PAD;
+    var xC     = PAD;
+    var xM     = PAD + NODE_W_C + COL_GAP;
+    var svgW   = xM + NODE_W_M + PAD;
 
-    // Desenha Links
-    let mapPY = {}; 
-    let yMacc = PAD + 40;
-    minutaOrdem.forEach(n => {
-        mapPY[n.id] = yMacc;
-        yMacc += ALT_NIV[n.nivel] + 5;
-    });
+    var out = ['<svg width="'+svgW+'" height="'+svgH+'" xmlns="http://www.w3.org/2000/svg">'];
 
-    posC.forEach(c => {
+    // Cabeçalhos colunas
+    out.push('<text x="'+(xC+NODE_W_C/2)+'" y="14" text-anchor="middle" font-size="9" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">CONTRIBUIÇÕES</text>');
+    out.push('<text x="'+(xM+NODE_W_M/2)+'" y="14" text-anchor="middle" font-size="9" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">MINUTA DO PLANO DIRETOR</text>');
+
+    // ── PASSO 5: links ────────────────────────────────────────────────────────
+    // (agora com posições corretas)
+    contribs.forEach(function(c){
         if(!c.codigo || mapPY[c.codigo] === undefined) return;
-        let y1 = c.py + c.h/2, y2 = mapPY[c.codigo] + ALT_NIV[mapM[c.codigo].nivel]/2;
-        out.push(`<path d="M${xC+NODE_W_C},${y1} C${(xC+NODE_W_C+xM)/2},${y1} ${(xC+NODE_W_C+xM)/2},${y2} ${xM},${y2}" fill="none" stroke="${COR_CONTRIB}" stroke-width="1.5" stroke-opacity="0.2"/>`);
+        var y1  = c.py + c.h / 2;
+        var y2  = mapPY[c.codigo] + ALT_NIV[mapM[c.codigo] ? mapM[c.codigo].nivel : 3] / 2;
+        var mx  = (xC + NODE_W_C + xM) / 2;
+        out.push('<path d="M'+(xC+NODE_W_C)+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+xM+','+y2+'" fill="none" stroke="'+COR_CONTRIB+'" stroke-width="1.5" stroke-opacity="0.22"/>');
     });
 
-    // Desenha Contribuições
-// Substitua o loop das contribuições (posC.forEach) por este:
-    posC.forEach(c => {
-        const maxChars = 85; // Ajuste conforme a largura da caixa
-        const palavras = c.texto.split(' ');
-        let linhas = [];
-        let linhaAtual = '';
-    
-        // Lógica de quebra de linha (Word Wrap)
-        palavras.forEach(palavra => {
-            if ((linhaAtual + palavra).length < maxChars) {
-                linhaAtual += (linhaAtual === '' ? '' : ' ') + palavra;
-            } else {
-                linhas.push(linhaAtual);
-                linhaAtual = palavra;
-            }
+    // ── PASSO 6: caixas de contribuição ──────────────────────────────────────
+    contribs.forEach(function(c, idx){
+        // Usar data-attribute para evitar problemas com aspas no onclick
+        out.push('<g class="nc" data-idx="'+idx+'" style="cursor:pointer">');
+        out.push('<rect x="'+xC+'" y="'+c.py+'" width="'+NODE_W_C+'" height="'+c.h+'" rx="6" fill="'+COR_CONTRIB+'" fill-opacity="0.85"/>');
+        out.push('<text font-size="11" fill="white" font-family="Roboto,sans-serif">');
+        c.linhas.forEach(function(linha, li){
+            var dy = li === 0 ? (c.py + PAD_TOPO_TEXTO) : 0;
+            out.push('<tspan x="'+(xC+12)+'" '+(li===0 ? 'y="'+dy+'"' : 'dy="'+LINHA_H+'"')+'>'+esc(linha)+'</tspan>');
         });
-        linhas.push(linhaAtual); // Adiciona a última linha
-    
-        // Limita a exibição visual para não estourar a caixa
-        const linhasVisiveis = linhas.slice(0, 4);
-    
-        // Ajusta a altura da caixa baseada no número real de linhas
-        c.h = Math.max(32, linhasVisiveis.length * 16 + 15);
-    
-        let gHtml = `<g class="nc" style="cursor:pointer" onclick="verDetalhe('${c.texto.replace(/'/g, "\\'")}')">
-            <rect x="${xC}" y="${c.py}" width="${NODE_W_C}" height="${c.h}" rx="6" fill="${COR_CONTRIB}" fill-opacity="0.85"/>
-            <text x="${xC + 12}" y="${c.py + 18}" font-size="11" fill="white" font-family="Roboto">`;
-    
-        linhasVisiveis.forEach((txt, idx) => {
-            gHtml += `<tspan x="${xC + 12}" dy="${idx === 0 ? 0 : 15}">${esc(txt)}${idx === 3 && linhas.length > 4 ? '...' : ''}</tspan>`;
-        });
-    
-        gHtml += `</text></g>`;
-        out.push(gHtml);
+        out.push('</text></g>');
     });
 
-    // Desenha Minuta com BARRAS DE VOTAÇÃO
-    minutaOrdem.forEach(n => {
-        let ind = IND_NIV[n.nivel] || 0;
-        let py = mapPY[n.id];
-        let w = NODE_W_M - ind;
-        let votos = mapVotos[n.id] || {adequado:0, precisa:0, total:0};
+    // ── PASSO 7: nós da minuta com barra de votos ────────────────────────────
+    minutaOrdem.forEach(function(n){
+        var ind    = IND_NIV[n.nivel] || 0;
+        var py     = mapPY[n.id];
+        var h      = ALT_NIV[n.nivel];
+        var w      = NODE_W_M - ind;
+        var votos  = mapVotos[n.id] || {adequado:0, precisa:0, total:0};
+        var label  = n.tipo + ' — ' + n.nome;
+        var short  = esc(label.length > 40 ? label.slice(0,39)+'…' : label);
+        var fs     = n.nivel === 1 ? 11 : n.nivel === 2 ? 10 : 9;
+        var fw     = n.nivel <= 2 ? '700' : '500';
+        var cor    = COR_NIV[n.nivel] || '#999';
 
-        out.push(`<g class="nm" onmouseenter="showTtp(event, '${n.nome}', ${votos.adequado}, ${votos.precisa})" onmouseleave="hideTtp()">
-            <rect x="${xM+ind}" y="${py}" width="${w}" height="${ALT_NIV[n.nivel]}" rx="4" fill="${COR_NIV[n.nivel]}" fill-opacity="0.9"/>
-            <text x="${xM+ind+8}" y="${py+18}" font-size="10" font-weight="600" fill="white">${n.tipo} - ${n.nome.slice(0, 35)}...</text>`);
-        
-        // Barra de progresso (Votação)
-        if(votos.total > 0) {
-            let barW = w - 16, barH = 4, pA = (votos.adequado / votos.total) * barW;
-            out.push(`<rect x="${xM+ind+8}" y="${py+ALT_NIV[n.nivel]-8}" width="${barW}" height="${barH}" rx="2" fill="rgba(0,0,0,0.2)"/>
-                      <rect x="${xM+ind+8}" y="${py+ALT_NIV[n.nivel]-8}" width="${pA}" height="${barH}" rx="2" fill="#00a859"/>
-                      <rect x="${xM+ind+8+pA}" y="${py+ALT_NIV[n.nivel]-8}" width="${barW-pA}" height="${barH}" rx="2" fill="#F07E31"/>`);
+        var nomeFull = esc(n.nome);
+        out.push('<g class="nm" onmouseenter="showTtp(event,\''+nomeFull+'\','+votos.adequado+','+votos.precisa+')" onmouseleave="hideTtp()">');
+        out.push('<rect x="'+(xM+ind)+'" y="'+py+'" width="'+w+'" height="'+h+'" rx="4" fill="'+cor+'" fill-opacity="0.9"/>');
+        out.push('<text x="'+(xM+ind+8)+'" y="'+(py+h/2)+'" dominant-baseline="middle" font-size="'+fs+'" font-weight="'+fw+'" fill="white" font-family="Roboto,sans-serif">'+short+'</text>');
+
+        if(votos.total > 0){
+            var barX = xM+ind+6, barY = py+h-7, barW = w-12, barH = 4;
+            var pA   = Math.round((votos.adequado / votos.total) * barW);
+            var pP   = barW - pA;
+            out.push('<rect x="'+barX+'" y="'+barY+'" width="'+barW+'" height="'+barH+'" rx="2" fill="rgba(0,0,0,0.2)"/>');
+            if(pA > 0) out.push('<rect x="'+barX+'" y="'+barY+'" width="'+pA+'" height="'+barH+'" rx="2" fill="#00a859" fill-opacity="0.9"/>');
+            if(pP > 0) out.push('<rect x="'+(barX+pA)+'" y="'+barY+'" width="'+pP+'" height="'+barH+'" fill="#F07E31" fill-opacity="0.9"/>');
         }
-        out.push(`</g>`);
+        out.push('</g>');
     });
 
     out.push('</svg>');
     document.getElementById('sankey-wrap').innerHTML = out.join('');
+
+    // Bind clique nas contribuições via delegação (evita problemas de aspas no onclick)
+    document.getElementById('sankey-wrap').onclick = function(e){
+        var g = e.target.closest('.nc');
+        if(g){
+            var idx = parseInt(g.dataset.idx);
+            verDetalhe(contribs[idx].texto);
+        }
+    };
 }
 
-// INTERAÇÕES
-function showTtp(e, nome, a, p) {
-    const t = document.getElementById('ttp');
-    t.innerHTML = `<strong>${nome}</strong><br><span style="color:#00a859">Adequado: ${a}</span> | <span style="color:#F07E31">Ajustes: ${p}</span>`;
-    t.style.display = 'block'; t.style.left = (e.clientX + 15) + 'px'; t.style.top = (e.clientY - 20) + 'px';
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+function showTtp(e, nome, a, p){
+    var t = document.getElementById('ttp');
+    t.innerHTML = '<strong>'+nome+'</strong><br>'
+        + '<span style="color:#4ade80">✓ Adequado: '+a+'</span>'
+        + ' &nbsp; <span style="color:#fb923c">⚠ Precisa ajuste: '+p+'</span>';
+    t.classList.add('vis');
+    t.style.left = (e.clientX+15)+'px';
+    t.style.top  = (e.clientY-10)+'px';
 }
-function hideTtp() { document.getElementById('ttp').style.display = 'none'; }
-function verDetalhe(txt) {
-    const i = document.getElementById('ibox');
+function hideTtp(){ document.getElementById('ttp').classList.remove('vis'); }
+
+// ── ibox (texto completo) ─────────────────────────────────────────────────────
+function verDetalhe(txt){
     document.getElementById('ibox-txt').textContent = txt;
-    i.style.display = 'block';
+    document.getElementById('ibox').classList.add('vis');
+    document.getElementById('ibox').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
-function limparBusca() { document.getElementById('busca-inp').value = ''; buscaTexto = ''; desenhar(); }
 
-document.getElementById('sel-etapa').addEventListener('change', e => popularOficinas(e.target.value));
-document.getElementById('sel-oficina').addEventListener('change', desenhar);
-document.getElementById('sel-titulo').addEventListener('change', desenhar);
-document.getElementById('busca-inp').addEventListener('input', e => { buscaTexto = e.target.value.toLowerCase(); desenhar(); });
+// ── Busca ─────────────────────────────────────────────────────────────────────
+function limparBusca(){
+    document.getElementById('busca-inp').value = '';
+    buscaTexto = '';
+    document.getElementById('busca-clear').classList.remove('vis');
+    resetarPagina();
+    desenhar();
+}
+
+// ── Event listeners ───────────────────────────────────────────────────────────
+document.getElementById('sel-etapa').addEventListener('change', function(e){
+    popularOficinas(e.target.value);
+});
+document.getElementById('sel-oficina').addEventListener('change', function(){
+    resetarPagina(); desenhar();
+});
+document.getElementById('sel-titulo').addEventListener('change', function(){
+    resetarPagina(); desenhar();
+});
+document.getElementById('busca-inp').addEventListener('input', function(e){
+    buscaTexto = e.target.value.trim().toLowerCase();
+    document.getElementById('busca-clear').classList.toggle('vis', buscaTexto.length > 0);
+    resetarPagina();
+    desenhar();
+});
 
 carregar();
 </script>
