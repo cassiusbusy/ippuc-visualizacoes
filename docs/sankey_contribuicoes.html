@@ -136,7 +136,7 @@ var COR_NIV      = {1:'#444', 2:'#666', 3:'#888', 4:'#aaa'};
 var ALT_NIV      = {1:44, 2:36, 3:30, 4:26};
 var IND_NIV      = {1:0,  2:14, 3:28, 4:40};
 var NODE_W_C     = 430;
-var NODE_W_M     = 450;
+var NODE_W_M     = 500;
 var COL_GAP      = 120;
 var PAD          = 20;
 var GAP_CONTRIB  = 7;
@@ -391,8 +391,8 @@ function desenhar(){
     var out = ['<svg width="'+svgW+'" height="'+svgH+'" xmlns="http://www.w3.org/2000/svg">'];
 
     // Cabeçalhos colunas
-    out.push('<text x="'+(xC+NODE_W_C/2)+'" y="14" text-anchor="middle" font-size="15" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">CONTRIBUIÇÕES</text>');
-    out.push('<text x="'+(xM+NODE_W_M/2)+'" y="14" text-anchor="middle" font-size="15" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">MINUTA DO PLANO DIRETOR</text>');
+    out.push('<text x="'+(xC+NODE_W_C/2)+'" y="14" text-anchor="middle" font-size="17" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">CONTRIBUIÇÕES</text>');
+    out.push('<text x="'+(xM+NODE_W_M/2)+'" y="14" text-anchor="middle" font-size="13" font-weight="700" fill="#aaa" letter-spacing="1" font-family="Roboto,sans-serif">MINUTA DO PLANO DIRETOR</text>');
 
     // ── PASSO 5: links ────────────────────────────────────────────────────────
     contribs.forEach(function(c){
