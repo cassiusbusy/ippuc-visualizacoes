@@ -407,7 +407,7 @@ function desenhar(){
     contribs.forEach(function(c, idx){
         out.push('<g class="nc" data-idx="'+idx+'" style="cursor:pointer">');
         out.push('<rect x="'+xC+'" y="'+c.py+'" width="'+NODE_W_C+'" height="'+c.h+'" rx="6" fill="'+COR_CONTRIB+'" fill-opacity="0.85"/>');
-        out.push('<text font-size="11" fill="white" font-family="Roboto,sans-serif">');
+        out.push('<text font-size="14" fill="white" font-family="Roboto,sans-serif">');
         c.linhas.forEach(function(linha, li){
             var dy = li === 0 ? (c.py + PAD_TOPO_TEXTO) : 0;
             out.push('<tspan x="'+(xC+12)+'" '+(li===0 ? 'y="'+dy+'"' : 'dy="'+LINHA_H+'"')+'>'+esc(linha)+'</tspan>');
