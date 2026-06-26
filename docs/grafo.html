@@ -151,30 +151,52 @@ function aresVisiveis(){
   const ids=new Set(nosVisiveis().map(n=>n.id));
   return DALL.arestas.filter(a=>a.weight>=thr&&a.bridging<=bcmax&&a.weight>=wmin&&ids.has(a.source)&&ids.has(a.target));
 }
-function tick(){
-  const nv=nosVisiveis(),av=aresVisiveis();
-  for(let i=0;i<nv.length;i++){
-    for(let j=i+1;j<nv.length;j++){
-      const a=nv[i],b=nv[j];
-      const dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;
-      const f=forca/(d*d);
-      a.vx-=dx*f;a.vy-=dy*f;b.vx+=dx*f;b.vy+=dy*f;
+function tick(){  
+  const nv=nosVisiveis(),av=aresVisiveis();  
+  
+  // 1. Repulsão corrigida com trava de proximidade e normalização vetorial
+  for(let i=0;i<nv.length;i++){    
+    for(let j=i+1;j<nv.length;j++){      
+      const a=nv[i],b=nv[j];      
+      const dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;      
+      
+      const dClamped = Math.max(d, 20); // Impede que a força tenda ao infinito se os nós sobrepuserem
+      const f = forca / (dClamped * dClamped * d); // Aplica a lei do inverso do quadrado perfeitamente normalizada
+      
+      a.vx-=dx*f;a.vy-=dy*f;b.vx+=dx*f;b.vy+=dy*f;    
+    }  
+  }  
+  
+  // 2. Atração (Conexões/Links)
+  av.forEach(a=>{    
+    const s=nos[a.source],t=nos[a.target];if(!s||!t)return;    
+    const dx=t.x-s.x,dy=t.y-s.y,d=Math.sqrt(dx*dx+dy*dy)||1;    
+    const f=(d-dist)*0.05*a.weight;    
+    s.vx+=dx/d*f;s.vy+=dy/d*f;t.vx-=dx/d*f;t.vy-=dy/d*f;  
+  });  
+  
+  // 3. Gravidade central
+  nv.forEach(n=>{n.vx+=(W/2-n.x)*0.004;n.vy+=(H/2-n.y)*0.004;});  
+  
+  // 4. Atrito otimizado e teto de velocidade máxima
+  nv.forEach(n=>{    
+    if(n.fixed)return;    
+    
+    n.vx*=0.70;n.vy*=0.70; // Reduzido de 0.83 para 0.70 (mais atrito drena a energia caótica mais rápido)    
+    
+    // Limita a velocidade máxima por frame para suavizar o arranque inicial
+    const velocidade = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+    if (velocidade > 12) {
+      n.vx = (n.vx / velocidade) * 12;
+      n.vy = (n.vy / velocidade) * 12;
     }
-  }
-  av.forEach(a=>{
-    const s=nos[a.source],t=nos[a.target];if(!s||!t)return;
-    const dx=t.x-s.x,dy=t.y-s.y,d=Math.sqrt(dx*dx+dy*dy)||1;
-    const f=(d-dist)*0.05*a.weight;
-    s.vx+=dx/d*f;s.vy+=dy/d*f;t.vx-=dx/d*f;t.vy-=dy/d*f;
-  });
-  nv.forEach(n=>{n.vx+=(W/2-n.x)*0.004;n.vy+=(H/2-n.y)*0.004;});
-  nv.forEach(n=>{
-    if(n.fixed)return;
-    n.vx*=0.83;n.vy*=0.83;
-    n.x=Math.max(15,Math.min(W-15,n.x+n.vx));n.y=Math.max(15,Math.min(H-15,n.y+n.vy));
-  });
+    
+    n.x=Math.max(15,Math.min(W-15,n.x+n.vx));n.y=Math.max(15,Math.min(H-15,n.y+n.vy));  
+  });  
+  
   render();
 }
+
 function render(){
   const av=aresVisiveis();
   const nv=new Set(nosVisiveis().map(n=>n.id));
