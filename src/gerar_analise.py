@@ -1,8 +1,8 @@
 """
-gerar_analise.py v2
-===================
+gerar_analise.py v2.1
+=====================
 Gera todos os 6 HTMLs do dashboard IPPUC:
-  index.html, palavras_chave.html, lda.html, pca.html, grafo.html, votos.html
+    index.html, palavras_chave.html, lda.html, pca.html, grafo.html, votos.html
 
 Dependências:
     pip install pandas scikit-learn gspread google-auth networkx
@@ -43,7 +43,9 @@ NOMES_TOPICOS = [
     'Grupo 5',
 ]
 CORES_TOPICOS  = ['#00a859','#F07E31','#447EC0','#EA535E','#8E6CAD']
-CORES_COMUNIDADES = ['#000000','#000000','#000000','#000000']
+
+# Corrigido: Paleta de cores para as comunidades do grafo (antes estava tudo #000000)
+CORES_COMUNIDADES = ['#00a859', '#447EC0', '#8E6CAD', '#EA535E', '#FDC533', '#F07E31', '#B2B2B2', '#1a3a5c']
 LETRAS_COMUNIDADES = ['A','B','C','D','E','F','G','H']
 
 STOPWORDS = set("""
@@ -179,10 +181,10 @@ def calcular_tfidf_ner(df, total_bruto):
         loc_c.update(row['ner']['loc']); org_c.update(row['ner']['org'])
         verb_c.update(row['ner']['verb']); adj_c.update(row['ner']['adj'])
     ner_global = {
-        'loc':  [{'termo': k, 'freq': v} for k, v in loc_c.most_common(20)],
-        'org':  [{'termo': k, 'freq': v} for k, v in org_c.most_common(20)],
-        'verb': [{'termo': k, 'freq': v} for k, v in verb_c.most_common(20)],
-        'adj':  [{'termo': k, 'freq': v} for k, v in adj_c.most_common(20)],
+        'loc':  '[{'termo': k, 'freq': v} for k, v in loc_c.most_common(20)]',
+        'org':  '[{'termo': k, 'freq': v} for k, v in org_c.most_common(20)]',
+        'verb': '[{'termo': k, 'freq': v} for k, v in verb_c.most_common(20)]',
+        'adj':  '[{'termo': k, 'freq': v} for k, v in adj_c.most_common(20)]',
     }
 
     # TF-IDF
@@ -321,12 +323,14 @@ def calcular_pca(df, tfidf_matrix, features):
     arrows = [{'termo': features[i], 'x': round(float(loadings[0, i]), 4), 'y': round(float(loadings[1, i]), 4)}
               for i in arrow_idx]
 
+    # Corrigido: Agora injetamos CORES_TOPICOS para o HTML usar na renderização
     dados_pca = {
         'docs': docs_pca,
         'var_exp': [round(float(v)*100, 1) for v in var_ratio[:2]],
         'arrows': arrows, 'scree': scree,
         'n_80': n_80, 'n_50': n_50,
         'n_topicos': N_TOPICOS, 'nomes_topicos': NOMES_TOPICOS,
+        'cores_topicos': CORES_TOPICOS,
     }
     print(f'[PCA] var={[round(v*100,1) for v in var_ratio[:2]]}, n_80={n_80}')
     return dados_pca
