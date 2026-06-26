@@ -174,19 +174,22 @@ def processar_minuta(df_raw):
     return df, total_bruto
 
 def calcular_tfidf_ner(df, total_bruto):
+
     # NER
     df['ner'] = df['conteudo'].apply(classificar_ner)
     loc_c, org_c, verb_c, adj_c = Counter(), Counter(), Counter(), Counter()
     for _, row in df.iterrows():
         loc_c.update(row['ner']['loc']); org_c.update(row['ner']['org'])
         verb_c.update(row['ner']['verb']); adj_c.update(row['ner']['adj'])
+        
+    # CORRIGIDO: Removidas as aspas simples que quebravam a estrutura de lista/dicionário
     ner_global = {
-        'loc':  '[{'termo': k, 'freq': v} for k, v in loc_c.most_common(20)]',
-        'org':  '[{'termo': k, 'freq': v} for k, v in org_c.most_common(20)]',
-        'verb': '[{'termo': k, 'freq': v} for k, v in verb_c.most_common(20)]',
-        'adj':  '[{'termo': k, 'freq': v} for k, v in adj_c.most_common(20)]',
+        'loc':  [{'termo': k, 'freq': v} for k, v in loc_c.most_common(20)],
+        'org':  [{'termo': k, 'freq': v} for k, v in org_c.most_common(20)],
+        'verb': [{'termo': k, 'freq': v} for k, v in verb_c.most_common(20)],
+        'adj':  [{'termo': k, 'freq': v} for k, v in adj_c.most_common(20)],
     }
-
+   
     # TF-IDF
     tfidf = TfidfVectorizer(max_features=200, ngram_range=(1, 2), min_df=1)
     tfidf_matrix = tfidf.fit_transform(df['texto_limpo'])
