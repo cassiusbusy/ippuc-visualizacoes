@@ -187,6 +187,12 @@
   }
   .eixo-card .focal a{color:var(--azul-claro); text-decoration:none;}
   .eixo-card .focal a:hover{text-decoration:underline;}
+  .eixo-card .dpl{
+    margin-top:4px;
+    font-size:13px;
+    color:var(--texto-suave);
+  }
+  .eixo-card .dpl strong{color:var(--texto);}
   ul.checklist{
     list-style:none;
     margin:0;
@@ -283,7 +289,7 @@
 <div class="container">
 
   <div class="aviso">
-    ⚡ Referência rápida de última hora — encontre seu eixo abaixo para ver dia, horário e ponto focal do IPPUC.
+    ⚡ Referência rápida de última hora — encontre seu eixo abaixo para ver dia, horário, ponto focal do IPPUC e responsável da DPL.
   </div>
 
   <section id="sobre">
@@ -334,6 +340,7 @@
       <p style="margin:0 0 4px">Guia orientativo, modelo de checklist e lista de respondentes por eixo:</p>
       <a href="https://cloudstorage.curitiba.pr.gov.br/index.php/s/IeGRsZ36iB9DJmK" target="_blank" rel="noopener">Acessar pasta compartilhada ↗</a>
       <div style="margin-top:8px; color:var(--texto-suave); font-size:13px;">Senha: <span class="senha">ippuc</span></div>
+      <p style="margin:12px 0 0; font-size:13px;">A documentação completa também foi enviada por e-mail. Em anexo separado está o material específico que será analisado e preenchido durante o evento.</p>
     </div>
   </section>
 
@@ -347,6 +354,11 @@
   <section id="contatos">
     <h2>Contatos gerais</h2>
     <div class="contatos-gerais">
+      <div class="card">
+        <div class="nome">Cassius Busemeyer</div>
+        <a href="mailto:cbusemeyer@ippuc.org.br">cbusemeyer@ippuc.org.br</a><br>
+        <a href="https://wa.me/5541999829774" target="_blank" rel="noopener">WhatsApp (41) 99982-9774</a>
+      </div>
       <div class="card">
         <div class="nome">Mônica Máximo da Silva</div>
         <a href="mailto:monsilva@ippuc.org.br">monsilva@ippuc.org.br</a>
@@ -370,17 +382,17 @@
 
 <script>
 const eixos = [
-  {n:1, nome:"Transformação Digital", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Leomar de Andrade","leoandrade@ippuc.org.br"],["Matheus Machado","mathmachado@ippuc.org.br"]]},
-  {n:2, nome:"Resiliência e Adaptação Climática", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]]},
-  {n:3, nome:"Governança e Gestão Pública", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"]]},
-  {n:4, nome:"Gestão Urbana", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Maria Guilhermina Ruchaud","mgruchaud@ippuc.org.br"],["Sabrina Zminko Kurchaidt","skurchaidt@ippuc.org.br"]]},
-  {n:5, nome:"Infraestrutura Física", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"16h00–17h30", focal:[["Pietro Rodrigues Walt","pwalt@ippuc.org.br"],["Artur Furtado Filho","arfurtado@ippuc.org.br"]]},
-  {n:6, nome:"Ambiente de Negócios e Competitividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Gabriel de Andrade","gabrielmandrade@ippuc.org.br"]]},
-  {n:7, nome:"Educação e Gestão de Talentos", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Valéria Pilão","vpilao@ippuc.org.br"]]},
-  {n:8, nome:"Inclusão e Bem-Estar", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Silvia Oliveira Lopes","silvlopes@ippuc.org.br"]]},
-  {n:9, nome:"Sustentabilidade Ambiental", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]]},
-  {n:10, nome:"Geração de Conhecimento e Inovação", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"],["Cassius Busemeyer","cbusemeyer@ippuc.org.br"]]},
-  {n:11, nome:"Imagem, Identidade e Atratividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Isabela Miranda","ismiranda@ippuc.org.br"]]}
+  {n:1, nome:"Transformação Digital", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Leomar de Andrade","leoandrade@ippuc.org.br"],["Matheus Machado","mathmachado@ippuc.org.br"]], dpl:"Cassius Busemeyer e Marcia Krama"},
+  {n:2, nome:"Resiliência e Adaptação Climática", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]], dpl:"Edison Reva"},
+  {n:3, nome:"Governança e Gestão Pública", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"]], dpl:"Marcia Krama"},
+  {n:4, nome:"Gestão Urbana", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Maria Guilhermina Ruchaud","mgruchaud@ippuc.org.br"],["Sabrina Zminko Kurchaidt","skurchaidt@ippuc.org.br"]], dpl:"Mauricio Meyer"},
+  {n:5, nome:"Infraestrutura Física", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"16h00–17h30", focal:[["Pietro Rodrigues Walt","pwalt@ippuc.org.br"],["Artur Furtado Filho","arfurtado@ippuc.org.br"]], dpl:"Amanda Purkot"},
+  {n:6, nome:"Ambiente de Negócios e Competitividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Gabriel de Andrade","gabrielmandrade@ippuc.org.br"]], dpl:"Rubens Sofiatti"},
+  {n:7, nome:"Educação e Gestão de Talentos", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Valéria Pilão","vpilao@ippuc.org.br"]], dpl:"Cassius Busemeyer e Marcia Krama"},
+  {n:8, nome:"Inclusão e Bem-Estar", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Silvia Oliveira Lopes","silvlopes@ippuc.org.br"]], dpl:"Noelia Carnasciali"},
+  {n:9, nome:"Sustentabilidade Ambiental", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]], dpl:"Edison Reva"},
+  {n:10, nome:"Geração de Conhecimento e Inovação", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"],["Cassius Busemeyer","cbusemeyer@ippuc.org.br"]], dpl:"Cassius Busemeyer e Marcia Krama"},
+  {n:11, nome:"Imagem, Identidade e Atratividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Isabela Miranda","ismiranda@ippuc.org.br"]], dpl:"Cassius Busemeyer"}
 ];
 
 const lista = document.getElementById('lista-eixos');
@@ -406,6 +418,7 @@ function render(){
       </div>
       <div class="dia">${e.diaLabel} · Complexo IMAP, Salão do Lago</div>
       <div class="focal">Ponto focal IPPUC: ${e.focal.map(f => `${f[0]} (<a href="mailto:${f[1]}">${f[1]}</a>)`).join(' · ')}</div>
+      <div class="dpl">Responsável DPL: <strong>${e.dpl}</strong></div>
     </div>
   `).join('') || '<p>Nenhum eixo encontrado.</p>';
 }
