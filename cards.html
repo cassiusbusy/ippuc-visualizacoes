@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Briefing Executivo — Workshop Eixo Trinário</title>
+<style>
+  :root{
+    --ink:#1f2430; --muted:#6b7280; --line:#e5e7eb;
+    --green:#2f7d4f; --greenbg:#e9f5ee;
+    --pink:#c14d63; --pinkbg:#fbe9ed;
+    --white:#5b6472; --whitebg:#f3f4f6;
+    --gold:#b8860b; --goldbg:#fdf3dd;
+    --blue:#2b5c8a; --bluebg:#eaf2fa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:Arial, Helvetica, sans-serif; color:var(--ink);
+    margin:0; background:#fafafa; line-height:1.5;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:32px 24px 80px;}
+  header.hero{
+    background:linear-gradient(135deg,#1f2937,#374151);
+    color:#fff; padding:36px 32px; border-radius:14px; margin-bottom:28px;
+  }
+  header.hero h1{margin:0 0 6px; font-size:26px;}
+  header.hero p{margin:0; color:#d1d5db; font-size:14px;}
+  .badgebar{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); padding:6px 12px; border-radius:20px; font-size:12px;}
+
+  section{margin-bottom:34px;}
+  h2{font-size:19px; border-bottom:2px solid var(--ink); padding-bottom:8px; margin-bottom:16px;}
+  h2 .n{color:var(--muted); font-weight:normal; font-size:13px;}
+  h3{font-size:15px; margin:0 0 8px;}
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:8px;}
+  .stat{border:1px solid var(--line); border-radius:10px; padding:14px; text-align:center; background:#fff;}
+  .stat .num{font-size:24px; font-weight:bold;}
+  .stat .lbl{font-size:11.5px; color:var(--muted); margin-top:4px;}
+  .stat.g .num{color:var(--green);} .stat.p .num{color:var(--white);}
+  .stat.e .num{color:var(--gold);} .stat.r .num{color:var(--pink);}
+
+  .exec{background:#fff; border:1px solid var(--line); border-left:5px solid var(--ink); border-radius:8px; padding:16px 18px; font-size:14px;}
+
+  table{width:100%; border-collapse:collapse; font-size:13px; background:#fff;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  th{background:#f3f4f6; font-size:12px; text-transform:uppercase; letter-spacing:.03em;}
+  tr:nth-child(even) td{background:#fbfbfb;}
+  td.score{font-weight:bold; text-align:center;}
+  .sev-high{color:#b91c1c;} .sev-med{color:#b8860b;} .sev-low{color:#2f7d4f;}
+
+  .swot{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .swot .card{border-radius:10px; padding:16px; border:1px solid var(--line);}
+  .swot .card h3{display:flex; align-items:center; gap:8px;}
+  .swot ul{margin:8px 0 0; padding-left:18px; font-size:13px;}
+  .swot li{margin-bottom:6px;}
+  .swot .s{background:var(--greenbg);} .swot .w{background:var(--whitebg);}
+  .swot .o{background:var(--bluebg);} .swot .t{background:var(--pinkbg);}
+  .tag{font-size:10.5px; color:var(--muted); font-style:italic;}
+
+  .cynefin{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .cyn-card{border-radius:10px; padding:16px; border:1px solid var(--line);}
+  .cyn-card h3{margin-bottom:4px;} .cyn-card .desc{font-size:12px; color:var(--muted); margin-bottom:10px;}
+  .cyn-card ul{margin:0; padding-left:18px; font-size:13px;}
+  .cyn-card li{margin-bottom:6px;}
+  .cyn-simple{background:#eefaf1;} .cyn-complicated{background:var(--bluebg);}
+  .cyn-complex{background:var(--goldbg);} .cyn-chaotic{background:#f4f4f5;}
+  .resp{margin-top:10px; font-size:12px; background:rgba(0,0,0,.04); padding:8px 10px; border-radius:6px;}
+
+  .qw-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .qw{border:1px solid var(--line); border-left:4px solid var(--green); border-radius:8px; padding:12px 14px; background:#fff;}
+  .qw h4{margin:0 0 4px; font-size:13.5px;}
+  .qw p{margin:0; font-size:12.5px; color:var(--muted);}
+  .qw .eff{display:inline-block; margin-top:6px; font-size:10.5px; background:var(--greenbg); color:var(--green); padding:2px 8px; border-radius:10px;}
+
+  .decisions{display:flex; flex-direction:column; gap:10px;}
+  .dec{border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:#fff;}
+  .dec b{font-size:13.5px;}
+  .dec p{margin:4px 0 0; font-size:12.5px; color:var(--muted);}
+
+  .reco{background:var(--ink); color:#fff; border-radius:10px; padding:18px 20px; font-size:14px;}
+  .reco b{color:#facc15;}
+
+  footer{margin-top:30px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;}
+  @media (max-width:700px){
+    .stats{grid-template-columns:1fr 1fr;}
+    .swot,.cynefin,.qw-grid{grid-template-columns:1fr;}
+  }
+
+  table.data-table{}
+  tr.row-g td{background:#eef8f1;}
+  tr.row-w td{background:#fbfbfb;}
+  tr.row-r td{background:#fdf0f3;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Briefing Executivo — Workshop World Café, Eixo Trinário</h1>
+    <p>Síntese estratégica das 68 fichas reais coletadas na dinâmica (verificadas contra as fotos originais dos cartões) — organizada em Matriz GUT, Cynefin, SWOT e Quick Wins para apoiar decisão da presidência.</p>
+    <div class="badgebar">
+      <span class="badge">Fonte: FICHAS_reclassificado.xlsx</span>
+      <span class="badge">Curitiba — Projeto BRT / Trinário</span>
+      <span class="badge">07/08/2026</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>1. Panorama dos dados</h2>
+    <div class="stats">
+      <div class="stat g"><div class="num">7</div><div class="lbl">PRÓXIMOS PASSOS<br>(verde)</div></div>
+      <div class="stat p"><div class="num">33</div><div class="lbl">PERGUNTAS / PROBLEMAS<br>(branco)</div></div>
+      <div class="stat e"><div class="num">17</div><div class="lbl">ESTUDOS / PARCEIROS<br>NECESSÁRIOS (branco)</div></div>
+      <div class="stat r"><div class="num">11</div><div class="lbl">RISCOS<br>(rosa)</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Resumo executivo</h2>
+    <div class="exec">
+      O workshop não chegou a um consenso técnico sobre <b>qual problema o projeto deve efetivamente resolver</b> — várias fichas questionam se a prioridade é o BRT, um novo trinário, o metrô ou apenas otimização operacional do sistema atual. Isso é o maior risco estratégico: qualquer decisão de obra antes de fechar essa definição arrisca repetir o padrão histórico citado nas fichas (obras que atrasam anos e corroem a confiança do usuário). Em paralelo, há uma lista extensa e barata de estudos ainda não feitos (pesquisa OD, embarque/desembarque, percepção da população) que poderia embasar essa decisão em poucos meses. Os riscos mais citados são financeiros/operacionais (estouro de custo em obra subterrânea, tipo "Big Dig") e sociais (gentrificação, perda de confiança). A recomendação central é: <b>fechar o diagnóstico antes de comprometer orçamento de obra.</b>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Matriz GUT <span class="n">— Gravidade × Urgência × Tendência, escala 1–5, itens mais críticos de Problemas e Riscos</span></h2>
+    <table>
+      <tr><th>#</th><th>Item</th><th>Origem</th><th>G</th><th>U</th><th>T</th><th>Score</th></tr>
+      <tr><td>1</td><td>Ausência de consenso sobre o problema real a resolver (BRT? novo trinário? metrô?)</td><td>Perguntas/Problemas</td><td>5</td><td>5</td><td>4</td><td class="score sev-high">100</td></tr>
+      <tr><td>2</td><td>Baixa atratividade do transporte coletivo (tarifa cara, baixa frequência, sem integração)</td><td>Perguntas/Problemas</td><td>5</td><td>4</td><td>5</td><td class="score sev-high">100</td></tr>
+      <tr><td>3</td><td>Histórico de obras inacabadas — itinerário regular funcionando &lt;40% dos dias desde 2020</td><td>Perguntas/Problemas</td><td>4</td><td>4</td><td>5</td><td class="score sev-high">80</td></tr>
+      <tr><td>4</td><td>Priorização de fato do carro individual apesar do discurso oposto</td><td>Perguntas/Problemas</td><td>4</td><td>4</td><td>4</td><td class="score sev-high">64</td></tr>
+      <tr><td>5</td><td>Segurança viária nas canaletas (altos índices de atropelamento)</td><td>Riscos</td><td>4</td><td>5</td><td>3</td><td class="score sev-high">60</td></tr>
+      <tr><td>6</td><td>Risco "Big Dig": estouro de custo/prazo em obra subterrânea + manutenção cara</td><td>Riscos</td><td>5</td><td>3</td><td>4</td><td class="score sev-high">60</td></tr>
+      <tr><td>7</td><td>Gentrificação e valorização imobiliária concentrada em poucos</td><td>Riscos</td><td>4</td><td>3</td><td>5</td><td class="score sev-med">60</td></tr>
+      <tr><td>8</td><td>Governança fragmentada entre secretarias (IPPUC, URBS, COHAB, SMMA, SMU)</td><td>Perguntas/Problemas</td><td>3</td><td>4</td><td>4</td><td class="score sev-med">48</td></tr>
+      <tr><td>9</td><td>Sunk cost fallacy — adiar solução estrutural com intervenções paliativas</td><td>Riscos</td><td>4</td><td>3</td><td>4</td><td class="score sev-med">48</td></tr>
+      <tr><td>10</td><td>Déficit habitacional / pressão por HIS no entorno do eixo</td><td>Perguntas/Problemas</td><td>4</td><td>3</td><td>4</td><td class="score sev-med">48</td></tr>
+      <tr><td>11</td><td>Perda adicional de passageiros durante o período de obras</td><td>Riscos</td><td>3</td><td>4</td><td>3</td><td class="score sev-med">36</td></tr>
+      <tr><td>12</td><td>Percepção de insegurança em espaços subterrâneos (assalto, vandalismo)</td><td>Riscos</td><td>3</td><td>3</td><td>3</td><td class="score sev-low">27</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>4. Classificação Cynefin <span class="n">— tipo de resposta de gestão recomendada por domínio</span></h2>
+    <div class="cynefin">
+      <div class="cyn-card cyn-simple">
+        <h3>🟢 Simples / Claro</h3>
+        <div class="desc">Solução conhecida — aplicar boas práticas diretamente.</div>
+        <ul>
+          <li>Sincronização de semáforos e prioridade semafórica ao ônibus</li>
+          <li>Alargamento e continuidade de calçadas, acessibilidade universal</li>
+          <li>Iluminação pública voltada ao pedestre</li>
+          <li>Sinalização e wayfinding</li>
+        </ul>
+        <div class="resp"><b>Resposta:</b> executar. Não precisa de mais estudo, só orçamento e cronograma.</div>
+      </div>
+      <div class="cyn-card cyn-complicated">
+        <h3>🔵 Complicado</h3>
+        <div class="desc">Resolvível com expertise técnica e análise — mas não é trivial.</div>
+        <ul>
+          <li>Modelagem financeira / viabilidade de PPP para o corredor</li>
+          <li>Aplicação de instrumentos urbanísticos (outorga onerosa, TDC, PEUC)</li>
+          <li>Redesenho geométrico das vias e faixas exclusivas</li>
+          <li>Viabilidade de HIS em terras públicas/privadas</li>
+        </ul>
+        <div class="resp"><b>Resposta:</b> trazer especialistas/consultoria, decidir com base em análise técnica.</div>
+      </div>
+      <div class="cyn-card cyn-complex">
+        <h3>🟠 Complexo</h3>
+        <div class="desc">Não há resposta certa a priori — requer experimentação e ajuste contínuo.</div>
+        <ul>
+          <li>Definição do problema central do projeto (BRT 4.0 × novo trinário × metrô)</li>
+          <li>Mudança de comportamento do usuário em direção ao transporte coletivo</li>
+          <li>Governança intersetorial contínua (IPPUC/URBS/COHAB/SMMA/SMU)</li>
+          <li>Efeitos de gentrificação e mercado imobiliário ao longo do tempo</li>
+        </ul>
+        <div class="resp"><b>Resposta:</b> não fechar plano definitivo cedo — rodar pilotos, urbanismo tático e testes reversíveis, sentir o resultado e ajustar.</div>
+      </div>
+      <div class="cyn-card cyn-chaotic">
+        <h3>⚪ Caótico</h3>
+        <div class="desc">Exige ação imediata para estabilizar antes de entender.</div>
+        <ul><li>Nenhum item das fichas se enquadra aqui.</li></ul>
+        <div class="resp"><b>Leitura:</b> não há crise ativa — há tempo para planejar com rigor antes de comprometer orçamento de obra.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Análise SWOT</h2>
+    <div class="swot">
+      <div class="card s">
+        <h3>💪 Forças</h3>
+        <ul>
+          <li>Trinário/BRT é ativo urbano já consolidado e referência internacional <span class="tag">(Próximos passos)</span></li>
+          <li>Processo participativo multissetorial já em curso (IPPUC, URBS, COHAB, SMMA + sociedade civil) <span class="tag">(Próximos passos / Estudos)</span></li>
+          <li>Infraestrutura viária existente — requalificar, não partir do zero</li>
+          <li>Equipe técnica interna disponível para diagnóstico</li>
+        </ul>
+      </div>
+      <div class="card w">
+        <h3>⚠️ Fraquezas</h3>
+        <ul>
+          <li>Baixa atratividade do transporte coletivo frente ao carro <span class="tag">(Problemas)</span></li>
+          <li>Sem consenso técnico sobre o problema a resolver <span class="tag">(Problemas)</span></li>
+          <li>Histórico de obras atrasadas / confiança pública já baixa <span class="tag">(Problemas)</span></li>
+          <li>Governança fragmentada entre secretarias <span class="tag">(Problemas)</span></li>
+        </ul>
+      </div>
+      <div class="card o">
+        <h3>🚀 Oportunidades</h3>
+        <ul>
+          <li>Estudos de baixo custo ainda não feitos (OD, embarque/desembarque, percepção do usuário) <span class="tag">(Estudos)</span></li>
+          <li>Parcerias mapeadas: COHAPAR, MCidades, incorporadoras, PPP <span class="tag">(Estudos)</span></li>
+          <li>Instrumentos urbanísticos disponíveis e não utilizados <span class="tag">(Estudos)</span></li>
+          <li>Financiamento cruzado via HIS / uso misto nos eixos externos <span class="tag">(Estudos)</span></li>
+        </ul>
+      </div>
+      <div class="card t">
+        <h3>🔥 Ameaças</h3>
+        <ul>
+          <li>Risco de estouro de custo/prazo tipo "Big Dig" <span class="tag">(Riscos)</span></li>
+          <li>Gentrificação e concentração de valorização imobiliária <span class="tag">(Riscos)</span></li>
+          <li>Sunk cost fallacy — investir em paliativos e adiar decisão estrutural <span class="tag">(Riscos)</span></li>
+          <li>Desgaste político de obra longa com percepção de piora no curto prazo <span class="tag">(Riscos)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Quick wins <span class="n">— baixo custo, curto prazo, alto impacto percebido (até 90 dias)</span></h2>
+    <div class="qw-grid">
+      <div class="qw"><h4>Pesquisa Origem-Destino + embarque/desembarque</h4><p>Dado barato de coletar, essencial para qualquer decisão futura.</p><span class="eff">Estudos</span></div>
+      <div class="qw"><h4>Grupo de trabalho intersetorial (IPPUC/URBS/COHAB/SMMA)</h4><p>Resolve a fragmentação de governança sem custo de obra.</p><span class="eff">Próximos passos</span></div>
+      <div class="qw"><h4>Sincronização semafórica e prioridade ao ônibus</h4><p>Ganho de tempo de viagem imediato, sem obra estrutural.</p><span class="eff">Problemas → solução simples</span></div>
+      <div class="qw"><h4>Consulta popular estruturada</h4><p>O workshop já é um piloto disso — formalizar e ampliar gera capital político.</p><span class="eff">Próximos passos</span></div>
+      <div class="qw"><h4>Estudo de percepção da população sobre o sistema</h4><p>Barato, dá munição de comunicação e prioriza o que mais incomoda o usuário.</p><span class="eff">Estudos</span></div>
+      <div class="qw"><h4>Mapeamento de imóveis ociosos/subutilizados no eixo</h4><p>Base para negociação de instrumentos urbanísticos, sem custo de obra.</p><span class="eff">Estudos</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. Grandes decisões pendentes da presidência</h2>
+    <div class="decisions">
+      <div class="dec"><b>Definir o problema central antes de aprovar qualquer obra</b><p>Trade-off: decidir rápido para mostrar avanço político × decidir errado e repetir o padrão de obras inacabadas já citado nas fichas.</p></div>
+      <div class="dec"><b>Aprovar orçamento para o pacote de estudos (OD, percepção, ociosidade dos eixos)</b><p>Trade-off: custo e tempo adicional × decisão de obra melhor embasada e menos sujeita a reversão.</p></div>
+      <div class="dec"><b>Formalizar o comitê intersetorial permanente</b><p>Trade-off: custo de coordenação × redução de retrabalho e diretrizes conflitantes entre secretarias.</p></div>
+      <div class="dec"><b>Enterramento total vs. soluções de superfície para o BRT/trinário</b><p>Trade-off: ganho de espaço público (enterrado) × risco financeiro e de segurança tipo "Big Dig".</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Recomendação final</h2>
+    <div class="reco">
+      Antes de comprometer orçamento de obra, <b>aprovar o pacote de estudos de baixo custo</b> (Origem-Destino, embarque/desembarque, percepção da população) e <b>formalizar o comitê intersetorial</b> — as duas ações de maior score na Matriz GUT (itens complexos da Cynefin) que hoje não têm dono nem prazo. Só depois disso decidir entre BRT 4.0, novo trinário ou metrô.
+    </div>
+  </section>
+
+
+  <section>
+    <h2>9. Dados originais <span class="n">— as 68 fichas retranscritas diretamente das fotos dos cartões (fonte da análise acima)</span></h2>
+    <table>
+      <tr><th style="width:70px">Cor</th><th style="width:190px">Categoria</th><th style="width:90px">Página(s)</th><th>Conteúdo da ficha</th></tr>
+      <tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>1</td><td>Discutir possíveis soluções e problemas com a população (sobre Visconde, BRT, etc.). Fazer mais estudos sobre as possibilidades, orçamentos e impactos. Avaliar possibilidade de colocar VLT nas canaletas, quem sabe transferir a estrutura atual p/ novos eixos na região sul. Pensar qual o real problema a ser resolvido.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>2</td><td>Diagnóstico amplo do sistema Trinário / dos eixos. Lapidação e definição do problema. Otimização da operação poderia trazer mais ganho de tempo médio com diminuição da velocidade máxima, menor custo e reflexos positivos na mortalidade e uso do espaço. Aprimorar os dados disponíveis no hipervisor para serem utilizados na análise. Olhar para o NUC da RMC e suas influências em Curitiba.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>3</td><td>Conectar o projeto ao planejamento (visão de futuro, instrumentos macroestratégicos, etc). Aprimorar os estudos: ocupação (pot. renovação, subutilização, vazios); outras alternativas de projeto (ousar mais) x (soluções mais simples). Fórum interno de discussão. Repensar paradigmas. Reduzir espaço automóvel em vias e áreas (Centro). Pensar cidade 15 minutos. Pensar nas áreas &quot;entre eixos&quot;. Buscas de alternativas.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>4</td><td>Avaliação de política pública ex-ante, considerando além da relação custo-benefício (R$) a relação custo-efetividade e retornos sociais (+ complexo de mensurar, mas tão importante quanto a análise de investimento). Realizar brainstorming com mais parceiros envolvidos ou não para enriquecer ainda mais as discussões, trazendo alternativas ainda não enxergadas talvez. Aprofundar o problema a ser endereçado. Olhar mais para o futuro pensando nas necessidades de + 30 anos.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>5</td><td>Seria benéfico criar uma estrutura consistente e frequente de encontros abertos entre setores do IPPUC e outros entes relacionados para discutir e ouvir a cidade, pensando em variadas propostas e questões do território. TRANSPORTE: Melhorar a operação — causadora da perda de qualidade. MORADIA: Mudar zoneamento para proporcionar adensamento ao longo das estruturas estabelecidas. VIVÊNCIA URBANA: Melhoria das infraestruturas de mobilidade ativa.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>6</td><td>SEGURANÇA VIÁRIA EM 1° LUGAR: Reduzir espaço dos carros. Investir onde não há infra e não onde já tem. Manter momentos estratégicos de discursos do projeto durante seu desenvolvimento. Integração temporal e tarifária, escalonando a tarifa por horários. Utilização de soluções digitais para facilitação do usuário no mapeamento dos trajetos e deslocamentos, aquisição e recarga de créditos e priorização da onda verde para ônibus. Urbanismo tático com fechamento de trechos das vias locais, elevando o piso ao nível da calçada. Primeiramente, compreender o problema de verdade — não há consenso sobre a demanda por um novo trinário ou um BRT 4.0. Segundamente, mapear todas as alternativas e identificar métricas p/ compará-las.</td></tr><tr class="row-g"><td>Verde</td><td><b>PRÓXIMOS PASSOS</b></td><td>7</td><td>DIVERSIFICAÇÃO SOCIAL: usuários do TPC usando o espaço público. CIDADE ATRATIVA: instrumentos que façam os &quot;ricos&quot; saírem do seu condomínio. PRIORITÁRIO: trabalhar com o que se tem, melhorias: semáforos sincronizados, horários, capacidade dos ônibus, calçadas. Identificar áreas em que o BRT gera conflitos + graves no espaço urbano (ex: segurança do pedestre, trechos de alta velocidade do ônibus/riscos, áreas com potencial de desenvolvimento/redesenvolvimento). Integrar os diversos setores do IPPUC p/ discussão dos grandes projetos urbanos desde os primeiros estudos (como o que está sendo feito nesse workshop). Criar um grupo de trabalho com os diversos setores para receber ideias, sugestões e opiniões distintas.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>3</td><td>Necessidade de alinhamento com a operação do transporte público / URBS. Necessidade de regulamentar e buscar instrumentos p/ viabilizar projetos urbanos / Gov. Federal.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>5</td><td>Desenvolvimento urbano da cidade há de ter foco na satisfação do maior número possível de usuários e/ou da população como um todo. Focar o projeto no local onde ele possa atender os diversos viés: transporte, trânsito, segurança, felicidade p/ quem será beneficiado por ele.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>9</td><td>Análise de investimentos. Outras experiências em municípios com características semelhantes: Valorizar os imóveis? Gentrificar? Ficar + seguro? O que traz a segurança?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>10</td><td>1) Inclusão dos corpos hídricos como parte da paisagem urbana e não apenas como um problema. 2) Gestão do sistema de transporte especialmente nos horários de pico. 3) Ampliar oferta de habitação.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>12</td><td>Considerar o Trinário como um ativo, não apenas um problema. Há muito potencial de requalificá-los com priorização de pedestres, meios de transporte alternativos e avanço de áreas verdes, despriorizando carros.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>13-14</td><td>O maior problema é construir uma cidade melhor p/ todos (mais segura, democrática e sustentável). Não há um problema de cisão ou fragmentação do território causado pelo BRT que a proposta do projeto foi formatada para responder (ainda que proponha ganhos em espaço público). A falta de atratividade do sistema de transporte coletivo se relaciona com o alto valor da tarifa, da baixa frequência das linhas não expressas e a impossibilidade de integração.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>15</td><td>Qual o espaço público que queremos para nossa cidade?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>16</td><td>Qual o principal problema? A baixa atratividade do transporte público frente ao automóvel particular.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>17-18</td><td>PROBLEMA: Falta de adesão popular. Técnica executiva. Aceitação da população. Custo-benefício.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>20</td><td>PROBLEMA: Assim como em Medellín, rios como canais hidráulicos, sem conexão com a cidade/comunidade e a devida valorização como elementos de patrimônio natural, cultural e paisagístico. Revalorização e Requalificação dos espaços urbanos e de lazer para além dos parques, para que a população se aproprie e usufrua mais de outros espaços.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>21</td><td>Devolução de espaço urbano para a população, com a ampliação de áreas verdes, reduzindo a impermeabilização de solo.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>22</td><td>1) Mitigação da expansão urbana e 2) Oferta de habitação acessível em áreas c/ infra.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>23</td><td>Como pensar a nova geração do BRT considerando os conflitos dos pedestres com os motorizados, e não somente dos motorizados entre si?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>32-33</td><td>Qual o real ganho de sustentabilidade com a redução do tempo de viagem, considerando-se o custo ambiental da obra como um todo? Considerando-se que ainda será uma superfície impermeável e será utilizado um grande volume de concreto? A apresentação embasa muito do embasamento na premissa de solucionar um conflito do BRT com cruzamentos e um aumento do tempo de viagem em clusters de semáforo. Se tempo de espera em semáforos é a justificativa, não bastaria gerenciar seu funcionamento de forma dinâmica com a localização dos veículos para remover o gargalo, sem a necessidade de realizar obras? De fato, não está claro se o projeto trará benefícios significativos de mobilidade e se o desenho urbano tem apenas um papel complementar ou não.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>34</td><td>A priorização do carro! A preferência pelo carro é a regra. Se dificulta p/ o carro, pega uma pista... inviável!</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>35</td><td>Para mim, o Trinário em Curitiba atualmente tem 2 grandes problemas: 1) baixa adesão ao TPC (redução do número geral dos usuários e também o fato de quem mora nas estruturais, no geral NÃO usa o sistema), o que nos leva ao segundo problema: 2) um dos maiores índices de motorização do Brasil, apesar de ter exportado o BRT para todo o mundo. Além disso, a região sul da cidade, mais adensada e c/ mais usuários do TPC, carece de mais investimentos em mobilidade do que a região central. Sobre o projeto apresentado, para além dos problemas apresentados na discussão, penso também na qualidade da experiência do usuário, no que esses túneis irão impactar.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>36</td><td>Os projetos apresentados na manhã enterravam os carros. Nessa proposta os carros seguem como barreiras na malha urbana.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>37</td><td>Dinamismo imobiliário limitado pelo pífio crescimento demográfico → dificuldade p/ usá-lo como vetor de desenvolvimento, solidariedade e subsídios cruzados.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>38-39</td><td>Permanece a dúvida quanto aos problemas operacionais do sistema e quanto os benefícios esperados estão vinculados à maneira como o sistema é gerido. 1) Mesmo que o objetivo principal da intervenção seja urbanístico, como evitar que esta grande intervenção solidifique conceitos que atualmente não atendem às necessidades e tragam &quot;co-malefícios&quot;? 2) O custo político de uma obra tão extensa e demorada, com eventual percepção de piora por grande parte da população, não deve ser ignorado. Pontos importantes como segurança viária e vitalidade devem ser endereçados, mas imagino que outras intervenções podem atacar o mesmo problema e fugir da armadilha do &quot;sunk cost&quot;.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>40</td><td>Qual o principal problema? BRT como barreira urbana? Tempo de viagem? Instalação de novas áreas verdes valorizadas? A cidade sistêmica tem parâmetros apresentados no documento &quot;My Neighborhood&quot; da ONU-Habitat, por meio dos 5 princípios de sustentabilidade: cidade compacta, conectada, vibrante, resiliente e inclusiva.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>41</td><td>As áreas da cidade entre eixos (centrais) poderiam ser mais densas. O sistema de praças ser reforçado. A segurança do pedestre através de diminuição de velocidades máximas, instalação de faixas de pedestres e alargamento de calçadas. Sombreamento de calçadas, uso de SbN para drenagem e diminuição de temperatura ambiente. Como transformar Curitiba em cidade de proximidade???</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>42</td><td>Os ônibus estão absurdamente lotados. Como aumentar a frequência?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>43</td><td>É possível pensar a cidade a partir da escala de pedestres e manter as Vias Rápidas?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>44</td><td>Até que ponto o dinamismo do comércio depende da passagem do transporte público e não de pessoas andando e passando em frente às lojas? Vide o exemplo da Rua XV (calçadão).</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>45</td><td>Pensando no direito à cidade, meu questionamento p/ além da transformação da paisagem que esta proposta pode trazer é: como ela permitiria a ocupação coletiva e não segmentada? Como dinamizar a ocupação deste espaço a ser criado? Como permitir e proporcionar a integração de sujeitos sociais que comumente já estão afastados de regiões c/ esta?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>46</td><td>PROBLEMA: O acesso à cidade de Curitiba por transporte coletivo hoje é dificultado. Lidamos com uma tarifa cara e frota engessada no aguardo de uma nova concessão. Enquanto isso, a cada ano o transporte individual torna-se mais atrativo: mais carros na rua, mais ruas saturadas, mais ônibus lotados presos no congestionamento. Temos que parar de dar soluções parciais para problemas profundos! O metrô é inevitável, e quanto antes iniciarmos esse processo, melhor.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>47</td><td>Particularmente, tenho mais dúvidas do que certezas sobre qual problema essa solução quer ou pode resolver. Entendo a necessidade de inovar o sistema, mas compreendo que há outras intervenções que podem ser executadas no eixo que apresentam resultados equiparados para o transporte, inclusive com mais benefícios para os passageiros do sistema.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>48</td><td>Qual a real vocação deste espaço dos eixos? Vemos muitos ciclistas e esportistas correndo e usando a canaleta, disputando espaço com o BRT. São eles que estão no local errado ou é a cidade que está deixando de atender a uma demanda demonstrada pela população?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>49</td><td>QUAL O PROBLEMA? Como atualizar/otimizar uma infraestrutura existente para gerar valor para a cidade e para as pessoas com um componente de solidariedade. De um Desenvolvimento Orientado pelo Transporte para um Desenvolvimento Orientado pela Sustentabilidade Urbana.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>50-51</td><td>1) Porque manter as pistas de veículos nas vias centrais? Porque não fazer áreas exclusivas de pedestres apenas com acessos a moradores e serviços? 2) A fluidez maior nas vias externas não está incentivando o uso do veículo individual? E ainda, levando o volume de tráfego a congestionar mais adiante? 3) A segurança do pedestre nas vias externas não foi melhorada. Porque a ciclovia sobre o canteiro central não pode estar sobre uma pista de carro? Menos pistas de carros, mais áreas verdes, menor temperatura (ilhas de calor), menor emissão e mais absorção de CO2.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>52</td><td>Como garantir dinamicidade econômica da região, associada a habitação acessível, sem que o transporte coletivo represente uma barreira e uma insegurança para o pedestre?</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>53</td><td>Perda de passageiros no sistema de transporte público coletivo e necessidade de ter um sistema de BRT mais eficiente sem comprometer o espaço público urbano.</td></tr><tr class="row-w"><td>Branco</td><td><b>PERGUNTAS/PROBLEMAS</b></td><td>54-55</td><td>PROBLEMA CENTRAL: Preparar o Trinário para o desenvolvimento orientado pela sustentabilidade urbana. Semaforização inteligente? Centralização das estações-tubo?</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>1</td><td>Quantificar e qualificar o uso dos imóveis no eixo central e áreas próximas. Desenvolver uma metodologia para classificar os imóveis e seus usos em sub-utilizados ou usos adequados. Dimensionar os impactos econômicos diversos que podem acontecer na geração de empregos, impostos, etc.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>2</td><td>Comparativo de custo: produzir HIS em regiões infraestruturadas (+ custo alto da terra) versus produzir HIS em terras baratas (+ custo de levar infraestrutura).</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>4</td><td>ESTUDOS, INFORMAÇÕES: Como os eixos são locais muito antropizados, tentar trazer soluções que tragam um ambiente mais ameno e agradável de circulação. Tentar colocar menos concreto e pavimento nas obras. Trazer as outras secretarias para conversar: SMMA, SMOP, COHAB, SMU.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>6-7</td><td>Plano Nacional de Mobilidade; Estudo Nacional de Mobilidade; Mais participação social real. Intensificar a articulação interfederativa para viabilizar a governança do sistema de mobilidade da RMC, com ênfase no envolvimento da AMEP. Captar a &quot;dor&quot; do usuário, e quais as suas propostas. Envolvimento da URBS, COHAB, PARS. S.A., Administrações Regionais, Setor Produtivo e Organizações da Sociedade Civil.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>8</td><td>Levantamento dos reais problemas que a cidade enfrenta para poder propor algo mais colado na realidade.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>11</td><td>Positivo ouvir experiências internacionais, seus erros e acertos, com muita franqueza.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>19</td><td>IDEIA: Enterrar estruturas viárias das &quot;externas&quot; (&quot;rápidas&quot;), inclusive para transporte público nas externas, ganhando espaço público nas 3 vias do Trinário, e melhorando/qualificando o espaço público do conjunto de vias no nível da superfície. Então induzir uso misto nas vias externas: comércio no térreo, pequeno comércio no térreo, habitação popular acima.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>24-29</td><td>ESTUDOS, INFORMAÇÕES E ATORES-CHAVE (GOVERNANÇA): O Trinário é um eixo indutor da cidade e pode continuar sendo, trazendo novas camadas como melhorias do meio ambiente, ser mais amigável para as pessoas, mais resiliente, mais ativa. A proposta apresentada traz um pouco desses conceitos; acredito que é possível avançar com esta proposta, considerando tudo o que foi dito. Manter a inovação no eixo de indução. URBS/SMMA/SMDT/IPPUC/COHAB: convocar diferentes secretarias p/ discussão de grandes projetos urbanos. 1) Consulta popular p/ saber quais os anseios e desejos da cidade. Atores-chave: COHAPAR, SMU/SMMA, COHAB, Lincoln.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>30-31</td><td>Estudo socioeconômico c/ usuários do sistema urbano de transporte, investigando o que levaria o usuário a permanecer e usufruir os espaços centrais da cidade.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>56</td><td>Viabilidade de produção de HIS em terras (públicas e privadas) considerando faixas de renda; terras ociosas → consequente regulamentação de instrumentos urbanísticos. Arranjos possíveis, inclusive com incorporadoras! Habitação como direito real de uso e não tanto como propriedade (inversa no valor de troca do mercado).</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>57-58</td><td>Pesquisa Origem/Destino. Pesquisas de embarque e desembarque p/ as linhas de transporte (minimamente p/ ligeirões, expressos e linhas diretas).</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>59</td><td>Estudo de ociosidade dos eixos. Estudo de carregamento dos trinários.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>60</td><td>Projeto que transita entre habitação e mobilidade urbana. Necessário entender formas menos destrutivas de otimizar o transporte. Necessário entender como trazer a classe trabalhadora pelo eixo, com moradia acessível. Necessário também entender se há necessidade de modificar o eixo.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>61-63</td><td>ESTUDOS, INFORMAÇÕES E ATORES-CHAVE: Pesquisa OD; Considerar o déficit habitacional; Estudos da situação atual da (in)segurança viária no Trinário → URBS, SMDT, COHAB, SMMA, principalmente a população. Mudanças climáticas: aproveitar melhor os espaços para qualidade ambiental e paisagística, melhorando as condições do local, com espaços verdes, espaços de convivência; grande oportunidade de reduzir ilhas de calor (aridez das vias do Trinário) e reduzir as emissões de CO2. Planejamento integrado: uso e ocupação do solo (diversidade, classes de renda diversas) + serviços/comércios; TC e sistema viário; mudanças climáticas.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>64</td><td>PARTICIPAÇÃO / COHAB, URBS, SMDT: As pessoas devem ser o centro da intervenção. A experiência do usuário: conforto / qualidade do ambiente urbano do sistema.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>65</td><td>Estudo de percepção da população quanto às questões que o projeto quer responder. A ideia é identificar quais são os maiores pontos positivos e negativos e onde é a maior restrição ao uso do sistema.</td></tr><tr class="row-w"><td>Branco</td><td><b>ESTUDOS/PARCEIROS NECESSÁRIOS</b></td><td>66</td><td>Levantamento de lotes/vazios/subutilizados, tanto imóveis públicos quanto privados.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>1</td><td>MELHOR DEFINIÇÃO DO PROBLEMA QUE BUSCAMOS RESOLVER. Atores que também devem participar: COHAB/COHAPAR, MCidades, URBS, Entidades Técnicas/Academia, Representantes da Sociedade Civil, Financiadores – Estado e Setor Produtivo. FOCO DEVE ABRANGER: mudanças climáticas; satisfação do maior número de pessoas; que traga prazer e satisfação de viver e habitar de fato a cidade; desenvolvimento urbano que resulte no desenvolvimento da vida das pessoas.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>2</td><td>Ter uma clareza sobre quais as questões e problemas a serem resolvidos antes de avançar excessivamente em soluções que podem não respondê-los. Considerar sempre opções simples em paralelo, mas não deixar de sempre levantar hipóteses e possibilidades arrojadas para o futuro que queremos para a cidade. Não esquecer de sempre definir métricas e parâmetros claros de sucesso para possibilitar uma avaliação robusta e coerente de soluções.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>3</td><td>Segregação urbana no mesmo efeito do que acontece com a ultrapassagem. Se perder em problemas estruturais que não estão no controle do município. Grande investimento com baixa capacidade de melhorias urbanas.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>4</td><td>RISCOS E PONTOS DE ATENÇÃO: gentrificação; aumento da desigualdade do acesso ao espaço público; a requalificação urbana/investimento público não ser incorporado pela iniciativa privada. PONTO DE ATENÇÃO: ouvir os futuros supostos beneficiados. Riscos: fazer porque acha que tem que fazer e não porque há um problema (ou seja, buscar um problema para justificar uma solução). Investimento alto pode ser comprometido por operação &quot;ruim&quot;.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>5</td><td>Dissociação entre o que se quer para o ônibus em relação ao que se quer para a cidade. Gentrificação; valorização concentrada nas mãos de poucos. Baixa probabilidade de resgatar confiança do usuário com o sistema de transporte. Perda da oportunidade de fazer algo mais inovador, amplo e sistêmico.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>6</td><td>Enterrar o TC e manter os veículos na superfície parece dar mais valor ao carro individual. O pedestre e usuário do TC devem ser a prioridade e o objetivo a ser atendido. MUDANÇAS CLIMÁTICAS: ter como objetivo a redução de ilhas de calor e de emissões de CO2. Áreas verdes → qualidade ambiental.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>7</td><td>CUIDADO COM O RISCO &quot;BIG DIG&quot;: &quot;encarecedores&quot; da obra, evitar o que aconteceu no Big Dig, aprender com a experiência alheia. Risco do parque linear ser muito estreito e o carro roubar a qualidade da região andável. Atenção na conexão com a Praça do Japão! Se não for facilmente caminhável a ida da praça p/ o parque linear, talvez não seja adotado por quem busca lazer/caminhada. URBS pretende diminuir gastos com R.H. (eliminando cobradores) → infraestrutura subterrânea requer mais manutenção e segurança → tempo de viagem deve levar em conta o acesso aos tubos. Riscos de segurança do espaço físico subterrâneo. Utilização das canaletas por viaturas e ambulâncias permanece (veículos a combustão).</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>8</td><td>RISCOS E PONTOS DE ATENÇÃO: enterramento do TRC pode diminuir usuários, complexificar a operação. Espaços subterrâneos podem piorar as questões e a percepção de segurança. RISCO DE ADIAR A SOLUÇÃO PARA A SATURAÇÃO DO MODAL ATUAL COM INTERVENÇÕES PALIATIVAS (&quot;SUNK COST FALLACY&quot;).</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>9</td><td>CUIDADO: fazer pesquisas muito bem realizadas e específicas para o que se quer, a partir daí levantar os problemas. Verificar quais são os usuários do trecho para não incorrer em erros que vão desincentivar mais o uso. Curitiba está, desde o início da década, realizando obras em seus eixos de transporte. Cada obra gera impactos que comprometem a operação durante a execução sob promessa de que, após o fim, melhorará. No entanto, este fim nunca chega, de modo que o eixo Norte-Sul só opera seu itinerário regular em menos de 40% dos dias após 2020 (sério). Perda de confiança no sistema é, em resumo, fonte de desconfiança. Muita atenção, mesmo, ao reformar o trinário! Atratividade de um modo de transporte é relativa, e se mantivermos a priorização do carro, não há ganho de tempo do TP que seja atrativo.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>10</td><td>Perpetuação da gentrificação (↑ infra, ↑ $ terra). Perpetuação das barreiras/fragmentações urbanas (continuidade dos cruzamentos pedestres-carros). Segurança viária (hoje, as canaletas concentram altos índices de atropelamentos → uso inadequado por pedestres e ciclistas). Priorizar as pessoas. Conforto/cidade para se viver.</td></tr><tr class="row-r"><td>Rosa</td><td><b>RISCOS</b></td><td>11</td><td>Revisar o desenho urbano apresentado, em termos da via local. Relembrar que o mercado imobiliário precisa ser ouvido, pois muitas vezes são eles que vão construir as moradias. É sempre um risco ter todas as opiniões dos técnicos da prefeitura alinhadas e convergindo para um ponto só – exemplo a Peatonal. Desarticulação da gestão do transporte coletivo incluindo planejamento, projeto, operacionalização e monitoramento. Definição de qual a diretriz para a cidade entre os modais de deslocamentos (automóvel, ônibus, bicicleta, deslocamentos a pé) aliada à vitalidade urbana que se deseja.</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    Elaborado a partir das 68 fichas reais do workshop World Café (Eixo Trinário), verificadas contra as fotos originais dos cartões brancos, verdes e rosa. Pontuações da Matriz GUT e agrupamentos de Cynefin/SWOT são uma leitura analítica dos dados, não uma extração literal das fichas — recomenda-se validação com a equipe técnica antes de uso em decisão formal.
+  </footer>
+
+</div>
+</body>
+</html>
