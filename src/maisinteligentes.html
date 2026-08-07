@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão UCS Curitiba | Programa Cidades +Inteligentes</title>
+<style>
+  :root{
+    --azul:#0b3d62;
+    --azul-claro:#1a6fb0;
+    --verde:#2e9e6b;
+    --bg:#f4f7fa;
+    --card:#ffffff;
+    --texto:#1c2733;
+    --texto-suave:#5b6b7a;
+    --borda:#e1e8ee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--texto);
+    line-height:1.5;
+  }
+  header{
+    background:linear-gradient(135deg,var(--azul) 0%,var(--azul-claro) 100%);
+    color:#fff;
+    padding:28px 20px 22px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  header .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:12px;
+    opacity:.85;
+    margin-bottom:4px;
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-weight:700;
+  }
+  header .meta{
+    font-size:14px;
+    opacity:.95;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:8px;
+  }
+  header .meta span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .container{
+    max-width:900px;
+    margin:0 auto;
+    padding:20px 16px 60px;
+  }
+  .quicklinks{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .quicklinks a{
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    border:1px solid rgba(255,255,255,.35);
+    transition:background .2s;
+  }
+  .quicklinks a:hover{background:rgba(255,255,255,.28);}
+  section{margin-top:34px;}
+  h2{
+    font-size:18px;
+    color:var(--azul);
+    border-bottom:2px solid var(--borda);
+    padding-bottom:8px;
+    margin-bottom:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:12px;
+    padding:16px 18px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .card + .card{margin-top:12px;}
+  p{color:var(--texto-suave);}
+  .venue-box{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .venue-box .icon{font-size:26px;}
+  .venue-box a.mapbtn{
+    display:inline-block;
+    margin-top:8px;
+    background:var(--azul-claro);
+    color:#fff;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+  }
+  /* Filtro */
+  .filtros{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+  }
+  .filtros button{
+    border:1px solid var(--borda);
+    background:#fff;
+    color:var(--texto);
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .filtros button.active{
+    background:var(--azul);
+    color:#fff;
+    border-color:var(--azul);
+  }
+  input#busca{
+    width:100%;
+    padding:10px 14px;
+    border-radius:8px;
+    border:1px solid var(--borda);
+    font-size:14px;
+    margin-bottom:16px;
+  }
+  .eixo-card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-left:5px solid var(--azul-claro);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:10px;
+  }
+  .eixo-card .linha1{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .eixo-card .titulo{
+    font-weight:700;
+    font-size:15px;
+    color:var(--azul);
+  }
+  .eixo-card .horario{
+    font-size:13px;
+    font-weight:700;
+    color:var(--verde);
+    background:#e8f7f0;
+    padding:3px 10px;
+    border-radius:12px;
+    white-space:nowrap;
+  }
+  .eixo-card .dia{
+    font-size:12px;
+    color:var(--texto-suave);
+    margin-top:2px;
+  }
+  .eixo-card .focal{
+    margin-top:8px;
+    font-size:13px;
+    color:var(--texto-suave);
+  }
+  .eixo-card .focal a{color:var(--azul-claro); text-decoration:none;}
+  .eixo-card .focal a:hover{text-decoration:underline;}
+  ul.checklist{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.checklist li{
+    padding:10px 0;
+    border-bottom:1px solid var(--borda);
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    color:var(--texto);
+  }
+  ul.checklist li:last-child{border-bottom:none;}
+  ul.checklist li .num{
+    background:var(--azul);
+    color:#fff;
+    min-width:22px;
+    height:22px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .materiais a{
+    display:inline-block;
+    background:var(--azul);
+    color:#fff;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:14px;
+    margin-top:6px;
+  }
+  .senha{
+    display:inline-block;
+    background:#fff3cd;
+    color:#7a5c00;
+    padding:2px 8px;
+    border-radius:6px;
+    font-family:monospace;
+    font-size:13px;
+  }
+  .contatos-gerais{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px;
+  }
+  .contatos-gerais .card{padding:14px;}
+  .contatos-gerais .nome{font-weight:700; font-size:14px; color:var(--azul);}
+  .contatos-gerais a{color:var(--azul-claro); font-size:13px; text-decoration:none;}
+  footer{
+    text-align:center;
+    padding:24px 16px 40px;
+    color:var(--texto-suave);
+    font-size:12px;
+  }
+  .aviso{
+    background:#fff3cd;
+    border:1px solid #ffe08a;
+    color:#7a5c00;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13px;
+    margin-bottom:16px;
+  }
+  @media (max-width:480px){
+    header h1{font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Programa Cidades +Inteligentes</div>
+  <h1>Missão Ministério das Cidades (UCS) — Curitiba</h1>
+  <div class="meta">
+    <span>📅 10 e 11 de agosto</span>
+    <span>📍 Complexo IMAP — Parque Barigui, Salão do Lago</span>
+  </div>
+  <div class="quicklinks">
+    <a href="#programacao">Programação por eixo</a>
+    <a href="#preparo">O que levar</a>
+    <a href="#materiais">Materiais</a>
+    <a href="#transporte">Transporte</a>
+    <a href="#contatos">Contatos</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="aviso">
+    ⚡ Referência rápida de última hora — encontre seu eixo abaixo para ver dia, horário e ponto focal do IPPUC.
+  </div>
+
+  <section id="sobre">
+    <h2>Sobre o evento</h2>
+    <div class="card">
+      <p style="margin:0">Nos dias 10 e 11 de agosto, o IPPUC recebe a equipe do Ministério das Cidades (UCS) para a etapa de entrevistas e coleta de evidências do Programa Cidades +Inteligentes, no âmbito da Rede de Cidades +Inteligentes. Cada respondente participa da entrevista referente ao seu eixo temático e, com apoio da equipe, preenche a planilha de checklist de evidências correspondente.</p>
+    </div>
+  </section>
+
+  <section id="local">
+    <h2>Local</h2>
+    <div class="card venue-box">
+      <div class="icon">📍</div>
+      <div style="flex:1">
+        <strong>Complexo IMAP — Parque Barigui</strong><br>
+        Salão do Lago<br>
+        <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=Complexo+IMAP+Parque+Barigui+Curitiba" target="_blank" rel="noopener">Abrir no Google Maps ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="programacao">
+    <h2>Programação por eixo</h2>
+    <input type="text" id="busca" placeholder="Buscar por eixo (ex: gestão urbana, eixo 3, digital...)">
+    <div class="filtros">
+      <button class="active" data-dia="todos">Todos</button>
+      <button data-dia="10/08">Dia 1 — 10/08</button>
+      <button data-dia="11/08">Dia 2 — 11/08</button>
+    </div>
+    <div id="lista-eixos"></div>
+  </section>
+
+  <section id="preparo">
+    <h2>O que preparar antes do seu horário</h2>
+    <div class="card">
+      <ul class="checklist">
+        <li><span class="num">1</span> Revise o Guia Orientativo de Coleta de Dados sobre Maturidade.</li>
+        <li><span class="num">2</span> Organize as evidências (normas, processos, dados, registros) das dimensões do seu eixo.</li>
+        <li><span class="num">3</span> Nomeie os arquivos no padrão: <em>nº do eixo.nº da dimensão.pergunta_palavras síntese</em> — ex.: <code>1.1.P1_Decreto_cidades_inteligentes</code>.</li>
+        <li><span class="num">4</span> Chegue com alguns minutos de antecedência ao Salão do Lago para o horário do seu eixo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="materiais">
+    <h2>Materiais de apoio</h2>
+    <div class="card materiais">
+      <p style="margin:0 0 4px">Guia orientativo, modelo de checklist e lista de respondentes por eixo:</p>
+      <a href="https://cloudstorage.curitiba.pr.gov.br/index.php/s/IeGRsZ36iB9DJmK" target="_blank" rel="noopener">Acessar pasta compartilhada ↗</a>
+      <div style="margin-top:8px; color:var(--texto-suave); font-size:13px;">Senha: <span class="senha">ippuc</span></div>
+    </div>
+  </section>
+
+  <section id="transporte">
+    <h2>Transporte</h2>
+    <div class="card">
+      <p style="margin:0">Há um carro de 8 lugares saindo do IPPUC com destino ao Parque Barigui. Quem tiver interesse em utilizá-lo deve confirmar com antecedência junto ao ponto focal do seu eixo para organizar o horário de saída.</p>
+    </div>
+  </section>
+
+  <section id="contatos">
+    <h2>Contatos gerais</h2>
+    <div class="contatos-gerais">
+      <div class="card">
+        <div class="nome">Mônica Máximo da Silva</div>
+        <a href="mailto:monsilva@ippuc.org.br">monsilva@ippuc.org.br</a>
+      </div>
+      <div class="card">
+        <div class="nome">Ana Paula Guzela Bertolin</div>
+        <a href="mailto:abertolin@ippuc.org.br">abertolin@ippuc.org.br</a>
+      </div>
+      <div class="card">
+        <div class="nome">Érika Haruno Hayashida</div>
+        <a href="mailto:ehayashida@ippuc.org.br">ehayashida@ippuc.org.br</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Programa Cidades +Inteligentes · IPPUC · Página de referência para a missão de 10 e 11/08/2026
+</footer>
+
+<script>
+const eixos = [
+  {n:1, nome:"Transformação Digital", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Leomar de Andrade","leoandrade@ippuc.org.br"],["Matheus Machado","mathmachado@ippuc.org.br"]]},
+  {n:2, nome:"Resiliência e Adaptação Climática", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]]},
+  {n:3, nome:"Governança e Gestão Pública", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"]]},
+  {n:4, nome:"Gestão Urbana", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Maria Guilhermina Ruchaud","mgruchaud@ippuc.org.br"],["Sabrina Zminko Kurchaidt","skurchaidt@ippuc.org.br"]]},
+  {n:5, nome:"Infraestrutura Física", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"16h00–17h30", focal:[["Pietro Rodrigues Walt","pwalt@ippuc.org.br"],["Artur Furtado Filho","arfurtado@ippuc.org.br"]]},
+  {n:6, nome:"Ambiente de Negócios e Competitividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"09h00–10h30", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Gabriel de Andrade","gabrielmandrade@ippuc.org.br"]]},
+  {n:7, nome:"Educação e Gestão de Talentos", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Valéria Pilão","vpilao@ippuc.org.br"]]},
+  {n:8, nome:"Inclusão e Bem-Estar", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"14h30–16h00", focal:[["Érika Hayashida","ehayashida@ippuc.org.br"],["Silvia Oliveira Lopes","silvlopes@ippuc.org.br"]]},
+  {n:9, nome:"Sustentabilidade Ambiental", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"16h00–17h30", focal:[["Karin Nohara Gomes","karigomes@ippuc.org.br"],["Ana Flavia Zilli","anzilli@ippuc.org.br"]]},
+  {n:10, nome:"Geração de Conhecimento e Inovação", dia:"10/08", diaLabel:"Dia 1 — 10/08", horario:"14h30–16h00", focal:[["Ana Paula Bertolin","abertolin@ippuc.org.br"],["Cassius Busemeyer","cbusemeyer@ippuc.org.br"]]},
+  {n:11, nome:"Imagem, Identidade e Atratividade", dia:"11/08", diaLabel:"Dia 2 — 11/08", horario:"10h30–12h00", focal:[["Josiane Nogueira","jonogueira@ippuc.org.br"],["Isabela Miranda","ismiranda@ippuc.org.br"]]}
+];
+
+const lista = document.getElementById('lista-eixos');
+const busca = document.getElementById('busca');
+const filtros = document.querySelectorAll('.filtros button');
+let diaAtual = 'todos';
+
+function render(){
+  const termo = busca.value.trim().toLowerCase();
+  const ordenados = [...eixos].sort((a,b)=> a.dia === b.dia ? a.horario.localeCompare(b.horario) : a.dia.localeCompare(b.dia));
+  const filtrados = ordenados.filter(e=>{
+    const passaDia = diaAtual === 'todos' || e.dia === diaAtual;
+    const alvo = ('eixo ' + e.n + ' ' + e.nome).toLowerCase();
+    const passaBusca = !termo || alvo.includes(termo);
+    return passaDia && passaBusca;
+  });
+
+  lista.innerHTML = filtrados.map(e => `
+    <div class="eixo-card">
+      <div class="linha1">
+        <div class="titulo">Eixo ${e.n} — ${e.nome}</div>
+        <div class="horario">${e.horario}</div>
+      </div>
+      <div class="dia">${e.diaLabel} · Complexo IMAP, Salão do Lago</div>
+      <div class="focal">Ponto focal IPPUC: ${e.focal.map(f => `${f[0]} (<a href="mailto:${f[1]}">${f[1]}</a>)`).join(' · ')}</div>
+    </div>
+  `).join('') || '<p>Nenhum eixo encontrado.</p>';
+}
+
+filtros.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    filtros.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    diaAtual = btn.dataset.dia;
+    render();
+  });
+});
+busca.addEventListener('input', render);
+render();
+</script>
+
+</body>
+</html>
