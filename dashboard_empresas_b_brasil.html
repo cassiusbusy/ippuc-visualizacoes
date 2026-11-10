@@ -148,7 +148,7 @@ footer{color:var(--muted);font-size:12px;padding:0 28px 24px}
     <div class="chatwrap">
       <div class="card">
         <h3>Pergunte à IA sobre as Empresas B</h3>
-        <div class="hint">A pergunta vai para o seu webhook do n8n, junto com um recorte dos dados relevante para ela.</div>
+        <div class="hint">A pergunta vai para um agente no seu n8n que consulta a tabela completa das 624 empresas e, se precisar, complementa com a web.</div>
         <div id="chat"></div>
         <div class="ask">
           <textarea id="q" placeholder="Ex.: Quais Empresas B de Curitiba atuam com meio ambiente?"></textarea>
@@ -177,28 +177,31 @@ footer{color:var(--muted);font-size:12px;padding:0 28px 24px}
   </section>
 
   <section id="t-n8n" class="hidden">
-    <div class="card" style="max-width:860px">
+    <div class="card" style="max-width:880px">
       <h3>Como ligar a aba “Pergunte à IA” ao n8n</h3>
       <ol class="steps">
-        <li>No n8n, <b>Workflows → Import from File</b> e escolha <code>n8n_bcorps_ia.json</code> (enviado junto com este dashboard).</li>
-        <li>Abra o nó <b>OpenAI Chat Model</b> e selecione sua credencial da OpenAI. Se preferir outro modelo (Gemini, Claude, Ollama), troque só esse nó: o resto do fluxo continua igual.</li>
-        <li>Ative o workflow (chave <b>Active</b>). A URL de produção fica assim:<br><code id="hookshow"></code></li>
-        <li>Se a URL for outra, cole-a no campo <b>URL do webhook</b> da aba “Pergunte à IA”. Ela fica salva no navegador.</li>
+        <li>No n8n, <b>Workflows → Import from File</b> e escolha <code>n8n_bcorps_ia.json</code>.</li>
+        <li>Abra o nó <b>OpenAI Chat Model</b> e selecione sua credencial. Para usar outro modelo (Gemini, Claude, Ollama), troque só esse nó.</li>
+        <li>Ative o workflow (<b>Active</b>). URL de produção: <code id="hookshow"></code></li>
+        <li>Se a URL for outra, cole no campo <b>URL do webhook</b> da aba “Pergunte à IA”.</li>
       </ol>
       <h3 style="margin-top:16px">O fluxo</h3>
       <pre>Webhook (POST /bcorps-ia, CORS liberado)
-   → Basic LLM Chain  (prompt de sistema + contexto + pergunta)
-        ↳ OpenAI Chat Model (gpt-4o-mini, temperatura 0.2)
+   → AI Agent  (instruções: consultar SEMPRE a tabela primeiro; web só para complementar)
+        ↳ OpenAI Chat Model (gpt-4o-mini)
+        ↳ consultar_tabela  — Code Tool com as 624 empresas embutidas
+                              ações: buscar · empresa · estatisticas (filtros por UF, setor, indústria, nota, áreas, ano…)
+        ↳ ler_pagina_web    — abre o site da empresa ou o perfil no B Lab
+        ↳ buscar_na_web     — busca no DuckDuckGo (sem chave)
    → Respond to Webhook  { "resposta": "…" }</pre>
       <h3 style="margin-top:16px">O que o dashboard envia</h3>
       <pre>{
   "pergunta": "texto do usuário",
   "historico": [{"role":"user|assistant","content":"…"}],   // últimas 6 mensagens
-  "estatisticas": "resumo agregado do recorte (totais, médias, setores, UFs)",
-  "empresas": "até 40 empresas mais relevantes para a pergunta, uma por linha",
-  "total_no_recorte": 624
+  "filtros_ativos": {"uf":"PR","nota_min":100} | null,        // só se marcar "Considerar só as empresas filtradas"
+  "empresa_em_foco": "Nome da empresa" | null                 // quando vem do botão no perfil
 }</pre>
-      <p class="sub">A seleção das empresas é feita no próprio navegador, por palavras-chave (nome, indústria, setor, sede, UF e descrição). Assim o prompt fica pequeno e não é preciso subir a planilha para o n8n. Se a resposta vier vazia ou com erro, confira se o workflow está ativo e se o domínio aceita CORS (<code>Allowed Origins = *</code> no nó Webhook).</p>
+      <p class="sub">A tabela fica dentro do próprio workflow (nó <b>consultar_tabela</b>), então o agente filtra, ordena e agrega a base inteira sem depender do navegador. Para atualizar os dados, é só substituir o array no início do código desse nó. A busca no DuckDuckGo às vezes é bloqueada; se acontecer, troque o nó por SerpAPI ou Tavily (precisam de chave).</p>
     </div>
   </section>
 </main>
@@ -388,31 +391,20 @@ $("#clearchat").onclick=()=>{ history=[]; focusCompany=null; $("#chat").innerHTM
 function addMsg(role,text,cls=""){ const m=document.createElement("div"); m.className=`msg ${role} ${cls}`; m.textContent=text; $("#chat").appendChild(m); $("#chat").scrollTop=1e9; return m; }
 function greet(){ addMsg("a","Olá! Pergunte o que quiser sobre as 624 Empresas B com operação no Brasil: setores, notas, empresas de uma região, comparações… Eu respondo com base nos dados do B Lab."); }
 greet();
-const STOP=new Set("a o as os de da do das dos e em no na nos nas um uma uns umas que quais qual com para por sobre me se sao ser tem ter mais menos como onde quem quero empresas empresa b corp corps brasil brasileiras brasileiro fale diga liste indique".split(" "));
-const UFNAME={sp:"SP",paulo:"SP",rio:"RJ",minas:"MG",parana:"PR",curitiba:"PR",gaucho:"RS",porto:"RS",goias:"GO",bahia:"BA",salvador:"BA",pernambuco:"PE",recife:"PE",santa:"SC",catarina:"SC",florianopolis:"SC",brasilia:"DF",ceara:"CE",fortaleza:"CE",para:"PA",belem:"PA",amazonas:"AM",manaus:"AM"};
-function pickContext(question){
-  const base = $("#usefilt").checked ? filtered() : DATA;
-  const words = norm(question).replace(/[^\w\s]/g," ").split(/\s+/).filter(w=>w.length>2 && !STOP.has(w));
-  const ufs=new Set(words.map(w=>UFNAME[w]).filter(Boolean));
-  const scored = base.map(d=>{ let s=0; words.forEach(w=>{ if(norm(d.n).includes(w)) s+=6; if(norm(d.ind+" "+d.set).includes(w)) s+=3; if(norm(d.sede).includes(w)) s+=3; if(d._t.includes(w)) s+=1; });
-    if(ufs.has(d.uf)) s+=5; if(d.id===focusCompany) s+=100; return {d,s}; });
-  let pick = scored.filter(x=>x.s>0).sort((a,b)=>b.s-a.s || (b.d.nota||0)-(a.d.nota||0)).slice(0,40).map(x=>x.d);
-  if(pick.length<15){ const have=new Set(pick.map(d=>d.id)); base.filter(d=>d.nota!=null && !have.has(d.id)).sort((a,b)=>b.nota-a.nota).slice(0,20-pick.length).forEach(d=>pick.push(d)); }
-  const line=d=>[d.n, d.sede||"sede n/i", d.set, d.ind, "desde "+d.desde, "nota "+(d.nota??"n/p"),
-     d.nota!=null?`gov ${d.gov} | trab ${d.trab??"-"} | com ${d.com} | amb ${d.amb} | cli ${d.cli}`:"", (d.desc||"").slice(0,d.id===focusCompany?1200:260).replace(/\s+/g," ")].join(" ; ");
-  const stats=(rows)=>{ const bySet=[...groupBy(rows,"set")].map(([k,a])=>`${k}: ${a.length} (média ${fmt(mean(a.map(x=>x.nota)))})`).join("; ");
-    const byUf=[...groupBy(rows,"uf")].sort((a,b)=>b[1].length-a[1].length).map(([k,a])=>`${k} ${a.length}`).join(", ");
-    const areas=AREAS.map(([k,l])=>`${l} ${fmt(mean(rows.map(x=>x[k])))}`).join("; ");
-    return `Total: ${rows.length}. Sede no Brasil: ${rows.filter(x=>x.br==="Sim").length}; fora: ${rows.filter(x=>x.br==="Não").length}; sem sede informada: ${rows.filter(x=>!x.br).length}. Nota B média: ${fmt(mean(rows.map(x=>x.nota)))} (mínimo p/ certificar 80; empresa comum média ~50,9). Por setor: ${bySet}. Sede por UF: ${byUf}. Média por área: ${areas}.`; };
-  return { estatisticas: stats(base), empresas: pick.map(line).join("\n"), total_no_recorte: base.length, n: pick.length };
+function activeFilters(){
+  const f={}, g=id=>$("#"+id).value.trim();
+  if(g("fq")) f.texto=g("fq"); if(g("fuf")) f.uf=g("fuf"); if(g("fset")) f.setor=g("fset"); if(g("find")) f.industria=g("find");
+  if(g("fbr")==="Sim") f.sede_no_brasil=true; if(g("fbr")==="Não") f.sede_no_brasil=false;
+  if(g("fmin")) f.nota_min=+g("fmin"); if(g("fmax")) f.nota_max=+g("fmax"); if(g("fa0")) f.ano_min=+g("fa0"); if(g("fa1")) f.ano_max=+g("fa1");
+  return Object.keys(f).length? f : null;
 }
 async function send(){
   const q=$("#q").value.trim(); if(!q) return;
   const url=$("#hook").value.trim(); $("#q").value=""; addMsg("u",q);
-  const ctx=pickContext(q); const wait=addMsg("a","Pensando…");
-  $("#ctxinfo").textContent=`Última pergunta: ${ctx.n} empresas enviadas como contexto (de ${ctx.total_no_recorte}).`;
+  const wait=addMsg("a","Consultando a tabela…");
+  const body={pergunta:q,historico:history.slice(-6),filtros_ativos:$("#usefilt").checked?activeFilters():null,empresa_em_foco:focusCompany!=null?DATA[focusCompany].n:null};
   try{
-    const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pergunta:q,historico:history.slice(-6),estatisticas:ctx.estatisticas,empresas:ctx.empresas,total_no_recorte:ctx.total_no_recorte})});
+    const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
     const txt=await r.text(); if(!r.ok) throw new Error(`HTTP ${r.status}: ${txt.slice(0,200)}`);
     let ans=txt; try{ const j=JSON.parse(txt); const o=Array.isArray(j)?j[0]:j; ans=o.resposta||o.output||o.text||o.answer||txt; }catch(e){}
     wait.textContent=ans; history.push({role:"user",content:q},{role:"assistant",content:ans});
@@ -421,7 +413,7 @@ async function send(){
     wait.textContent=`Não consegui falar com o n8n (${e.message}).\n\nConfira se o workflow está importado e ATIVO, se a URL do webhook está certa e se o nó Webhook tem "Allowed Origins" = *. Veja a aba "Configurar n8n".`;
   }
 }
-function renderIA(){ $("#ctxinfo").textContent = $("#usefilt").checked ? `Recorte atual: ${filtered().length} empresas.` : "Usando as 624 empresas."; }
+function renderIA(){ const f=activeFilters(); $("#ctxinfo").textContent = $("#usefilt").checked ? (f?`Filtros enviados ao agente: ${Object.entries(f).map(([k,v])=>k+"="+v).join(", ")}`:"Nenhum filtro ativo — o agente consulta as 624.") : "O agente consulta as 624 empresas da tabela."; }
 
 /* ---------- render ---------- */
 function render(){
