@@ -103,7 +103,6 @@ footer{color:var(--muted);font-size:12px;padding:0 28px 24px}
   <button data-t="visao" class="on">Visão geral</button>
   <button data-t="empresas">Empresas</button>
   <button data-t="ia">Pergunte à IA</button>
-  <button data-t="n8n">Configurar n8n</button>
 </nav>
 <main>
   <div class="filters" id="filters">
@@ -176,34 +175,6 @@ footer{color:var(--muted);font-size:12px;padding:0 28px 24px}
     </div>
   </section>
 
-  <section id="t-n8n" class="hidden">
-    <div class="card" style="max-width:880px">
-      <h3>Como ligar a aba “Pergunte à IA” ao n8n</h3>
-      <ol class="steps">
-        <li>No n8n, <b>Workflows → Import from File</b> e escolha <code>n8n_bcorps_ia.json</code>.</li>
-        <li>Abra o nó <b>OpenAI Chat Model</b> e selecione sua credencial. Para usar outro modelo (Gemini, Claude, Ollama), troque só esse nó.</li>
-        <li>Ative o workflow (<b>Active</b>). URL de produção: <code id="hookshow"></code></li>
-        <li>Se a URL for outra, cole no campo <b>URL do webhook</b> da aba “Pergunte à IA”.</li>
-      </ol>
-      <h3 style="margin-top:16px">O fluxo</h3>
-      <pre>Webhook (POST /bcorps-ia, CORS liberado)
-   → AI Agent  (instruções: consultar SEMPRE a tabela primeiro; web só para complementar)
-        ↳ OpenAI Chat Model (gpt-4o-mini)
-        ↳ consultar_tabela  — Code Tool com as 624 empresas embutidas
-                              ações: buscar · empresa · estatisticas (filtros por UF, setor, indústria, nota, áreas, ano…)
-        ↳ ler_pagina_web    — abre o site da empresa ou o perfil no B Lab
-        ↳ buscar_na_web     — busca no DuckDuckGo (sem chave)
-   → Respond to Webhook  { "resposta": "…" }</pre>
-      <h3 style="margin-top:16px">O que o dashboard envia</h3>
-      <pre>{
-  "pergunta": "texto do usuário",
-  "historico": [{"role":"user|assistant","content":"…"}],   // últimas 6 mensagens
-  "filtros_ativos": {"uf":"PR","nota_min":100} | null,        // só se marcar "Considerar só as empresas filtradas"
-  "empresa_em_foco": "Nome da empresa" | null                 // quando vem do botão no perfil
-}</pre>
-      <p class="sub">A tabela fica dentro do próprio workflow (nó <b>consultar_tabela</b>), então o agente filtra, ordena e agrega a base inteira sem depender do navegador. Para atualizar os dados, é só substituir o array no início do código desse nó. A busca no DuckDuckGo às vezes é bloqueada; se acontecer, troque o nó por SerpAPI ou Tavily (precisam de chave).</p>
-    </div>
-  </section>
 </main>
 <footer>13 empresas já certificadas no padrão 2.x não têm nota publicada; 46 não informam a sede. Descrições no idioma original publicado pelas empresas.</footer>
 <div id="tip"></div>
@@ -224,8 +195,7 @@ let tab="visao";
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>showTab(b.dataset.t));
 function showTab(t){ tab=t;
   document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
-  ["visao","empresas","ia","n8n"].forEach(x=>$("#t-"+x).classList.toggle("hidden",x!==t));
-  $("#filters").classList.toggle("hidden", t==="n8n");
+  ["visao","empresas","ia"].forEach(x=>$("#t-"+x).classList.toggle("hidden",x!==t));
   render();
 }
 
@@ -381,8 +351,7 @@ function renderDetail(){
 /* ---------- IA ---------- */
 let history=[], focusCompany=null;
 $("#hook").value = store.get("bcorps_hook") || DEFAULT_HOOK;
-$("#hookshow").textContent = $("#hook").value;
-$("#hook").onchange=()=>{ store.set("bcorps_hook",$("#hook").value.trim()); $("#hookshow").textContent=$("#hook").value; };
+$("#hook").onchange=()=>{ store.set("bcorps_hook",$("#hook").value.trim()); };
 $("#usefilt").onchange=render;
 document.querySelectorAll(".sugs button").forEach(b=>b.onclick=()=>{ $("#q").value=b.textContent; send(); });
 $("#send").onclick=send;
@@ -410,7 +379,7 @@ async function send(){
     wait.textContent=ans; history.push({role:"user",content:q},{role:"assistant",content:ans});
   }catch(e){
     wait.classList.add("err");
-    wait.textContent=`Não consegui falar com o n8n (${e.message}).\n\nConfira se o workflow está importado e ATIVO, se a URL do webhook está certa e se o nó Webhook tem "Allowed Origins" = *. Veja a aba "Configurar n8n".`;
+    wait.textContent=`Não consegui falar com o n8n (${e.message}).\n\nConfira se o workflow está importado e ATIVO, se a URL do webhook está certa e se o nó Webhook tem "Allowed Origins" = *.`;
   }
 }
 function renderIA(){ const f=activeFilters(); $("#ctxinfo").textContent = $("#usefilt").checked ? (f?`Filtros enviados ao agente: ${Object.entries(f).map(([k,v])=>k+"="+v).join(", ")}`:"Nenhum filtro ativo — o agente consulta as 624.") : "O agente consulta as 624 empresas da tabela."; }
